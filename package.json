@@ -1,0 +1,22 @@
+{
+  "name": "heaps",
+  "version": "1.0.0",
+  "description": "Food sharing app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/braga-felipe/heaps.git"
+  },
+  "author": "Ana, Andy, Felipe, Val",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/braga-felipe/heaps/issues"
+  },
+  "homepage": "https://github.com/braga-felipe/heaps#readme",
+  "dependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
