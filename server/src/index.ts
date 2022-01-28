@@ -24,12 +24,14 @@ app.use(
 (async function () {
   //typeORM connection to POSTGRES
   await createConnection({
+    url: "postgres://tnsynagdhfeeoz:8f3fffa7c6b9427f6b1c7ccea5c00e92d246f7c57a8c6e4c898ff090f93c0975@ec2-54-220-166-184.eu-west-1.compute.amazonaws.com:5432/ddkbj1b88gtcq8",
     type: "postgres",
-    database: "heaps",
     logging: true,
     synchronize: true,
-    username: postgresU,
-    password: postgresP,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+
     //TODO: Add entities to array
     entities: [Item],
   });
@@ -49,7 +51,7 @@ app.use(
     apolloServer.applyMiddleware({
       app,
       cors: false
-    }); 
+    });
     app.listen(PORT, () => {
     console.log('listening on port: ', PORT);
   })} catch (err) {
