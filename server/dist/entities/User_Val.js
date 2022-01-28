@@ -12,15 +12,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
+const Chat_1 = require("./Chat");
 const Item_1 = require("./Item");
 let User = class User extends typeorm_1.BaseEntity {
 };
 __decorate([
+    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
-
+    (0, type_graphql_1.Field)(() => [Item_1.Item]),
+    (0, typeorm_1.OneToMany)(() => Item_1.Item, (item) => item.owner),
+    __metadata("design:type", Array)
+], User.prototype, "items_owned", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => [Item_1.Item]),
+    (0, typeorm_1.Column)(() => Item_1.Item),
+    __metadata("design:type", Array)
+], User.prototype, "items_taken", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => [Chat_1.Chat]),
+    (0, typeorm_1.ManyToMany)(() => Chat_1.Chat, (chat) => chat.users),
+    (0, typeorm_1.JoinTable)(),
+    __metadata("design:type", Array)
+], User.prototype, "chats", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
     (0, typeorm_1.CreateDateColumn)(),
@@ -36,4 +52,4 @@ User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);
 exports.User = User;
-//# sourceMappingURL=User.js.map
+//# sourceMappingURL=User_Val.js.map

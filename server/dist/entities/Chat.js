@@ -9,31 +9,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Chat = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const Item_1 = require("./Item");
-let User = class User extends typeorm_1.BaseEntity {
+const Message_1 = require("./Message");
+const User_Val_1 = require("./User_Val");
+let Chat = class Chat extends typeorm_1.BaseEntity {
 };
 __decorate([
+    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], User.prototype, "id", void 0);
+], Chat.prototype, "id", void 0);
 __decorate([
-
+    (0, type_graphql_1.Field)(() => [User_Val_1.User]),
+    (0, typeorm_1.ManyToMany)(() => User_Val_1.User, (user) => user.chats),
+    __metadata("design:type", Array)
+], Chat.prototype, "users", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => Item_1.Item),
+    (0, typeorm_1.ManyToOne)(() => Item_1.Item, (item) => item.chats),
+    __metadata("design:type", Item_1.Item)
+], Chat.prototype, "item", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => [Message_1.Message]),
+    (0, typeorm_1.OneToMany)(() => Message_1.Message, (message) => message.chat),
+    __metadata("design:type", Array)
+], Chat.prototype, "messages", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], User.prototype, "createdAt", void 0);
+], Chat.prototype, "createdAt", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], User.prototype, "updatedAt", void 0);
-User = __decorate([
+], Chat.prototype, "updatedAt", void 0);
+Chat = __decorate([
     (0, type_graphql_1.ObjectType)(),
     (0, typeorm_1.Entity)()
-], User);
-exports.User = User;
-//# sourceMappingURL=User.js.map
+], Chat);
+exports.Chat = Chat;
+//# sourceMappingURL=Chat.js.map

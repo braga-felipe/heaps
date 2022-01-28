@@ -6,8 +6,12 @@ import {
   UpdateDateColumn,
   Column,
   BaseEntity,
+  ManyToOne,
+  OneToMany,
 } from "typeorm";
 import { Diets, Allergies } from "../resolvers/item";
+import { Chat } from "./Chat";
+import { User } from "./User_Val";
 
 @ObjectType()
 @Entity()
@@ -33,10 +37,6 @@ export class Item extends BaseEntity {
   @Column()
   servings: number;
 
-  //TODO: Add User Entity and Import
-  // @ManyToOne(() => User, (user) => user.items) 
-  // owner: User;
-
   @Field(() => Boolean)
   @Column('boolean', {default: false})
   complete: boolean = false;
@@ -61,6 +61,14 @@ export class Item extends BaseEntity {
   @Field(() => Int)
   @Column('int', {default: 0})
   SICK_points: number = 0;
+
+  @Field(() => User)
+  @ManyToOne(() => User, (user: User) => user.items_owned, {onDelete: 'SET NULL'})
+  owner: User;
+  
+  @Field(() => [Chat])
+  @OneToMany(() => Chat, (chat: Chat) => chat.item, {onDelete: 'SET NULL'})
+  chats: Chat[] | [];
 
   @Field(() => String)
   @CreateDateColumn()
