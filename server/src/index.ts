@@ -4,9 +4,11 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { postgresP, postgresU, __prod__ } from "./constants";
 import { createConnection } from "typeorm";
-import { HelloResolver } from "./resolvers/Hello";
+import cors from "cors";
+//Resolver Imports for Graphql
+import { ItemResolver } from "./resolvers/item";
+import { Item } from "./entities/Item";
 
-const cors = require('cors');
 const app = express();
 const PORT = 4000;
 
@@ -21,7 +23,7 @@ app.use(
 
 (async function () {
   //typeORM connection to POSTGRES
-  const conn = await createConnection({
+  await createConnection({
     type: "postgres",
     database: "heaps",
     logging: true,
@@ -29,14 +31,14 @@ app.use(
     username: postgresU,
     password: postgresP,
     //TODO: Add entities to array
-    entities: [],
+    entities: [Item],
   });
 
   //ApolloServer Setup and Schema Build
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      //TODO: Add resolvers in array
-      resolvers: [HelloResolver],
+      // Add resolvers in array
+      resolvers: [ItemResolver],
       validate: false
     }),
   });

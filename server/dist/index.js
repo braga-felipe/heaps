@@ -9,28 +9,29 @@ const apollo_server_express_1 = require("apollo-server-express");
 const type_graphql_1 = require("type-graphql");
 const constants_1 = require("./constants");
 const typeorm_1 = require("typeorm");
-const Hello_1 = require("./resolvers/Hello");
-const cors = require('cors');
+const cors_1 = __importDefault(require("cors"));
+const item_1 = require("./resolvers/item");
+const Item_1 = require("./entities/Item");
 const app = (0, express_1.default)();
 const PORT = 4000;
 app.use(express_1.default.json());
-app.use(cors({
+app.use((0, cors_1.default)({
     origin: '*',
     credentials: true
 }));
 (async function () {
-    const conn = await (0, typeorm_1.createConnection)({
+    await (0, typeorm_1.createConnection)({
         type: "postgres",
         database: "heaps",
         logging: true,
         synchronize: true,
         username: constants_1.postgresU,
         password: constants_1.postgresP,
-        entities: [],
+        entities: [Item_1.Item],
     });
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: await (0, type_graphql_1.buildSchema)({
-            resolvers: [Hello_1.HelloResolver],
+            resolvers: [item_1.ItemResolver],
             validate: false
         }),
     });
