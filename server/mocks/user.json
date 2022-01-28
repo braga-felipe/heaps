@@ -46,7 +46,6 @@
     "data": {
       "_id": 1,
       "name": "Risotto",
-      "isGroceries": false,
       "description": "Pear risotto",
       "ownerId": 1,
       "servings": 4,
@@ -62,7 +61,6 @@
     "data": {
       "_id": 2,
       "name": "Risotto",
-      "isGroceries": false,
       "description": "Pear risotto",
       "servings": 0,
       "ownerId": 2,
