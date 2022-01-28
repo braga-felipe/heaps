@@ -11,6 +11,9 @@ const typeorm_1 = require("typeorm");
 const cors_1 = __importDefault(require("cors"));
 const item_1 = require("./resolvers/item");
 const Item_1 = require("./entities/Item");
+const User_Val_1 = require("./entities/User_Val");
+const Chat_1 = require("./entities/Chat");
+const Message_1 = require("./entities/Message");
 const app = (0, express_1.default)();
 const PORT = 4000;
 app.use(express_1.default.json());
@@ -27,7 +30,7 @@ app.use((0, cors_1.default)({
         ssl: {
             rejectUnauthorized: false,
         },
-        entities: [Item_1.Item],
+        entities: [Item_1.Item, User_Val_1.User, Chat_1.Chat, Message_1.Message],
     });
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: await (0, type_graphql_1.buildSchema)({

@@ -9,45 +9,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Message = void 0;
+exports.User = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const Chat_1 = require("./Chat");
-const User_Val_1 = require("./User_Val");
-let Message = class Message extends typeorm_1.BaseEntity {
+const Item_1 = require("./Item");
+let User = class User extends typeorm_1.BaseEntity {
 };
 __decorate([
-    (0, type_graphql_1.Field)(),
+    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Message.prototype, "id", void 0);
+], User.prototype, "id", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Message.prototype, "text", void 0);
+    (0, type_graphql_1.Field)(() => [Item_1.Item]),
+    (0, typeorm_1.OneToMany)(() => Item_1.Item, (item) => item.owner),
+    __metadata("design:type", Array)
+], User.prototype, "items_owned", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => Chat_1.Chat),
-    (0, typeorm_1.ManyToOne)(() => Chat_1.Chat, (chat) => chat.messages),
-    __metadata("design:type", Chat_1.Chat)
-], Message.prototype, "chat", void 0);
+    (0, type_graphql_1.Field)(() => [Item_1.Item]),
+    (0, typeorm_1.Column)(() => Item_1.Item),
+    __metadata("design:type", Array)
+], User.prototype, "items_taken", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => User_Val_1.User),
-    __metadata("design:type", User_Val_1.User)
-], Message.prototype, "author", void 0);
+    (0, type_graphql_1.Field)(() => [Chat_1.Chat]),
+    (0, typeorm_1.ManyToMany)(() => Chat_1.Chat, (chat) => chat.users),
+    (0, typeorm_1.JoinTable)(),
+    __metadata("design:type", Array)
+], User.prototype, "chats", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], Message.prototype, "createdAt", void 0);
+], User.prototype, "createdAt", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Message.prototype, "updatedAt", void 0);
-Message = __decorate([
+], User.prototype, "updatedAt", void 0);
+User = __decorate([
     (0, type_graphql_1.ObjectType)(),
     (0, typeorm_1.Entity)()
-], Message);
-exports.Message = Message;
-//# sourceMappingURL=Message.js.map
+], User);
+exports.User = User;
+//# sourceMappingURL=User.js.map
