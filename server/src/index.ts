@@ -37,7 +37,7 @@ app.use(
   //ApolloServer Setup and Schema Build
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      //TODO: Add resolvers in array
+      // Add resolvers in array
       resolvers: [ItemResolver],
       validate: false
     }),

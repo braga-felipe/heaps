@@ -12,7 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ItemResolver = void 0;
+exports.ItemResolver = exports.Diets = exports.Allergies = void 0;
 const type_graphql_1 = require("type-graphql");
 const Item_1 = require("../entities/Item");
 const typeorm_1 = require("typeorm");
@@ -21,13 +21,13 @@ var Allergies;
     Allergies[Allergies["glutenFree"] = 0] = "glutenFree";
     Allergies[Allergies["lactoseFree"] = 1] = "lactoseFree";
     Allergies[Allergies["nutFree"] = 2] = "nutFree";
-})(Allergies || (Allergies = {}));
+})(Allergies = exports.Allergies || (exports.Allergies = {}));
 var Diets;
 (function (Diets) {
     Diets[Diets["vegetarian"] = 0] = "vegetarian";
     Diets[Diets["vegan"] = 1] = "vegan";
     Diets[Diets["pescatarian"] = 2] = "pescatarian";
-})(Diets || (Diets = {}));
+})(Diets = exports.Diets || (exports.Diets = {}));
 (0, type_graphql_1.registerEnumType)(Allergies, { name: "Allergies" });
 (0, type_graphql_1.registerEnumType)(Diets, { name: "Diets" });
 let ItemCreateInput = class ItemCreateInput {

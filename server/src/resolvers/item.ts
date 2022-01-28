@@ -4,12 +4,12 @@ import {getManager} from "typeorm";
 
 
 //Enums allow us to type-set the inputs for the Allergies and Diets properties on Items we are creating
-enum Allergies { 
+export enum Allergies { 
   "glutenFree",
   "lactoseFree",
   "nutFree"
  }
- enum Diets { 
+ export enum Diets { 
    "vegetarian",
    "vegan",
    "pescatarian"

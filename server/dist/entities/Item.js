@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Item = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
+const item_1 = require("../resolvers/item");
 let Item = class Item extends typeorm_1.BaseEntity {
     constructor() {
         super(...arguments);
@@ -22,7 +23,7 @@ let Item = class Item extends typeorm_1.BaseEntity {
     }
 };
 __decorate([
-    (0, type_graphql_1.Field)(),
+    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], Item.prototype, "id", void 0);
@@ -57,12 +58,12 @@ __decorate([
     __metadata("design:type", Boolean)
 ], Item.prototype, "isGroceries", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => [String]),
+    (0, type_graphql_1.Field)(() => [item_1.Allergies]),
     (0, typeorm_1.Column)('text', { array: true }),
     __metadata("design:type", Array)
 ], Item.prototype, "allergies", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => [String]),
+    (0, type_graphql_1.Field)(() => [item_1.Diets]),
     (0, typeorm_1.Column)('text', { array: true }),
     __metadata("design:type", Array)
 ], Item.prototype, "diets", void 0);

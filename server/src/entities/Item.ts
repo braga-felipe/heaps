@@ -7,6 +7,7 @@ import {
   Column,
   BaseEntity,
 } from "typeorm";
+import { Diets, Allergies } from "../resolvers/item";
 
 @ObjectType()
 @Entity()
@@ -15,7 +16,7 @@ export class Item extends BaseEntity {
   //@Field is the Graphql property, you need to add return type for typegraphql
   //the 'type' property defines the postgres datatype used by the migration to generate sql
  
-  @Field()
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -49,11 +50,11 @@ export class Item extends BaseEntity {
   isGroceries: boolean = false;
 
   //Allergies and Diets only necessary for 'dish' type items, so marked as optional
-  @Field(() => [String])
+  @Field(() => [Allergies])
   @Column('text',{array: true})
   allergies?: string[] | [];
 
-  @Field(() => [String])
+  @Field(() => [Diets])
   @Column('text',  {array: true})
   diets?: string[] | [];
 
