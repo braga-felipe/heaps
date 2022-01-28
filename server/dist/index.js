@@ -7,7 +7,6 @@ require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
 const type_graphql_1 = require("type-graphql");
-const constants_1 = require("./constants");
 const typeorm_1 = require("typeorm");
 const cors_1 = __importDefault(require("cors"));
 const item_1 = require("./resolvers/item");
@@ -21,12 +20,13 @@ app.use((0, cors_1.default)({
 }));
 (async function () {
     await (0, typeorm_1.createConnection)({
+        url: "postgres://tnsynagdhfeeoz:8f3fffa7c6b9427f6b1c7ccea5c00e92d246f7c57a8c6e4c898ff090f93c0975@ec2-54-220-166-184.eu-west-1.compute.amazonaws.com:5432/ddkbj1b88gtcq8",
         type: "postgres",
-        database: "heaps",
         logging: true,
         synchronize: true,
-        username: constants_1.postgresU,
-        password: constants_1.postgresP,
+        ssl: {
+            rejectUnauthorized: false,
+        },
         entities: [Item_1.Item],
     });
     const apolloServer = new apollo_server_express_1.ApolloServer({
