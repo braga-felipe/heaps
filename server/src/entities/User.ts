@@ -1,6 +1,7 @@
 import { ObjectType, Field } from "type-graphql";
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, BaseEntity } from 'typeorm';
-import { Item } from './Item'
+import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, BaseEntity, OneToMany, ManyToMany, JoinTable } from 'typeorm';
+import { Item } from './Item';
+import { Chat } from './Chat';
 
 @ObjectType()
 @Entity()
@@ -34,17 +35,19 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   SICK_points?: number;
 
-  @Field(() => [Item])
-  @Column()
-  itemsAvailable: Item[];
 
   @Field(() => [Item])
-  @Column()
-  itemsTaken: Item[];
+  @OneToMany(() => Item, (item: Item) => item.owner)
+  items_owned: Item[] | [];
 
-  @Field(() => String)
-  @Column()
-  img_url: string;
+
+  @Field(() => [Item])
+  @Column(() => Item)
+  items_taken: Item[] | [];
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  img_url?: string;
 
   @Field(() => String)
   @CreateDateColumn()
@@ -54,5 +57,9 @@ export class User extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  //
+  @Field(() => [Chat])
+  @ManyToMany(() => Chat, (chat: Chat) => chat.users)
+  @JoinTable()
+  chats: Chat[] | [];
+
 }
