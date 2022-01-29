@@ -1,4 +1,4 @@
-import { ObjectType, Field} from "type-graphql";
+import { ObjectType, Field, InputType} from "type-graphql";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -12,6 +12,7 @@ import { Chat } from "./Chat";
 import { User } from "./User";
 
 @ObjectType()
+@InputType()
 @Entity()
 export class Message extends BaseEntity {
   @Field()

@@ -36,14 +36,18 @@ export class User extends BaseEntity {
   SICK_points?: number;
 
 
-  @Field(() => [Item])
+  @Field(() => [Item], {nullable: true})
   @OneToMany(() => Item, (item: Item) => item.owner)
-  items_owned: Item[] | [];
+  items_owned?: Item[];
 
-
-  @Field(() => [Item])
+  @Field(() => [Item], {nullable: true})
   @Column(() => Item)
-  items_taken: Item[] | [];
+  items_taken?: Item[];
+
+  @Field(() => [Chat], {nullable: true})
+  @ManyToMany(() => Chat, (chat: Chat) => chat.users)
+  @JoinTable()
+  chats?: Chat[];
 
   @Field({ nullable: true })
   @Column({ nullable: true })
@@ -56,10 +60,4 @@ export class User extends BaseEntity {
   @Field(() => String)
   @UpdateDateColumn()
   updatedAt: Date;
-
-  @Field(() => [Chat])
-  @ManyToMany(() => Chat, (chat: Chat) => chat.users)
-  @JoinTable()
-  chats: Chat[] | [];
-
 }
