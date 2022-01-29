@@ -16,6 +16,7 @@ exports.ItemResolver = exports.Diets = exports.Allergies = void 0;
 const type_graphql_1 = require("type-graphql");
 const Item_1 = require("../entities/Item");
 const typeorm_1 = require("typeorm");
+const User_1 = require("../entities/User");
 var Allergies;
 (function (Allergies) {
     Allergies[Allergies["glutenFree"] = 0] = "glutenFree";
@@ -48,6 +49,10 @@ __decorate([
     (0, type_graphql_1.Field)(),
     __metadata("design:type", Boolean)
 ], ItemCreateInput.prototype, "isGroceries", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(),
+    __metadata("design:type", Number)
+], ItemCreateInput.prototype, "ownerId", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => [Allergies]),
     __metadata("design:type", Array)
@@ -99,7 +104,9 @@ let ItemResolver = class ItemResolver {
     }
     async createItem(options) {
         const entityManager = (0, typeorm_1.getManager)();
+        const foundUser = await entityManager.findOneOrFail(User_1.User, options.ownerId);
         const item = entityManager.create(Item_1.Item, options);
+        item.owner = foundUser;
         await entityManager.save(item);
         return item;
     }

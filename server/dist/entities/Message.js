@@ -13,7 +13,7 @@ exports.Message = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const Chat_1 = require("./Chat");
-const User_Val_1 = require("./User_Val");
+const User_1 = require("./User");
 let Message = class Message extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -32,8 +32,8 @@ __decorate([
     __metadata("design:type", Chat_1.Chat)
 ], Message.prototype, "chat", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => User_Val_1.User),
-    __metadata("design:type", User_Val_1.User)
+    (0, type_graphql_1.Field)(() => User_1.User),
+    __metadata("design:type", User_1.User)
 ], Message.prototype, "author", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
@@ -47,6 +47,7 @@ __decorate([
 ], Message.prototype, "updatedAt", void 0);
 Message = __decorate([
     (0, type_graphql_1.ObjectType)(),
+    (0, type_graphql_1.InputType)(),
     (0, typeorm_1.Entity)()
 ], Message);
 exports.Message = Message;

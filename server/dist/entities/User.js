@@ -13,6 +13,7 @@ exports.User = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const Item_1 = require("./Item");
+const Chat_1 = require("./Chat");
 let User = class User extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -50,18 +51,24 @@ __decorate([
     __metadata("design:type", Number)
 ], User.prototype, "SICK_points", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => [Item_1.Item]),
-    (0, typeorm_1.Column)(),
+    (0, type_graphql_1.Field)(() => [Item_1.Item], { nullable: true }),
+    (0, typeorm_1.OneToMany)(() => Item_1.Item, (item) => item.owner),
     __metadata("design:type", Array)
-], User.prototype, "itemsAvailable", void 0);
+], User.prototype, "items_owned", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => [Item_1.Item]),
-    (0, typeorm_1.Column)(),
+    (0, type_graphql_1.Field)(() => [Item_1.Item], { nullable: true }),
+    (0, typeorm_1.Column)(() => Item_1.Item),
     __metadata("design:type", Array)
-], User.prototype, "itemsTaken", void 0);
+], User.prototype, "items_taken", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => String),
-    (0, typeorm_1.Column)(),
+    (0, type_graphql_1.Field)(() => [Chat_1.Chat], { nullable: true }),
+    (0, typeorm_1.ManyToMany)(() => Chat_1.Chat, (chat) => chat.users),
+    (0, typeorm_1.JoinTable)(),
+    __metadata("design:type", Array)
+], User.prototype, "chats", void 0);
+__decorate([
+    (0, type_graphql_1.Field)({ nullable: true }),
+    (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
 ], User.prototype, "img_url", void 0);
 __decorate([

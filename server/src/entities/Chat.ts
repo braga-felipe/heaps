@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int } from "type-graphql";
+import { ObjectType, Field, Int, InputType } from "type-graphql";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -11,9 +11,10 @@ import {
 } from "typeorm";
 import { Item } from "./Item";
 import { Message } from "./Message";
-import { User } from "./User_Val";
+import { User } from "./User";
 
 @ObjectType()
+@InputType()
 @Entity()
 export class Chat extends BaseEntity { 
   //@Field is the Graphql property, you need to add return type for typegraphql
