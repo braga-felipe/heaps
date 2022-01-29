@@ -1,20 +1,21 @@
 import { Query, Resolver, Arg, Int, Mutation, InputType, Field, registerEnumType } from 'type-graphql';
 import { Item } from "../entities/Item";
 import {getManager} from "typeorm";
+import { User } from '../entities/User';
 
 
 //Enums allow us to type-set the inputs for the Allergies and Diets properties on Items we are creating
-export enum Allergies { 
+export enum Allergies {
   "glutenFree",
   "lactoseFree",
   "nutFree"
  }
- export enum Diets { 
+ export enum Diets {
    "vegetarian",
    "vegan",
    "pescatarian"
  }
- 
+
  //We can't accept an item where the values for allergies/diets are not in the defined enums.
  registerEnumType(Allergies, {name: "Allergies"});
  registerEnumType(Diets, {name: "Diets"});
@@ -30,6 +31,8 @@ class ItemCreateInput {
   servings: number;
   @Field()
   isGroceries: boolean;
+  @Field()
+  ownerId: number;
   @Field(() => [Allergies])
   allergies?: string[];
   @Field(() => [Diets])
@@ -54,7 +57,7 @@ class ItemUpdateOptions {
 }
 
 //Define types for update queries.
-@InputType() 
+@InputType()
 class ItemUpdateInput {
   @Field(() => Int)
   id: number;
@@ -64,24 +67,27 @@ class ItemUpdateInput {
 
 @Resolver()
 export class ItemResolver {
-  @Query(() => Item, { nullable: true }) 
+  @Query(() => Item, { nullable: true })
   getItem(
     @Arg('id', () => Int) id: number
   ): Promise<Item | undefined> {
     return Item.findOne(id);
   }
 
-  @Mutation(() => Item) 
-  async createItem  (
-    @Arg('options') options: ItemCreateInput,
+  @Mutation(() => Item)
+  async createItem (
+    //The potential fields we can update ("options") are defined in ItemUpdateInput type def.
+    @Arg('options') options: ItemCreateInput
   ): Promise<Item> {
     const entityManager = getManager();
-    const item = entityManager.create(Item, options);
+    const foundUser = await entityManager.findOneOrFail(User, options.ownerId);
+    const item = entityManager.create(Item, options)
+    item.owner = foundUser;
     await entityManager.save(item);
     return item;
   }
-  
-  //This function takes an options object. You need to pass an id for the item to update 
+
+  //This function takes an options object. You need to pass an id for the item to update
   //and a key for the property to update.
   @Mutation(() => Item)
   async updateItem (
@@ -98,5 +104,3 @@ export class ItemResolver {
   }
 
 }
-
-

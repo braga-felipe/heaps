@@ -2,12 +2,16 @@ import "reflect-metadata";
 import express from "express";
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
-import { postgresP, postgresU, __prod__ } from "./constants";
+import { __prod__ } from "./constants";
 import { createConnection } from "typeorm";
 import cors from "cors";
 //Resolver Imports for Graphql
 import { ItemResolver } from "./resolvers/item";
 import { Item } from "./entities/Item";
+import { User } from "./entities/User";
+import { Chat } from "./entities/Chat";
+import { Message } from "./entities/Message";
+import { UserResolver } from './resolvers/User';
 
 const app = express();
 const PORT = 4000;
@@ -33,14 +37,14 @@ app.use(
     },
 
     //TODO: Add entities to array
-    entities: [Item],
+    entities: [Item, User, Chat, Message],
   });
 
   //ApolloServer Setup and Schema Build
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       // Add resolvers in array
-      resolvers: [ItemResolver],
+      resolvers: [ItemResolver, UserResolver],
       validate: false
     }),
   });
