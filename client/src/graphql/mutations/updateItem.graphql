@@ -1,0 +1,16 @@
+mutation UPDATE_ITEM($options: ItemUpdateInput!) {
+  updateItem(options: $options) {
+    id
+    name
+    description
+    servings
+    complete
+    archive
+    isGroceries
+    allergies
+    diets
+    SICK_points
+    createdAt
+    updatedAt
+  }
+}

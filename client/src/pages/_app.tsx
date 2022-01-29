@@ -1,12 +1,7 @@
 import '../styles/globals.css';
-import { Provider, createClient } from 'urql';
-
+import { Provider } from 'urql';
+import { client } from '../urqlClient';
 import type { AppProps } from 'next/app';
-
-const client = createClient({
-  url: 'http://localhost:4000/graphql',
-  fetchOptions: { credentials: 'include' },
-});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

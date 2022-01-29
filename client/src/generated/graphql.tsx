@@ -186,27 +186,27 @@ export type Get_ItemQueryResult = Apollo.QueryResult<
   Get_ItemQueryVariables
 >;
 
-export const Get_ItemDocument = gql`
-  query GET_ITEM($getItemId: Int!) {
-    getItem(id: $getItemId) {
-      id
-      name
-      description
-      servings
-      complete
-      archive
-      isGroceries
-      allergies
-      diets
-      SICK_points
-      createdAt
-      updatedAt
-    }
-  }
-`;
+// export const Get_ItemDocument = gql`
+//   query GET_ITEM($getItemId: Int!) {
+//     getItem(id: $getItemId) {
+//       id
+//       name
+//       description
+//       servings
+//       complete
+//       archive
+//       isGroceries
+//       allergies
+//       diets
+//       SICK_points
+//       createdAt
+//       updatedAt
+//     }
+//   }
+// `;
 
-export function useGet_ItemQuery(
-  options: Omit<Urql.UseQueryArgs<Get_ItemQueryVariables>, 'query'> = {}
-) {
-  return Urql.useQuery<Get_ItemQuery>({ query: Get_ItemDocument, ...options });
-}
+// export function useGet_ItemQuery(
+//   options: Omit<Urql.UseQueryArgs<Get_ItemQueryVariables>, 'query'> = {}
+// ) {
+//   return Urql.useQuery<Get_ItemQuery>({ query: Get_ItemDocument, ...options });
+// }
