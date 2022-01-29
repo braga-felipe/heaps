@@ -14,7 +14,7 @@ import { User } from "./User";
 @ObjectType()
 @InputType()
 @Entity()
-export class Message extends BaseEntity { 
+export class Message extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id!: number;
