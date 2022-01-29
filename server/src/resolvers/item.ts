@@ -1,6 +1,7 @@
 import { Query, Resolver, Arg, Int, Mutation, InputType, Field, registerEnumType } from 'type-graphql';
 import { Item } from "../entities/Item";
 import {getManager} from "typeorm";
+import { User } from '../entities/User';
 
 
 //Enums allow us to type-set the inputs for the Allergies and Diets properties on Items we are creating
@@ -30,6 +31,8 @@ class ItemCreateInput {
   servings: number;
   @Field()
   isGroceries: boolean;
+  @Field()
+  ownerId: number;
   @Field(() => [Allergies])
   allergies?: string[];
   @Field(() => [Diets])
@@ -71,12 +74,15 @@ export class ItemResolver {
     return Item.findOne(id);
   }
 
-  @Mutation(() => Item) 
-  async createItem  (
-    @Arg('options') options: ItemCreateInput,
+  @Mutation(() => Item)
+  async createItem (
+    //The potential fields we can update ("options") are defined in ItemUpdateInput type def.
+    @Arg('options') options: ItemCreateInput
   ): Promise<Item> {
     const entityManager = getManager();
-    const item = entityManager.create(Item, options);
+    const foundUser = await entityManager.findOneOrFail(User, options.ownerId);
+    const item = entityManager.create(Item, options)
+    item.owner = foundUser;
     await entityManager.save(item);
     return item;
   }
