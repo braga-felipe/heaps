@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const User_1 = require("../entities/User");
+const typeorm_1 = require("typeorm");
 let CreateUserInput = class CreateUserInput {
 };
 __decorate([
@@ -48,14 +49,18 @@ let UserResolver = class UserResolver {
     getAllUsers() {
         return User_1.User.find();
     }
-    async getOneUserByID(id) {
-        await user;
+    ;
+    getOneUserByID(id) {
+        return User_1.User.findOne({ where: { id } });
     }
-    async createUser(userData) {
-        const user = await User_1.User.create(userData);
-        await user.save();
-        return user;
+    ;
+    async createUser(options) {
+        const entityManager = (0, typeorm_1.getManager)();
+        const newUser = entityManager.create(User_1.User, options);
+        await entityManager.save(newUser);
+        return newUser;
     }
+    ;
 };
 __decorate([
     (0, type_graphql_1.Query)(() => [User_1.User]),
@@ -64,15 +69,15 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserResolver.prototype, "getAllUsers", null);
 __decorate([
-    (0, type_graphql_1.Mutation)(() => User_1.User),
+    (0, type_graphql_1.Query)(() => User_1.User),
     __param(0, (0, type_graphql_1.Arg)('id', () => type_graphql_1.Int)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], UserResolver.prototype, "getOneUserByID", null);
 __decorate([
     (0, type_graphql_1.Mutation)(() => User_1.User),
-    __param(0, (0, type_graphql_1.Arg)('userData')),
+    __param(0, (0, type_graphql_1.Arg)('options')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [CreateUserInput]),
     __metadata("design:returntype", Promise)

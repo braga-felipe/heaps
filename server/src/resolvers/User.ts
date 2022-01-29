@@ -1,5 +1,6 @@
-import { Query, Resolver, Arg, Int, Mutation, InputType, Field, registerEnumType } from 'type-graphql';
+import { Query, Resolver, Arg, Int, Mutation, InputType, Field, } from 'type-graphql';
 import { User } from '../entities/User';
+import {getManager} from "typeorm";
 
 @InputType()
 
@@ -28,22 +29,31 @@ export class UserResolver {
   @Query(() => [User])
   getAllUsers() {
     return User.find()
-  }
+  };
+
+  @Query(() => User)
+  getOneUserByID(
+    @Arg('id',() => Int) id: number)  {
+      return User.findOne( { where: { id } });
+    };
 
   @Mutation(() => User)
-  async getOneUserByID(
-    @Arg('id',()=> Int) id: number) {
-      await user = 
-    }
+  async createUser (
+    @Arg('options') options: CreateUserInput,
+    ): Promise<User> {
+      const entityManager = getManager();
+      const newUser = entityManager.create(User, options);
+      await entityManager.save(newUser);
+      return newUser;
+    };
 
-
-  @Mutation(() => User)
-  async createUser(
-    @Arg('userData') userData: CreateUserInput) {
-      const user = await User.create(userData);
-      await user.save();
-      return user;
-    }
-
+  // @Mutation(() => User)
+  // async createUser(
+  //   @Arg('userData') userData: CreateUserInput): Promise<User> {
+  //     const user = await User.create(userData);
+  //     await user.save();
+  //     return user;
+  //   };
 
 }
+

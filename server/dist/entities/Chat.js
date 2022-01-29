@@ -49,6 +49,7 @@ __decorate([
 ], Chat.prototype, "updatedAt", void 0);
 Chat = __decorate([
     (0, type_graphql_1.ObjectType)(),
+    (0, type_graphql_1.InputType)(),
     (0, typeorm_1.Entity)()
 ], Chat);
 exports.Chat = Chat;
