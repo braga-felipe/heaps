@@ -14,7 +14,7 @@ const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const item_1 = require("../resolvers/item");
 const Chat_1 = require("./Chat");
-const User_Val_1 = require("./User_Val");
+const User_1 = require("./User");
 let Item = class Item extends typeorm_1.BaseEntity {
     constructor() {
         super(...arguments);
@@ -75,9 +75,9 @@ __decorate([
     __metadata("design:type", Number)
 ], Item.prototype, "SICK_points", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => User_Val_1.User),
-    (0, typeorm_1.ManyToOne)(() => User_Val_1.User, (user) => user.items_owned, { onDelete: 'SET NULL' }),
-    __metadata("design:type", User_Val_1.User)
+    (0, type_graphql_1.Field)(() => User_1.User),
+    (0, typeorm_1.ManyToOne)(() => User_1.User, (user) => user.items_owned, { onDelete: 'SET NULL' }),
+    __metadata("design:type", User_1.User)
 ], Item.prototype, "owner", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => [Chat_1.Chat]),

@@ -14,7 +14,7 @@ const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const Item_1 = require("./Item");
 const Message_1 = require("./Message");
-const User_Val_1 = require("./User_Val");
+const User_1 = require("./User");
 let Chat = class Chat extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -23,8 +23,8 @@ __decorate([
     __metadata("design:type", Number)
 ], Chat.prototype, "id", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => [User_Val_1.User]),
-    (0, typeorm_1.ManyToMany)(() => User_Val_1.User, (user) => user.chats),
+    (0, type_graphql_1.Field)(() => [User_1.User]),
+    (0, typeorm_1.ManyToMany)(() => User_1.User, (user) => user.chats),
     __metadata("design:type", Array)
 ], Chat.prototype, "users", void 0);
 __decorate([

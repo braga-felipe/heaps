@@ -9,11 +9,11 @@ import {
   ManyToOne,
 } from "typeorm";
 import { Chat } from "./Chat";
-import { User } from "./User_Val";
+import { User } from "./User";
 
 @ObjectType()
 @Entity()
-export class Message extends BaseEntity { 
+export class Message extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id!: number;
