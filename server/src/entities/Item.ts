@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int } from "type-graphql";
+import { ObjectType, Field, Int, InputType } from "type-graphql";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -11,9 +11,10 @@ import {
 } from "typeorm";
 import { Diets, Allergies } from "../resolvers/item";
 import { Chat } from "./Chat";
-import { User } from "./User_Val";
+import { User } from "./User";
 
 @ObjectType()
+@InputType()
 @Entity()
 export class Item extends BaseEntity { 
 
@@ -61,6 +62,10 @@ export class Item extends BaseEntity {
   @Field(() => Int)
   @Column('int', {default: 0})
   SICK_points: number = 0;
+
+  @Field(() => Int)
+  @Column()
+  ownerId: number;
 
   @Field(() => User)
   @ManyToOne(() => User, (user: User) => user.items_owned, {onDelete: 'SET NULL'})
