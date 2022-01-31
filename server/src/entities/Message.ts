@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int } from "type-graphql";
+import { ObjectType, Field, InputType} from "type-graphql";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,11 +6,15 @@ import {
   UpdateDateColumn,
   Column,
   BaseEntity,
+  ManyToOne,
 } from "typeorm";
+import { Chat } from "./Chat";
+import { User } from "./User";
 
 @ObjectType()
+@InputType()
 @Entity()
-export class Item extends BaseEntity { 
+export class Message extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id!: number;
@@ -18,6 +22,15 @@ export class Item extends BaseEntity {
   @Field(() => String)
   @Column()
   text: string;
+
+  //This is the chat that 'owns' the messages
+  @Field(() => Chat)
+  @ManyToOne(() => Chat, (chat: Chat) => chat.messages)
+  chat: Chat;
+
+  //This is the user who wrote the message
+  @Field(() => User)
+  author: User;
 
   @Field(() => String)
   @CreateDateColumn()
