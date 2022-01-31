@@ -31,7 +31,7 @@ export default function Register() {
             <InputField name='ZIPCode' />
             <InputField name='Email' />
             <InputField name='Password' />
-            <SubmitButton props={props} />
+            <SubmitButton props={props} name='Register' />
           </Form>
         )}
       </Formik>

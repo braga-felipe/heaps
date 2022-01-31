@@ -20,7 +20,7 @@ export default function Login() {
         <Form>
           <InputField name='Email' />
           <InputField name='Password' />
-          <SubmitButton props={props} />
+          <SubmitButton props={props} name='Log In' />
         </Form>
       )}
     </Formik>
