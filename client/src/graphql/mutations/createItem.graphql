@@ -1,0 +1,16 @@
+mutation CREATE_ITEM($options: ItemCreateInput!) {
+  createItem(options: $options) {
+    id
+    name
+    description
+    servings
+    complete
+    archive
+    isGroceries
+    allergies
+    diets
+    SICK_points
+    createdAt
+    updatedAt
+  }
+}

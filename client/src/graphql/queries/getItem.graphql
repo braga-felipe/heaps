@@ -1,0 +1,16 @@
+query GET_ITEM($getItemId: Int!) {
+  getItem(id: $getItemId) {
+    id
+    name
+    description
+    servings
+    complete
+    archive
+    isGroceries
+    allergies
+    diets
+    SICK_points
+    createdAt
+    updatedAt
+  }
+}
