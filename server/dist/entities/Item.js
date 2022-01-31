@@ -106,6 +106,7 @@ __decorate([
 ], Item.prototype, "updatedAt", void 0);
 Item = __decorate([
     (0, type_graphql_1.ObjectType)(),
+    (0, type_graphql_1.InputType)(),
     (0, typeorm_1.Entity)()
 ], Item);
 exports.Item = Item;
