@@ -58,13 +58,13 @@ export class UserResolver {
   //     return user;
   //   };
 
-    @Mutation(() => User)
-    async registerUser(
-      @Args('options') options: UsernamePasswordInput
-    ) {
-      const hashedPassword = await argon2.hash(options.password);
-      const uer = User.create
-    }
+    // @Mutation(() => User)
+    // async registerUser(
+    //   @Args('options') options: UsernamePasswordInput
+    // ) {
+    //   const hashedPassword = await argon2.hash(options.password);
+    //   const uer = User.create
+    // }
 
 }
 

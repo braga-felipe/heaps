@@ -1,13 +1,13 @@
 import { Query, Resolver, Arg, Int, Mutation, InputType, Field, registerEnumType } from 'type-graphql';
 import { Item } from "../entities/Item";
 import { getManager} from "typeorm";
-import { User } from '../entities/User_Val';
+import { User } from '../entities/User';
 import { Chat } from '../entities/Chat';
 import { off } from 'process';
 
 
 
-//TODO: Define type for chat create input 
+//TODO: Define type for chat create input
 @InputType()
 class ChatCreateInput {
   @Field(()  => Int)

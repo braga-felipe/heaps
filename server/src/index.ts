@@ -8,7 +8,7 @@ import cors from "cors";
 //Resolver Imports for Graphql
 import { ItemResolver } from "./resolvers/item";
 import { Item } from "./entities/Item";
-import { User } from "./entities/User_Val";
+import { User } from "./entities/User";
 import { Chat } from "./entities/Chat";
 import { Message } from "./entities/Message";
 import { UserResolver } from './resolvers/user_val';

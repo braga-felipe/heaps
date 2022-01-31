@@ -13,7 +13,7 @@ import {
 } from "typeorm";
 import { Item } from "./Item";
 import { Message } from "./Message";
-import { User } from "./User_Val";
+import { User } from "./User";
 
 @ObjectType()
 @InputType()

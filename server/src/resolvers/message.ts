@@ -3,7 +3,7 @@ import { Item } from "../entities/Item";
 import { getManager } from "typeorm";
 import { Message } from '../entities/Message';
 import { Chat } from '../entities/Chat';
-import { User } from '../entities/User_Val';
+import { User } from '../entities/User';
 
 //Define the types for  Message inputs
 @InputType()
@@ -11,10 +11,10 @@ class MessageCreateInput {
   @Field(() => String)
   text: string;
 
-  @Field(() => Int) 
+  @Field(() => Int)
   chatId: number;
-  
-  @Field(() => Int) 
+
+  @Field(() => Int)
   currentUserId: number;
 }
 
