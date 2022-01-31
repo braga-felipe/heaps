@@ -32,20 +32,20 @@ export class Chat extends BaseEntity {
 
   //If you comment out a @Field, you won't expose that data in graphQL
   @Field(() => [User])
-  @ManyToMany(() => User, (user: User) => user.chats)
+  @ManyToMany(() => User, (user: User) => user.chats, { eager: true })
   @JoinTable()
-  users: User[];
+  users: Promise<User[]>;
 
   @Field(() => Int)
   @Column()
   itemOwnerId: number;
 
   @Field(() => Item)
-  @ManyToOne(() => Item, (item: Item) => item.chats)
-  item: Item;
+  @ManyToOne(() => Item, (item: Item) => item.chats, { eager: true })
+  item: Promise<Item>;
 
   @Field(() => [Message], {nullable: true})
-  @OneToMany(() => Message, (message: Message) => message.chat)
+  @OneToMany(() => Message, (message: Message) => message.chat, { eager: true })
   messages?: Message[];
 
   @Field(() => String)
