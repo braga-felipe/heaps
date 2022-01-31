@@ -100,7 +100,7 @@ ItemUpdateInput = __decorate([
 ], ItemUpdateInput);
 let ItemResolver = class ItemResolver {
     getItem(id) {
-        return Item_1.Item.findOne(id);
+        return Item_1.Item.findOne(id, { relations: ['chats'] });
     }
     async createItem(options) {
         const entityManager = (0, typeorm_1.getManager)();
