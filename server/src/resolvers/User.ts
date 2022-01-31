@@ -1,6 +1,7 @@
-import { Query, Resolver, Arg, Int, Mutation, InputType, Field, } from 'type-graphql';
+import { Query, Resolver, Arg, Int, Mutation, InputType, Field, Args, } from 'type-graphql';
 import { User } from '../entities/User';
 import {getManager} from "typeorm";
+import * as argon2 from "argon2";
 
 @InputType()
 
@@ -24,6 +25,7 @@ class CreateUserInput {
   img_url?: string;
 }
 
+
 @Resolver()
 export class UserResolver {
   @Query(() => [User])
@@ -41,6 +43,7 @@ export class UserResolver {
   async createUser (
     @Arg('options') options: CreateUserInput,
     ): Promise<User> {
+      const hashedPassword = await argon2.hash(options.password);
       const entityManager = getManager();
       const newUser = entityManager.create(User, options);
       await entityManager.save(newUser);
@@ -54,6 +57,14 @@ export class UserResolver {
   //     await user.save();
   //     return user;
   //   };
+
+    @Mutation(() => User)
+    async registerUser(
+      @Args('options') options: UsernamePasswordInput
+    ) {
+      const hashedPassword = await argon2.hash(options.password);
+      const uer = User.create
+    }
 
 }
 
