@@ -20,7 +20,6 @@ export default function Register() {
   }
   return (
     <div>
-      <h1>Register</h1>
       <Formik
         initialValues={{
           username: '',
@@ -39,6 +38,7 @@ export default function Register() {
       >
         {(props) => (
           <Form>
+            <h1>Register</h1>
             <Field name='username' validate={validateName}>
               {({ field, form }) => (
                 <FormControl isInvalid={form.errors.email && form.touched.username}>
@@ -57,9 +57,9 @@ export default function Register() {
                 </FormControl>
               )}
             </Field>
-            <Field name='zipcode' validate={validateName}>
+            <Field name='zipCode' validate={validateName}>
               {({ field, form }) => (
-                <FormControl isInvalid={form.errors.zipcode && form.touched.zipcode}>
+                <FormControl isInvalid={form.errors.zipCode && form.touched.zipCode}>
                   <FormLabel htmlFor='zipcode'>ZIP Code</FormLabel>
                   <Input {...field} id='zipcode' placeholder='ZIP Code' />
                   <FormErrorMessage>{form.errors.zipcode}</FormErrorMessage>
