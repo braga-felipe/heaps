@@ -1,4 +1,4 @@
-import { ObjectType, Field } from "type-graphql";
+import { ObjectType, Field, Int } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, BaseEntity, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { Item } from './Item';
 import { Chat } from './Chat';
@@ -12,8 +12,8 @@ export class User extends BaseEntity {
   id!: number;
 
   @Field(() => String)
-  @Column({ type: "varchar" })
-  username: string;
+  @Column({ type: "text", unique: true })
+  username!: string;
 
   //@Field(() => String)
   @Column()
@@ -31,22 +31,20 @@ export class User extends BaseEntity {
   @Column()
   zipCode: string;
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   @Column({ nullable: true })
   SICK_points?: number;
 
-
-  @Field(() => [Item], {nullable: true})
+  @Field(() => [Item])
   @OneToMany(() => Item, (item: Item) => item.owner)
   items_owned?: Item[];
 
-  // @Field(() => [Item], {nullable: true})
-  // @Column(() => Item)
-  // items_taken?: Item[];
+  @Field(() => [Item], {nullable: true})
+  @OneToMany(() => Item, (item: Item) => item.takers)
+  items_taken?: Item[];
 
   @Field(() => [Chat], {nullable: true})
   @ManyToMany(() => Chat, (chat: Chat) => chat.users)
-  @JoinTable()
   chats?: Chat[];
 
   @Field({ nullable: true })

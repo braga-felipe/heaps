@@ -1,4 +1,4 @@
-import { ObjectType, Field, InputType} from "type-graphql";
+import { ObjectType, Field, Int} from "type-graphql";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -9,7 +9,6 @@ import {
   ManyToOne,
 } from "typeorm";
 import { Chat } from "./Chat";
-import { User } from "./User";
 
 @ObjectType()
 @InputType()
@@ -29,8 +28,13 @@ export class Message extends BaseEntity {
   chat: Chat;
 
   //This is the user who wrote the message
-  @Field(() => User)
-  author: User;
+  @Field(() => Int)
+  @Column()
+  authorId: number;
+
+  @Field(() => Boolean)
+  @Column('boolean', {default: false})
+  isRead: boolean = false;
 
   @Field(() => String)
   @CreateDateColumn()

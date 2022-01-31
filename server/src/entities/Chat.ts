@@ -8,6 +8,8 @@ import {
   ManyToOne,
   ManyToMany,
   OneToMany,
+  Column,
+  JoinTable,
 } from "typeorm";
 import { Item } from "./Item";
 import { Message } from "./Message";
@@ -24,18 +26,27 @@ export class Chat extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
+  @Field(() => Int)
+  @Column()
+  userOwnerId: number;
+
   //If you comment out a @Field, you won't expose that data in graphQL
   @Field(() => [User])
-  @ManyToMany(() => User, (user: User) => user.chats)
+  @ManyToMany(() => User, (user: User) => user.chats, { eager: true })
+  @JoinTable()
   users: User[];
 
+  @Field(() => Int)
+  @Column()
+  itemOwnerId: number;
+
   @Field(() => Item)
-  @ManyToOne(() => Item, (item: Item) => item.chats)
+  @ManyToOne(() => Item, (item: Item) => item.chats, { eager: true })
   item: Item;
 
-  @Field(() => [Message])
-  @OneToMany(() => Message, (message: Message) => message.chat)
-  messages: Message[];
+  @Field(() => [Message], {nullable: true})
+  @OneToMany(() => Message, (message: Message) => message.chat, { eager: true })
+  messages?: Promise<Message[]>;
 
   @Field(() => String)
   @CreateDateColumn()

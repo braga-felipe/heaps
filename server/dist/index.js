@@ -15,6 +15,8 @@ const User_1 = require("./entities/User");
 const Chat_1 = require("./entities/Chat");
 const Message_1 = require("./entities/Message");
 const User_2 = require("./resolvers/User");
+const chat_1 = require("./resolvers/chat");
+const message_1 = require("./resolvers/message");
 const app = (0, express_1.default)();
 const PORT = 4000;
 app.use(express_1.default.json());
@@ -35,7 +37,7 @@ app.use((0, cors_1.default)({
     });
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: await (0, type_graphql_1.buildSchema)({
-            resolvers: [item_1.ItemResolver, User_2.UserResolver],
+            resolvers: [item_1.ItemResolver, User_2.UserResolver, chat_1.ChatResolver, message_1.MessageResolver],
             validate: false
         }),
     });

@@ -71,9 +71,13 @@ export class Item extends BaseEntity {
   @ManyToOne(() => User, (user: User) => user.items_owned, {onDelete: 'SET NULL'})
   owner: User;
 
+  @Field(() => User)
+  @ManyToOne(() => User, (user: User) => user.items_taken, {onDelete: 'SET NULL'})
+  takers: [User];
+
   @Field(() => [Chat])
   @OneToMany(() => Chat, (chat: Chat) => chat.item, {onDelete: 'SET NULL'})
-  chats: Chat[] | [];
+  chats: Chat[];
 
   @Field(() => String)
   @CreateDateColumn()

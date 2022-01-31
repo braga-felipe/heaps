@@ -12,6 +12,8 @@ import { User } from "./entities/User";
 import { Chat } from "./entities/Chat";
 import { Message } from "./entities/Message";
 import { UserResolver } from './resolvers/User';
+import { ChatResolver } from './resolvers/chat';
+import { MessageResolver } from "./resolvers/message";
 
 const app = express();
 const PORT = 4000;
@@ -44,7 +46,7 @@ app.use(
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       // Add resolvers in array
-      resolvers: [ItemResolver, UserResolver],
+      resolvers: [ItemResolver, UserResolver, ChatResolver, MessageResolver],
       validate: false
     }),
   });

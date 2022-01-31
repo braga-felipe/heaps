@@ -23,17 +23,29 @@ __decorate([
     __metadata("design:type", Number)
 ], Chat.prototype, "id", void 0);
 __decorate([
+    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Chat.prototype, "userOwnerId", void 0);
+__decorate([
     (0, type_graphql_1.Field)(() => [User_1.User]),
     (0, typeorm_1.ManyToMany)(() => User_1.User, (user) => user.chats),
+    (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], Chat.prototype, "users", void 0);
 __decorate([
+    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Chat.prototype, "itemOwnerId", void 0);
+__decorate([
+
     (0, type_graphql_1.Field)(() => Item_1.Item),
     (0, typeorm_1.ManyToOne)(() => Item_1.Item, (item) => item.chats),
     __metadata("design:type", Item_1.Item)
 ], Chat.prototype, "item", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => [Message_1.Message]),
+    (0, type_graphql_1.Field)(() => [Message_1.Message], { nullable: true }),
     (0, typeorm_1.OneToMany)(() => Message_1.Message, (message) => message.chat),
     __metadata("design:type", Array)
 ], Chat.prototype, "messages", void 0);
