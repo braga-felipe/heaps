@@ -104,10 +104,10 @@ let ItemResolver = class ItemResolver {
     }
     async createItem(options) {
         const entityManager = (0, typeorm_1.getManager)();
-        const foundUser = await entityManager.findOneOrFail(User_1.User, options.ownerId);
-        const item = entityManager.create(Item_1.Item, options);
-        item.owner = foundUser;
-        await entityManager.save(item);
+        const user = await User_1.User.findOneOrFail(options.ownerId, { relations: ['items_owned'] });
+        const item = await entityManager
+            .create(Item_1.Item, Object.assign(Object.assign({}, options), { owner: user }))
+            .save();
         return item;
     }
     async updateItem(options) {

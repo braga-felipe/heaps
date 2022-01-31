@@ -13,8 +13,11 @@ exports.Message = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const Chat_1 = require("./Chat");
-const User_1 = require("./User");
 let Message = class Message extends typeorm_1.BaseEntity {
+    constructor() {
+        super(...arguments);
+        this.isRead = false;
+    }
 };
 __decorate([
     (0, type_graphql_1.Field)(),
@@ -32,9 +35,15 @@ __decorate([
     __metadata("design:type", Chat_1.Chat)
 ], Message.prototype, "chat", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => User_1.User),
-    __metadata("design:type", User_1.User)
-], Message.prototype, "author", void 0);
+    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Message.prototype, "authorId", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => Boolean),
+    (0, typeorm_1.Column)('boolean', { default: false }),
+    __metadata("design:type", Boolean)
+], Message.prototype, "isRead", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
     (0, typeorm_1.CreateDateColumn)(),
@@ -47,7 +56,6 @@ __decorate([
 ], Message.prototype, "updatedAt", void 0);
 Message = __decorate([
     (0, type_graphql_1.ObjectType)(),
-    (0, type_graphql_1.InputType)(),
     (0, typeorm_1.Entity)()
 ], Message);
 exports.Message = Message;

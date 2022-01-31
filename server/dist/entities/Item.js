@@ -85,6 +85,11 @@ __decorate([
     __metadata("design:type", User_1.User)
 ], Item.prototype, "owner", void 0);
 __decorate([
+    (0, type_graphql_1.Field)(() => User_1.User),
+    (0, typeorm_1.ManyToOne)(() => User_1.User, (user) => user.items_taken, { onDelete: 'SET NULL' }),
+    __metadata("design:type", Array)
+], Item.prototype, "takers", void 0);
+__decorate([
     (0, type_graphql_1.Field)(() => [Chat_1.Chat]),
     (0, typeorm_1.OneToMany)(() => Chat_1.Chat, (chat) => chat.item, { onDelete: 'SET NULL' }),
     __metadata("design:type", Array)
@@ -101,7 +106,6 @@ __decorate([
 ], Item.prototype, "updatedAt", void 0);
 Item = __decorate([
     (0, type_graphql_1.ObjectType)(),
-    (0, type_graphql_1.InputType)(),
     (0, typeorm_1.Entity)()
 ], Item);
 exports.Item = Item;

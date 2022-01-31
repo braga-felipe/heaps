@@ -11,7 +11,7 @@ import { Item } from "./entities/Item";
 import { User } from "./entities/User";
 import { Chat } from "./entities/Chat";
 import { Message } from "./entities/Message";
-import { UserResolver } from './resolvers/user_val';
+import { UserResolver } from './resolvers/User';
 import { ChatResolver } from './resolvers/chat';
 import { MessageResolver } from "./resolvers/message";
 
@@ -30,7 +30,7 @@ app.use(
 (async function () {
   //typeORM connection to POSTGRES
   await createConnection({
-    url: "postgres://cqdwlaycgnlihe:5a485120a790b97466abe4032ae3976c7ee7834b87f3975d5bd3919745f197ff@ec2-3-227-15-75.compute-1.amazonaws.com:5432/d9917k0abiuhik",
+    url: "postgres://tnsynagdhfeeoz:8f3fffa7c6b9427f6b1c7ccea5c00e92d246f7c57a8c6e4c898ff090f93c0975@ec2-54-220-166-184.eu-west-1.compute.amazonaws.com:5432/ddkbj1b88gtcq8",
     type: "postgres",
     logging: true,
     synchronize: true,

@@ -1,5 +1,5 @@
 import { ObjectType, Field } from "type-graphql";
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, BaseEntity, OneToMany, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, BaseEntity, OneToMany, ManyToMany } from 'typeorm';
 import { Item } from './Item';
 import { Chat } from './Chat';
 
@@ -12,8 +12,8 @@ export class User extends BaseEntity {
   id!: number;
 
   @Field(() => String)
-  @Column({ type: "varchar" })
-  username: string;
+  @Column({ type: "text", unique: true })
+  username!: string;
 
   //@Field(() => String)
   @Column()
