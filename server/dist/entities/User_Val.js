@@ -23,7 +23,7 @@ __decorate([
 ], User.prototype, "id", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
-    (0, typeorm_1.Column)({ type: "text", unique: true }),
+    (0, typeorm_1.Column)({ type: "varchar" }),
     __metadata("design:type", String)
 ], User.prototype, "username", void 0);
 __decorate([
@@ -86,4 +86,4 @@ User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);
 exports.User = User;
-//# sourceMappingURL=User.js.map
+//# sourceMappingURL=User_Val.js.map

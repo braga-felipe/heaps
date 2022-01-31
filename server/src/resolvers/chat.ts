@@ -1,7 +1,12 @@
 import { Query, Resolver, Arg, Int, Mutation, InputType, Field, registerEnumType } from 'type-graphql';
 import { Item } from "../entities/Item";
+<<<<<<< HEAD
 import { getManager} from "typeorm";
 import { User } from '../entities/User';
+=======
+import { getConnection, getManager} from "typeorm";
+import { User } from '../entities/User_Val';
+>>>>>>> 76c729265cccccfa4c0de9df08674934a1b02bce
 import { Chat } from '../entities/Chat';
 import { off } from 'process';
 
@@ -43,10 +48,9 @@ export class ChatResolver {
     const entityManager = getManager();
     const user1 = await User.findOneOrFail(options.userOwnerId, {relations: ["chats"]});
     const user2 = await User.findOneOrFail(options.userRequesterId, {relations: ["chats"]});
-    console.log(user1);
     const item = await entityManager.findOneOrFail(Item, options.itemOwnerId, { relations: ["chats"]});
     const chat = await entityManager
-                        .create(Chat, {...options, users: [user1, user2] , item: item })
+                        .create(Chat, {...options, users: Promise.resolve([user1, user2]) , item: Promise.resolve(item) })
                         .save();
     return chat;
   }

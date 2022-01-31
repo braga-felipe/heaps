@@ -43,10 +43,9 @@ let ChatResolver = class ChatResolver {
         const entityManager = (0, typeorm_1.getManager)();
         const user1 = await User_1.User.findOneOrFail(options.userOwnerId, { relations: ["chats"] });
         const user2 = await User_1.User.findOneOrFail(options.userRequesterId, { relations: ["chats"] });
-        console.log(user1);
         const item = await entityManager.findOneOrFail(Item_1.Item, options.itemOwnerId, { relations: ["chats"] });
         const chat = await entityManager
-            .create(Chat_1.Chat, Object.assign(Object.assign({}, options), { users: [user1, user2], item: item }))
+            .create(Chat_1.Chat, Object.assign(Object.assign({}, options), { users: Promise.resolve([user1, user2]), item: Promise.resolve(item) }))
             .save();
         return chat;
     }

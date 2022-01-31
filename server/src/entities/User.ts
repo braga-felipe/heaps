@@ -1,5 +1,5 @@
-import { ObjectType, Field } from "type-graphql";
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, BaseEntity, OneToMany, ManyToMany } from 'typeorm';
+import { ObjectType, Field, Int } from "type-graphql";
+import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, BaseEntity, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { Item } from './Item';
 import { Chat } from './Chat';
 
@@ -31,7 +31,7 @@ export class User extends BaseEntity {
   @Column()
   zipCode: string;
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   @Column({ nullable: true })
   SICK_points?: number;
 
@@ -46,6 +46,7 @@ export class User extends BaseEntity {
 
   @Field(() => [Chat], {nullable: true})
   @ManyToMany(() => Chat, (chat: Chat) => chat.users)
+  @JoinTable()
   chats?: Chat[];
 
   @Field({ nullable: true })
