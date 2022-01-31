@@ -12,8 +12,8 @@ export class User extends BaseEntity {
   id!: number;
 
   @Field(() => String)
-  @Column({ type: "varchar" })
-  username: string;
+  @Column({ type: "text", unique: true })
+  username!: string;
 
   //@Field(() => String)
   @Column()

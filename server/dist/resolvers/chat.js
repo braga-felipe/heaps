@@ -16,7 +16,7 @@ exports.ChatResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const Item_1 = require("../entities/Item");
 const typeorm_1 = require("typeorm");
-const User_Val_1 = require("../entities/User_Val");
+const User_1 = require("../entities/User");
 const Chat_1 = require("../entities/Chat");
 let ChatCreateInput = class ChatCreateInput {
 };
@@ -41,8 +41,8 @@ let ChatResolver = class ChatResolver {
     }
     async createChat(options) {
         const entityManager = (0, typeorm_1.getManager)();
-        const user1 = await User_Val_1.User.findOneOrFail(options.userOwnerId, { relations: ["chats"] });
-        const user2 = await User_Val_1.User.findOneOrFail(options.userRequesterId, { relations: ["chats"] });
+        const user1 = await User_1.User.findOneOrFail(options.userOwnerId, { relations: ["chats"] });
+        const user2 = await User_1.User.findOneOrFail(options.userRequesterId, { relations: ["chats"] });
         const item = await entityManager.findOneOrFail(Item_1.Item, options.itemOwnerId, { relations: ["chats"] });
         const chat = await entityManager
             .create(Chat_1.Chat, Object.assign(Object.assign({}, options), { users: Promise.resolve([user1, user2]), item: Promise.resolve(item) }))

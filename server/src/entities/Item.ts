@@ -11,7 +11,7 @@ import {
 } from "typeorm";
 import { Diets, Allergies } from "../resolvers/item";
 import { Chat } from "./Chat";
-import { User } from "./User_Val";
+import { User } from "./User";
 
 @ObjectType()
 @Entity()

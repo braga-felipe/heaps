@@ -1,7 +1,7 @@
 import { Query, Resolver, Arg, Int, Mutation, InputType, Field, registerEnumType } from 'type-graphql';
 import { Item } from "../entities/Item";
 import { getManager} from "typeorm";
-import { User } from '../entities/User_Val';
+import { User } from '../entities/User';
 
 
 //Enums allow us to type-set the inputs for the Allergies and Diets properties on Items we are creating

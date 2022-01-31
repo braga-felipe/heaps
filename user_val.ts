@@ -1,6 +1,6 @@
 import { Query, Resolver, Arg, Int, Mutation, InputType, Field} from 'type-graphql';
 import { getManager} from "typeorm";
-import { User } from '../entities/User_Val';
+import { User } from '../entities/User';
 
 
 
@@ -34,10 +34,10 @@ export class UserResolver {
     return newUser;
   }
 
-  //This function takes an options object. You need to pass an id for the user to update 
+  //This function takes an options object. You need to pass an id for the user to update
   //and a key for the property to update.
 
-  @Query(() => User, { nullable: true }) 
+  @Query(() => User, { nullable: true })
   async getUser(
     @Arg('id', () => Int) id: number
   ): Promise<User| undefined> {

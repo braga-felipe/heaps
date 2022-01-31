@@ -23,7 +23,7 @@ __decorate([
 ], User.prototype, "id", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
-    (0, typeorm_1.Column)({ type: "varchar" }),
+    (0, typeorm_1.Column)({ type: "text", unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "username", void 0);
 __decorate([
@@ -46,24 +46,21 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "zipCode", void 0);
 __decorate([
-    (0, type_graphql_1.Field)({ nullable: true }),
+    (0, type_graphql_1.Field)(() => type_graphql_1.Int, { nullable: true }),
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
 ], User.prototype, "SICK_points", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => [Item_1.Item], { nullable: true }),
+    (0, type_graphql_1.Field)(() => [Item_1.Item]),
     (0, typeorm_1.OneToMany)(() => Item_1.Item, (item) => item.owner),
     __metadata("design:type", Array)
 ], User.prototype, "items_owned", void 0);
 __decorate([
-<<<<<<< HEAD
     (0, type_graphql_1.Field)(() => [Item_1.Item], { nullable: true }),
-    (0, typeorm_1.Column)(() => Item_1.Item),
+    (0, typeorm_1.OneToMany)(() => Item_1.Item, (item) => item.takers),
     __metadata("design:type", Array)
 ], User.prototype, "items_taken", void 0);
 __decorate([
-=======
->>>>>>> e48150157358ec17c67806c6035924f34f4402ea
     (0, type_graphql_1.Field)(() => [Chat_1.Chat], { nullable: true }),
     (0, typeorm_1.ManyToMany)(() => Chat_1.Chat, (chat) => chat.users),
     (0, typeorm_1.JoinTable)(),
