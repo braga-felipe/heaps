@@ -3,7 +3,7 @@ import { Item } from "../entities/Item";
 import { getManager} from "typeorm";
 import { User } from '../entities/User';
 import { Chat } from '../entities/Chat';
-
+import { off } from 'process';
 
 
 //TODO: Define type for chat create input
@@ -41,7 +41,7 @@ export class ChatResolver {
     const user2 = await User.findOneOrFail(options.userRequesterId, {relations: ["chats"]});
     const item = await entityManager.findOneOrFail(Item, options.itemOwnerId, { relations: ["chats"]});
     const chat = await entityManager
-                        .create(Chat, {...options, users: Promise.resolve([user1, user2]) , item: Promise.resolve(item) })
+                        .create(Chat, {...options, users: [user1, user2] , item: item })
                         .save();
     return chat;
   }
