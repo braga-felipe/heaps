@@ -1,41 +1,61 @@
 import React from 'react';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
+import { FormControl, FormLabel, Input, FormErrorMessage, Button } from "@chakra-ui/react";
+
 
 interface Values {
   email: string;
   password: string;
 }
 export default function Login() {
+  function validateName(value) {
+    let error
+    if (!value) {
+      error = 'Name is required'
+    }
+    return error
+  }
+
   return (
-    <div>
-      <h1>loging</h1>
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-        }}
-        onSubmit={(
-          values: Values,
-
-        ) => {
-          console.log('values', values);
-
-        }}
-      >
+    <Formik
+      initialValues={{
+        email: '',
+        password: '',
+      }}
+      onSubmit={(values, actions) => {
+        console.log('values', values);
+      }}
+    >
+      {(props) => (
         <Form>
-          <label htmlFor="email">Email</label>
-          <Field
-            id="email"
-            name="email"
-            placeholder="john@acme.com"
-            type="email"
-          />
-          <label htmlFor="password">First Name</label>
-          <Field id="password" name="password" placeholder="Password" type='password' />
-
-          <button type="submit">Submit</button>
+          <Field name='email' validate={validateName}>
+            {({ field, form }) => (
+              <FormControl isInvalid={form.errors.email && form.touched.email}>
+                <FormLabel htmlFor='email'>Email</FormLabel>
+                <Input {...field} id='email' placeholder='email' />
+                <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Field name='password' >
+            {({ field, form }) => (
+              <FormControl isInvalid={form.errors.password && form.touched.password}>
+                <FormLabel htmlFor='password'>Password</FormLabel>
+                <Input {...field} id='password' placeholder='password' type='password' />
+                <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Button
+            mt={4}
+            colorScheme='teal'
+            isLoading={props.isSubmitting}
+            type='submit'
+          >
+            Submit
+          </Button>
         </Form>
-      </Formik>
-    </div>
+      )}
+    </Formik>
   );
 }
