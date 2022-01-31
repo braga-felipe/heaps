@@ -1,8 +1,6 @@
 import { Query, Resolver, Arg, Int, Mutation, InputType, Field} from 'type-graphql';
-import { Item } from "../entities/Item";
-import {getConnection, getManager} from "typeorm";
-import { User } from '../entities/User';
-import { Chat } from '../entities/Chat';
+import { getManager} from "typeorm";
+import { User } from '../entities/User_Val';
 
 
 
@@ -43,9 +41,8 @@ export class UserResolver {
   async getUser(
     @Arg('id', () => Int) id: number
   ): Promise<User| undefined> {
-    const user = await User.findOne(id, { relations: ['items_owned']});
+    const user = await User.findOne(id, { relations: ['items_owned', 'chats']});
     return user;
   }
-
 }
 
