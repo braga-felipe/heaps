@@ -51,7 +51,6 @@ class UserResponse {
   newUser?: User;
 }
 
-
 @Resolver()
 export class UserResolver {
   @Query(() => [User])
