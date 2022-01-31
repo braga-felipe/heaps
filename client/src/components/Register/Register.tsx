@@ -11,6 +11,13 @@ interface Values {
 
 }
 export default function Register() {
+  function validateName(value) {
+    let error
+    if (!value) {
+      error = 'Name is required'
+    }
+    return error
+  }
   return (
     <div>
       <h1>Register</h1>
@@ -32,6 +39,33 @@ export default function Register() {
       >
         {(props) => (
           <Form>
+            <Field name='username' validate={validateName}>
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.email && form.touched.username}>
+                  <FormLabel htmlFor='username'>Username</FormLabel>
+                  <Input {...field} id='username' placeholder='Username' />
+                  <FormErrorMessage>{form.errors.username}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Field name='address' validate={validateName}>
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.address && form.touched.address}>
+                  <FormLabel htmlFor='address'>Address</FormLabel>
+                  <Input {...field} id='address' placeholder='Address' />
+                  <FormErrorMessage>{form.errors.address}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Field name='zipcode' validate={validateName}>
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.zipcode && form.touched.zipcode}>
+                  <FormLabel htmlFor='zipcode'>ZIP Code</FormLabel>
+                  <Input {...field} id='zipcode' placeholder='ZIP Code' />
+                  <FormErrorMessage>{form.errors.zipcode}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
             <Field name='email' validate={validateName}>
               {({ field, form }) => (
                 <FormControl isInvalid={form.errors.email && form.touched.email}>
