@@ -36,17 +36,16 @@ export class User extends BaseEntity {
   SICK_points?: number;
 
 
-  @Field(() => [Item], {nullable: true})
+  @Field(() => [Item])
   @OneToMany(() => Item, (item: Item) => item.owner)
   items_owned?: Item[];
 
-  // @Field(() => [Item], {nullable: true})
-  // @Column(() => Item)
-  // items_taken?: Item[];
+  @Field(() => [Item], {nullable: true})
+  @OneToMany(() => Item, (item: Item) => item.takers)
+  items_taken?: Item[];
 
   @Field(() => [Chat], {nullable: true})
   @ManyToMany(() => Chat, (chat: Chat) => chat.users)
-  @JoinTable()
   chats?: Chat[];
 
   @Field({ nullable: true })

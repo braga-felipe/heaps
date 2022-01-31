@@ -8,10 +8,12 @@ import {
   ManyToOne,
   ManyToMany,
   OneToMany,
+  Column,
+  JoinTable,
 } from "typeorm";
 import { Item } from "./Item";
 import { Message } from "./Message";
-import { User } from "./User";
+import { User } from "./User_Val";
 
 @ObjectType()
 @InputType()
@@ -24,18 +26,27 @@ export class Chat extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
+  @Field(() => Int)
+  @Column()
+  userOwnerId: number;
+
   //If you comment out a @Field, you won't expose that data in graphQL
   @Field(() => [User])
   @ManyToMany(() => User, (user: User) => user.chats)
+  @JoinTable()
   users: User[];
+
+  @Field(() => Int)
+  @Column()
+  itemOwnerId: number;
 
   @Field(() => Item)
   @ManyToOne(() => Item, (item: Item) => item.chats)
   item: Item;
 
-  @Field(() => [Message])
+  @Field(() => [Message], {nullable: true})
   @OneToMany(() => Message, (message: Message) => message.chat)
-  messages: Message[];
+  messages?: Message[];
 
   @Field(() => String)
   @CreateDateColumn()
