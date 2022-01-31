@@ -61,8 +61,8 @@ export class UserResolver {
   }
 
   @Query(() => User)
-  async getOneUserByID(@Arg("id", () => Int) id: number) {
-    const user = await User.findOne(id, {
+  async getOneUserByID(@Arg("id", () => Int) id: number): Promise<User | undefined> {
+    const user = await User.findOneOrFail(id, {
       relations: ["items_owned", "chats"],
     });
     return user;

@@ -34,7 +34,7 @@ export class Chat extends BaseEntity {
   @Field(() => [User])
   @ManyToMany(() => User, (user: User) => user.chats, { eager: true })
   @JoinTable()
-  users: Promise<User[]>;
+  users: User[];
 
   @Field(() => Int)
   @Column()
@@ -42,11 +42,11 @@ export class Chat extends BaseEntity {
 
   @Field(() => Item)
   @ManyToOne(() => Item, (item: Item) => item.chats, { eager: true })
-  item: Promise<Item>;
+  item: Item;
 
   @Field(() => [Message], {nullable: true})
   @OneToMany(() => Message, (message: Message) => message.chat, { eager: true })
-  messages?: Message[];
+  messages?: Promise<Message[]>;
 
   @Field(() => String)
   @CreateDateColumn()
