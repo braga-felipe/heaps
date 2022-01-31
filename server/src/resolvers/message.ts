@@ -1,9 +1,9 @@
-import { Query, Resolver, Arg, Int, Mutation, InputType, Field, registerEnumType } from 'type-graphql';
-import { Item } from "../entities/Item";
+import {  Resolver, Arg, Int, Mutation, InputType, Field} from 'type-graphql';
+
 import { getManager } from "typeorm";
 import { Message } from '../entities/Message';
 import { Chat } from '../entities/Chat';
-import { User } from '../entities/User';
+
 
 //Define the types for  Message inputs
 @InputType()
@@ -26,7 +26,7 @@ export class MessageResolver {
     @Arg('options') options: MessageCreateInput
   ): Promise<Message> {
     const entityManager = getManager();
-    const chat = await Chat.findOneOrFail(options.chatId, { relations: ['messages', 'item']});
+    const chat = await Chat.findOneOrFail(options.chatId, { relations: ['messages']});
     const message = await entityManager
                         .create(Message, { ...options, chat: chat, authorId: options.currentUserId})
                         .save();

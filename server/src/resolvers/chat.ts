@@ -1,15 +1,9 @@
-import { Query, Resolver, Arg, Int, Mutation, InputType, Field, registerEnumType } from 'type-graphql';
+import { Query, Resolver, Arg, Int, Mutation, InputType, Field} from 'type-graphql';
 import { Item } from "../entities/Item";
-<<<<<<< HEAD
 import { getManager} from "typeorm";
 import { User } from '../entities/User';
-=======
-import { getConnection, getManager} from "typeorm";
-import { User } from '../entities/User_Val';
->>>>>>> 76c729265cccccfa4c0de9df08674934a1b02bce
 import { Chat } from '../entities/Chat';
 import { off } from 'process';
-
 
 
 //TODO: Define type for chat create input
@@ -26,18 +20,15 @@ class ChatCreateInput {
 
 }
 
-
 //Define types for update queries.
 
 @Resolver()
 export class ChatResolver {
-  //Todo: Get Chat by UserOwner
-  //Todo: Get Chat by ItemOwner
   @Query(() => Chat, { nullable: true })
   getChat(
     @Arg('id', () => Int) id: number
   ): Promise<Chat| undefined> {
-    return Chat.findOne(id, {relations: ["users", "messages"]});
+    return Chat.findOne(id, {relations: ["users", "messages", "item"]});
   }
 
   @Mutation(() => Chat)
@@ -50,7 +41,7 @@ export class ChatResolver {
     const user2 = await User.findOneOrFail(options.userRequesterId, {relations: ["chats"]});
     const item = await entityManager.findOneOrFail(Item, options.itemOwnerId, { relations: ["chats"]});
     const chat = await entityManager
-                        .create(Chat, {...options, users: Promise.resolve([user1, user2]) , item: Promise.resolve(item) })
+                        .create(Chat, {...options, users: [user1, user2] , item: item })
                         .save();
     return chat;
   }

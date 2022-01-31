@@ -9,7 +9,6 @@ import {
   ManyToOne,
 } from "typeorm";
 import { Chat } from "./Chat";
-import { User } from "./User";
 
 @ObjectType()
 @Entity()

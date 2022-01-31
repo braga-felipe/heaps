@@ -46,7 +46,6 @@ export class User extends BaseEntity {
 
   @Field(() => [Chat], {nullable: true})
   @ManyToMany(() => Chat, (chat: Chat) => chat.users)
-  @JoinTable()
   chats?: Chat[];
 
   @Field({ nullable: true })
