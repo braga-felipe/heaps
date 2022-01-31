@@ -14,7 +14,6 @@ import { Chat } from "./Chat";
 import { User } from "./User";
 
 @ObjectType()
-@InputType()
 @Entity()
 export class Item extends BaseEntity { 
 

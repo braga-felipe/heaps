@@ -12,7 +12,6 @@ import { Chat } from "./Chat";
 import { User } from "./User";
 
 @ObjectType()
-@InputType()
 @Entity()
 export class Message extends BaseEntity { 
   @Field()

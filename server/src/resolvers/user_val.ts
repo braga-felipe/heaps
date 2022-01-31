@@ -7,11 +7,20 @@ import { Chat } from '../entities/Chat';
 
 
 @InputType()
-class UserCreateInput {
+class CreateUserInput {
+  @Field(() => String)
+  username: string;
   @Field()
-  email!: string;
+  email: string;
+  @Field()
+  password: string;
+  @Field(() => String)
+  address: string;
+  @Field(() => String)
+  zipCode: string;
+  @Field({ nullable: true })
+  img_url?: string;
 }
-
 //Define types for update queries.
 
 @Resolver()
@@ -19,7 +28,7 @@ export class UserResolver {
 
   @Mutation(() => User)
   async createUser (
-    @Arg('options') options: UserCreateInput,
+    @Arg('options') options: CreateUserInput,
   ): Promise<User> {
     const entityManager = getManager();
     const newUser = entityManager.create(User, options);
@@ -31,10 +40,11 @@ export class UserResolver {
   //and a key for the property to update.
 
   @Query(() => User, { nullable: true }) 
-  getUser(
+  async getUser(
     @Arg('id', () => Int) id: number
   ): Promise<User| undefined> {
-    return User.findOne(id);
+    const user = await User.findOne(id, { relations: ['items_owned']});
+    return user;
   }
 
 }
