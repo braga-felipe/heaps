@@ -28,7 +28,7 @@ export default function InputField({ name }) {
             {...field}
             id={name}
             placeholder={name}
-            type={name === 'Password' ? 'password' : 'text'}
+            type={name === 'password' ? 'password' : 'text'}
           />
           <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
         </FormControl>

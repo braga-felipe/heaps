@@ -1,16 +1,16 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
 import SubmitButton from '../ChakraUiComponents/Button';
 
-import { useGet_User_By_IdQuery } from '../../generated/graphql';
+import { useUser_LoginMutation } from '../../generated/graphql';
 
 interface Values {
   email: string;
   password: string;
 }
 export default function Login() {
-  const [, getUser] = useGet_User_By_IdQuery();
+  const [, getUser] = useUser_LoginMutation();
 
   return (
     <Formik
@@ -18,13 +18,18 @@ export default function Login() {
         email: '',
         password: '',
       }}
-      onSubmit={(values: Values) => {
+      onSubmit={async (values: Values, { setErrors }) => {
+        const res = await getUser({ options: values })
+        if (res.data?.userLogin.errors) {
+          setErrors({ email: `${res.data.userLogin.errors[0].message}`, })
+        }
         console.log('values', values);
+        console.log('login: ', res);
       }}>
       {(props) => (
         <Form>
-          <InputField name='Email' />
-          <InputField name='Password' />
+          <InputField name='email' />
+          <InputField name='password' />
           <SubmitButton props={props} name='Log In' />
         </Form>
       )}
