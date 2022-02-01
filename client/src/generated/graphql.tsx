@@ -166,6 +166,7 @@ export type Query = {
   getChat?: Maybe<Chat>;
   getItem?: Maybe<Item>;
   getOneUserByID: User;
+  me?: Maybe<User>;
 };
 
 
@@ -201,7 +202,6 @@ export type User = {
 
 export type UserLoginInput = {
   email: Scalars['String'];
-  id: Scalars['Float'];
   password: Scalars['String'];
 };
 
@@ -231,6 +231,13 @@ export type Update_ItemMutationVariables = Exact<{
 
 
 export type Update_ItemMutation = { __typename?: 'Mutation', updateItem: { __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, createdAt: string, updatedAt: string } };
+
+export type User_LoginMutationVariables = Exact<{
+  options: UserLoginInput;
+}>;
+
+
+export type User_LoginMutation = { __typename?: 'Mutation', userLogin: { __typename?: 'UserResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null | undefined, user?: { __typename?: 'User', username: string, id: number, email: string, address: string, zipCode: string } | null | undefined } };
 
 export type Get_All_UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -317,6 +324,27 @@ export const Update_ItemDocument = gql`
 
 export function useUpdate_ItemMutation() {
   return Urql.useMutation<Update_ItemMutation, Update_ItemMutationVariables>(Update_ItemDocument);
+};
+export const User_LoginDocument = gql`
+    mutation USER_LOGIN($options: UserLoginInput!) {
+  userLogin(options: $options) {
+    errors {
+      field
+      message
+    }
+    user {
+      username
+      id
+      email
+      address
+      zipCode
+    }
+  }
+}
+    `;
+
+export function useUser_LoginMutation() {
+  return Urql.useMutation<User_LoginMutation, User_LoginMutationVariables>(User_LoginDocument);
 };
 export const Get_All_UsersDocument = gql`
     query GET_ALL_USERS {
