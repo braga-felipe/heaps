@@ -26,11 +26,11 @@ export default function Register() {
         {(props) => (
           <Form>
             <h1>Register</h1>
-            <InputField name='Username' />
-            <InputField name='Address' />
-            <InputField name='ZIPCode' />
-            <InputField name='Email' />
-            <InputField name='Password' />
+            <InputField name='username' />
+            <InputField name='address' />
+            <InputField name='zipCode' />
+            <InputField name='email' />
+            <InputField name='password' />
             <SubmitButton props={props} name='Register' />
           </Form>
         )}
