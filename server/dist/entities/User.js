@@ -63,7 +63,6 @@ __decorate([
 __decorate([
     (0, type_graphql_1.Field)(() => [Chat_1.Chat], { nullable: true }),
     (0, typeorm_1.ManyToMany)(() => Chat_1.Chat, (chat) => chat.users),
-    (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], User.prototype, "chats", void 0);
 __decorate([

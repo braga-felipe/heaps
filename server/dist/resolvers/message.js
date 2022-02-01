@@ -37,7 +37,7 @@ MessageCreateInput = __decorate([
 let MessageResolver = class MessageResolver {
     async createMessage(options) {
         const entityManager = (0, typeorm_1.getManager)();
-        const chat = await Chat_1.Chat.findOneOrFail(options.chatId, { relations: ['messages', 'item'] });
+        const chat = await Chat_1.Chat.findOneOrFail(options.chatId, { relations: ['messages'] });
         const message = await entityManager
             .create(Message_1.Message, Object.assign(Object.assign({}, options), { chat: chat, authorId: options.currentUserId }))
             .save();

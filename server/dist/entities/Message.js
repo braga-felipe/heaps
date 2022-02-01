@@ -56,7 +56,7 @@ __decorate([
 ], Message.prototype, "updatedAt", void 0);
 Message = __decorate([
     (0, type_graphql_1.ObjectType)(),
-    (0, type_graphql_1.InputType)(),
+    InputType(),
     (0, typeorm_1.Entity)()
 ], Message);
 exports.Message = Message;

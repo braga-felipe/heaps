@@ -17,12 +17,33 @@ const Message_1 = require("./entities/Message");
 const User_2 = require("./resolvers/User");
 const chat_1 = require("./resolvers/chat");
 const message_1 = require("./resolvers/message");
+const connectRedis = require('connect-redis');
+const redis = require('redis');
+const session = require('express-session');
 const app = (0, express_1.default)();
 const PORT = 4000;
+const redisClient = redis.createClient();
+const RedisStore = connectRedis(session);
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
-    origin: '*',
+    origin: 'http://localhost:3000',
     credentials: true
+}));
+app.use(session({
+    name: 'qid',
+    store: new RedisStore({
+        client: redisClient,
+        disableTouch: true,
+    }),
+    cookie: {
+        maxAge: 10000000,
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax',
+    },
+    saveUninitialized: false,
+    secret: 'qiwroasdjlasddde',
+    resave: false
 }));
 (async function () {
     await (0, typeorm_1.createConnection)({

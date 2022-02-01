@@ -37,7 +37,7 @@ ChatCreateInput = __decorate([
 ], ChatCreateInput);
 let ChatResolver = class ChatResolver {
     getChat(id) {
-        return Chat_1.Chat.findOne(id, { relations: ["users", "messages"] });
+        return Chat_1.Chat.findOne(id, { relations: ["users", "messages", "item"] });
     }
     async createChat(options) {
         const entityManager = (0, typeorm_1.getManager)();
@@ -45,7 +45,7 @@ let ChatResolver = class ChatResolver {
         const user2 = await User_1.User.findOneOrFail(options.userRequesterId, { relations: ["chats"] });
         const item = await entityManager.findOneOrFail(Item_1.Item, options.itemOwnerId, { relations: ["chats"] });
         const chat = await entityManager
-            .create(Chat_1.Chat, Object.assign(Object.assign({}, options), { users: Promise.resolve([user1, user2]), item: Promise.resolve(item) }))
+            .create(Chat_1.Chat, Object.assign(Object.assign({}, options), { users: [user1, user2], item: item }))
             .save();
         return chat;
     }

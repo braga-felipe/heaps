@@ -30,11 +30,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const User_1 = require("../entities/User");
 const argon2 = __importStar(require("argon2"));
+const types_1 = require("../types");
 let CreateUserInput = class CreateUserInput {
 };
 __decorate([
@@ -64,6 +66,23 @@ __decorate([
 CreateUserInput = __decorate([
     (0, type_graphql_1.InputType)()
 ], CreateUserInput);
+let UserLoginInput = class UserLoginInput {
+};
+__decorate([
+    (0, type_graphql_1.Field)(),
+    __metadata("design:type", Number)
+], UserLoginInput.prototype, "id", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(),
+    __metadata("design:type", String)
+], UserLoginInput.prototype, "email", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(),
+    __metadata("design:type", String)
+], UserLoginInput.prototype, "password", void 0);
+UserLoginInput = __decorate([
+    (0, type_graphql_1.InputType)()
+], UserLoginInput);
 let FieldError = class FieldError {
 };
 __decorate([
@@ -86,7 +105,7 @@ __decorate([
 __decorate([
     (0, type_graphql_1.Field)(() => User_1.User, { nullable: true }),
     __metadata("design:type", User_1.User)
-], UserResponse.prototype, "newUser", void 0);
+], UserResponse.prototype, "user", void 0);
 UserResponse = __decorate([
     (0, type_graphql_1.ObjectType)()
 ], UserResponse);
@@ -96,18 +115,18 @@ let UserResolver = class UserResolver {
         return allUser;
     }
     async getOneUserByID(id) {
-        const user = await User_1.User.findOne(id, {
+        const user = await User_1.User.findOneOrFail(id, {
             relations: ["items_owned", "chats"],
         });
         return user;
     }
-    async createUser(options) {
-        if (options.username.length < 6) {
+    async createUser(options, { req }) {
+        if (!options.username) {
             return {
                 errors: [
                     {
                         field: "username",
-                        message: "Username must be at least 6 characters.",
+                        message: "Please enter a valid name.",
                     },
                 ],
             };
@@ -122,10 +141,32 @@ let UserResolver = class UserResolver {
                 ],
             };
         }
+        let emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (!options.email.match(emailFormat)) {
+            return {
+                errors: [
+                    {
+                        field: "email",
+                        message: "Please enter a valid email address.",
+                    },
+                ],
+            };
+        }
         const hashedPassword = await argon2.hash(options.password);
-        let newUser = undefined;
+        let user = undefined;
         try {
-            newUser = await User_1.User.create({
+            const checkUser = await User_1.User.findOne({ email: options.email });
+            if (checkUser) {
+                return {
+                    errors: [
+                        {
+                            field: "email",
+                            message: "Email already in use."
+                        }
+                    ]
+                };
+            }
+            user = await User_1.User.create({
                 username: options.username,
                 password: hashedPassword,
                 email: options.email,
@@ -135,18 +176,46 @@ let UserResolver = class UserResolver {
             }).save();
         }
         catch (err) {
-            if (err.errno === 19) {
+            if (err) {
+                console.log(err);
                 return {
                     errors: [
                         {
-                            field: "username",
-                            message: "Username has already been taken.",
+                            field: "email",
+                            message: "Please enter a different email address.",
                         },
                     ],
                 };
             }
         }
-        return { newUser };
+        req.session.userId = user === null || user === void 0 ? void 0 : user.id;
+        return { user };
+    }
+    async userLogin(options, { req }) {
+        const user = await User_1.User.findOne({ email: options.email });
+        if (!user) {
+            return {
+                errors: [
+                    {
+                        field: "email",
+                        message: "Email and password combination does not match."
+                    }
+                ]
+            };
+        }
+        const validPasswordCheck = await argon2.verify(options.email, options.password);
+        if (!validPasswordCheck) {
+            return {
+                errors: [
+                    {
+                        field: "password",
+                        message: "Password and password combination does not match."
+                    }
+                ]
+            };
+        }
+        req.session.userId = user.id;
+        return { user };
     }
 };
 __decorate([
@@ -165,10 +234,19 @@ __decorate([
 __decorate([
     (0, type_graphql_1.Mutation)(() => UserResponse),
     __param(0, (0, type_graphql_1.Arg)("options")),
+    __param(1, (0, type_graphql_1.Ctx)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [CreateUserInput]),
+    __metadata("design:paramtypes", [CreateUserInput, typeof (_a = typeof types_1.MyContext !== "undefined" && types_1.MyContext) === "function" ? _a : Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "createUser", null);
+__decorate([
+    (0, type_graphql_1.Mutation)(() => UserResponse),
+    __param(0, (0, type_graphql_1.Arg)('options')),
+    __param(1, (0, type_graphql_1.Ctx)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [UserLoginInput, typeof (_b = typeof types_1.MyContext !== "undefined" && types_1.MyContext) === "function" ? _b : Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "userLogin", null);
 UserResolver = __decorate([
     (0, type_graphql_1.Resolver)()
 ], UserResolver);
