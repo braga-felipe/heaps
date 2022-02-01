@@ -14,23 +14,25 @@ import { Message } from "./entities/Message";
 import { UserResolver } from './resolvers/User';
 import { ChatResolver } from './resolvers/chat';
 import { MessageResolver } from "./resolvers/message";
+import { MyContext } from "./types";
 
+//TODO: Update DB to redis store
+// const connectRedis = require('connect-redis');
+// const redis = require('redis');
 
-const connectRedis = require('connect-redis');
-const redis = require('redis');
 const session = require('express-session');
 
 const app = express();
 const PORT = 4000;
 
-const redisClient = redis.createClient()
-const RedisStore = connectRedis(session)
+// const redisClient = redis.createClient()
+// const RedisStore = connectRedis(session)
 
 
 app.use(express.json());
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: '*',
     credentials: true
   })
 );
@@ -38,15 +40,11 @@ app.use(
 app.use(
   session({
     name: 'qid',
-    store: new RedisStore({
-      client: redisClient,
-      disableTouch: true,
-    }),
     cookie: {
       maxAge: 10000000,
       httpOnly: true,
       secure: false,
-      sameSite: 'lax',
+      sameSite: false,
     },
     saveUninitialized: false,
     secret: 'qiwroasdjlasddde',
@@ -57,7 +55,7 @@ app.use(
 (async function () {
   //typeORM connection to POSTGRES
   await createConnection({
-    url: "postgres://tnsynagdhfeeoz:8f3fffa7c6b9427f6b1c7ccea5c00e92d246f7c57a8c6e4c898ff090f93c0975@ec2-54-220-166-184.eu-west-1.compute.amazonaws.com:5432/ddkbj1b88gtcq8",
+    url: "postgres://cqdwlaycgnlihe:5a485120a790b97466abe4032ae3976c7ee7834b87f3975d5bd3919745f197ff@ec2-3-227-15-75.compute-1.amazonaws.com:5432/d9917k0abiuhik",
     type: "postgres",
     logging: true,
     synchronize: true,
@@ -76,6 +74,10 @@ app.use(
       resolvers: [ItemResolver, UserResolver, ChatResolver, MessageResolver],
       validate: false
     }),
+    context: ({ req, res }): MyContext => ({
+      req,
+      res
+    })
   });
 
   //Start server and apply middleware to ApolloServer
@@ -86,8 +88,9 @@ app.use(
       cors: false
     });
     app.listen(PORT, () => {
-    console.log('listening on port: ', PORT);
-  })} catch (err) {
+      console.log('listening on port: ', PORT);
+    })
+  } catch (err) {
     console.error(err);
   }
 })();
