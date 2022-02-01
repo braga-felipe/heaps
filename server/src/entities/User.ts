@@ -35,7 +35,7 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   SICK_points?: number;
 
-  @Field(() => [Item])
+  @Field(() => [Item], { nullable: true })
   @OneToMany(() => Item, (item: Item) => item.owner)
   items_owned?: Item[];
 
