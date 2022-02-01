@@ -10,6 +10,7 @@ interface Values {
   password: string;
 }
 export default function Register() {
+
   return (
     <div>
       <Formik

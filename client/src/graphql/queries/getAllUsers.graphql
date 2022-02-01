@@ -1,0 +1,36 @@
+query GET_ALL_USERS{
+  getAllUsers {
+    id
+    username
+    email
+    address
+    zipCode
+    SICK_points
+    items_owned {
+      id
+      name
+      description
+      servings
+      complete
+      archive
+      isGroceries
+      allergies
+      diets
+      SICK_points
+    }
+    items_taken {
+      id
+      name
+      description
+      servings
+      complete
+      archive
+      isGroceries
+      allergies
+      diets
+      SICK_points
+    }
+    createdAt
+    updatedAt
+  }
+}
