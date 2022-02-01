@@ -5,7 +5,6 @@ import { User } from '../entities/User';
 import { Chat } from '../entities/Chat';
 
 
-
 //TODO: Define type for chat create input
 @InputType()
 class ChatCreateInput {
