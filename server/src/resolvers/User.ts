@@ -38,9 +38,6 @@ class CreateUserInput {
 @InputType()
 class UserLoginInput {
   @Field()
-  id: number;
-
-  @Field()
   email: string;
 
   @Field()
@@ -172,7 +169,7 @@ export class UserResolver {
           ]
         }
       }
-      const validPasswordCheck = await argon2.verify(options.email, options.password);
+      const validPasswordCheck = await argon2.verify(user.password, options.password);
       if (!validPasswordCheck) {
         return {
           errors: [
@@ -206,7 +203,6 @@ export class UserResolver {
             resolve(false);
             return;
           }
-  
           resolve(true);
         })
       );
