@@ -187,6 +187,15 @@ export class UserResolver {
       return { user };
     }
 
+    //Authentication query. Returns user or null
+    @Query(() => User, { nullable: true })
+    me(@Ctx() { req }: MyContext) {
+      if (!req.session.userId) {
+        return null;
+      }
+      return User.findOne(req.session.userId);
+    }
+
     @Mutation(() => Boolean)
     logout(@Ctx() { req, res }: MyContext) {
       return new Promise((resolve) =>
