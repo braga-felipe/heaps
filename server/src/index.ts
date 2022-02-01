@@ -16,16 +16,17 @@ import { ChatResolver } from './resolvers/chat';
 import { MessageResolver } from "./resolvers/message";
 import { MyContext } from "./types";
 
+//TODO: Update DB to redis store
+// const connectRedis = require('connect-redis');
+// const redis = require('redis');
 
-const connectRedis = require('connect-redis');
-const redis = require('redis');
 const session = require('express-session');
 
 const app = express();
 const PORT = 4000;
 
-const redisClient = redis.createClient()
-const RedisStore = connectRedis(session)
+// const redisClient = redis.createClient()
+// const RedisStore = connectRedis(session)
 
 
 app.use(express.json());
@@ -39,10 +40,6 @@ app.use(
 app.use(
   session({
     name: 'qid',
-    store: new RedisStore({
-      client: redisClient,
-      disableTouch: true,
-    }),
     cookie: {
       maxAge: 10000000,
       httpOnly: true,
