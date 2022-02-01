@@ -11,6 +11,8 @@ import {
 } from "type-graphql";
 import { User } from "../entities/User";
 import * as argon2 from "argon2";
+import { MyContext } from '../types'
+
 
 @InputType()
 class CreateUserInput {
@@ -33,6 +35,17 @@ class CreateUserInput {
   img_url?: string;
 }
 
+@InputType()
+class UserLoginInput {
+  @Field()
+  id: number;
+
+  @Field()
+  email: string;
+
+  @Field()
+  password: string;
+}
 @ObjectType()
 class FieldError {
   @Field(() => String)
@@ -48,7 +61,7 @@ class UserResponse {
   errors?: FieldError[];
 
   @Field(() => User, { nullable: true })
-  newUser?: User;
+  user?: User;
 }
 
 @Resolver()
@@ -69,14 +82,15 @@ export class UserResolver {
 
   @Mutation(() => UserResponse)
   async createUser(
-    @Arg("options") options: CreateUserInput
+    @Arg("options") options: CreateUserInput,
+    @Ctx() {req} : MyContext
   ): Promise<UserResponse> {
-    if (options.username.length < 6) {
+    if (!options.username) {
       return {
         errors: [
           {
             field: "username",
-            message: "Username must be at least 6 characters.",
+            message: "Please enter a valid name.",
           },
         ],
       };
@@ -91,10 +105,32 @@ export class UserResolver {
         ],
       };
     }
+    let emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!options.email.match(emailFormat)) {
+      return {
+        errors: [
+          {
+            field: "email",
+            message: "Please enter a valid email address.",
+          },
+        ],
+      };
+    }
     const hashedPassword = await argon2.hash(options.password);
-    let newUser: User | undefined = undefined;
+    let user: User | undefined = undefined;
     try {
-      newUser = await User.create({
+      const checkUser = await User.findOne({ email: options.email })
+      if (checkUser) {
+        return {
+          errors: [
+            {
+            field: "email",
+            message: "Email already in use."
+            }
+          ]
+        }
+      }
+      user = await User.create({
         username: options.username,
         password: hashedPassword,
         email: options.email,
@@ -103,17 +139,51 @@ export class UserResolver {
         img_url: options.img_url,
       }).save();
     } catch (err) {
-      if (err.errno === 19) {
+      if (err) {
+        console.log(err)
         return {
           errors: [
             {
-              field: "username",
-              message: "Username has already been taken.",
+              field: "email",
+              message: "Please enter a different email address.",
             },
           ],
         };
       }
     }
-    return { newUser };
+    req.session.userId = user?.id
+    return { user };
   }
+
+  @Mutation(() => UserResponse)
+  async userLogin(
+    @Arg('options') options: UserLoginInput,
+    @Ctx() {req} : MyContext
+    ): Promise<UserResponse> {
+
+      const user = await User.findOne({ email: options.email });
+      if (!user) {
+        return {
+          errors: [
+            {
+              field: "email",
+              message: "Email and password combination does not match."
+            }
+          ]
+        }
+      }
+      const validPasswordCheck = await argon2.verify(options.email, options.password);
+      if (!validPasswordCheck) {
+        return {
+          errors: [
+            {
+              field: "password",
+              message: "Password and password combination does not match."
+            }
+          ]
+        }
+      }
+      req.session.userId = user.id
+      return { user };
+    }
 }
