@@ -117,7 +117,7 @@ export class UserResolver {
       };
     }
     const hashedPassword = await argon2.hash(options.password);
-    let user: User | undefined = undefined;
+    let user;
     try {
       const checkUser = await User.findOne({ email: options.email })
       if (checkUser) {
@@ -151,7 +151,7 @@ export class UserResolver {
         };
       }
     }
-    req.session.userId = user?.id
+    req.session.userId = user?.id;
     return { user };
   }
 
@@ -185,5 +185,21 @@ export class UserResolver {
       }
       req.session.userId = user.id
       return { user };
+    }
+
+    @Mutation(() => Boolean)
+    logout(@Ctx() { req, res }: MyContext) {
+      return new Promise((resolve) =>
+        req.session.destroy((err) => {
+          res.clearCookie('qid');
+          if (err) {
+            console.log(err);
+            resolve(false);
+            return;
+          }
+  
+          resolve(true);
+        })
+      );
     }
 }
