@@ -1,41 +1,28 @@
 import React from 'react';
-import { Formik, Field, Form, FormikHelpers } from 'formik';
-
+import { Formik, Form } from 'formik';
+import InputField from '../ChakraUiComponents/InputField';
+import SubmitButton from '../ChakraUiComponents/Button';
 interface Values {
   email: string;
   password: string;
 }
 export default function Login() {
   return (
-    <div>
-      <h1>loging</h1>
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-        }}
-        onSubmit={(
-          values: Values,
-
-        ) => {
-          console.log('values', values);
-
-        }}
-      >
+    <Formik
+      initialValues={{
+        email: '',
+        password: '',
+      }}
+      onSubmit={(values: Values) => {
+        console.log('values', values);
+      }}>
+      {(props) => (
         <Form>
-          <label htmlFor="email">Email</label>
-          <Field
-            id="email"
-            name="email"
-            placeholder="john@acme.com"
-            type="email"
-          />
-          <label htmlFor="password">First Name</label>
-          <Field id="password" name="password" placeholder="Password" type='password' />
-
-          <button type="submit">Submit</button>
+          <InputField name='Email' />
+          <InputField name='Password' />
+          <SubmitButton props={props} name='Log In' />
         </Form>
-      </Formik>
-    </div>
+      )}
+    </Formik>
   );
 }

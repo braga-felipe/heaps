@@ -35,7 +35,6 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   SICK_points?: number;
 
-
   @Field(() => [Item])
   @OneToMany(() => Item, (item: Item) => item.owner)
   items_owned?: Item[];
@@ -46,7 +45,6 @@ export class User extends BaseEntity {
 
   @Field(() => [Chat], {nullable: true})
   @ManyToMany(() => Chat, (chat: Chat) => chat.users)
-  @JoinTable()
   chats?: Chat[];
 
   @Field({ nullable: true })

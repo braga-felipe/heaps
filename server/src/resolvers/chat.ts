@@ -1,9 +1,8 @@
-import { Query, Resolver, Arg, Int, Mutation, InputType, Field, registerEnumType } from 'type-graphql';
+import { Query, Resolver, Arg, Int, Mutation, InputType, Field} from 'type-graphql';
 import { Item } from "../entities/Item";
 import { getManager} from "typeorm";
 import { User } from '../entities/User';
 import { Chat } from '../entities/Chat';
-
 
 
 
@@ -21,13 +20,10 @@ class ChatCreateInput {
 
 }
 
-
 //Define types for update queries.
 
 @Resolver()
 export class ChatResolver {
-  //Todo: Get Chat by UserOwner
-  //Todo: Get Chat by ItemOwner
   @Query(() => Chat, { nullable: true })
   getChat(
     @Arg('id', () => Int) id: number
@@ -45,7 +41,7 @@ export class ChatResolver {
     const user2 = await User.findOneOrFail(options.userRequesterId, {relations: ["chats"]});
     const item = await entityManager.findOneOrFail(Item, options.itemOwnerId, { relations: ["chats"]});
     const chat = await entityManager
-                        .create(Chat, {...options, users: Promise.resolve([user1, user2]) , item: Promise.resolve(item) })
+                        .create(Chat, {...options, users: [user1, user2] , item: item })
                         .save();
     return chat;
   }

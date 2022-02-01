@@ -1,19 +1,29 @@
 import React from 'react';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Form } from 'formik';
+import InputField from '../ChakraUiComponents/InputField';
+import CheckBox from '../ChakraUiComponents/Checkbox';
+import SubmitButton from '../ChakraUiComponents/Button';
+import { FormLabel, CheckboxGroup } from '@chakra-ui/react';
 
+import {
+  useCreate_ItemMutation,
+  Allergies,
+  Diets,
+} from '../../generated/graphql';
 interface Values {
   name: string;
   description: string;
   servings: number;
   isGroceries: boolean;
-  allergies: string[];
-  diets: string[];
+  allergies: Allergies[];
+  diets: Diets[];
 }
 
-export default function CreateItem() {
+export default function CreateItem(props) {
+  const [, createFoodItem] = useCreate_ItemMutation();
   return (
     <div>
-      <h1>Create Item</h1>
+      <FormLabel>Create a Food Item</FormLabel>
       <Formik
         initialValues={{
           name: '',
@@ -23,46 +33,37 @@ export default function CreateItem() {
           allergies: [],
           diets: [],
         }}
-        onSubmit={(
-          values: Values,
-
-        ) => {
+        onSubmit={async (values: Values) => {
+          const res = await createFoodItem({ options: values });
           console.log('values', values);
-
-        }}
-      >
+          console.log('res: ', res);
+          return res;
+        }}>
         <Form>
-          <label htmlFor="name">Food Item</label>
-          <Field id="name" name="name" placeholder="Food Item" />
-
-          <label htmlFor="description">Description</label>
-          <Field id="description" name="description" placeholder="Description" />
-
-          <label htmlFor="isGroceries">Check if is Groceries</label>
-          <Field id="isGroceries" name="isGroceries" type='checkbox' />
-          <div>
-            <label >
-              Allergies
-              <label htmlFor="glutenFree">Gluten Free</label>
-              <Field id="glutenFree" value='Gluten Free' type='checkbox' name='allergies' />
-              <label htmlFor="lactoseFree">Lactose Free</label>
-              <Field id="lactoseFree" value='Lactose Free' type='checkbox' name='allergies' />
-              <label htmlFor="nutFree">Nut Free</label>
-              <Field id="nutFree" value='Nut Free' type='checkbox' name='allergies' />
-            </label>
-          </div>
-          <div>
-            <label >
-              Diets
-              <label htmlFor="vegan">Vegan</label>
-              <Field id="vegan" value='Vegan' type='checkbox' name='diets' />
-              <label htmlFor="vegetarian">Vegetarian</label>
-              <Field id="vegetarian" value='Vegetarian' type='checkbox' name='diets' />
-              <label htmlFor="pescatarian">Pecatarian</label>
-              <Field id="pescatarian" value='Pescatarian' type='checkbox' name='diets' />
-            </label>
-          </div>
-          <button type="submit">Submit</button>
+          <InputField name='Name' />
+          <InputField name='Description' />
+          <CheckBox
+            name='Is Groceries'
+            group='isGroceries'
+            value='isGroceries'
+          />
+          <FormLabel>Allergies</FormLabel>
+          <CheckboxGroup>
+            <CheckBox name='Gluten Free' group='allergies' value='glutenFree' />
+            <CheckBox
+              name='Lactose Free'
+              group='allergies'
+              value='lactoseFree'
+            />
+            <CheckBox name='Nut Free' group='allergies' value='nutFree' />
+          </CheckboxGroup>
+          <FormLabel>Diets</FormLabel>
+          <CheckboxGroup>
+            <CheckBox name='Vegan' group='diets' value='vegan' />
+            <CheckBox name='Vegetarian' group='diets' value='vegetarian' />
+            <CheckBox name='Pescatarian' group='diets' value='pescatarian' />
+          </CheckboxGroup>
+          <SubmitButton props={props} name='Create Dish' />
         </Form>
       </Formik>
     </div>
