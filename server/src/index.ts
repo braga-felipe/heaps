@@ -14,6 +14,7 @@ import { Message } from "./entities/Message";
 import { UserResolver } from './resolvers/User';
 import { ChatResolver } from './resolvers/chat';
 import { MessageResolver } from "./resolvers/message";
+import { MyContext } from "./types";
 
 
 const connectRedis = require('connect-redis');
@@ -46,7 +47,7 @@ app.use(
       maxAge: 10000000,
       httpOnly: true,
       secure: false,
-      sameSite: 'lax',
+      sameSite: false,
     },
     saveUninitialized: false,
     secret: 'qiwroasdjlasddde',
@@ -76,6 +77,10 @@ app.use(
       resolvers: [ItemResolver, UserResolver, ChatResolver, MessageResolver],
       validate: false
     }),
+    context: ({ req, res }): MyContext => ({
+      req,
+      res
+     })
   });
 
   //Start server and apply middleware to ApolloServer

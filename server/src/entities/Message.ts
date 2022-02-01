@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int} from "type-graphql";
+import { ObjectType, Field, Int, InputType} from "type-graphql";
 import {
   Entity,
   PrimaryGeneratedColumn,
