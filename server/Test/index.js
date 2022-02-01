@@ -132,7 +132,6 @@ describe("GraphQL", () => {
     };
     let randomNumber = random();
     const randomEmail = `testemail${randomNumber}@testingheaps.com`;
-    console.log('random email', randomEmail)
     const query = `mutation {
       createUser(options: { username: "Andy", password: "password123" , email: "${randomEmail}", address: "Codeworks Berlin", zipCode: "10967", img_url: "imageURL"}) {
         user {
@@ -148,15 +147,14 @@ describe("GraphQL", () => {
         }
       }
     }`;
-    console.log('query', query)
     request.post("/graphql")
     .send({ query })
     .expect(200)
     .end((err, res) => {
       if (err) return done(err);
-      console.log('result ', res)
       expect(res.body.data.createUser.errors).to.equal(null)
-      expect(res.body.data.createUser.user.username).to.not.equal(undefined)
+      expect(res.body.data.createUser.user.username).to.not.equal(null)
+      expect(res.body.data.createUser.user.email).to.not.equal(null)
       done();
     })
   });
