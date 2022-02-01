@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
 import CheckBox from '../ChakraUiComponents/Checkbox';
 import SubmitButton from '../ChakraUiComponents/Button';
 import { FormLabel, CheckboxGroup } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { createOneItem } from '../../redux/actions/items';
 import {
   Allergies,
@@ -23,8 +23,12 @@ interface Values {
 
 export default function CreateItem(props) {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state);
   const [, createFoodItem] = useCreate_ItemMutation();
+
+  useEffect(() => {
+    // will need to get the user state here?
+    console.log('useEffect');
+  });
 
   return (
     <div>
@@ -33,23 +37,25 @@ export default function CreateItem(props) {
         initialValues={{
           name: '',
           description: '',
-          servings: 0,
-          ownerId: 1,
+          servings: 1,
+          ownerId: 23,
           isGroceries: false,
           allergies: [],
           diets: [],
         }}
         onSubmit={async (values: Values) => {
-          console.log('items BEFORE call: ', items);
-          const res = await createFoodItem({ options: values });
-          console.log('item result', res);
-
-          dispatch(createOneItem(res.data.createItem));
-          console.log('items AFTER call: ', items);
+          const res = await createFoodItem({ options: values })
+            .then((res) => {
+              console.log(res);
+              dispatch(createOneItem(res.data.createItem));
+            })
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err.message));
+          console.log(res);
         }}>
         <Form>
-          <InputField name='Name' />
-          <InputField name='Description' />
+          <InputField name='name' />
+          <InputField name='description' />
           <CheckBox
             name='Is Groceries'
             group='isGroceries'
