@@ -11,6 +11,7 @@ import {
 import { Chat } from "./Chat";
 
 @ObjectType()
+@InputType()
 @Entity()
 export class Message extends BaseEntity {
   @Field()
@@ -34,7 +35,6 @@ export class Message extends BaseEntity {
   @Field(() => Boolean)
   @Column('boolean', {default: false})
   isRead: boolean = false;
-
 
   @Field(() => String)
   @CreateDateColumn()

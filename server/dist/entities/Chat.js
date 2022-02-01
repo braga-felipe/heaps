@@ -39,6 +39,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Chat.prototype, "itemOwnerId", void 0);
 __decorate([
+
     (0, type_graphql_1.Field)(() => Item_1.Item),
     (0, typeorm_1.ManyToOne)(() => Item_1.Item, (item) => item.chats, { eager: true }),
     __metadata("design:type", Promise)
