@@ -12,7 +12,7 @@ export class User extends BaseEntity {
   id!: number;
 
   @Field(() => String)
-  @Column({ type: "text", unique: true })
+  @Column({ type: "text" })
   username!: string;
 
   //@Field(() => String)
@@ -20,7 +20,7 @@ export class User extends BaseEntity {
   password: string;
 
   @Field(() => String)
-  @Column()
+  @Column({ unique: true })
   email!: string;
 
   @Field(() => String)
@@ -35,7 +35,7 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   SICK_points?: number;
 
-  @Field(() => [Item])
+  @Field(() => [Item], { nullable: true })
   @OneToMany(() => Item, (item: Item) => item.owner)
   items_owned?: Item[];
 
