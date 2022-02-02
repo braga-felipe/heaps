@@ -64,7 +64,7 @@ class UserResponse {
 @Resolver()
 export class UserResolver {
   @Query(() => [User])
-  async getAllUsers() {
+  async getAllUsers(): Promise<User[] | undefined> {
     const allUser = await User.find();
     return allUser;
   }
