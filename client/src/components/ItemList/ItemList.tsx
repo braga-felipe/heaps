@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { State } from '../Register/Register';
+import { Box } from '@chakra-ui/react';
 import ItemCard from './ItemCard';
 
 interface ItemProp {
@@ -21,12 +22,12 @@ export default function ItemList({ complete }) {
   ];
 
   return (
-    <div>
+    <Box>
       {mockItems.map((item: ItemProp) => {
         if (item.complete === complete) {
           return <ItemCard item={item} key={item.name} />;
         }
       })}
-    </div>
+    </Box>
   );
 }

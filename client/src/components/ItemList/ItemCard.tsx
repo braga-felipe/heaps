@@ -1,9 +1,11 @@
 import React from 'react';
-
+import { Box } from '@chakra-ui/react';
+import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
 export default function ItemCard({ item }) {
   return (
-    <div>
-      <h1>{item.name}</h1>
-    </div>
+    <Accordion />
+    // <Box color='red'>
+    //   <h1>{item.name}</h1>
+    // </Box>
   );
 }

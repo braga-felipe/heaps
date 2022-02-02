@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
 import SubmitButton from '../ChakraUiComponents/Button';
+import { Container, Heading } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../redux/actions/user';
 import { useCreate_UserMutation } from '../../generated/graphql';
@@ -22,7 +23,7 @@ export default function Register() {
   const [, registerUser] = useCreate_UserMutation();
   console.log({ user });
   return (
-    <div>
+    <Container>
       <Formik
         initialValues={{
           username: '',
@@ -39,7 +40,7 @@ export default function Register() {
         }}>
         {(props) => (
           <Form>
-            <h1>Register</h1>
+            <Heading>Register</Heading>
             <InputField name='username' />
             <InputField name='address' />
             <InputField name='zipCode' />
@@ -49,6 +50,6 @@ export default function Register() {
           </Form>
         )}
       </Formik>
-    </div>
+    </Container>
   );
 }
