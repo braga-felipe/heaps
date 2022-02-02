@@ -12,7 +12,7 @@ interface Values {
   zipCode: string;
   password: string;
 }
-interface State {
+export interface State {
   user?;
   items?;
 }
@@ -20,6 +20,7 @@ export default function Register() {
   const dispatch = useDispatch();
   const user = useSelector((state: State) => state.user);
   const [, registerUser] = useCreate_UserMutation();
+  console.log({ user });
   return (
     <div>
       <Formik
@@ -31,9 +32,10 @@ export default function Register() {
           password: '',
         }}
         onSubmit={async (values: Values) => {
-          await registerUser({ options: values }).then((res) =>
-            dispatch(register(res.data.createUser.user))
-          );
+          await registerUser({ options: values })
+            .then((res) => dispatch(register(res.data.createUser.user)))
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err.message));
         }}>
         {(props) => (
           <Form>

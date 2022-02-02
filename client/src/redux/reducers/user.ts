@@ -6,6 +6,9 @@ export const user = (state = {}, action) => {
     case 'CREATE_USER': {
       return { ...state, ...action.payload };
     }
+    case 'GET_INITIAL_USER': {
+      return {};
+    }
     default:
       return state;
   }
