@@ -13,12 +13,44 @@ interface ItemProp {
 export default function ItemList({ complete }) {
   // const items = useSelector((state: State) => state.items);
   const mockItems = [
-    { name: 'Risotto', description: 'Very yummy risotto', complete: true },
-    { name: 'Lasagna', description: 'Very yummy lasagna', complete: true },
-    { name: 'Burger', description: 'Very yummy burger', complete: false },
-    { name: 'Ramen', description: 'Very yummy ramen', complete: true },
-    { name: 'Sushi', description: 'Very yummy sushi', complete: false },
-    { name: 'Curry', description: 'Very yummy curry', complete: false },
+    {
+      name: 'Risotto',
+      description:
+        'Very yummy risotto, made with special ingredients and love.',
+      complete: true,
+      diets: ['🥬', '🥖', '🥜'],
+    },
+    {
+      name: 'Lasagna',
+      description:
+        'Very yummy lasagna, made with special ingredients and love.',
+      complete: true,
+      diets: ['🥬', '🥖', '🥜'],
+    },
+    {
+      name: 'Burger',
+      description: 'Very yummy burger, made with special ingredients and love.',
+      complete: false,
+      diets: ['🥬', '🥖', '🥜'],
+    },
+    {
+      name: 'Ramen',
+      description: 'Very yummy ramen, made with special ingredients and love.',
+      complete: true,
+      diets: ['🥬', '🥖', '🥜'],
+    },
+    {
+      name: 'Sushi',
+      description: 'Very yummy sushi, made with special ingredients and love.',
+      complete: false,
+      diets: ['🥬', '🥖', '🥜'],
+    },
+    {
+      name: 'Curry',
+      description: 'Very yummy curry, made with special ingredients and love.',
+      complete: false,
+      diets: ['🥬', '🥖', '🥜'],
+    },
   ];
 
   return (

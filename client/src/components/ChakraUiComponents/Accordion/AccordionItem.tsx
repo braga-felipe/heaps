@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 
-export function AccordionItemComponent() {
+export function AccordionItemComponent({ item }) {
   return (
     <AccordionItem>
       {({ isExpanded }) => (
@@ -14,7 +14,7 @@ export function AccordionItemComponent() {
           <h2>
             <AccordionButton>
               <Box flex='1' textAlign='left'>
-                Section 2 title
+                {/* {item.name} */}
               </Box>
               {isExpanded ? (
                 <MinusIcon fontSize='12px' />
@@ -23,12 +23,7 @@ export function AccordionItemComponent() {
               )}
             </AccordionButton>
           </h2>
-          <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </AccordionPanel>
+          <AccordionPanel pb={4}>{item.description}</AccordionPanel>
         </>
       )}
     </AccordionItem>
