@@ -23,13 +23,13 @@ export default function Login() {
           email: '',
           password: '',
         }}
-        onSubmit={async (values: Values, { setErrors }) => {
+        onSubmit={async (values: User, { setErrors }) => {
           const res = await getUser({ options: values });
           if (res.data?.userLogin.errors) {
             setErrors({ email: `${res.data.userLogin.errors[0].message}` });
           }
           if (res.data?.userLogin.user) {
-            router.push("/");
+            router.push('/');
           }
           console.log('values', values);
           console.log('login: ', res);
