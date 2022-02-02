@@ -193,7 +193,7 @@ export type User = {
   email: Scalars['String'];
   id: Scalars['Float'];
   img_url?: Maybe<Scalars['String']>;
-  items_owned: Array<Item>;
+  items_owned?: Maybe<Array<Item>>;
   items_taken?: Maybe<Array<Item>>;
   updatedAt: Scalars['String'];
   username: Scalars['String'];
@@ -242,7 +242,7 @@ export type User_LoginMutation = { __typename?: 'Mutation', userLogin: { __typen
 export type Get_All_UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Get_All_UsersQuery = { __typename?: 'Query', getAllUsers: Array<{ __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, createdAt: string, updatedAt: string, items_owned: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number }>, items_taken?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number }> | null | undefined }> };
+export type Get_All_UsersQuery = { __typename?: 'Query', getAllUsers: Array<{ __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, createdAt: string, updatedAt: string, items_owned?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number }> | null | undefined, items_taken?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number }> | null | undefined }> };
 
 export type Get_ItemQueryVariables = Exact<{
   getItemId: Scalars['Int'];
@@ -256,7 +256,12 @@ export type Get_User_By_IdQueryVariables = Exact<{
 }>;
 
 
-export type Get_User_By_IdQuery = { __typename?: 'Query', getOneUserByID: { __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, createdAt: string, updatedAt: string, items_owned: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, ownerId: number, owner: { __typename?: 'User', id: number, username: string } }> } };
+export type Get_User_By_IdQuery = { __typename?: 'Query', getOneUserByID: { __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, createdAt: string, updatedAt: string, items_owned?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, ownerId: number, owner: { __typename?: 'User', id: number, username: string } }> | null | undefined } };
+
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, img_url?: string | null | undefined, createdAt: string, updatedAt: string, items_owned?: Array<{ __typename?: 'Item', id: number }> | null | undefined, items_taken?: Array<{ __typename?: 'Item', id: number }> | null | undefined, chats?: Array<{ __typename?: 'Chat', id: number }> | null | undefined } | null | undefined };
 
 
 export const Create_ItemDocument = gql`
@@ -444,4 +449,32 @@ export const Get_User_By_IdDocument = gql`
 
 export function useGet_User_By_IdQuery(options: Omit<Urql.UseQueryArgs<Get_User_By_IdQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<Get_User_By_IdQuery>({ query: Get_User_By_IdDocument, ...options });
+};
+export const MeDocument = gql`
+    query ME {
+  me {
+    id
+    username
+    email
+    address
+    zipCode
+    SICK_points
+    items_owned {
+      id
+    }
+    items_taken {
+      id
+    }
+    chats {
+      id
+    }
+    img_url
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
 };

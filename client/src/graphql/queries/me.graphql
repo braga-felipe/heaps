@@ -1,0 +1,22 @@
+query ME {
+  me {
+    id
+    username
+    email
+    address
+    zipCode
+    SICK_points
+    items_owned {
+      id
+    }
+    items_taken {
+      id
+    }
+    chats {
+      id
+    }
+    img_url
+    createdAt
+    updatedAt
+  }
+}
