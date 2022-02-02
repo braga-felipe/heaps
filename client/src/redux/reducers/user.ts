@@ -3,6 +3,9 @@ export const user = (state = {}, action) => {
     case 'GET_USER': {
       return action.data;
     }
+    case 'CREATE_USER': {
+      return { ...state, ...action.payload };
+    }
     default:
       return state;
   }

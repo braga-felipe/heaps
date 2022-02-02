@@ -7,9 +7,9 @@ import {
   FormErrorMessage,
 } from '@chakra-ui/react';
 
-export default function InputField(props) {
-  const { name } = props;
-  const inputName = name.split(' ').join('').toLowerCase();
+export default function InputField({ name }) {
+  /* const { name } = props;*/
+  const inputName = name.charAt(0).toUpperCase() + name.slice(1);
 
   function validateName(value) {
     let error;
@@ -19,18 +19,18 @@ export default function InputField(props) {
     return error;
   }
   return (
-    <Field name={inputName} validate={validateName}>
+    <Field name={name} validate={validateName}>
       {({ field, form }) => (
         <FormControl
-          isInvalid={form.errors[inputName] && form.touched[inputName]}>
-          <FormLabel htmlFor={inputName}>{name}</FormLabel>
+          isInvalid={form.errors[name] && form.touched[name]}>
+          <FormLabel htmlFor={name}>{inputName}</FormLabel>
           <Input
             {...field}
-            id={inputName}
+            id={name}
             placeholder={name}
-            type={name === 'Password' ? 'password' : 'text'}
+            type={name === 'password' ? 'password' : 'text'}
           />
-          <FormErrorMessage>{form.errors[inputName]}</FormErrorMessage>
+          <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
         </FormControl>
       )}
     </Field>

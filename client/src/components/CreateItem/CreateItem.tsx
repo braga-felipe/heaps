@@ -4,23 +4,28 @@ import InputField from '../ChakraUiComponents/InputField';
 import CheckBox from '../ChakraUiComponents/Checkbox';
 import SubmitButton from '../ChakraUiComponents/Button';
 import { FormLabel, CheckboxGroup } from '@chakra-ui/react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { createOneItem } from '../../redux/actions/items';
 import {
-  useCreate_ItemMutation,
   Allergies,
   Diets,
+  useCreate_ItemMutation,
 } from '../../generated/graphql';
 interface Values {
   name: string;
   description: string;
   servings: number;
+  ownerId: number;
   isGroceries: boolean;
   allergies: Allergies[];
   diets: Diets[];
 }
 
 export default function CreateItem(props) {
+  const dispatch = useDispatch();
+  const items = useSelector((state) => state);
   const [, createFoodItem] = useCreate_ItemMutation();
+
   return (
     <div>
       <FormLabel>Create a Food Item</FormLabel>
@@ -29,15 +34,18 @@ export default function CreateItem(props) {
           name: '',
           description: '',
           servings: 0,
+          ownerId: 1,
           isGroceries: false,
           allergies: [],
           diets: [],
         }}
         onSubmit={async (values: Values) => {
+          console.log('items BEFORE call: ', items);
           const res = await createFoodItem({ options: values });
-          console.log('values', values);
-          console.log('res: ', res);
-          return res;
+          console.log('item result', res);
+
+          dispatch(createOneItem(res.data.createItem));
+          console.log('items AFTER call: ', items);
         }}>
         <Form>
           <InputField name='Name' />
