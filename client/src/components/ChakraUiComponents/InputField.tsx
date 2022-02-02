@@ -8,7 +8,6 @@ import {
 } from '@chakra-ui/react';
 
 export default function InputField({ name }) {
-  /* const { name } = props;*/
   const inputName = name.charAt(0).toUpperCase() + name.slice(1);
 
   function validateName(value) {
@@ -21,8 +20,7 @@ export default function InputField({ name }) {
   return (
     <Field name={name} validate={validateName}>
       {({ field, form }) => (
-        <FormControl
-          isInvalid={form.errors[name] && form.touched[name]}>
+        <FormControl isInvalid={form.errors[name] && form.touched[name]}>
           <FormLabel htmlFor={name}>{inputName}</FormLabel>
           <Input
             {...field}
