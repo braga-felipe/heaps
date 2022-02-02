@@ -6,14 +6,14 @@ import { User } from '../entities/User';
 
 //Enums allow us to type-set the inputs for the Allergies and Diets properties on Items we are creating
 export enum Allergies {
-  "glutenFree",
-  "lactoseFree",
-  "nutFree"
+  glutenFree = "glutenFree",
+  lactoseFree = "lactoseFree",
+  nutFree = "nutFree"
  }
  export enum Diets {
-   "vegetarian",
-   "vegan",
-   "pescatarian"
+  vegetarian = "vegetarian",
+  vegan = "vegan",
+  pescatarian = "pescatarian"
  }
 
  //We can't accept an item where the values for allergies/diets are not in the defined enums.
@@ -34,9 +34,9 @@ class ItemCreateInput {
   @Field()
   ownerId: number;
   @Field(() => [Allergies])
-  allergies?: string[];
+  allergies?: Allergies[];
   @Field(() => [Diets])
-  diets?: string[];
+  diets?: Diets[];
 }
 
 

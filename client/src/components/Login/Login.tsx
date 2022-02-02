@@ -5,13 +5,15 @@ import InputField from '../ChakraUiComponents/InputField';
 import SubmitButton from '../ChakraUiComponents/Button';
 
 import { useUser_LoginMutation } from '../../generated/graphql';
+import { useRouter } from 'next/router';
 
-interface Values {
+interface User {
   email: string;
   password: string;
 }
 export default function Login() {
   const [, getUser] = useUser_LoginMutation();
+  const router = useRouter();
 
   return (
     <Container>
@@ -25,6 +27,9 @@ export default function Login() {
           const res = await getUser({ options: values });
           if (res.data?.userLogin.errors) {
             setErrors({ email: `${res.data.userLogin.errors[0].message}` });
+          }
+          if (res.data?.userLogin.user) {
+            router.push("/");
           }
           console.log('values', values);
           console.log('login: ', res);

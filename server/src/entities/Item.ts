@@ -52,12 +52,12 @@ export class Item extends BaseEntity {
 
   //Allergies and Diets only necessary for 'dish' type items, so marked as optional
   @Field(() => [Allergies])
-  @Column('text',{array: true})
-  allergies?: string[] | [];
+  @Column('text', {array: true})
+  allergies?: Allergies[];
 
   @Field(() => [Diets])
-  @Column('text',  {array: true})
-  diets?: string[] | [];
+  @Column('text', {array: true})
+  diets?: Diets[];
 
   @Field(() => Int)
   @Column('int', {default: 0})
@@ -73,7 +73,7 @@ export class Item extends BaseEntity {
 
   @Field(() => User)
   @ManyToOne(() => User, (user: User) => user.items_taken, {onDelete: 'SET NULL'})
-  takers: [User];
+  takers: User[];
 
   @Field(() => [Chat])
   @OneToMany(() => Chat, (chat: Chat) => chat.item, {onDelete: 'SET NULL'})
