@@ -1,0 +1,29 @@
+query GET_USER_BY_ID($getOneUserByIdId: Int!) {
+  getOneUserByID(id: $getOneUserByIdId) {
+    id
+    username
+    email
+    address
+    zipCode
+    SICK_points
+    items_owned {
+      id
+      name
+      description
+      servings
+      complete
+      archive
+      isGroceries
+      allergies
+      diets
+      SICK_points
+      ownerId
+      owner {
+        id
+        username
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}

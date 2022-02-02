@@ -74,6 +74,12 @@ export class ItemResolver {
     return Item.findOne(id, {relations: ['chats']});
   }
 
+  @Query(() => [Item], { nullable: true })
+  async getAllItems(): Promise<Item[] | undefined> {
+    const allItems = await Item.find();
+    return allItems;
+  }
+
   @Mutation(() => Item)
   async createItem (
     //The potential fields we can update ("options") are defined in ItemUpdateInput type def.

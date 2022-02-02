@@ -5,11 +5,11 @@ import { getOneItem } from '../redux/actions/items';
 const IndexPage: NextPage = () => {
   const dispatch = useDispatch();
   dispatch(getOneItem());
-  const item = useSelector((state) => state.items);
+  const items = useSelector((state) => state.items);
   return (
     <div className={styles.container}>
       <h1>hello World!</h1>
-      <h2>{item}</h2>
+      <h2>{items}</h2>
     </div>
   );
 };

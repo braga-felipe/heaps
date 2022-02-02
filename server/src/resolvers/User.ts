@@ -38,9 +38,6 @@ class CreateUserInput {
 @InputType()
 class UserLoginInput {
   @Field()
-  id: number;
-
-  @Field()
   email: string;
 
   @Field()
@@ -67,7 +64,7 @@ class UserResponse {
 @Resolver()
 export class UserResolver {
   @Query(() => [User])
-  async getAllUsers() {
+  async getAllUsers(): Promise<User[] | undefined> {
     const allUser = await User.find();
     return allUser;
   }
@@ -172,7 +169,7 @@ export class UserResolver {
           ]
         }
       }
-      const validPasswordCheck = await argon2.verify(options.email, options.password);
+      const validPasswordCheck = await argon2.verify(user.password, options.password);
       if (!validPasswordCheck) {
         return {
           errors: [
@@ -187,6 +184,15 @@ export class UserResolver {
       return { user };
     }
 
+    //Authentication query. Returns user or null
+    @Query(() => User, { nullable: true })
+    me(@Ctx() { req }: MyContext) {
+      if (!req.session.userId) {
+        return null;
+      }
+      return User.findOne(req.session.userId);
+    }
+
     @Mutation(() => Boolean)
     logout(@Ctx() { req, res }: MyContext) {
       return new Promise((resolve) =>
@@ -197,7 +203,6 @@ export class UserResolver {
             resolve(false);
             return;
           }
-  
           resolve(true);
         })
       );
