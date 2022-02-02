@@ -11,7 +11,7 @@ interface ItemProp {
 }
 
 export default function ItemList({ complete }) {
-  // const items = useSelector((state: State) => state.items);
+  const items = useSelector((state: State) => state.items);
   const mockItems = [
     {
       name: 'Risotto',
@@ -55,7 +55,7 @@ export default function ItemList({ complete }) {
 
   return (
     <Box>
-      {mockItems.map((item: ItemProp) => {
+      {items.map((item: ItemProp) => {
         if (item.complete === complete) {
           return <ItemCard item={item} key={item.name} />;
         }

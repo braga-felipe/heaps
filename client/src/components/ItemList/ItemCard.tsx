@@ -9,17 +9,19 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
-import { items } from '../../redux/reducers/items';
+
 export default function ItemCard({ item }) {
   return (
-    <Container sx={{ border: 'solid', marginTop: '3px' }}>
+    <Container sx={{ border: '1px solid', marginTop: '3px' }}>
       <Flex justify='space-around' align='center'>
         <Heading fontSize='md'>{item.name}</Heading>
-        <VStack>
+        {/* <VStack>
           {item.diets.map((diet) => (
-            <Text fontSize='xs'>{diet}</Text>
+            <Text key={diet} fontSize='xs'>
+              {diet}
+            </Text>
           ))}
-        </VStack>
+        </VStack> */}
         <Box>
           <Image
             borderRadius='full'
