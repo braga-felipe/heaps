@@ -162,6 +162,7 @@ export type MutationUserLoginArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getAllItems?: Maybe<Array<Item>>;
   getAllUsers: Array<User>;
   getChat?: Maybe<Chat>;
   getItem?: Maybe<Item>;
@@ -225,6 +226,11 @@ export type Create_UserMutationVariables = Exact<{
 
 export type Create_UserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'UserResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null | undefined, user?: { __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined } | null | undefined } };
 
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
+
 export type Update_ItemMutationVariables = Exact<{
   options: ItemUpdateInput;
 }>;
@@ -238,6 +244,11 @@ export type User_LoginMutationVariables = Exact<{
 
 
 export type User_LoginMutation = { __typename?: 'Mutation', userLogin: { __typename?: 'UserResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null | undefined, user?: { __typename?: 'User', username: string, id: number, email: string, address: string, zipCode: string } | null | undefined } };
+
+export type Get_All_ItemsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Get_All_ItemsQuery = { __typename?: 'Query', getAllItems?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, ownerId: number, createdAt: string, updatedAt: string, owner: { __typename?: 'User', username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined }, takers: { __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined } }> | null | undefined };
 
 export type Get_All_UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -308,6 +319,15 @@ export const Create_UserDocument = gql`
 export function useCreate_UserMutation() {
   return Urql.useMutation<Create_UserMutation, Create_UserMutationVariables>(Create_UserDocument);
 };
+export const LogoutDocument = gql`
+    mutation LOGOUT {
+  logout
+}
+    `;
+
+export function useLogoutMutation() {
+  return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
+};
 export const Update_ItemDocument = gql`
     mutation UPDATE_ITEM($options: ItemUpdateInput!) {
   updateItem(options: $options) {
@@ -350,6 +370,44 @@ export const User_LoginDocument = gql`
 
 export function useUser_LoginMutation() {
   return Urql.useMutation<User_LoginMutation, User_LoginMutationVariables>(User_LoginDocument);
+};
+export const Get_All_ItemsDocument = gql`
+    query GET_ALL_ITEMS {
+  getAllItems {
+    id
+    name
+    description
+    servings
+    complete
+    archive
+    isGroceries
+    allergies
+    diets
+    SICK_points
+    ownerId
+    owner {
+      username
+      email
+      address
+      zipCode
+      SICK_points
+    }
+    takers {
+      id
+      username
+      email
+      address
+      zipCode
+      SICK_points
+    }
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useGet_All_ItemsQuery(options: Omit<Urql.UseQueryArgs<Get_All_ItemsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<Get_All_ItemsQuery>({ query: Get_All_ItemsDocument, ...options });
 };
 export const Get_All_UsersDocument = gql`
     query GET_ALL_USERS {

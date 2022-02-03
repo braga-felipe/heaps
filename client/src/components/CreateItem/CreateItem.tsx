@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
 import CheckBox from '../ChakraUiComponents/Checkbox';
 import SubmitButton from '../ChakraUiComponents/Button';
-import { FormLabel, CheckboxGroup } from '@chakra-ui/react';
+import { Heading, FormLabel, CheckboxGroup, Container } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { createOneItem } from '../../redux/actions/items';
 import {
@@ -31,8 +31,8 @@ export default function CreateItem(props) {
   });
 
   return (
-    <div>
-      <FormLabel>Create a Food Item</FormLabel>
+    <Container>
+      <Heading>Create a Food Item</Heading>
       <Formik
         initialValues={{
           name: '',
@@ -44,6 +44,7 @@ export default function CreateItem(props) {
           diets: [],
         }}
         onSubmit={async (values: Values) => {
+          console.log({ values });
           const res = await createFoodItem({ options: values })
             .then((res) => {
               console.log(res);
@@ -80,6 +81,6 @@ export default function CreateItem(props) {
           <SubmitButton props={props} name='Create Dish' />
         </Form>
       </Formik>
-    </div>
+    </Container>
   );
 }

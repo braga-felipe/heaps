@@ -1,0 +1,23 @@
+query GetMyChats {
+  me {
+    id
+    chats {
+      id
+      item {
+        name
+        ownerId
+      }
+      messages {
+        text
+        authorId
+        isRead
+        createdAt
+      }
+      users {
+        username
+        id
+        img_url
+      }
+    }
+  }
+}

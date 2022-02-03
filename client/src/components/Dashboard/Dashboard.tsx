@@ -1,22 +1,23 @@
 import React from 'react';
 import ItemList from '../ItemList/ItemList';
+import { Box, Container, Heading, Text } from '@chakra-ui/react';
 export default function Dashboard() {
   return (
-    <>
-      <div>
-        <h1>NavBard</h1>
-      </div>
-      <div>
-        <h1>Dashboard</h1>
-      </div>
-      <h1>Current List</h1>
-      <div className='list'>
+    <Container>
+      <Box>
+        <h1>NavBar</h1>
+      </Box>
+      <Box>
+        <Heading>Dashboard</Heading>
+      </Box>
+      <Text fontSize='2xl'>Current List</Text>
+      <Box className='list'>
         <ItemList complete={false} />
-      </div>
-      <h1>Past List</h1>
-      <div className='list'>
+      </Box>
+      <Text fontSize='2xl'>Past List</Text>
+      <Box className='list'>
         <ItemList complete={true} />
-      </div>
-    </>
+      </Box>
+    </Container>
   );
 }
