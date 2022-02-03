@@ -9,8 +9,10 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
+import { User } from '../../generated/graphql';
+import { Item } from '../../generated/graphql';
 
-export default function ItemCard({ user, item }) {
+export default function ItemCard({ user, item, buttonName, path }) {
   return (
     <Container sx={cStyle()}>
       <Flex sx={fStyle()}>
@@ -33,7 +35,7 @@ export default function ItemCard({ user, item }) {
           />
         </Box>
       </Flex>
-      <Accordion item={item} />
+      <Accordion item={item} buttonName={buttonName} path={path} />
     </Container>
   );
 }

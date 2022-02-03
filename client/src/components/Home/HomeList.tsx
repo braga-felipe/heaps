@@ -15,7 +15,7 @@ interface ItemProp {
   ownerId: number;
 }
 
-export default function HomeList({ isGroceries }) {
+export default function HomeList({ isGroceries, buttonName, path }) {
   // access items and user from store
   const items = useSelector((state: State) => state.items);
   const user = useSelector((state: State) => state.user);
@@ -24,7 +24,7 @@ export default function HomeList({ isGroceries }) {
     <Container margin={'0'} padding={'0'}>
       {items.filter((item: ItemProp) => item.isGroceries === isGroceries)
         .map((item: ItemProp, index) =>
-          <ItemCard user={user} item={item} key={index} />
+          <ItemCard user={user} item={item} key={index} buttonName={buttonName} path={path} />
         )}
     </Container>
   );

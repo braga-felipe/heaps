@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { State } from '../Register/Register';
-import { Box, Container } from '@chakra-ui/react';
+import { State } from '../../pages/index';
+import { Container } from '@chakra-ui/react';
 import ItemCard from './ItemCard';
 
 interface ItemProp {
@@ -15,7 +15,7 @@ interface ItemProp {
   ownerId: number;
 }
 
-export default function ItemList({ complete }) {
+export default function ItemList({ complete, buttonName, path }) {
   // access items and user from store
   const items = useSelector((state: State) => state.items);
   const user = useSelector((state: State) => state.user);
@@ -24,7 +24,8 @@ export default function ItemList({ complete }) {
       {items.map((item: ItemProp, index) => {
         // filter items by the complete props and user id
         if (item.complete === complete && item.ownerId === user.id) {
-          return <ItemCard user={user} item={item} key={index} />;
+          return <ItemCard user={user} item={item} key={index}
+            buttonName={buttonName} path={path} />;
         }
       })}
     </Container>

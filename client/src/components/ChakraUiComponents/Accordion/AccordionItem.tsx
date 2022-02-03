@@ -5,8 +5,9 @@ import {
   Box,
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
+import ItemCardButton from '../ButtonItemCard';
 
-export function AccordionItemComponent({ item }) {
+export function AccordionItemComponent({ item, buttonName, path }) {
   return (
     <AccordionItem>
       {({ isExpanded }) => (
@@ -23,7 +24,12 @@ export function AccordionItemComponent({ item }) {
               )}
             </AccordionButton>
           </h2>
-          <AccordionPanel pb={4}>{item.description}</AccordionPanel>
+          <AccordionPanel pb={4}>
+            <p>
+              {item.description}
+            </p>
+            <ItemCardButton buttonName={buttonName} path={path} />
+          </AccordionPanel>
         </>
       )}
     </AccordionItem>

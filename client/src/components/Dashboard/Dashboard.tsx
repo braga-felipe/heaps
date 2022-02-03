@@ -34,7 +34,7 @@ export default function Dashboard() {
               fontSize: '18px',
               lineSeight: '22px',
             }}>Current List</Heading>
-            <ItemList complete={false} />
+            <ItemList complete={false} buttonName='Chat' path='chatLobby' />
           </Box>
           <Box className='list'>
             <Heading sx={{
@@ -45,7 +45,7 @@ export default function Dashboard() {
               fontSize: '18px',
               lineSeight: '22px',
             }}>Past List</Heading>
-            <ItemList complete={true} />
+            <ItemList complete={true} buttonName='Chat' path='chatLobby' />
           </Box>
         </>
       )}
