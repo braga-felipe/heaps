@@ -2,34 +2,54 @@ import type { NextPage } from 'next';
 import styles from '../styles/Home.module.css';
 import { Container, Heading } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllItems, getOneItem } from '../redux/actions/items';
-import { State } from '../components/Register/Register';
+import { getAllItems } from '../redux/actions/items';
 import { useGet_All_ItemsQuery, useMeQuery } from '../generated/graphql';
+import Home from '../components/Home/Home';
 import { useEffect } from 'react';
+import { getInitialUser } from '../redux/actions/user';
+
+export interface State {
+  user?;
+  items?;
+}
 
 const IndexPage: NextPage = () => {
   const dispatch = useDispatch();
-  const [{ data }] = useGet_All_ItemsQuery();
-  const itemList = data && data.getAllItems;
-  console.log({ itemList });
+
+  const getItemsList = () => {
+    const [{ data }] = useGet_All_ItemsQuery();
+    return data && data.getAllItems;
+
+  }
+
+  const getMeData = () => {
+    const [{ data }] = useMeQuery();
+    return data && data.me;
+  }
+
+  const itemList = getItemsList();
+
+  const meUser = getMeData();
+  console.log({ meUser });
+
   useEffect(() => {
     dispatch(getAllItems(itemList));
+    meUser && dispatch(getInitialUser(meUser));
   });
 
   const items = useSelector((state: State) => state.items);
   console.log({ items });
-  // const [{ data, fetching }] = useMeQuery();
+
+  /* const user = useSelector((state: State) => state.user);
+  console.log({ user }); */
+
+  //const usename = meUser.username;
 
   return (
     <Container className={styles.container}>
-      <Heading>Oi carai</Heading>
-      {/* {data?.me ? (
-        <Heading size='lg'> Hello {data.me.username}</Heading>
-      ) : (
-        <Heading size='lg'>hello World!</Heading>
-      )}
-      <Heading size='md'>{items}</Heading> */}
-    </Container>
+      {meUser && (<Heading>Hello {meUser.username}</Heading>)}
+      <Home />
+    </Container >
   );
 };
 

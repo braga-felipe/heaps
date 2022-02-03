@@ -3,8 +3,6 @@ import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
 import SubmitButton from '../ChakraUiComponents/Button';
 import { Container, Heading } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../../redux/actions/user';
 import { useCreate_UserMutation } from '../../generated/graphql';
 import { useRouter } from 'next/router';
 
@@ -15,13 +13,9 @@ interface NewUser {
   zipCode: string;
   password: string;
 }
-export interface State {
-  user?;
-  items?;
-}
+
 export default function Register() {
-  const dispatch = useDispatch();
-  const user = useSelector((state: State) => state.user);
+
   const [, registerUser] = useCreate_UserMutation();
   const router = useRouter();
 

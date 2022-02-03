@@ -8,6 +8,7 @@ import customTheme from '../styles/extendTheme';
 import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
+
   return (
     <ReduxProvider store={store}>
       <Provider value={client}>
