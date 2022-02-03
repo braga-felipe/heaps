@@ -43,7 +43,6 @@ export default function CreateItem(props) {
           diets: [],
         }}
         onSubmit={async (values: Values) => {
-          console.log({ values });
           const res = await createFoodItem({ options: values })
             .then((res) => {
               console.log(res);
