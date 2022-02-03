@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import ItemList from '../ItemList/ItemList';
 import { Box, Container, Heading, Text } from '@chakra-ui/react';
 import { getAllItems } from '../../redux/actions/items';
-import { useDispatch, useSelector } from 'react-redux';
-import { State } from '../Register/Register';
+import { useDispatch } from 'react-redux';
 import { useMeQuery } from '../../generated/graphql';
 import { getInitialUser } from '../../redux/actions/user';
 
@@ -18,8 +17,7 @@ export default function Dashboard() {
   useEffect(() => {
     dispatch(getAllItems());
   }, []);
-  const items = useSelector((state: State) => state.items);
-  console.log(items);
+
   return (
     <Container>
       <Box>

@@ -24,7 +24,7 @@ export default function ItemList({ complete }) {
       {items.map((item: ItemProp) => {
         // filter items by the complete props and user id
         if (item.complete === complete && item.ownerId === user.id) {
-          return <ItemCard item={item} key={item.id} />;
+          return <ItemCard user={user} item={item} key={item.id} />;
         }
       })}
     </Box>

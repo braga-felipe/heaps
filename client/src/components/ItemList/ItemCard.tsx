@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
 
-export default function ItemCard({ item }) {
+export default function ItemCard({ user, item }) {
   return (
     <Container sx={{ border: '1px solid', marginTop: '3px' }}>
       <Flex justify='space-around' align='center'>
@@ -26,7 +26,10 @@ export default function ItemCard({ item }) {
           <Image
             borderRadius='full'
             boxSize='80px'
-            src='https://ca.slack-edge.com/T0WU5R8NT-U02GWRVJERW-72846fc663f1-512'
+            src={
+              user.img_url ||
+              'https://ca.slack-edge.com/T0WU5R8NT-U02GWRVJERW-72846fc663f1-512'
+            }
             alt='profile'
           />
         </Box>
