@@ -6,7 +6,7 @@ export default function Groceries() {
 
   return (
     <Container>
-      <HomeList isGroceries={true} />
+      <HomeList isGroceries={true} buttonName='Chat' path='chatLobby' />
     </Container>
   );
 }

@@ -4,12 +4,9 @@ import Groceries from './Groceries';
 import Dishes from './Dishes';
 import ItemButton from '../ChakraUiComponents/ButtonItem';
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Container, Heading } from '@chakra-ui/react'
-import { useRouter } from 'next/router';
 
 
 export default function Home() {
-
-
 
   return (
     <Container>

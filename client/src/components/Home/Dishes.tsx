@@ -7,7 +7,7 @@ export default function Dishes() {
 
   return (
     <Container>
-      <HomeList isGroceries={false} />
+      <HomeList isGroceries={false} buttonName='Chat' path='chatLobby' />
     </Container>
   );
 }

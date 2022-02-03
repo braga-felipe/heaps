@@ -18,7 +18,8 @@ export default function Dashboard() {
       <Box>
         <h1>NavBar</h1>
       </Box>
-      <Box></Box>
+      <Box>
+      
       {error ? (
         <Heading>Oops, there's was an error</Heading>
       ) : fetching ? (
@@ -26,19 +27,16 @@ export default function Dashboard() {
       ) : (
         <>
           <Heading sx={hStyles()}>Current List</Heading>
-          <Box className='list'>
-            <Heading sx={hStyles()}>Current List</Heading>
-            <ItemList complete={false} />
-          </Box>
+            <Box>
+              <ItemList complete={false} buttonName='Chat' path='chatLobby' />
+            </Box>
           <Heading sx={hStyles()}>Past List</Heading>
-          <Box className='list'>
-
-            <Heading sx={hStyles()}>Past List</Heading>
-
-            <ItemList complete={true} />
-          </Box>
+            <Box className='list'>
+              <ItemList complete={true} buttonName='Chat' path='chatLobby' />
+            </Box>
         </>
       )}
+       </Box>
     </Container>
   );
 }
