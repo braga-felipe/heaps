@@ -15,7 +15,7 @@ export default function Dashboard() {
     dispatch(getMyItems(myItems));
   });
   return (
-    <Container>
+    <Container align='center'>
       <Box>
         <h1>NavBar</h1>
       </Box>
