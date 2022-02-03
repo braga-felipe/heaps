@@ -21,10 +21,10 @@ export default function ItemList({ complete }) {
   const user = useSelector((state: State) => state.user);
   return (
     <Box>
-      {items.map((item: ItemProp) => {
+      {items.map((item: ItemProp, index) => {
         // filter items by the complete props and user id
         if (item.complete === complete && item.ownerId === user.id) {
-          return <ItemCard user={user} item={item} key={item.id} />;
+          return <ItemCard user={user} item={item} key={index} />;
         }
       })}
     </Box>
