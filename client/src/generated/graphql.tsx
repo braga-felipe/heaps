@@ -248,7 +248,7 @@ export type User_LoginMutation = { __typename?: 'Mutation', userLogin: { __typen
 export type Get_All_ItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Get_All_ItemsQuery = { __typename?: 'Query', getAllItems?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean }> | null | undefined };
+export type Get_All_ItemsQuery = { __typename?: 'Query', getAllItems?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, SICK_points: number, ownerId: number, createdAt: string, updatedAt: string, owner: { __typename?: 'User', username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined } }> | null | undefined };
 
 export type Get_All_UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -391,6 +391,17 @@ export const Get_All_ItemsDocument = gql`
     complete
     archive
     isGroceries
+    SICK_points
+    ownerId
+    owner {
+      username
+      email
+      address
+      zipCode
+      SICK_points
+    }
+    createdAt
+    updatedAt
   }
 }
     `;

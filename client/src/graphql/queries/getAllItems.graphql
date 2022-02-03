@@ -7,5 +7,16 @@ query GET_ALL_ITEMS {
     complete
     archive
     isGroceries
+    SICK_points
+    ownerId
+    owner {
+      username
+      email
+      address
+      zipCode
+      SICK_points
+    }
+    createdAt
+    updatedAt
   }
 }
