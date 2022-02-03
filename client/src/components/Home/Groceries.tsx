@@ -1,9 +1,12 @@
+import { Container } from '@chakra-ui/react';
 import React from 'react';
+import HomeList from './HomeList';
 
 export default function Groceries() {
+
   return (
-    <div>
-      I will be the Groceries List!
-    </div>
+    <Container>
+      <HomeList isGroceries={true} />
+    </Container>
   );
 }

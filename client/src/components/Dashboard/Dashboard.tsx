@@ -11,9 +11,8 @@ export default function Dashboard() {
   const [{ error, fetching, data }] = useGetMyItemsQuery();
   const myItems = data?.me.items_owned;
   // updating state with fetched items
-  useEffect(() => {
-    dispatch(getMyItems(myItems));
-  });
+  dispatch(getMyItems(myItems));
+
   return (
     <Container align='center'>
       <Box>
@@ -27,11 +26,25 @@ export default function Dashboard() {
       ) : (
         <>
           <Box className='list'>
-            <Heading sx={hStyles()}>Current List</Heading>
+            <Heading sx={{
+              width: '129px',
+              height: '22px',
+              fontStyle: 'normal',
+              fontWeight: 'bold',
+              fontSize: '18px',
+              lineSeight: '22px',
+            }}>Current List</Heading>
             <ItemList complete={false} />
           </Box>
           <Box className='list'>
-            <Heading sx={hStyles()}>Past List</Heading>
+            <Heading sx={{
+              width: '129px',
+              height: '22px',
+              fontStyle: 'normal',
+              fontWeight: 'bold',
+              fontSize: '18px',
+              lineSeight: '22px',
+            }}>Past List</Heading>
             <ItemList complete={true} />
           </Box>
         </>
