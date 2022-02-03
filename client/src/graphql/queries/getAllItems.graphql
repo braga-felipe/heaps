@@ -7,26 +7,5 @@ query GET_ALL_ITEMS {
     complete
     archive
     isGroceries
-    allergies
-    diets
-    SICK_points
-    ownerId
-    owner {
-      username
-      email
-      address
-      zipCode
-      SICK_points
-    }
-    takers {
-      id
-      username
-      email
-      address
-      zipCode
-      SICK_points
-    }
-    createdAt
-    updatedAt
   }
 }

@@ -13,7 +13,7 @@ export const items = (state = [], action: Action) => {
       return [...state, action.payload];
     }
     case 'GET_ALL_ITEMS': {
-      return action.payload;
+      return action.payload ? action.payload : state;
     }
     default:
       return state;

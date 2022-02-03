@@ -248,7 +248,7 @@ export type User_LoginMutation = { __typename?: 'Mutation', userLogin: { __typen
 export type Get_All_ItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Get_All_ItemsQuery = { __typename?: 'Query', getAllItems?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, ownerId: number, createdAt: string, updatedAt: string, owner: { __typename?: 'User', username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined }, takers: { __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined } }> | null | undefined };
+export type Get_All_ItemsQuery = { __typename?: 'Query', getAllItems?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean }> | null | undefined };
 
 export type Get_All_UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -261,6 +261,11 @@ export type Get_ItemQueryVariables = Exact<{
 
 
 export type Get_ItemQuery = { __typename?: 'Query', getItem?: { __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, createdAt: string, updatedAt: string } | null | undefined };
+
+export type GetMyChatsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMyChatsQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: number, chats?: Array<{ __typename?: 'Chat', id: number, item: { __typename?: 'Item', name: string, ownerId: number }, messages?: Array<{ __typename?: 'Message', text: string, authorId: number, isRead: boolean, createdAt: string }> | null | undefined, users: Array<{ __typename?: 'User', username: string, id: number, img_url?: string | null | undefined }> }> | null | undefined } | null | undefined };
 
 export type GetMyItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -386,27 +391,6 @@ export const Get_All_ItemsDocument = gql`
     complete
     archive
     isGroceries
-    allergies
-    diets
-    SICK_points
-    ownerId
-    owner {
-      username
-      email
-      address
-      zipCode
-      SICK_points
-    }
-    takers {
-      id
-      username
-      email
-      address
-      zipCode
-      SICK_points
-    }
-    createdAt
-    updatedAt
   }
 }
     `;
@@ -477,6 +461,35 @@ export const Get_ItemDocument = gql`
 
 export function useGet_ItemQuery(options: Omit<Urql.UseQueryArgs<Get_ItemQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<Get_ItemQuery>({ query: Get_ItemDocument, ...options });
+};
+export const GetMyChatsDocument = gql`
+    query GetMyChats {
+  me {
+    id
+    chats {
+      id
+      item {
+        name
+        ownerId
+      }
+      messages {
+        text
+        authorId
+        isRead
+        createdAt
+      }
+      users {
+        username
+        id
+        img_url
+      }
+    }
+  }
+}
+    `;
+
+export function useGetMyChatsQuery(options: Omit<Urql.UseQueryArgs<GetMyChatsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetMyChatsQuery>({ query: GetMyChatsDocument, ...options });
 };
 export const GetMyItemsDocument = gql`
     query GetMyItems {
