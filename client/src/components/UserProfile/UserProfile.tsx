@@ -1,6 +1,17 @@
 import React from "react";
 import {
-  Container, Heading, Text, VStack, HStack, Tag, Avatar, Wrap, WrapItem, Button, ButtonGroup
+  Container,
+  Heading,
+  Text,
+  VStack,
+  HStack,
+  Tag,
+  Avatar,
+  Wrap,
+  WrapItem,
+  Button,
+  ButtonGroup,
+  Flex
 } from "@chakra-ui/react";
 import { Editable, EditableInput, EditablePreview } from "@chakra-ui/react";
 
@@ -12,7 +23,7 @@ const data = {
   address: "Hasenheide 65",
   zipCode: "10967",
   SICK_points: 1,
-  img_url: 'localhost:3000',
+  img_url: "localhost:3000",
   itemsAvailable: [
     {
       _id: 1,
@@ -59,31 +70,40 @@ const data = {
 };
 
 export default function UserProfile() {
-
-
   return (
-    <Container maxW='container.md' mt={4}>
-      <Wrap>
-      <WrapItem>
-    <Avatar size="lg" name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-        <VStack>
-          <Heading>{data.username}</Heading>
-          <Text color="gray">
-            {data.address} {", "} {data.zipCode}
-          </Text>
-          <Text>{data.email}</Text>
-        </VStack>
-        </WrapItem>
-        <Button colorScheme='blue'>Edit Profile</Button>
-        <Text>{'Current Items'}</Text>
+    <Container>
+      <Heading align="center" sx={{ margin: "10px", marginTop: "20px" }}>Profile</Heading>
+      <Container maxW="500px"  sx={{ border: "1px solid" }}>
+      <Flex direction="row-reverse" >
+        <Button size='xs' colorScheme="blue" sx={{ marginTop: "10px" }}>Edit Profile</Button>
+        <Wrap  justify="left" sx={{ margin: "10px", marginRight: '120px' }} >
+          <WrapItem >
+            <VStack align="left">
+            <Avatar
+              size="lg"
+              name="Random Guy"
+              src="https://bit.ly/dan-abramov"
+            />
+              <Heading>{data.username}</Heading>
+              <Text color="gray">
+                {data.address} {", "} {data.zipCode}
+              </Text>
+              <Text>{data.email}</Text>
+            </VStack>
+          </WrapItem>
         </Wrap>
-      <VStack>
-        {data.itemsAvailable.map((data) => (
-          <Tag colorScheme="blue" key={data._id}>
-            {data.name}
-          </Tag>
-        ))}
-      </VStack>
+        </Flex>
+      </Container>
+      <Container mt={4} sx={{ border: "1px solid" }}>
+        <VStack sx={{ margin: "10px"}}>
+          <Text>{"Current Items"}</Text>
+          {data.itemsAvailable.map((data) => (
+            <Tag colorScheme="blue" key={data._id}>
+              {data.name}
+            </Tag>
+          ))}
+        </VStack>
+      </Container>
     </Container>
   );
 }

@@ -4,7 +4,8 @@ import InputField from '../ChakraUiComponents/InputField';
 import CheckBox from '../ChakraUiComponents/Checkbox';
 import SubmitButton from '../ChakraUiComponents/Button';
 import { Heading, FormLabel, CheckboxGroup, Container } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
+import { State } from '../Register/Register';
+import { useDispatch, useSelector } from 'react-redux';
 import { createOneItem } from '../../redux/actions/items';
 import {
   Allergies,
@@ -24,11 +25,9 @@ interface Values {
 export default function CreateItem(props) {
   const dispatch = useDispatch();
   const [, createFoodItem] = useCreate_ItemMutation();
+  const user = useSelector((state: State) => state.user);
 
-  useEffect(() => {
-    // will need to get the user state here?
-    console.log('useEffect');
-  });
+  useEffect(() => {});
 
   return (
     <Container>
@@ -38,7 +37,7 @@ export default function CreateItem(props) {
           name: '',
           description: '',
           servings: 1,
-          ownerId: 23,
+          ownerId: user.id,
           isGroceries: false,
           allergies: [],
           diets: [],
