@@ -3,8 +3,8 @@ import styles from '../styles/Home.module.css';
 import { Container, Heading } from '@chakra-ui/react';
 import Home from '../components/Home/Home';
 
-const IndexPage: NextPage = () => {
 
+const IndexPage: NextPage = () => {
 
   return (
     <Container className={styles.container}>
