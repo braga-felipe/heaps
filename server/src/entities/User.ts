@@ -40,7 +40,7 @@ export class User extends BaseEntity {
   items_owned?: Item[];
 
   @Field(() => [Item], {nullable: true})
-  @OneToMany(() => Item, (item: Item) => item.takers)
+  @ManyToMany(() => Item, (item: Item) => item.takers)
   items_taken?: Item[];
 
   @Field(() => [Chat], {nullable: true})
