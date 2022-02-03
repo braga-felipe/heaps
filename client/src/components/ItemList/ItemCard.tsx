@@ -1,30 +1,27 @@
 import React from 'react';
+import Image from 'next/image';
+import Icons from './Icons';
 import {
+  Avatar,
   Box,
   Container,
   Text,
   Flex,
   VStack,
-  Image,
   Heading,
+  Icon,
 } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
+import { items } from '../../redux/reducers/items';
 
 export default function ItemCard({ user, item }) {
   return (
     <Container sx={cStyle()}>
       <Flex sx={fStyle()}>
         <Heading sx={hStyle()}>{item.name}</Heading>
-        {/* <VStack>
-          {item.diets.map((diet) => (
-            <Text key={diet} fontSize='xs'>
-              {diet}
-            </Text>
-          ))}
-        </VStack> */}
+        <Icons item={item} />
         <Box>
-          <Image
-            sx={iStyle()}
+          <Avatar
             src={
               user.img_url ||
               'https://ca.slack-edge.com/T0WU5R8NT-U02GWRVJERW-72846fc663f1-512'
@@ -65,9 +62,17 @@ function cStyle() {
 
 function hStyle() {
   return {
+    color: '#FFFFFF',
     fontStyle: 'normal',
     fontWeight: '5000',
     fontSize: '20px',
     lineHeight: '22px',
   };
+}
+function gluten(item) {
+  item.allergies.includes('glutenFree') ? '/gluten.png' : 'nogluten.png';
+}
+
+function fish(item) {
+  item.allergies.includes('pescatarian') ? '/fish.png' : './nofish.png';
 }

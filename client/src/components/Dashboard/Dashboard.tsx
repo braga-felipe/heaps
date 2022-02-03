@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import ItemList from '../ItemList/ItemList';
-import { Box, Container, Heading, Text } from '@chakra-ui/react';
+import { Box, Container, Heading } from '@chakra-ui/react';
 import { getMyItems } from '../../redux/actions/items';
 import { useDispatch } from 'react-redux';
 import { useGetMyItemsQuery } from '../../generated/graphql';
@@ -14,8 +14,9 @@ export default function Dashboard() {
   useEffect(() => {
     dispatch(getMyItems(myItems));
   });
+  console.log({ myItems });
   return (
-    <Container align='center'>
+    <Container sx={{ width: '350px' }}>
       <Box>
         <h1>NavBar</h1>
       </Box>
@@ -26,12 +27,12 @@ export default function Dashboard() {
         <Heading>Fetching your items...</Heading>
       ) : (
         <>
+          <Heading sx={hStyles()}>Current List</Heading>
           <Box className='list'>
-            <Heading sx={hStyles()}>Current List</Heading>
             <ItemList complete={false} />
           </Box>
+          <Heading sx={hStyles()}>Past List</Heading>
           <Box className='list'>
-            <Heading sx={hStyles()}>Past List</Heading>
             <ItemList complete={true} />
           </Box>
         </>
@@ -42,6 +43,7 @@ export default function Dashboard() {
 
 function hStyles() {
   return {
+    // position: 'absolute',
     width: '129px',
     height: '22px',
     fontStyle: 'normal',
