@@ -262,6 +262,11 @@ export type Get_ItemQueryVariables = Exact<{
 
 export type Get_ItemQuery = { __typename?: 'Query', getItem?: { __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, createdAt: string, updatedAt: string } | null | undefined };
 
+export type GetMyItemsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMyItemsQuery = { __typename?: 'Query', me?: { __typename?: 'User', items_owned?: Array<{ __typename?: 'Item', name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number }> | null | undefined } | null | undefined };
+
 export type Get_User_By_IdQueryVariables = Exact<{
   getOneUserByIdId: Scalars['Int'];
 }>;
@@ -472,6 +477,27 @@ export const Get_ItemDocument = gql`
 
 export function useGet_ItemQuery(options: Omit<Urql.UseQueryArgs<Get_ItemQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<Get_ItemQuery>({ query: Get_ItemDocument, ...options });
+};
+export const GetMyItemsDocument = gql`
+    query GetMyItems {
+  me {
+    items_owned {
+      name
+      description
+      servings
+      complete
+      archive
+      isGroceries
+      allergies
+      diets
+      SICK_points
+    }
+  }
+}
+    `;
+
+export function useGetMyItemsQuery(options: Omit<Urql.UseQueryArgs<GetMyItemsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetMyItemsQuery>({ query: GetMyItemsDocument, ...options });
 };
 export const Get_User_By_IdDocument = gql`
     query GET_USER_BY_ID($getOneUserByIdId: Int!) {
