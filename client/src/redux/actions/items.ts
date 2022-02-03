@@ -27,10 +27,15 @@ export const getAllItems = () => async (dispatch, getState) => {
     data: {
       query: `query {
         getAllItems {
-          name
-          description
-          ownerId
-          complete
+        id
+        name
+        description
+        servings
+        complete
+        archive
+        isGroceries
+        SICK_points
+        ownerId
         }
       }`,
     },
