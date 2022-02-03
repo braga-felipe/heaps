@@ -2,8 +2,6 @@ import React from 'react';
 import Icons from './Icons';
 import { Avatar, Box, Container, Flex, Heading } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
-import { User } from '../../generated/graphql';
-import { Item } from '../../generated/graphql';
 
 export default function ItemCard({ user, item, buttonName, path }) {
   return (
@@ -37,7 +35,7 @@ function cStyle() {
   return {
     border: '1px solid',
     marginTop: '3px',
-    width: '317px',
+    width: '350px',
     background: '#5D55B4',
     borderRadius: ' 10px',
     boxShadow: '3px 3px 10px rgba(116, 65, 0, 0.2)',

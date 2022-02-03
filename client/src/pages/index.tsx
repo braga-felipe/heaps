@@ -19,13 +19,12 @@ const IndexPage: NextPage = () => {
   const getItemsList = () => {
     const [{ data }] = useGet_All_ItemsQuery();
     return data && data.getAllItems;
-
-  }
+  };
 
   const getMeData = () => {
     const [{ data }] = useMeQuery();
     return data && data.me;
-  }
+  };
 
   const itemList = getItemsList();
 
@@ -47,9 +46,9 @@ const IndexPage: NextPage = () => {
 
   return (
     <Container className={styles.container}>
-      {meUser && (<Heading>Hello {meUser.username}</Heading>)}
+      {meUser && <Heading>Hello, {meUser.username}!</Heading>}
       <Home />
-    </Container >
+    </Container>
   );
 };
 

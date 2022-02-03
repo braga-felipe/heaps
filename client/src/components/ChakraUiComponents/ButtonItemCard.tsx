@@ -2,7 +2,6 @@ import { Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 export default function ItemCardButton({ buttonName, path }) {
-
   const router = useRouter();
 
   function showPageLinked() {
@@ -12,9 +11,9 @@ export default function ItemCardButton({ buttonName, path }) {
     <Button
       mt={4}
       size='xs'
-      colorScheme='teal'
-      onClick={showPageLinked}
-    >
+      backgroundColor='secondary'
+      color='white'
+      onClick={showPageLinked}>
       {buttonName}
     </Button>
   );
