@@ -1,6 +1,6 @@
 
 import React from 'react'
-import ChatLobbyList from '../components/Chat/chatLobbyList'
+import ChatLobbyList from '../components/Chat/ChatLobbyList';
 
 interface chatLobbyProps {
 
