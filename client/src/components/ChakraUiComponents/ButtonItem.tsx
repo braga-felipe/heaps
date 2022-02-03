@@ -1,12 +1,18 @@
 import { Button } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
-export default function SubmitButton(props) {
-  const { name } = props;
+export default function ItemButton({ name, pagePath }) {
+
+  const router = useRouter();
+
+  function showPageLinked() {
+    router.push('/' + `${pagePath}`);
+  }
   return (
     <Button
       mt={4}
       colorScheme='teal'
-      isLoading={props.isSubmitting}
+      onClick={showPageLinked}
     >
       {name}
     </Button>

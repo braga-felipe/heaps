@@ -2,8 +2,8 @@ import React from 'react';
 import { useGet_All_ItemsQuery } from '../../generated/graphql';
 import Groceries from './Groceries';
 import Dishes from './Dishes';
-import { Button } from '@chakra-ui/react'
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import ItemButton from '../ChakraUiComponents/ButtonItem';
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Container, Heading } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
 
 
@@ -11,20 +11,9 @@ export default function Home() {
 
 
 
-  const router = useRouter();
-  const [{ data }] = useGet_All_ItemsQuery();
-
-
-  if (data) {
-    console.log('data', data.getAllItems);
-  }
-
-  function showCreateItem() {
-    router.push('/' + 'createItem');
-  }
-
   return (
-    <div>
+    <Container>
+      <Heading>HOME</Heading>
       <Tabs isFitted variant='enclosed'>
         <TabList mb='1em'>
           <Tab>Groceries</Tab>
@@ -39,15 +28,8 @@ export default function Home() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Button onClick={showCreateItem}
-        size='md'
-        height='48px'
-        width='200px'
-        border='2px'
-        borderColor='green.500'
-      >
-        Post dish
-      </Button>
-    </div>
+      <ItemButton name='Post Dish' pagePath='createItem' />
+      <ItemButton name='Dashboard' pagePath='dashboard' />
+    </Container>
   );
 }
