@@ -126,8 +126,8 @@ describe("GraphQL", () => {
     })
   });
 
-  it("Create/Register a new user. Random generated name each time.", (done) => {
-    function random(max = 1000) {
+  it("Create/Register a new user and check if session cookie is created. Random generated email each time.", (done) => {
+    function random(max = 10000) {
       return Math.floor(Math.random() * max) + 1
     };
     let randomNumber = random();
@@ -155,6 +155,7 @@ describe("GraphQL", () => {
       expect(res.body.data.createUser.errors).to.equal(null)
       expect(res.body.data.createUser.user.username).to.not.equal(null)
       expect(res.body.data.createUser.user.email).to.not.equal(null)
+      expect(res.header['set-cookie']).to.not.equal(null)
       done();
     })
   });
