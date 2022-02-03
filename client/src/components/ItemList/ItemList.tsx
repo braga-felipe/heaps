@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { State } from '../Register/Register';
-import { Box } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import ItemCard from './ItemCard';
 
 interface ItemProp {
@@ -20,13 +20,13 @@ export default function ItemList({ complete }) {
   const items = useSelector((state: State) => state.items);
   const user = useSelector((state: State) => state.user);
   return (
-    <Box>
+    <Container margin={'0'} padding={'0'}>
       {items.map((item: ItemProp, index) => {
         // filter items by the complete props and user id
         if (item.complete === complete && item.ownerId === user.id) {
           return <ItemCard user={user} item={item} key={index} />;
         }
       })}
-    </Box>
+    </Container>
   );
 }
