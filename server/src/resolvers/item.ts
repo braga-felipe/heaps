@@ -71,12 +71,12 @@ export class ItemResolver {
   getItem(
     @Arg('id', () => Int) id: number
   ): Promise<Item | undefined> {
-    return Item.findOne(id, {relations: ['chats', 'owner']});
+    return Item.findOne(id, {relations: ['chats', 'owner', 'takers']});
   }
 
   @Query(() => [Item], { nullable: true })
   async getAllItems(): Promise<Item[] | undefined> {
-    const allItems = await Item.find({relations: ["chats", "owner"]});
+    const allItems = await Item.find({relations: ["chats", "owner", "takers"]});
     return allItems;
   }
 

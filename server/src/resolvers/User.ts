@@ -72,7 +72,7 @@ export class UserResolver {
   @Query(() => User)
   async getOneUserByID(@Arg("id", () => Int) id: number): Promise<User | undefined> {
     const user = await User.findOneOrFail(id, {
-      relations: ["items_owned", "chats"],
+      relations: ["items_owned", "chats", "items_taken"],
     });
     return user;
   }
@@ -190,7 +190,7 @@ export class UserResolver {
       if (!req.session.userId) {
         return null;
       }
-      return User.findOne(req.session.userId, { relations: ["chats", "items_owned"]});
+      return User.findOne(req.session.userId, { relations: ["chats", "items_owned", "items_taken"]});
     }
 
     @Mutation(() => Boolean)
