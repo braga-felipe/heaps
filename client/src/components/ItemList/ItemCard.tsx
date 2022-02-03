@@ -12,7 +12,16 @@ import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion
 
 export default function ItemCard({ user, item }) {
   return (
-    <Container sx={{ border: '1px solid', marginTop: '3px' }}>
+    <Container
+      sx={{
+        border: '1px solid',
+        marginTop: '3px',
+        width: '317px',
+        left: '29px',
+        top: '571px',
+        background: '#5D55B4',
+        borderRadius: ' 10px',
+      }}>
       <Flex justify='space-around' align='center'>
         <Heading fontSize='md'>{item.name}</Heading>
         {/* <VStack>
