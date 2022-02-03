@@ -3,20 +3,25 @@ import { VStack, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
 
 export default function Icons({ item }) {
-  const nut = !item.allergies.includes('nutFree') ? '/nut.png' : '/nut-not.png';
-  const lactose = !item.allergies.includes('lactoseFree')
-    ? '/lactose.png'
-    : '/lactose-not.png';
-  const gluten = !item.allergies.includes('glutenFree')
-    ? '/gluten.png'
-    : '/gluten-not.png';
-  const vegan = item.diets.includes('vegan') ? '/vegan.png' : '/vegan-not.png';
-  const vegetarian = item.diets.includes('vegetarian')
-    ? '/vegetarian.png'
-    : '/vegetarian-not.png';
-  const pescatarian = item.diets.includes('pescatarian')
-    ? '/fish.png'
-    : '/fish-not.png';
+  console.log({ item });
+  const nut =
+    item && !item?.allergies.includes('nutFree') ? '/nut.png' : '/nut-not.png';
+  const lactose =
+    item && !item?.allergies.includes('lactoseFree')
+      ? '/lactose.png'
+      : '/lactose-not.png';
+  const gluten =
+    item && !item?.allergies.includes('glutenFree')
+      ? '/gluten.png'
+      : '/gluten-not.png';
+  const vegan =
+    item && item?.diets.includes('vegan') ? '/vegan.png' : '/vegan-not.png';
+  const vegetarian =
+    item && item?.diets.includes('vegetarian')
+      ? '/vegetarian.png'
+      : '/vegetarian-not.png';
+  const pescatarian =
+    item && item?.diets.includes('pescatarian') ? '/fish.png' : '/fish-not.png';
   return (
     <Flex sx={fStyle()}>
       <VStack>

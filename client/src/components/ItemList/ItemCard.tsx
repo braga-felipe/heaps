@@ -1,12 +1,6 @@
 import React from 'react';
 import Icons from './Icons';
-import {
-  Avatar,
-  Box,
-  Container,
-  Text,
-  Heading,
-} from '@chakra-ui/react';
+import { Avatar, Box, Container, Flex, Heading } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
 import { User } from '../../generated/graphql';
 import { Item } from '../../generated/graphql';
