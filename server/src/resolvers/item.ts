@@ -65,6 +65,13 @@ class ItemUpdateInput {
   updateOptions: ItemUpdateOptions;
 }
 
+@InputType()
+class ItemTakeInput {
+  @Field(() => Int)
+  itemId: number;
+  @Field(() => Int)
+  userId: number;
+}
 @Resolver()
 export class ItemResolver {
   @Query(() => Item, { nullable: true })
@@ -107,6 +114,23 @@ export class ItemResolver {
     }
     const updatedItem = entityManager.findOneOrFail(Item, options.id);
     return updatedItem;
+  }
+
+  @Mutation(() => Item)
+  async takeItem (
+    //The potential fields we can update ("options") are defined in ItemUpdateInput type def.
+    @Arg('options') options: ItemTakeInput
+  ): Promise<Item> {
+    const entityManager = getManager();
+    const user = await entityManager.findOneOrFail(User, options.userId, { relations: ["items_taken"]})
+    const item = await entityManager.findOneOrFail(Item, options.itemId, { relations: ["takers"]})
+    if (item.takers) {
+      item.takers = [...item.takers, user]
+    } else {
+      item.takers = [user];
+    }
+    await entityManager.save(item)
+    return item;
   }
 
 

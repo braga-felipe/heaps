@@ -8,6 +8,8 @@ import {
   BaseEntity,
   ManyToOne,
   OneToMany,
+  ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { Diets, Allergies } from "../resolvers/item";
 import { Chat } from "./Chat";
@@ -71,8 +73,9 @@ export class Item extends BaseEntity {
   @ManyToOne(() => User, (user: User) => user.items_owned, {onDelete: 'SET NULL'})
   owner: User;
 
-  @Field(() => User)
-  @ManyToOne(() => User, (user: User) => user.items_taken, {onDelete: 'SET NULL'})
+  @Field(() => [User])
+  @ManyToMany(() => User, (user: User) => user.items_taken, {onDelete: 'SET NULL'})
+  @JoinTable()
   takers: User[];
 
   @Field(() => [Chat])
