@@ -1,11 +1,10 @@
 import React from 'react';
+import Icons from './Icons';
 import {
+  Avatar,
   Box,
   Container,
   Text,
-  Flex,
-  VStack,
-  Image,
   Heading,
 } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
@@ -17,16 +16,9 @@ export default function ItemCard({ user, item, buttonName, path }) {
     <Container sx={cStyle()}>
       <Flex sx={fStyle()}>
         <Heading sx={hStyle()}>{item.name}</Heading>
-        {/* <VStack>
-          {item.diets.map((diet) => (
-            <Text key={diet} fontSize='xs'>
-              {diet}
-            </Text>
-          ))}
-        </VStack> */}
+        <Icons item={item} />
         <Box>
-          <Image
-            sx={iStyle()}
+          <Avatar
             src={
               user.img_url ||
               'https://ca.slack-edge.com/T0WU5R8NT-U02GWRVJERW-72846fc663f1-512'
@@ -38,13 +30,6 @@ export default function ItemCard({ user, item, buttonName, path }) {
       <Accordion item={item} buttonName={buttonName} path={path} />
     </Container>
   );
-}
-
-function iStyle() {
-  return {
-    borderRadius: 'full',
-    boxSize: '80px',
-  };
 }
 
 function fStyle() {
@@ -67,6 +52,7 @@ function cStyle() {
 
 function hStyle() {
   return {
+    color: '#FFFFFF',
     fontStyle: 'normal',
     fontWeight: '5000',
     fontSize: '20px',
