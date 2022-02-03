@@ -7,7 +7,7 @@ export const user = (state = {}, action) => {
       return { ...state, ...action.payload };
     }
     case 'GET_INITIAL_USER': {
-      return {};
+      return action.payload;
     }
     default:
       return state;
