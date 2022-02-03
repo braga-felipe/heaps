@@ -44,7 +44,6 @@ function hStyles() {
   return {
     width: '129px',
     height: '22px',
-    fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '18px',

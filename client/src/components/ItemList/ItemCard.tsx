@@ -19,6 +19,8 @@ export default function ItemCard({ user, item }) {
         width: '317px',
         left: '29px',
         top: '571px',
+        background: '#5D55B4',
+        borderRadius: ' 10px',
       }}>
       <Flex justify='space-around' align='center'>
         <Heading fontSize='md'>{item.name}</Heading>
