@@ -4,10 +4,17 @@ import { Box, Container, Heading, Text } from '@chakra-ui/react';
 import { getAllItems } from '../../redux/actions/items';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../Register/Register';
-import getDataOptions from '../../axios/api';
+import { useMeQuery } from '../../generated/graphql';
+import { getInitialUser } from '../../redux/actions/user';
 
 export default function Dashboard() {
   const dispatch = useDispatch();
+  // fetching user using session id
+  const [{ error, fetching, data }] = useMeQuery();
+  const user = data?.me;
+  // storing user in store
+  user && dispatch(getInitialUser(user));
+  // getAllItems items from the store, to be filtered by user id
   useEffect(() => {
     dispatch(getAllItems());
   }, []);
