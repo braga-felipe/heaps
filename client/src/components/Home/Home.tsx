@@ -5,11 +5,17 @@ import Dishes from './Dishes';
 import { Button } from '@chakra-ui/react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
-import createItem from '../../pages/createItem';
+
 
 export default function Home() {
-  const [{ data }] = useGet_All_ItemsQuery();
+
   const router = useRouter();
+  const [{ data }] = useGet_All_ItemsQuery();
+
+
+  if (data) {
+    console.log('data', data.getAllItems);
+  }
 
   function showCreateItem() {
     router.push('/' + 'createItem');
