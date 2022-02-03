@@ -30,7 +30,7 @@ export default function SearchBar() {
       },
     })
       .then((response) => {
-        console.log("getDataOptions response :", response.data);
+        console.log("getDataOptions response :", response);
 
         const massagedDataOptions = response.data.data.getAllItems.map(
           (data) => {
