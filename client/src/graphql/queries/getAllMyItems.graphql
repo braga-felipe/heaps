@@ -1,0 +1,17 @@
+query GetMyItems {
+  me {
+    items_owned {
+      name
+      description
+      servings
+      isGroceries
+      allergies
+      diets
+      SICK_points
+      createdAt
+      id
+      complete
+      archive
+    }
+  }
+}
