@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { State } from '../../pages/index';
 import { Container, VStack } from '@chakra-ui/react';
 import ItemCard from '../ItemList/ItemCard';
+import SearchBar from '../../components/SeachBar/SearchBar'
 
 interface ItemProp {
   id: number;
@@ -15,13 +16,15 @@ interface ItemProp {
   ownerId: number;
 }
 
-export default function HomeList({ isGroceries, buttonName, path }) {
+export default function HomeList({ isGroceries, buttonName, path ,}) {
   // access items and user from store
   const items = useSelector((state: State) => state.items);
   const user = useSelector((state: State) => state.user);
+  console.log('itemList in home', items)
 
   return (
     <Container margin={'-6'} padding={'-2'}>
+      <SearchBar options={items} />
       {items
         .filter((item: ItemProp) => item.isGroceries === isGroceries)
         .map((item: ItemProp, index) => (
