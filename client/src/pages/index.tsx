@@ -7,7 +7,7 @@ import { useGet_All_ItemsQuery, useMeQuery } from '../generated/graphql';
 import Home from '../components/Home/Home';
 import { useEffect } from 'react';
 import { getInitialUser } from '../redux/actions/user';
-import Layout from '../components/Navibar/Layout';
+import Layout from '../components/Navbar/Layout';
 
 export interface State {
   user?;

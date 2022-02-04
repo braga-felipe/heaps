@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 
 
-export default function Navibar() {
+export default function Navbar() {
   return (
     <HStack sx={hsStyle()}>
       <Heading size='md'>Heaps</Heading>

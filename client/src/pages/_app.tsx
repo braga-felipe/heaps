@@ -6,7 +6,7 @@ import { ChakraProvider, layout } from '@chakra-ui/react';
 import { store } from '../redux/store';
 import customTheme from '../styles/extendTheme';
 import type { AppProps } from 'next/app';
-import Layout from '../components/Navibar/Layout';
+import Layout from '../components/Navbar/Layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
