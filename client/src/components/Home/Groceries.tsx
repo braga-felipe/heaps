@@ -1,11 +1,22 @@
-import { Container } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import React from 'react';
 import HomeList from './HomeList';
 
 export default function Groceries() {
   return (
-    <Container zIndex='0'>
+    <Box sx={bStyle()} marginLeft='-10px'>
       <HomeList isGroceries={true} buttonName='Chat' path='chatLobby' />
-    </Container>
+    </Box>
   );
+}
+
+function bStyle() {
+  return {
+    width: '330px',
+    minHeight: '80px',
+    maxHeight: '500px',
+    overflowY: 'scroll',
+    borderRadius: '15px',
+    border: '1px solid #E2E8F0',
+  };
 }
