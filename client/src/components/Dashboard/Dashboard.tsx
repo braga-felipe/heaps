@@ -1,23 +1,25 @@
 import React from 'react';
+import Cooking from '../Assets/Cooking';
 import ItemList from '../ItemList/ItemList';
-import styles from '../../styles/Home.module.css';
-import { State } from '../../pages/index';
-import { Box, Container, Heading } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
+import { Box, Container, Flex, Heading } from '@chakra-ui/react';
 
 export default function Dashboard() {
-  const user = useSelector((state: State) => state.user);
   return (
-    <Container sx={cStyle()}>
-      <Heading sx={hStyle()}>Current List</Heading>
-      <Box sx={bStyle()}>
-        <ItemList complete={false} buttonName='Chat' path='chatLobby' />
-      </Box>
-      <Heading sx={hStyle()}>Past List</Heading>
-      <Box sx={bStyle()}>
-        <ItemList complete={true} buttonName='Chat' path='chatLobby' />
-      </Box>
-    </Container>
+    <>
+      <Flex sx={{ justifyContent: 'center' }}>
+        <Cooking />
+      </Flex>
+      <Container sx={cStyle()}>
+        <Heading sx={hStyle()}>Current Items</Heading>
+        <Box sx={bStyle()}>
+          <ItemList complete={false} buttonName='Chat' path='chatLobby' />
+        </Box>
+        <Heading sx={hStyle()}>Past Items</Heading>
+        <Box sx={bStyle()}>
+          <ItemList complete={true} buttonName='Chat' path='chatLobby' />
+        </Box>
+      </Container>
+    </>
   );
 }
 function bStyle() {
@@ -33,6 +35,7 @@ function hStyle() {
     height: '22px',
     fontWeight: 'bold',
     fontSize: '18px',
+    margin: '5px',
   };
 }
 
