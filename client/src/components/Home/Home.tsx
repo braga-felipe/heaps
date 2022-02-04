@@ -2,6 +2,7 @@ import React from 'react';
 import Groceries from './Groceries';
 import Dishes from './Dishes';
 import ItemButton from '../ChakraUiComponents/ButtonItem';
+import SearchBar from '../SeachBar/SearchBar';
 import {
   Tabs,
   TabList,
@@ -15,6 +16,7 @@ import {
 export default function Home() {
   return (
     <Container sx={cStyle()}>
+      {/*  <SearchBar /> */}
       <Tabs isFitted mt='3px' mb='5px' variant='enclosed'>
         <TabList mb='15px'>
           <Tab color='secondary'>Groceries</Tab>
@@ -29,7 +31,7 @@ export default function Home() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Flex mb='2px' justify='space-around'>
+      <Flex mb='10px' justify='space-around'>
         <ItemButton name='Post Dish' pagePath='createItem' />
         <ItemButton name='Dashboard' pagePath='dashboard' />
       </Flex>
