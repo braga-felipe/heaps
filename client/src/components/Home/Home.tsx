@@ -18,7 +18,6 @@ export default function Home() {
   const [isGroceries, setIsGroceries] = useState(true);
 
   return (
-    // <Container>
     <Container sx={cStyle()}>
       <Flex sx={{ justifyContent: 'center', alignItems: 'center' }}>
         <Grocery isGroceries={isGroceries} />
@@ -53,7 +52,6 @@ export default function Home() {
         <ItemButton name='Dashboard' pagePath='dashboard' />
       </Flex>
     </Container>
-    // </Container>
   );
 }
 
