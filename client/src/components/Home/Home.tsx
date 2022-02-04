@@ -32,8 +32,6 @@ export default function Home() {
         </TabPanels>
       </Tabs>
       <Flex mb='10px' justify='space-around'>
-        <ItemButton name='Post Dish' pagePath='createItem' />
-        <ItemButton name='Dashboard' pagePath='dashboard' />
       </Flex>
     </Container>
   );
