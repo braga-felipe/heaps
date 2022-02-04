@@ -1,12 +1,17 @@
 import React from 'react';
 import ItemList from '../ItemList/ItemList';
+import styles from '../../styles/Home.module.css';
+import { State } from '../../pages/index';
 import { Box, Container, Heading } from '@chakra-ui/react';
+import ProfileIcon from '../Assets/ProfileIcon';
+import { useSelector } from 'react-redux';
 
 export default function Dashboard() {
+  const user = useSelector((state: State) => state.user);
   return (
-    <Container sx={{ width: '350px' }}>
-      <Box>
-        <h1>NavBar</h1>
+    <Container className={styles.container}>
+      <Box align='right'>
+        <ProfileIcon user={user} />
       </Box>
       <Container>
         <Heading sx={hStyles()}>Current List</Heading>
@@ -20,6 +25,7 @@ export default function Dashboard() {
         <Heading sx={hStyles()}>Past List</Heading>
         <Box
           width='400px'
+          minHeight='80px'
           borderRadius='15px'
           border='1px solid #E2E8F0'
           alignItems='center'>

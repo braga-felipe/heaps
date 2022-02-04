@@ -7,6 +7,7 @@ import { useGet_All_ItemsQuery, useMeQuery } from '../generated/graphql';
 import Home from '../components/Home/Home';
 import { useEffect } from 'react';
 import { getInitialUser } from '../redux/actions/user';
+import SearchBar from '../components/SeachBar/SearchBar';
 
 export interface State {
   user?;
@@ -27,26 +28,17 @@ const IndexPage: NextPage = () => {
   };
 
   const itemList = getItemsList();
-
   const meUser = getMeData();
-  console.log({ meUser });
 
   useEffect(() => {
     dispatch(getAllItems(itemList));
     meUser && dispatch(getInitialUser(meUser));
   });
 
-  const items = useSelector((state: State) => state.items);
-  console.log({ items });
-
-  /* const user = useSelector((state: State) => state.user);
-  console.log({ user }); */
-
-  //const usename = meUser.username;
-
   return (
     <Container className={styles.container}>
       {meUser && <Heading>Hello, {meUser.username}!</Heading>}
+      <SearchBar />
       <Home />
     </Container>
   );

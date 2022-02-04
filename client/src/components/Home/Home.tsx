@@ -14,11 +14,7 @@ import {
 
 export default function Home() {
   return (
-    <Container
-      width='400px'
-      borderRadius='15px'
-      border='1px solid #E2E8F0'
-      alignItems='center'>
+    <Container sx={cStyle()}>
       <Tabs isFitted mt='3px' mb='5px' variant='enclosed'>
         <TabList mb='15px'>
           <Tab color='secondary'>Groceries</Tab>
@@ -39,4 +35,13 @@ export default function Home() {
       </Flex>
     </Container>
   );
+}
+
+function cStyle() {
+  return {
+    width: '400px',
+    borderRadius: '15px',
+    border: '1px solid #E2E8F0',
+    alignItems: 'center',
+  };
 }
