@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from './Navbar';
 
 export default function Layout(props) {
+
   return (
     <Container sx={cStyle()}>
       <Navbar />
@@ -14,6 +15,9 @@ export default function Layout(props) {
     return {
       justifyContent: 'space-between',
       alignItems: 'center',
+      position: 'fixed',
+      bottom: '0',
+      width: '100%'
     };
   }
 }
