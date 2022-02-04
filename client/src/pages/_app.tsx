@@ -14,9 +14,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ReduxProvider store={store}>
       <Provider value={client}>
         <ChakraProvider theme={customTheme}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Component {...pageProps} />
+          <Layout />
         </ChakraProvider>
       </Provider>
     </ReduxProvider>
