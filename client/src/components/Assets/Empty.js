@@ -1,13 +1,13 @@
 import { useLottie } from 'lottie-react';
-import cooking from './cooking.json';
+import empty from './empty.json';
 export default function Cooking() {
   const options = {
-    animationData: cooking,
+    animationData: empty,
     loop: true,
     autoplay: true,
     style: {
-      height: '175px',
-      width: '175px',
+      height: '95px',
+      width: '95px',
     },
   };
   const { View } = useLottie(options);

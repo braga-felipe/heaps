@@ -11,11 +11,11 @@ export default function Dashboard() {
       </Flex>
       <Container sx={cStyle()}>
         <Heading sx={hStyle()}>Current Items</Heading>
-        <Box sx={bStyle()}>
+        <Box sx={bStyle()} height='300px'>
           <ItemList complete={false} buttonName='Chat' path='chatLobby' />
         </Box>
         <Heading sx={hStyle()}>Past Items</Heading>
-        <Box sx={bStyle()}>
+        <Box sx={bStyle()} height='150px'>
           <ItemList complete={true} buttonName='Chat' path='chatLobby' />
         </Box>
       </Container>
@@ -25,7 +25,6 @@ export default function Dashboard() {
 function bStyle() {
   return {
     width: '400px',
-    height: '300px',
     overflowY: 'scroll',
   };
 }
