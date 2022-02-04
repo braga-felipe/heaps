@@ -1,39 +1,31 @@
-
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  Heading,
-  HStack,
-  VStack,
-} from '@chakra-ui/react';
-
-
+import { Heading, HStack, Container } from '@chakra-ui/react';
 
 export default function Navbar() {
   return (
     <HStack sx={hsStyle()}>
-      <Heading size='md'></Heading>
       <HStack sx={cStyle()}>
         <Link href='/'>
-          <VStack>
+          <Container>
             <Image src='/home.png' width='25px' height='25px' />
-          </VStack>
+          </Container>
         </Link>
         <Link href='/createItem'>
-          <VStack>
+          <Container>
             <Image src='/food.png' width='30px' height='30px' />
-          </VStack>
+          </Container>
         </Link>
         <Link href='/dashboard'>
-          <VStack>
+          <Container>
             <Image src='/dashboard.png' width='30px' height='30px' />
-          </VStack>
+          </Container>
         </Link>
         <Link href='/chatLobby'>
-          <VStack>
+          <Container>
             <Image src='/chat.png' width='30px' height='30px' />
-          </VStack>
+          </Container>
         </Link>
       </HStack>
     </HStack>
@@ -42,17 +34,17 @@ export default function Navbar() {
 
 function hsStyle() {
   return {
-    justifyContent: 'space-between',
+    display: 'flex-box',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     background: '#dfb23f',
     color: 'white',
-  }
+  };
 }
 function cStyle() {
   return {
     justifyContent: 'space-between',
     alignItems: 'center',
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  };
 }
-

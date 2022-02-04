@@ -9,7 +9,6 @@ import type { AppProps } from 'next/app';
 import Layout from '../components/Navbar/Layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   return (
     <ReduxProvider store={store}>
       <Provider value={client}>
