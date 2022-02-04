@@ -5,7 +5,8 @@ export default function SubmitButton(props) {
   return (
     <Button
       mt={4}
-      colorScheme='teal'
+      backgroundColor='secondary'
+      color='white'
       isLoading={props.isSubmitting}
       type='submit'>
       {name}

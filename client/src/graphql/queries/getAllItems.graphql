@@ -7,6 +7,8 @@ query GET_ALL_ITEMS {
     complete
     archive
     isGroceries
+    allergies
+    diets
     SICK_points
     ownerId
     owner {

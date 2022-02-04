@@ -1,23 +1,24 @@
 import React from 'react';
-import { useGet_All_ItemsQuery } from '../../generated/graphql';
 import Groceries from './Groceries';
 import Dishes from './Dishes';
 import ItemButton from '../ChakraUiComponents/ButtonItem';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Container, Heading } from '@chakra-ui/react'
-import { useRouter } from 'next/router';
-
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Container,
+  Flex,
+} from '@chakra-ui/react';
 
 export default function Home() {
-
-
-
   return (
-    <Container>
-      <Heading>HOME</Heading>
-      <Tabs isFitted variant='enclosed'>
-        <TabList mb='1em'>
-          <Tab>Groceries</Tab>
-          <Tab>Dishes</Tab>
+    <Container sx={cStyle()}>
+      <Tabs isFitted mt='3px' mb='5px' variant='enclosed'>
+        <TabList mb='15px'>
+          <Tab color='secondary'>Groceries</Tab>
+          <Tab color='secondary'>Dishes</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -28,8 +29,19 @@ export default function Home() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <ItemButton name='Post Dish' pagePath='createItem' />
-      <ItemButton name='Dashboard' pagePath='dashboard' />
+      <Flex mb='10px' justify='space-around'>
+        <ItemButton name='Post Dish' pagePath='createItem' />
+        <ItemButton name='Dashboard' pagePath='dashboard' />
+      </Flex>
     </Container>
   );
+}
+
+function cStyle() {
+  return {
+    width: '400px',
+    borderRadius: '15px',
+    border: '1px solid #E2E8F0',
+    alignItems: 'center',
+  };
 }
