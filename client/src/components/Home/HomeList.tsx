@@ -21,18 +21,20 @@ export default function HomeList({ isGroceries, buttonName, path }) {
   const user = useSelector((state: State) => state.user);
 
   return (
-    <Container margin={'-6'} padding={'-2'}>
-      {items
-        .filter((item: ItemProp) => item.isGroceries === isGroceries)
-        .map((item: ItemProp, index) => (
-          <ItemCard
-            user={user}
-            item={item}
-            key={index}
-            buttonName={buttonName}
-            path={path}
-          />
-        ))}
+    <Container marginTop='25px'>
+      <Container marginLeft='-10px'>
+        {items
+          .filter((item: ItemProp) => item.isGroceries === isGroceries)
+          .map((item: ItemProp, index) => (
+            <ItemCard
+              user={user}
+              item={item}
+              key={index}
+              buttonName={buttonName}
+              path={path}
+            />
+          ))}
+      </Container>
     </Container>
   );
 }

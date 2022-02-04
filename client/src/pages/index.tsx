@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import styles from '../styles/Home.module.css';
-import { Container, Heading } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllItems } from '../redux/actions/items';
 import { useGet_All_ItemsQuery, useMeQuery } from '../generated/graphql';
@@ -36,9 +36,12 @@ const IndexPage: NextPage = () => {
   });
 
   return (
-    <Container className={styles.container}>
-      {meUser && <Heading>Hello, {meUser.username}!</Heading>}
-      <Home />
+
+    <Container>
+      <Container className={styles.container}>
+        {meUser && <Heading>Hello, {meUser.username}!</Heading>}
+        <Home />
+      </Container>
     </Container>
   );
 };
