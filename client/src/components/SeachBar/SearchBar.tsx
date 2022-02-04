@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import { AppProps } from "next/app";
-import axios from "axios";
-import { user } from "../../redux/reducers/user";
-import { useGet_All_ItemsQuery } from "../../generated/graphql";
-import ItemList from "../ItemList/ItemList";
 import { Container } from "@chakra-ui/react";
 
 interface Props {
@@ -13,48 +8,38 @@ interface Props {
   message: string;
 }
 
-export default function SearchBar({ options }) {
+export default function SearchBar({ items, onChange }) {
   const [selectOptions, setSelectedOption] = useState(null);
-  // const [dataOptions, setDataOptions] = React.useState();
-  // const [{ error, fetching, data }]= useGet_All_ItemsQuery();
 
-
-  //   .map(item => {
-//     return {
-// SICK_points: item.SICK_points,
-// allergies: item.allergies,
-// archive: item.archive,
-// complete: item.complete,
-// createdAt: item.createdAt,
-// description: item.description,
-// diets: item.diets,
-// id: item.id,
-// isGroceries: item.isGroceries,
-// name: item.name,
-// owner: item.owner,
-// ownerId: item.ownerId,
-// servings: item.servings
-//     }
-//   });
-
-  console.log("items in search bar: ", options);
 
   return (
     <Container className="search-bar">
       <Select
         defaultValue={selectOptions}
-        onChange={setSelectedOption}
-        options={options.map((data) => {
+        onChange={onChange}
+        options={items.map((data) => {
           return {
-            value: data.name,
-            label: data.name,
-            ownerId: data.ownerId,
-            complete: data.complete,
+            value: data.props.item.name,
+            label: data.props.item.name,
+            ownerId: data.props.item.ownerId,
+            complete: data.props.item.complete,
+            SICK_points: data.props.item.SICK_points,
+            allergies: data.props.item.allergies,
+            archive: data.props.item.archive,
+            createdAt: data.props.item.createdAt,
+            description: data.props.item.description,
+            diets: data.props.item.diets,
+            id: data.props.item.id,
+            isGroceries: data.props.item.isGroceries,
+            name: data.props.item.name,
+            owner: data.props.item.owner,
+            servings: data.props.item.servings,
           };
         })}
         isSearchable
-        placeholder
+        placeholder={'Search...'}
         delimiter="value"
+        isClearable
       />
     </Container>
   );
