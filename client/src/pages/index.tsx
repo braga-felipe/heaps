@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import styles from '../styles/Home.module.css';
-import { Container, Heading } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllItems } from '../redux/actions/items';
 import { useGet_All_ItemsQuery, useMeQuery } from '../generated/graphql';
@@ -8,6 +8,7 @@ import Home from '../components/Home/Home';
 import { useEffect } from 'react';
 import { getInitialUser } from '../redux/actions/user';
 import SearchBar from '../components/SeachBar/SearchBar';
+import ProfileIcon from '../components/Assets/ProfileIcon';
 
 export interface State {
   user?;
@@ -36,10 +37,13 @@ const IndexPage: NextPage = () => {
   });
 
   return (
-    <Container className={styles.container}>
-      {meUser && <Heading>Hello, {meUser.username}!</Heading>}
-      <SearchBar />
-      <Home />
+    <Container>
+      <ProfileIcon user={meUser} />
+      <Container className={styles.container}>
+        {meUser && <Heading>Hello, {meUser.username}!</Heading>}
+        <SearchBar />
+        <Home />
+      </Container>
     </Container>
   );
 };

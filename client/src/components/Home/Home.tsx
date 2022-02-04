@@ -39,6 +39,7 @@ export default function Home() {
 
 function cStyle() {
   return {
+    marginTop: '10px',
     width: '400px',
     borderRadius: '15px',
     border: '1px solid #E2E8F0',

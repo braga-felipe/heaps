@@ -3,46 +3,45 @@ import ItemList from '../ItemList/ItemList';
 import styles from '../../styles/Home.module.css';
 import { State } from '../../pages/index';
 import { Box, Container, Heading } from '@chakra-ui/react';
-import ProfileIcon from '../Assets/ProfileIcon';
 import { useSelector } from 'react-redux';
 
 export default function Dashboard() {
   const user = useSelector((state: State) => state.user);
   return (
-    <Container className={styles.container}>
-      <Box align='right'>
-        <ProfileIcon user={user} />
+    <Container sx={cStyle()}>
+      <Heading sx={hStyle()}>Current List</Heading>
+      <Box sx={bStyle()}>
+        <ItemList complete={false} buttonName='Chat' path='chatLobby' />
       </Box>
-      <Container>
-        <Heading sx={hStyles()}>Current List</Heading>
-        <Box
-          width='400px'
-          borderRadius='15px'
-          border='1px solid #E2E8F0'
-          alignItems='center'>
-          <ItemList complete={false} buttonName='Chat' path='chatLobby' />
-        </Box>
-        <Heading sx={hStyles()}>Past List</Heading>
-        <Box
-          width='400px'
-          minHeight='80px'
-          borderRadius='15px'
-          border='1px solid #E2E8F0'
-          alignItems='center'>
-          <ItemList complete={true} buttonName='Chat' path='chatLobby' />
-        </Box>
-      </Container>
+      <Heading sx={hStyle()}>Past List</Heading>
+      <Box sx={bStyle()}>
+        <ItemList complete={true} buttonName='Chat' path='chatLobby' />
+      </Box>
     </Container>
   );
 }
-
-function hStyles() {
+function bStyle() {
+  return {
+    width: '400px',
+    height: '300px',
+    overflowY: 'scroll',
+  };
+}
+function hStyle() {
   return {
     width: '129px',
     height: '22px',
-    fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '18px',
-    lineSeight: '22px',
+  };
+}
+
+function cStyle() {
+  return {
+    marginTop: '10px',
+    width: '400px',
+    borderRadius: '15px',
+    border: '1px solid #E2E8F0',
+    alignItems: 'center',
   };
 }
