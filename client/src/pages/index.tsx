@@ -7,7 +7,7 @@ import { useGet_All_ItemsQuery, useMeQuery } from '../generated/graphql';
 import Home from '../components/Home/Home';
 import { useEffect } from 'react';
 import { getInitialUser } from '../redux/actions/user';
-import SearchBar from '../components/SeachBar/SearchBar';
+import Layout from '../components/Navibar/Layout';
 
 export interface State {
   user?;
@@ -38,7 +38,6 @@ const IndexPage: NextPage = () => {
   return (
     <Container className={styles.container}>
       {meUser && <Heading>Hello, {meUser.username}!</Heading>}
-      <SearchBar />
       <Home />
     </Container>
   );
