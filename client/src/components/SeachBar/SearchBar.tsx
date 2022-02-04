@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import Select from "react-select";
-import { AppProps } from "next/app";
-import axios from "axios";
-import { user } from "../../redux/reducers/user";
+import React, { useState } from 'react';
+import Select from 'react-select';
+import { AppProps } from 'next/app';
+import { Container } from '@chakra-ui/react';
+import axios from 'axios';
+import { user } from '../../redux/reducers/user';
 
 interface Props {
   label: string;
@@ -10,15 +11,14 @@ interface Props {
   message: string;
 }
 
-
 export default function SearchBar() {
   const [selectOptions, setSelectedOption] = useState(null);
   const [dataOptions, setDataOptions] = React.useState();
 
   const getDataOptions = () => {
     axios({
-      method: "post",
-      url: "http://localhost:4000/graphql",
+      method: 'post',
+      url: 'http://localhost:4000/graphql',
       data: {
         query: `query {
           getAllItems {
@@ -30,7 +30,7 @@ export default function SearchBar() {
       },
     })
       .then((response) => {
-        console.log("getDataOptions response :", response);
+        console.log('getDataOptions response :', response);
 
         const massagedDataOptions = response.data.data.getAllItems.map(
           (data) => {
@@ -39,12 +39,12 @@ export default function SearchBar() {
                 value: data.name,
                 label: data.name,
                 ownerId: data.ownerId,
-                complete: data.complete
-              }
+                complete: data.complete,
+              };
             }
           }
         );
-        console.log("massaged data", massagedDataOptions);
+        console.log('massaged data', massagedDataOptions);
         // dataOptions(response.data.data);
         setDataOptions(massagedDataOptions);
       })
@@ -56,7 +56,7 @@ export default function SearchBar() {
   getDataOptions();
 
   return (
-    <div className="search-bar">
+    <Container className='search-bar'>
       <Select
         defaultValue={selectOptions}
         onChange={setSelectedOption}
@@ -64,8 +64,8 @@ export default function SearchBar() {
         isMulti
         isSearchable
         placeholder
-        delimiter="value"
+        delimiter='value'
       />
-    </div>
+    </Container>
   );
 }

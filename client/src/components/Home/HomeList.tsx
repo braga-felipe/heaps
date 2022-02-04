@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { State } from '../../pages/index';
-import { Box, Container } from '@chakra-ui/react';
+import { Container, VStack } from '@chakra-ui/react';
 import ItemCard from '../ItemList/ItemCard';
 
 interface ItemProp {
@@ -21,11 +21,18 @@ export default function HomeList({ isGroceries, buttonName, path }) {
   const user = useSelector((state: State) => state.user);
 
   return (
-    <Container margin={'0'} padding={'0'}>
-      {items.filter((item: ItemProp) => item.isGroceries === isGroceries)
-        .map((item: ItemProp, index) =>
-          <ItemCard user={user} item={item} key={index} buttonName={buttonName} path={path} />
-        )}
+    <Container margin={'-6'} padding={'-2'}>
+      {items
+        .filter((item: ItemProp) => item.isGroceries === isGroceries)
+        .map((item: ItemProp, index) => (
+          <ItemCard
+            user={user}
+            item={item}
+            key={index}
+            buttonName={buttonName}
+            path={path}
+          />
+        ))}
     </Container>
   );
 }
