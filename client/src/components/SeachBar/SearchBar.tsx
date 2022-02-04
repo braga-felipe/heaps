@@ -4,6 +4,7 @@ import { AppProps } from "next/app";
 import axios from "axios";
 import { user } from "../../redux/reducers/user";
 import { useGet_All_ItemsQuery } from '../../generated/graphql';
+import ItemList from '../ItemList/ItemList';
 
 interface Props {
   label: string;
@@ -14,10 +15,7 @@ interface Props {
 export default function SearchBar() {
   const [selectOptions, setSelectedOption] = useState(null);
   // const [dataOptions, setDataOptions] = React.useState();
-
-  const [{ error, fetching, data }]= useGet_All_ItemsQuery();
-
-
+  // const [{ error, fetching, data }]= useGet_All_ItemsQuery();
 
   // const getDataOptions = () => {
   //   axios({
@@ -57,30 +55,31 @@ export default function SearchBar() {
   //     });
   // };
 
-  // getDataOptions();
 
-  const massagedOptions = data?.getAllItems.map((data) => {
-    if (data.complete === false) {
-      return {
-        value: data.name,
-        label: data.name,
-        ownerId: data.ownerId,
-        complete: data.complete
-      }
-    }
-  })
+
+  // const massagedOptions = dataOptions.getAllItems.map((data) => {
+  //   if (data.complete === false) {
+  //     return {
+  //       value: data.name,
+  //       label: data.name,
+  //       ownerId: data.ownerId,
+  //       complete: data.complete
+  //     }
+  //   }
+  // })
 
   return (
     <div className="search-bar">
       <Select
         defaultValue={selectOptions}
         onChange={setSelectedOption}
-        options={massagedOptions}
+        options={selectOptions}
         isMulti
         isSearchable
         placeholder
         delimiter="value"
       />
+
     </div>
   );
 }
