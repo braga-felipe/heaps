@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Groceries from './Groceries';
 import Dishes from './Dishes';
 import ItemButton from '../ChakraUiComponents/ButtonItem';
 import SearchBar from '../SeachBar/SearchBar';
+import Grocery from '../Assets/Grocery';
 import {
   Tabs,
   TabList,
@@ -14,13 +15,29 @@ import {
 } from '@chakra-ui/react';
 
 export default function Home() {
+  const [isGroceries, setIsGroceries] = useState(true);
+
   return (
+    // <Container>
     <Container sx={cStyle()}>
+      <Flex sx={{ justifyContent: 'center', alignItems: 'center' }}>
+        <Grocery isGroceries={isGroceries} />
+      </Flex>
+
       {/*  <SearchBar /> */}
-      <Tabs isFitted mt='3px' mb='5px' variant='enclosed'>
+      <Tabs
+        onChange={(index) => setIsGroceries(!isGroceries)}
+        isFitted
+        mt='3px'
+        mb='5px'
+        variant='enclosed'>
         <TabList mb='15px'>
-          <Tab color='secondary'>Groceries</Tab>
-          <Tab color='secondary'>Dishes</Tab>
+          <Tab _selected={{ color: 'primary' }} color='secondary'>
+            Groceries
+          </Tab>
+          <Tab _selected={{ color: 'primary' }} color='secondary'>
+            Dishes
+          </Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -34,6 +51,7 @@ export default function Home() {
       <Flex mb='10px' justify='space-around'>
       </Flex>
     </Container>
+    // </Container>
   );
 }
 
@@ -41,7 +59,7 @@ function cStyle() {
   return {
     width: '375px',
     borderRadius: '15px',
-    border: '1px solid #E2E8F0',
+    // border: '1px solid #E2E8F0',
     alignItems: 'center',
   };
 }

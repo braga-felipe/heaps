@@ -54,11 +54,11 @@ const IndexPage: NextPage = () => {
   });
 
   return (
-    <Container className={styles.container}>
-      {meUser && <Heading>Hello, {meUser.username}!</Heading>}
-      {/* <SearchBar /> */}
-      <Home />
-    </Container>
+    <Container>
+      <Container className={styles.container}>
+        {/* {meUser && <Heading>Hello, {meUser.username}!</Heading>} */}
+        <Home />
+      </Container>
   );
 };
 
