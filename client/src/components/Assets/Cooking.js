@@ -6,8 +6,8 @@ export default function Cooking() {
     loop: true,
     autoplay: true,
     style: {
-      height: '225px',
-      width: '225px',
+      height: '300px',
+      width: '300px',
     },
   };
   const { View } = useLottie(options);
