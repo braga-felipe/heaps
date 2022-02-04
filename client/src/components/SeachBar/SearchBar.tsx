@@ -5,6 +5,8 @@ import axios from "axios";
 import { user } from "../../redux/reducers/user";
 import { useGet_All_ItemsQuery } from '../../generated/graphql';
 import ItemList from '../ItemList/ItemList';
+import { Container } from '@chakra-ui/react';
+
 
 interface Props {
   label: string;
