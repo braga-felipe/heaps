@@ -25,9 +25,11 @@ export default function Navbar() {
             <Image src='/food.png' width='30px' height='30px' />
           </VStack>
         </Link>
-        <VStack>
-          <Image src='/dashboard.png' width='30px' height='30px' />
-        </VStack>
+        <Link href='/dashboard'>
+          <VStack>
+            <Image src='/dashboard.png' width='30px' height='30px' />
+          </VStack>
+        </Link>
         <Link href='/chatLobby'>
           <VStack>
             <Image src='/chat.png' width='30px' height='30px' />
