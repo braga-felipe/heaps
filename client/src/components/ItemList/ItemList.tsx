@@ -21,7 +21,7 @@ export default function ItemList({ /*items,*/ complete, buttonName, path }) {
   const user = useSelector((state: State) => state.user);
   const itemsToView = [];
   return (
-    <Container margin={'2 0 2 0'} padding={'0'}>
+    <Container sx={cStyle()} className='round-container'>
       <Container>
         {items.map((item: ItemProp, index) => {
           // filter items by the complete props and user id
@@ -42,4 +42,11 @@ export default function ItemList({ /*items,*/ complete, buttonName, path }) {
       <Container>{!itemsToView.length && <Empty />}</Container>
     </Container>
   );
+}
+
+function cStyle() {
+  return {
+    width: '335px',
+    alignItems: 'center',
+  };
 }

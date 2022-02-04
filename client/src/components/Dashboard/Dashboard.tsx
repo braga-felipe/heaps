@@ -2,10 +2,10 @@ import React from 'react';
 import Cooking from '../Assets/Cooking';
 import ItemList from '../ItemList/ItemList';
 import { Box, Container, Flex, Heading } from '@chakra-ui/react';
-
+import styles from '../../styles/Home.module.css';
 export default function Dashboard() {
   return (
-    <>
+    <Container className={styles.container}>
       <Flex sx={{ justifyContent: 'center' }}>
         <Cooking />
       </Flex>
@@ -19,13 +19,15 @@ export default function Dashboard() {
           <ItemList complete={true} buttonName='Chat' path='chatLobby' />
         </Box>
       </Container>
-    </>
+    </Container>
   );
 }
 function bStyle() {
   return {
-    width: '400px',
+    width: '330px',
     overflowY: 'scroll',
+    borderRadius: '15px',
+    border: '1px solid #E2E8F0',
   };
 }
 function hStyle() {
@@ -37,13 +39,20 @@ function hStyle() {
     margin: '5px',
   };
 }
-
 function cStyle() {
   return {
-    marginTop: '10px',
-    width: '400px',
+    width: '375px',
     borderRadius: '15px',
     border: '1px solid #E2E8F0',
     alignItems: 'center',
   };
 }
+// function cStyle() {
+//   return {
+//     marginTop: '10px',
+//     width: '400px',
+//     borderRadius: '15px',
+//     border: '1px solid #E2E8F0',
+//     alignItems: 'center',
+//   };
+// }

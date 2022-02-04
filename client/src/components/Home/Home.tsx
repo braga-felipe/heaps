@@ -29,7 +29,7 @@ export default function Home() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Flex mb='10px' justify='space-around'>
+      <Flex mb='2px' justify='space-around'>
         <ItemButton name='Post Dish' pagePath='createItem' />
         <ItemButton name='Dashboard' pagePath='dashboard' />
       </Flex>
@@ -39,8 +39,7 @@ export default function Home() {
 
 function cStyle() {
   return {
-    marginTop: '10px',
-    width: '400px',
+    width: '375px',
     borderRadius: '15px',
     border: '1px solid #E2E8F0',
     alignItems: 'center',
