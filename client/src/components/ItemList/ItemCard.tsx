@@ -30,7 +30,8 @@ function cStyle() {
   return {
     border: '1px solid',
     marginTop: '3px',
-    width: '350px',
+    marginLeft: '-10px',
+    width: '300px',
     background: '#5D55B4',
     borderRadius: ' 10px',
     boxShadow: '3px 3px 10px rgba(116, 65, 0, 0.2)',
@@ -44,5 +45,6 @@ function hStyle() {
     fontWeight: '5000',
     fontSize: '20px',
     lineHeight: '22px',
+    width: '120px',
   };
 }

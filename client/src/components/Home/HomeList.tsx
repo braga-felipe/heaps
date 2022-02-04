@@ -5,6 +5,8 @@ import { Container, VStack } from "@chakra-ui/react";
 import ItemCard from "../ItemList/ItemCard";
 import SearchBar from "../../components/SeachBar/SearchBar";
 
+
+
 interface ItemProp {
   id: number;
   name: string;
@@ -48,7 +50,7 @@ export default function HomeList({ isGroceries, buttonName, path }) {
       setFoundItems(keyword);
     }
   };
-  
+
   return (
     <Container margin={"-6"} padding={"-2"}>
       <SearchBar
