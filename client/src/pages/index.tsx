@@ -27,9 +27,11 @@ const IndexPage: NextPage = () => {
     return data && data.me;
   };
 
+
   const itemList = getItemsList()
 
   const meUser = getMeData();
+
 
 
   useEffect(() => {
