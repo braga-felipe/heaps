@@ -3,8 +3,7 @@ import Select from "react-select";
 import { AppProps } from "next/app";
 import axios from "axios";
 import { user } from "../../redux/reducers/user";
-import { useGet_All_ItemsQuery } from '../../generated/graphql';
-import ItemList from '../ItemList/ItemList';
+import { useGet_All_ItemsQuery } from '../../generated/graphql'
 
 interface Props {
   label: string;
@@ -12,15 +11,15 @@ interface Props {
   message: string;
 }
 
+
 export default function SearchBar() {
   const [selectOptions, setSelectedOption] = useState(null);
-  // const [dataOptions, setDataOptions] = React.useState();
-  // const [{ error, fetching, data }]= useGet_All_ItemsQuery();
+  const [{ error, fetching, data }]= useGet_All_ItemsQuery();
 
   // const getDataOptions = () => {
   //   axios({
   //     method: "post",
-  //     url: "http://localhost:4000/graphql",
+  //     url: "http://localhost:3000",
   //     data: {
   //       query: `query {
   //         getAllItems {
@@ -33,7 +32,6 @@ export default function SearchBar() {
   //   })
   //     .then((response) => {
   //       console.log("getDataOptions response :", response);
-
 
   //       const massagedDataOptions = response.data.data.getAllItems.map(
   //         (data) => {
@@ -56,31 +54,31 @@ export default function SearchBar() {
   //     });
   // };
 
+  // getDataOptions();
 
 
+const massagedOptions = data?.getAllItems.map((data) => {
+            if (data.complete === false) {
+              return {
+                value: data.name,
+                label: data.name,
+                ownerId: data.ownerId,
+                complete: data.complete
+              }
+            }
+          })
 
-  // const massagedOptions = dataOptions.getAllItems.map((data) => {
-  //   if (data.complete === false) {
-  //     return {
-  //       value: data.name,
-  //       label: data.name,
-  //       ownerId: data.ownerId,
-  //       complete: data.complete
-  //     }
-  //   }
-  // })
-
+console.log('massagedData ',massagedOptions);
   return (
-    <Container className='search-bar'>
+    <div className="search-bar">
       <Select
         defaultValue={selectOptions}
         onChange={setSelectedOption}
-        options={selectOptions}
-        isMulti
+        options={massagedOptions}
         isSearchable
         placeholder
-        delimiter='value'
+        delimiter="value"
       />
-    </Container>
+    </div>
   );
 }
