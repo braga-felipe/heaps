@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
 import CheckBox from '../ChakraUiComponents/Checkbox';
@@ -26,8 +27,9 @@ export default function CreateItem(props) {
   const dispatch = useDispatch();
   const [, createFoodItem] = useCreate_ItemMutation();
   const user = useSelector((state: State) => state.user);
+  const router = useRouter();
 
-  useEffect(() => { });
+  useEffect(() => {});
 
   return (
     <Container>
@@ -51,6 +53,7 @@ export default function CreateItem(props) {
             .then((res) => console.log(res))
             .catch((err) => console.log(err.message));
           console.log(res);
+          router.push('/home');
         }}>
         <Form>
           <InputField name='name' />
