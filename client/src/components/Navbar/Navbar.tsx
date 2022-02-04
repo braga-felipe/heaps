@@ -1,24 +1,31 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Heading, HStack, VStack } from '@chakra-ui/react';
+import { Heading, HStack, Container } from '@chakra-ui/react';
 
 export default function Navbar() {
   return (
     <HStack sx={hsStyle()}>
-      <Heading size='md'></Heading>
       <HStack sx={cStyle()}>
         <Link href='/'>
-          <Image src='/home.png' width='25px' height='25px' />
+          <Container>
+            <Image src='/home.png' width='25px' height='25px' />
+          </Container>
         </Link>
         <Link href='/createItem'>
-          <Image src='/food.png' width='30px' height='30px' />
+          <Container>
+            <Image src='/food.png' width='30px' height='30px' />
+          </Container>
         </Link>
         <Link href='/dashboard'>
-          <Image src='/dashboard.png' width='30px' height='30px' />
+          <Container>
+            <Image src='/dashboard.png' width='30px' height='30px' />
+          </Container>
         </Link>
         <Link href='/chatLobby'>
-          <Image src='/chat.png' width='30px' height='30px' />
+          <Container>
+            <Image src='/chat.png' width='30px' height='30px' />
+          </Container>
         </Link>
       </HStack>
     </HStack>

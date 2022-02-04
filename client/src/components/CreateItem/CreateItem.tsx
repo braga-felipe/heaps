@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
+import InputNumber from '../ChakraUiComponents/InputNumber';
 import CheckBox from '../ChakraUiComponents/Checkbox';
 import SubmitButton from '../ChakraUiComponents/Button';
 import {
+  HStack,
   Button,
   Heading,
   FormLabel,
@@ -47,7 +49,7 @@ export default function CreateItem(props) {
   function goToHomePage() {
     router.push('/');
   }
-  useEffect(() => {});
+  useEffect(() => { });
 
   return (
     <Container>
@@ -62,7 +64,7 @@ export default function CreateItem(props) {
           allergies: [],
           diets: [],
         }}
-        onSubmit={async (values: Values) => {
+        onSubmit={async (values: Values, actions) => {
           const res = await createFoodItem({ options: values })
             .then((res) => {
               console.log(res);
@@ -71,32 +73,33 @@ export default function CreateItem(props) {
             .then((res) => console.log(res))
             .catch((err) => console.log(err.message));
           console.log(res);
+          actions.resetForm();
+
           onOpen();
         }}>
         <Form>
           <InputField name='name' />
           <InputField name='description' />
-          <CheckBox
-            name='Is Groceries'
-            group='isGroceries'
-            value='isGroceries'
-          />
-          <FormLabel>Allergies</FormLabel>
-          <CheckboxGroup>
-            <CheckBox name='Gluten Free' group='allergies' value='glutenFree' />
-            <CheckBox
-              name='Lactose Free'
-              group='allergies'
-              value='lactoseFree'
-            />
-            <CheckBox name='Nut Free' group='allergies' value='nutFree' />
-          </CheckboxGroup>
-          <FormLabel>Diets</FormLabel>
-          <CheckboxGroup>
-            <CheckBox name='Vegan' group='diets' value='vegan' />
-            <CheckBox name='Vegetarian' group='diets' value='vegetarian' />
-            <CheckBox name='Pescatarian' group='diets' value='pescatarian' />
-          </CheckboxGroup>
+          <CheckBox name='Is Groceries' group='isGroceries' value='isGroceries' />
+          <HStack>
+            <Container>
+              <FormLabel>Allergies</FormLabel>
+              <CheckboxGroup>
+                <CheckBox name='Gluten Free' group='allergies' value='glutenFree' />
+                <CheckBox name='Lactose Free' group='allergies' value='lactoseFree' />
+                <CheckBox name='Nut Free' group='allergies' value='nutFree' />
+              </CheckboxGroup>
+            </Container>
+            <Container>
+              <FormLabel>Diets</FormLabel>
+              <CheckboxGroup>
+                <CheckBox name='Vegan' group='diets' value='vegan' />
+                <CheckBox name='Vegetarian' group='diets' value='vegetarian' />
+                <CheckBox name='Pescatarian' group='diets' value='pescatarian' />
+              </CheckboxGroup>
+            </Container>
+          </HStack>
+          <InputNumber />
           <SubmitButton props={props} name='Create Dish' />
         </Form>
       </Formik>
