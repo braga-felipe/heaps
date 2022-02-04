@@ -27,26 +27,12 @@ const IndexPage: NextPage = () => {
     return data && data.me;
   };
 
-  const itemList = getItemsList();
-  //   .map(item => {
-  //     return {
-  // SICK_points: item.SICK_points,
-  // allergies: item.allergies,
-  // archive: item.archive,
-  // complete: item.complete,
-  // createdAt: item.createdAt,
-  // description: item.description,
-  // diets: item.diets,
-  // id: item.id,
-  // isGroceries: item.isGroceries,
-  // name: item.name,
-  // owner: item.owner,
-  // ownerId: item.ownerId,
-  // servings: item.servings
-  //     }
-  //   });
+
+  const itemList = getItemsList()
+
   const meUser = getMeData();
-  console.log('itemlist: ', itemList);
+
+
 
   useEffect(() => {
     dispatch(getAllItems(itemList));
@@ -55,7 +41,7 @@ const IndexPage: NextPage = () => {
 
   return (
     <Container className={styles.container}>
-      {/* {meUser && <Heading>Hello, {meUser.username}!</Heading>} */}
+      {meUser && <Heading>Hello, {meUser.username}!</Heading>}
       <Home />
     </Container>
   );
