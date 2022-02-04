@@ -4,10 +4,24 @@ import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
 import CheckBox from '../ChakraUiComponents/Checkbox';
 import SubmitButton from '../ChakraUiComponents/Button';
-import { Heading, FormLabel, CheckboxGroup, Container } from '@chakra-ui/react';
+import {
+  Button,
+  Heading,
+  FormLabel,
+  CheckboxGroup,
+  Container,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { State } from '../../pages/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOneItem } from '../../redux/actions/items';
+import CompletePopUp from '../Assets/CompletePopUp';
 import {
   Allergies,
   Diets,
@@ -28,7 +42,11 @@ export default function CreateItem(props) {
   const [, createFoodItem] = useCreate_ItemMutation();
   const user = useSelector((state: State) => state.user);
   const router = useRouter();
-
+  // hook for modal
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  function goToHomePage() {
+    router.push('/');
+  }
   useEffect(() => {});
 
   return (
@@ -53,7 +71,8 @@ export default function CreateItem(props) {
             .then((res) => console.log(res))
             .catch((err) => console.log(err.message));
           console.log(res);
-          router.push('/home');
+          // router.push('/home');
+          onOpen();
         }}>
         <Form>
           <InputField name='name' />
@@ -82,6 +101,22 @@ export default function CreateItem(props) {
           <SubmitButton props={props} name='Create Dish' />
         </Form>
       </Formik>
+
+      <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Success!</ModalHeader>
+          <ModalBody pb={6}>
+            <CompletePopUp />
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme='blue' onClick={onClose} mr={3}>
+              Back to form
+            </Button>
+            <Button onClick={goToHomePage}>Go to Home Page</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Container>
   );
 }
