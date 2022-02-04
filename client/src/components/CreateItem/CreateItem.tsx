@@ -3,7 +3,11 @@ import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
 import CheckBox from '../ChakraUiComponents/Checkbox';
 import SubmitButton from '../ChakraUiComponents/Button';
-import { Heading, FormLabel, CheckboxGroup, Container } from '@chakra-ui/react';
+import {
+  Heading, FormLabel, CheckboxGroup, Container,
+  HStack, NumberInput, NumberInputField, NumberDecrementStepper,
+  NumberIncrementStepper, NumberInputStepper, FormControl,
+} from '@chakra-ui/react';
 import { State } from '../../pages/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOneItem } from '../../redux/actions/items';
@@ -60,22 +64,34 @@ export default function CreateItem(props) {
             group='isGroceries'
             value='isGroceries'
           />
-          <FormLabel>Allergies</FormLabel>
-          <CheckboxGroup>
-            <CheckBox name='Gluten Free' group='allergies' value='glutenFree' />
-            <CheckBox
-              name='Lactose Free'
-              group='allergies'
-              value='lactoseFree'
-            />
-            <CheckBox name='Nut Free' group='allergies' value='nutFree' />
-          </CheckboxGroup>
-          <FormLabel>Diets</FormLabel>
-          <CheckboxGroup>
-            <CheckBox name='Vegan' group='diets' value='vegan' />
-            <CheckBox name='Vegetarian' group='diets' value='vegetarian' />
-            <CheckBox name='Pescatarian' group='diets' value='pescatarian' />
-          </CheckboxGroup>
+          <HStack>
+            <Container>
+              <FormLabel>Allergies</FormLabel>
+              <CheckboxGroup>
+                <CheckBox name='Gluten Free' group='allergies' value='glutenFree' />
+                <CheckBox name='Lactose Free' group='allergies' value='lactoseFree' />
+                <CheckBox name='Nut Free' group='allergies' value='nutFree' />
+              </CheckboxGroup>
+            </Container>
+            <Container>
+              <FormLabel>Diets</FormLabel>
+              <CheckboxGroup>
+                <CheckBox name='Vegan' group='diets' value='vegan' />
+                <CheckBox name='Vegetarian' group='diets' value='vegetarian' />
+                <CheckBox name='Pescatarian' group='diets' value='pescatarian' />
+              </CheckboxGroup>
+            </Container>
+          </HStack>
+          <FormControl>
+            <FormLabel htmlFor='servings'>Servings</FormLabel>
+            <NumberInput max={50} min={1}>
+              <NumberInputField name='servings' id='servings' value='servings' />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+          </FormControl>
           <SubmitButton props={props} name='Create Dish' />
         </Form>
       </Formik>
