@@ -71,7 +71,6 @@ export default function CreateItem(props) {
             .then((res) => console.log(res))
             .catch((err) => console.log(err.message));
           console.log(res);
-          // router.push('/home');
           onOpen();
         }}>
         <Form>

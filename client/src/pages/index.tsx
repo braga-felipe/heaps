@@ -36,10 +36,9 @@ const IndexPage: NextPage = () => {
   });
 
   return (
-
     <Container>
       <Container className={styles.container}>
-        {meUser && <Heading>Hello, {meUser.username}!</Heading>}
+        {/* {meUser && <Heading>Hello, {meUser.username}!</Heading>} */}
         <Home />
       </Container>
     </Container>
