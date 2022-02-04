@@ -34,6 +34,7 @@ export default function SearchBar() {
   //     .then((response) => {
   //       console.log("getDataOptions response :", response);
 
+
   //       const massagedDataOptions = response.data.data.getAllItems.map(
   //         (data) => {
   //           if (data.complete === false) {
@@ -57,6 +58,7 @@ export default function SearchBar() {
 
 
 
+
   // const massagedOptions = dataOptions.getAllItems.map((data) => {
   //   if (data.complete === false) {
   //     return {
@@ -69,7 +71,7 @@ export default function SearchBar() {
   // })
 
   return (
-    <div className="search-bar">
+    <Container className='search-bar'>
       <Select
         defaultValue={selectOptions}
         onChange={setSelectedOption}
@@ -77,9 +79,8 @@ export default function SearchBar() {
         isMulti
         isSearchable
         placeholder
-        delimiter="value"
+        delimiter='value'
       />
-
-    </div>
+    </Container>
   );
 }

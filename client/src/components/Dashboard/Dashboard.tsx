@@ -1,41 +1,37 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ItemList from '../ItemList/ItemList';
-import { Box, Container, Heading, Text } from '@chakra-ui/react';
-import { getMyItems } from '../../redux/actions/items';
-import { useDispatch } from 'react-redux';
-import { useGetMyItemsQuery } from '../../generated/graphql';
+import styles from '../../styles/Home.module.css';
+import { State } from '../../pages/index';
+import { Box, Container, Heading } from '@chakra-ui/react';
+import ProfileIcon from '../Assets/ProfileIcon';
+import { useSelector } from 'react-redux';
 
 export default function Dashboard() {
-  const dispatch = useDispatch();
-  // fetching user using session id and getting user's item
-  const [{ error, fetching, data }] = useGetMyItemsQuery();
-  const myItems = data?.me.items_owned;
-  // updating state with fetched items
-  useEffect(() => {
-    dispatch(getMyItems(myItems));
-  });
+  const user = useSelector((state: State) => state.user);
   return (
-    <Container align='center'>
-      <Box>
-        <h1>NavBar</h1>
+    <Container className={styles.container}>
+      <Box align='right'>
+        <ProfileIcon user={user} />
       </Box>
-      <Box></Box>
-      {error ? (
-        <Heading>Oops, there's was an error</Heading>
-      ) : fetching ? (
-        <Heading>Fetching your items...</Heading>
-      ) : (
-        <>
-          <Box className='list'>
-            <Heading sx={hStyles()}>Current List</Heading>
-            <ItemList complete={false} />
-          </Box>
-          <Box className='list'>
-            <Heading sx={hStyles()}>Past List</Heading>
-            <ItemList complete={true} />
-          </Box>
-        </>
-      )}
+      <Container>
+        <Heading sx={hStyles()}>Current List</Heading>
+        <Box
+          width='400px'
+          borderRadius='15px'
+          border='1px solid #E2E8F0'
+          alignItems='center'>
+          <ItemList complete={false} buttonName='Chat' path='chatLobby' />
+        </Box>
+        <Heading sx={hStyles()}>Past List</Heading>
+        <Box
+          width='400px'
+          minHeight='80px'
+          borderRadius='15px'
+          border='1px solid #E2E8F0'
+          alignItems='center'>
+          <ItemList complete={true} buttonName='Chat' path='chatLobby' />
+        </Box>
+      </Container>
     </Container>
   );
 }

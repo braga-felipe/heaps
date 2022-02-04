@@ -1,48 +1,22 @@
 import React from 'react';
-import {
-  Box,
-  Container,
-  Text,
-  Flex,
-  VStack,
-  Image,
-  Heading,
-} from '@chakra-ui/react';
+import Icons from './Icons';
+import { Avatar, Box, Container, Flex, Heading } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
+import ProfileIcon from '../Assets/ProfileIcon';
 
-export default function ItemCard({ user, item }) {
+export default function ItemCard({ user, item, buttonName, path }) {
   return (
     <Container sx={cStyle()}>
       <Flex sx={fStyle()}>
         <Heading sx={hStyle()}>{item.name}</Heading>
-        {/* <VStack>
-          {item.diets.map((diet) => (
-            <Text key={diet} fontSize='xs'>
-              {diet}
-            </Text>
-          ))}
-        </VStack> */}
+        <Icons item={item} />
         <Box>
-          <Image
-            sx={iStyle()}
-            src={
-              user.img_url ||
-              'https://ca.slack-edge.com/T0WU5R8NT-U02GWRVJERW-72846fc663f1-512'
-            }
-            alt='profile'
-          />
+          <ProfileIcon user={user} />
         </Box>
       </Flex>
-      <Accordion item={item} />
+      <Accordion item={item} buttonName={buttonName} path={path} />
     </Container>
   );
-}
-
-function iStyle() {
-  return {
-    borderRadius: 'full',
-    boxSize: '80px',
-  };
 }
 
 function fStyle() {
@@ -56,7 +30,7 @@ function cStyle() {
   return {
     border: '1px solid',
     marginTop: '3px',
-    width: '317px',
+    width: '350px',
     background: '#5D55B4',
     borderRadius: ' 10px',
     boxShadow: '3px 3px 10px rgba(116, 65, 0, 0.2)',
@@ -65,6 +39,7 @@ function cStyle() {
 
 function hStyle() {
   return {
+    color: '#FFFFFF',
     fontStyle: 'normal',
     fontWeight: '5000',
     fontSize: '20px',
