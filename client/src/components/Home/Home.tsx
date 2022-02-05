@@ -27,10 +27,9 @@ export default function Home() {
       <Tabs
         onChange={(index) => setIsGroceries(!isGroceries)}
         isFitted
-        mt='3px'
-        mb='5px'
+        mt='0px'
         variant='enclosed'>
-        <TabList mb='15px'>
+        <TabList mb='5px'>
           <Tab _selected={{ color: 'primary' }} color='secondary'>
             Groceries
           </Tab>

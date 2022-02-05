@@ -38,7 +38,17 @@ const IndexPage: NextPage = () => {
 
   return (
     <>
-      {meUser && <Heading>Hello, {meUser.username}!</Heading>}
+      {meUser && (
+        <Heading
+          sx={{
+            position: 'absolute',
+            zIndex: '1',
+            backgroundColor: 'white',
+            width: '100%',
+          }}>
+          Hello, {meUser.username}!
+        </Heading>
+      )}
       <Home />
     </>
   );
