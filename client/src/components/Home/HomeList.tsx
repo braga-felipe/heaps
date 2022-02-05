@@ -85,7 +85,7 @@ export default function HomeList({ isGroceries, buttonName, path }) {
 function cStyle() {
   return {
     marginTop: '80px',
-    width: '335px',
+    width: '310px',
     alignItems: 'center',
     zIndex: '0',
   };
@@ -93,11 +93,12 @@ function cStyle() {
 function searchStyle() {
   return {
     borderRadius: '12px 12px 0 0',
-    width: '327px',
+    width: '342px',
     margin: '0',
     padding: '20px 0px 15px 0',
     position: 'fixed',
     backgroundColor: 'white',
     zIndex: '1',
+    // boxShadow: '3px 3px 10px rgba(116, 65, 0, 0.2)',
   };
 }
