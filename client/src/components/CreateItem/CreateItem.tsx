@@ -49,7 +49,6 @@ export default function CreateItem(props) {
   function goToHomePage() {
     router.push('/');
   }
-  useEffect(() => { });
 
   return (
     <Container>
