@@ -2,7 +2,7 @@ import React from 'react';
 import Cooking from '../Assets/Cooking';
 import ItemList from '../ItemList/ItemList';
 import { Box, Container, Flex, Heading } from '@chakra-ui/react';
-import styles from '../../styles/Home.module.css';
+
 export default function Dashboard() {
   return (
     <Container>

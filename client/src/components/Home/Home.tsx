@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Groceries from './Groceries';
 import Dishes from './Dishes';
-import ItemButton from '../ChakraUiComponents/ButtonItem';
-import SearchBar from '../SeachBar/SearchBar';
+import ItemButton from '../ChakraUiComponents/ButtonItem';;
 import Grocery from '../Assets/Grocery';
 import {
   Tabs,
