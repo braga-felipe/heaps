@@ -11,7 +11,8 @@ import {
 } from "type-graphql";
 import { User } from "../entities/User";
 import * as argon2 from "argon2";
-import { MyContext } from '../types'
+import { MyContext } from '../types';
+import generateRandomImage from '../utils/generateRandomUrl';
 
 
 @InputType()
@@ -114,6 +115,7 @@ export class UserResolver {
       };
     }
     const hashedPassword = await argon2.hash(options.password);
+    const randomURL = generateRandomImage();
     let user;
     try {
       const checkUser = await User.findOne({ email: options.email })
@@ -133,7 +135,7 @@ export class UserResolver {
         email: options.email,
         address: options.address,
         zipCode: options.zipCode,
-        img_url: options.img_url,
+        img_url: randomURL,
       }).save();
     } catch (err) {
       if (err) {
