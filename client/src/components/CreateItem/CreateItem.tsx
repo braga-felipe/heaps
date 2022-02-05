@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import Auth from '../Auth';
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
@@ -51,73 +52,95 @@ export default function CreateItem(props) {
   }
 
   return (
-    <Container>
-      <Heading>Create a Food Item</Heading>
-      <Formik
-        initialValues={{
-          name: '',
-          description: '',
-          servings: 1,
-          ownerId: user.id,
-          isGroceries: false,
-          allergies: [],
-          diets: [],
-        }}
-        onSubmit={async (values: Values, actions) => {
-          const res = await createFoodItem({ options: values })
-            .then((res) => {
-              console.log(res);
-              dispatch(createOneItem(res.data.createItem));
-            })
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err.message));
-          console.log(res);
-          actions.resetForm();
+    <Auth>
+      <Container>
+        <Heading>Create a Food Item</Heading>
+        <Formik
+          initialValues={{
+            name: '',
+            description: '',
+            servings: 1,
+            ownerId: user.id,
+            isGroceries: false,
+            allergies: [],
+            diets: [],
+          }}
+          onSubmit={async (values: Values, actions) => {
+            const res = await createFoodItem({ options: values })
+              .then((res) => {
+                console.log(res);
+                dispatch(createOneItem(res.data.createItem));
+              })
+              .then((res) => console.log(res))
+              .catch((err) => console.log(err.message));
+            console.log(res);
+            actions.resetForm();
 
-          onOpen();
-        }}>
-        <Form>
-          <InputField name='name' />
-          <InputField name='description' />
-          <CheckBox name='Is Groceries' group='isGroceries' value='isGroceries' />
-          <HStack>
-            <Container>
-              <FormLabel>Allergies</FormLabel>
-              <CheckboxGroup>
-                <CheckBox name='Gluten Free' group='allergies' value='glutenFree' />
-                <CheckBox name='Lactose Free' group='allergies' value='lactoseFree' />
-                <CheckBox name='Nut Free' group='allergies' value='nutFree' />
-              </CheckboxGroup>
-            </Container>
-            <Container>
-              <FormLabel>Diets</FormLabel>
-              <CheckboxGroup>
-                <CheckBox name='Vegan' group='diets' value='vegan' />
-                <CheckBox name='Vegetarian' group='diets' value='vegetarian' />
-                <CheckBox name='Pescatarian' group='diets' value='pescatarian' />
-              </CheckboxGroup>
-            </Container>
-          </HStack>
-          <InputNumber />
-          <SubmitButton props={props} name='Create Dish' />
-        </Form>
-      </Formik>
+            onOpen();
+          }}>
+          <Form>
+            <InputField name='name' />
+            <InputField name='description' />
+            <CheckBox
+              name='Is Groceries'
+              group='isGroceries'
+              value='isGroceries'
+            />
+            <HStack>
+              <Container>
+                <FormLabel>Allergies</FormLabel>
+                <CheckboxGroup>
+                  <CheckBox
+                    name='Gluten Free'
+                    group='allergies'
+                    value='glutenFree'
+                  />
+                  <CheckBox
+                    name='Lactose Free'
+                    group='allergies'
+                    value='lactoseFree'
+                  />
+                  <CheckBox name='Nut Free' group='allergies' value='nutFree' />
+                </CheckboxGroup>
+              </Container>
+              <Container>
+                <FormLabel>Diets</FormLabel>
+                <CheckboxGroup>
+                  <CheckBox name='Vegan' group='diets' value='vegan' />
+                  <CheckBox
+                    name='Vegetarian'
+                    group='diets'
+                    value='vegetarian'
+                  />
+                  <CheckBox
+                    name='Pescatarian'
+                    group='diets'
+                    value='pescatarian'
+                  />
+                </CheckboxGroup>
+              </Container>
+            </HStack>
+            <InputNumber />
+            <SubmitButton props={props} name='Create Dish' />
+          </Form>
+        </Formik>
 
-      <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Success!</ModalHeader>
-          <ModalBody pb={6}>
-            <CompletePopUp />
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme='blue' onClick={onClose} mr={3}>
-              Back to form
-            </Button>
-            <Button onClick={goToHomePage}>Go to Home Page</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </Container>
+        <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Success!</ModalHeader>
+            <ModalBody pb={6}>
+              <CompletePopUp />
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme='blue' onClick={onClose} mr={3}>
+                Back to form
+              </Button>
+              <Button onClick={goToHomePage}>Go to Home Page</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Container>
+    </Auth>
   );
 }

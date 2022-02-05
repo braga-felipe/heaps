@@ -6,14 +6,18 @@ import SubmitButton from '../ChakraUiComponents/Button';
 
 import { useUser_LoginMutation } from '../../generated/graphql';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { getInitialUser } from '../../redux/actions/user';
 
 interface User {
   email: string;
   password: string;
 }
 export default function Login() {
-  const [, getUser] = useUser_LoginMutation();
+  const [res, getUser] = useUser_LoginMutation();
+  console.log('LOGIN DATA: ', res.data?.userLogin.user);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   return (
     <Container>
@@ -29,6 +33,7 @@ export default function Login() {
             setErrors({ email: `${res.data.userLogin.errors[0].message}` });
           }
           if (res.data?.userLogin.user) {
+            dispatch(getInitialUser(res.data.userLogin.user));
             router.push('/');
           }
           console.log('values', values);

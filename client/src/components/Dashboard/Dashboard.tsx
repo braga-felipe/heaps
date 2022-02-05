@@ -2,22 +2,25 @@ import React from 'react';
 import Cooking from '../Assets/Cooking';
 import ItemList from '../ItemList/ItemList';
 import { Box, Container, Flex, Heading } from '@chakra-ui/react';
-import styles from '../../styles/Home.module.css';
+
+import Auth from '../Auth';
 export default function Dashboard() {
   return (
-    <Container>
-      <Flex sx={{ justifyContent: 'center' }}>
-        <Cooking />
-      </Flex>
-      <Heading sx={hStyle()}>Current Items</Heading>
-      <Box sx={bStyle()} height='350px'>
-        <ItemList complete={false} buttonName='Chat' path='chatLobby' />
-      </Box>
-      <Heading sx={hStyle()}>Past Items</Heading>
-      <Box sx={bStyle()} height='150px'>
-        <ItemList complete={true} buttonName='Chat' path='chatLobby' />
-      </Box>
-    </Container>
+    <Auth>
+      <Container>
+        <Flex sx={{ justifyContent: 'center' }}>
+          <Cooking />
+        </Flex>
+        <Heading sx={hStyle()}>Current Items</Heading>
+        <Box sx={bStyle()} height='350px'>
+          <ItemList complete={false} buttonName='Chat' path='chatLobby' />
+        </Box>
+        <Heading sx={hStyle()}>Past Items</Heading>
+        <Box sx={bStyle()} height='150px'>
+          <ItemList complete={true} buttonName='Chat' path='chatLobby' />
+        </Box>
+      </Container>
+    </Auth>
   );
 }
 function bStyle() {

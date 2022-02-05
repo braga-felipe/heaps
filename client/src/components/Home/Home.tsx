@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Groceries from './Groceries';
 import Dishes from './Dishes';
-import ItemButton from '../ChakraUiComponents/ButtonItem';
-import SearchBar from '../SeachBar/SearchBar';
+// import { useRouter } from 'next/router';
 import Grocery from '../Assets/Grocery';
 import {
   Tabs,
@@ -15,6 +14,8 @@ import {
 } from '@chakra-ui/react';
 
 export default function Home() {
+  // const router = useRouter();
+  // router.reload();
   const [isGroceries, setIsGroceries] = useState(true);
 
   return (
