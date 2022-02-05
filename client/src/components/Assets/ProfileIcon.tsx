@@ -9,13 +9,20 @@ export default function ProfileIcon({ user }) {
   }
   return (
     <Link onClick={showPageLinked}>
-      <Container margin='2px'>
-        <Avatar
-          backgroundColor='#DFB23F'
-          src={user?.img_url || '/user.png'}
-          alt='profile'
-        />
-      </Container>
+      <Avatar
+        sx={style()}
+        backgroundColor='#DFB23F'
+        src={user?.img_url}
+        alt='profile'
+      />
     </Link>
   );
+}
+
+function style() {
+  return {
+    margin: '5px 0 0 0',
+    height: '35px',
+    width: '35px',
+  };
 }

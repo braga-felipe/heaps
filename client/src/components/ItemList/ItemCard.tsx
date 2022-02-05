@@ -1,33 +1,98 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import Icons from './Icons';
-import { Avatar, Box, Container, Flex, Heading } from '@chakra-ui/react';
+import SickPointIcon from '../Assets/SickPointsIcon';
+import { Container, Flex, Heading, VStack } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
 import ProfileIcon from '../Assets/ProfileIcon';
+import SickPointsIcon from '../Assets/SickPointsIcon';
 
 export default function ItemCard({ user, item, buttonName, path }) {
+  const router = useRouter();
+  const url = router.route;
+  const counter = item.servings;
+  console.log(item);
   return (
     <Container sx={cStyle(user, item)}>
       <Flex sx={fStyle()}>
-        <Heading sx={hStyle()}>{item.name}</Heading>
+        <VStack sx={vsStyle()}>
+          <Heading sx={hStyle()}>{item.name}</Heading>
+          <Heading sx={h2Style()}>ZIP Code:{item.owner.zipCode}</Heading>
+        </VStack>
+        <Flex sx={f2Style()}>
+          {isOwner(user, item) && url === '/dashboard' ? (
+            <>
+              {/* <button>+</button>
+              <button>-</button> */}
+            </>
+          ) : (
+            <Container sx={spacer()}> </Container>
+          )}
+          <Heading sx={hp2Style()}>portions:</Heading>
+          <Heading sx={h3Style()}>
+            {counter}/{item.servings}
+          </Heading>
+        </Flex>
         <Icons item={item} />
-        <Box>
+        <VStack>
           <ProfileIcon user={user} />
-        </Box>
+          <SickPointsIcon item={item} />
+        </VStack>
       </Flex>
       <Accordion item={item} buttonName={buttonName} path={path} />
     </Container>
   );
 }
 
+function isOwner(user, item) {
+  return item.owner.email === user.email ? true : false;
+}
+
 function fStyle() {
   return {
     justifyContent: 'space-between',
+    alignItems: 'end',
+  };
+}
+
+function vsStyle() {
+  return {
+    marginLeft: '0px',
+    width: '100px',
     alignItems: 'center',
   };
 }
 
+function hStyle() {
+  return {
+    color: '#FFFFFF',
+    fontStyle: 'normal',
+    fontWeight: '500',
+    fontSize: '130%',
+    width: '100px',
+    // textAlign: 'left',
+  };
+}
+
+function h2Style() {
+  return {
+    color: '#FFFFFF',
+    fontStyle: 'normal',
+    fontWeight: '300',
+    fontSize: '10px',
+    width: '100px',
+    // textAlign: 'left',
+  };
+}
+
+function f2Style() {
+  return {
+    flexDirection: 'column',
+  };
+}
+
 function cStyle(user, item) {
-  const background = item.owner.email === user.email ? 'primary' : 'secondary';
+  const background = isOwner(user, item) ? 'primary' : 'secondary';
   return {
     border: '1px solid',
     marginTop: '3px',
@@ -39,14 +104,28 @@ function cStyle(user, item) {
   };
 }
 
-function hStyle() {
+function hp2Style() {
   return {
     color: '#FFFFFF',
     fontStyle: 'normal',
     fontWeight: '5000',
-    fontSize: '20px',
-    lineHeight: '22px',
-    width: '120px',
+    fontSize: '10px',
+    width: '45px',
     textAlign: 'left',
+  };
+}
+function h3Style() {
+  return {
+    color: '#FFFFFF',
+    fontStyle: 'normal',
+    fontWeight: '5000',
+    fontSize: '15px',
+    width: '45px',
+    textAlign: 'right',
+  };
+}
+function spacer() {
+  return {
+    height: '50px',
   };
 }
