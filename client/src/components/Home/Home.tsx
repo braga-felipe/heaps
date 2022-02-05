@@ -26,10 +26,9 @@ export default function Home() {
       <Tabs
         onChange={(index) => setIsGroceries(!isGroceries)}
         isFitted
-        mt='3px'
-        mb='5px'
+        mt='0px'
         variant='enclosed'>
-        <TabList mb='15px'>
+        <TabList mb='5px'>
           <Tab _selected={{ color: 'primary' }} color='secondary'>
             Groceries
           </Tab>
@@ -46,17 +45,18 @@ export default function Home() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Flex mb='10px' justify='space-around'>
-      </Flex>
+      <Flex mb='10px' justify='space-around'></Flex>
     </Container>
   );
 }
 
 function cStyle() {
   return {
+    margin: '0',
+    padding: '0',
     width: '375px',
-    borderRadius: '15px',
-    // border: '1px solid #E2E8F0',
+    borderRadius: '0px',
+    border: '1px solid #E2E8F0',
     alignItems: 'center',
   };
 }

@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
-import styles from '../styles/Home.module.css';
-import { Container, Heading } from '@chakra-ui/react';
-import { useSelector, useDispatch } from 'react-redux';
+import { Heading } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
 import { getAllItems } from '../redux/actions/items';
 import { useGet_All_ItemsQuery, useMeQuery } from '../generated/graphql';
 import Home from '../components/Home/Home';
@@ -27,12 +26,9 @@ const IndexPage: NextPage = () => {
     return data && data.me;
   };
 
-
-  const itemList = getItemsList()
+  const itemList = getItemsList();
 
   const meUser = getMeData();
-
-
 
   useEffect(() => {
     dispatch(getAllItems(itemList));
@@ -40,16 +36,30 @@ const IndexPage: NextPage = () => {
   });
 
   return (
-    <Container className={styles.container}>
-      {meUser && <Heading size='xs'>Hello, {meUser.username}!</Heading>}
+    <>
+      {meUser && (<Heading sx={HcStyle()}>Hello, {meUser.username}!</Heading>)}
       <Heading sx={HStyle()}>Heaps</Heading>
       <Home />
-    </Container>
+    </>
   );
 };
 function HStyle() {
   return {
     fontFamily: 'Lobster',
+    fontSize: '4xl',
+    zIndex: '1',
   };
 }
+
+function HcStyle() {
+  return {
+    position: 'fixed',
+    left: '270px',
+    fontSize: 'xs',
+    zIndex: '1',
+    backgroundColor: 'white',
+    width: '100%',
+  };
+}
+
 export default IndexPage;

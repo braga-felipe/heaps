@@ -27,6 +27,11 @@ export default function Navbar() {
             <Image src='/chat.png' width='30px' height='30px' />
           </Container>
         </Link>
+        <Link href='/login'>
+          <Container>
+            <Image src='/logout.png' width='30px' height='30px' />
+          </Container>
+        </Link>
       </HStack>
     </HStack>
   );
