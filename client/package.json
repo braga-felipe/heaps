@@ -16,6 +16,7 @@
     "@chakra-ui/react": "^1.8.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@fontsource/lobster": "^4.5.1",
     "@graphql-codegen/cli": "^2.4.0",
     "@graphql-codegen/typescript-urql": "^3.4.2",
     "axios": "^0.25.0",

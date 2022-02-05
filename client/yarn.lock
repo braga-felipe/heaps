@@ -1266,6 +1266,11 @@
     "ts-node" "^9"
     "tslib" "^2"
 
+"@fontsource/lobster@^4.5.1":
+  "integrity" "sha512-pg5MUPxfoncGKS4yzmwdX3codC+zaS1AsF1zCoGe1/5fr/RnwsLSjBvX0ozstnzFFebJBx8q48RGaS6opoTxmA=="
+  "resolved" "https://registry.npmjs.org/@fontsource/lobster/-/lobster-4.5.1.tgz"
+  "version" "4.5.1"
+
 "@graphql-codegen/cli@2.4.0":
   "integrity" "sha512-4iiHH2AxBE17lX5cFdFg6+kh7I6uKQLYG0IZRalRbW/grKL7kuVp/RDUjmVB2GNJTJEhjxYLMJFJZocUmAUBlw=="
   "resolved" "https://registry.npmjs.org/@graphql-codegen/cli/-/cli-2.4.0.tgz"
