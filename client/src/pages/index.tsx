@@ -27,12 +27,9 @@ const IndexPage: NextPage = () => {
     return data && data.me;
   };
 
-
-  const itemList = getItemsList()
+  const itemList = getItemsList();
 
   const meUser = getMeData();
-
-
 
   useEffect(() => {
     dispatch(getAllItems(itemList));
@@ -40,10 +37,10 @@ const IndexPage: NextPage = () => {
   });
 
   return (
-    <Container className={styles.container}>
+    <>
       {meUser && <Heading>Hello, {meUser.username}!</Heading>}
       <Home />
-    </Container>
+    </>
   );
 };
 

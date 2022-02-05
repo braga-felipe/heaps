@@ -12,7 +12,8 @@ export default function Groceries() {
 
 function bStyle() {
   return {
-    width: '330px',
+    width: '345px',
+    marginLeft: '-2px',
     minHeight: '80px',
     maxHeight: '500px',
     overflowY: 'scroll',
