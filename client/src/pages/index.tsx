@@ -45,9 +45,10 @@ const IndexPage: NextPage = () => {
 };
 function HStyle() {
   return {
+    position: 'fixed',
     fontFamily: 'Lobster',
-    fontSize: '4xl',
-    zIndex: '1',
+    fontSize: '3xl',
+    margin: '2%'
   };
 }
 
