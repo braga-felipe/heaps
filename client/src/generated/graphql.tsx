@@ -223,12 +223,26 @@ export type UserResponse = {
   user?: Maybe<User>;
 };
 
+export type AcceptItemClaimMutationVariables = Exact<{
+  options: ItemTakeInput;
+}>;
+
+
+export type AcceptItemClaimMutation = { __typename?: 'Mutation', takeItem: { __typename?: 'Item', id: number } };
+
 export type Create_ItemMutationVariables = Exact<{
   options: ItemCreateInput;
 }>;
 
 
 export type Create_ItemMutation = { __typename?: 'Mutation', createItem: { __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, createdAt: string, updatedAt: string } };
+
+export type CreateMessageMutationVariables = Exact<{
+  options: MessageCreateInput;
+}>;
+
+
+export type CreateMessageMutation = { __typename?: 'Mutation', createMessage: { __typename?: 'Message', id: number, text: string, authorId: number, isRead: boolean, createdAt: string } };
 
 export type Create_UserMutationVariables = Exact<{
   options: CreateUserInput;
@@ -266,6 +280,13 @@ export type Get_All_UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type Get_All_UsersQuery = { __typename?: 'Query', getAllUsers: Array<{ __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, createdAt: string, updatedAt: string, items_owned?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number }> | null | undefined, items_taken?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number }> | null | undefined }> };
 
+export type GetChatMessagesQueryVariables = Exact<{
+  getChatId: Scalars['Int'];
+}>;
+
+
+export type GetChatMessagesQuery = { __typename?: 'Query', getChat?: { __typename?: 'Chat', id: number, userOwnerId: number, item: { __typename?: 'Item', name: string, id: number }, users: Array<{ __typename?: 'User', id: number, username: string, img_url?: string | null | undefined }>, messages?: Array<{ __typename?: 'Message', id: number, text: string, authorId: number, isRead: boolean, createdAt: string }> | null | undefined } | null | undefined };
+
 export type Get_ItemQueryVariables = Exact<{
   getItemId: Scalars['Int'];
 }>;
@@ -296,6 +317,17 @@ export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, img_url?: string | null | undefined, createdAt: string, updatedAt: string, items_owned?: Array<{ __typename?: 'Item', id: number }> | null | undefined, items_taken?: Array<{ __typename?: 'Item', id: number }> | null | undefined, chats?: Array<{ __typename?: 'Chat', id: number }> | null | undefined } | null | undefined };
 
 
+export const AcceptItemClaimDocument = gql`
+    mutation AcceptItemClaim($options: ItemTakeInput!) {
+  takeItem(options: $options) {
+    id
+  }
+}
+    `;
+
+export function useAcceptItemClaimMutation() {
+  return Urql.useMutation<AcceptItemClaimMutation, AcceptItemClaimMutationVariables>(AcceptItemClaimDocument);
+};
 export const Create_ItemDocument = gql`
     mutation CREATE_ITEM($options: ItemCreateInput!) {
   createItem(options: $options) {
@@ -317,6 +349,21 @@ export const Create_ItemDocument = gql`
 
 export function useCreate_ItemMutation() {
   return Urql.useMutation<Create_ItemMutation, Create_ItemMutationVariables>(Create_ItemDocument);
+};
+export const CreateMessageDocument = gql`
+    mutation CreateMessage($options: MessageCreateInput!) {
+  createMessage(options: $options) {
+    id
+    text
+    authorId
+    isRead
+    createdAt
+  }
+}
+    `;
+
+export function useCreateMessageMutation() {
+  return Urql.useMutation<CreateMessageMutation, CreateMessageMutationVariables>(CreateMessageDocument);
 };
 export const Create_UserDocument = gql`
     mutation CREATE_USER($options: CreateUserInput!) {
@@ -463,6 +510,34 @@ export const Get_All_UsersDocument = gql`
 
 export function useGet_All_UsersQuery(options: Omit<Urql.UseQueryArgs<Get_All_UsersQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<Get_All_UsersQuery>({ query: Get_All_UsersDocument, ...options });
+};
+export const GetChatMessagesDocument = gql`
+    query getChatMessages($getChatId: Int!) {
+  getChat(id: $getChatId) {
+    id
+    userOwnerId
+    item {
+      name
+      id
+    }
+    users {
+      id
+      username
+      img_url
+    }
+    messages {
+      id
+      text
+      authorId
+      isRead
+      createdAt
+    }
+  }
+}
+    `;
+
+export function useGetChatMessagesQuery(options: Omit<Urql.UseQueryArgs<GetChatMessagesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetChatMessagesQuery>({ query: GetChatMessagesDocument, ...options });
 };
 export const Get_ItemDocument = gql`
     query GET_ITEM($getItemId: Int!) {

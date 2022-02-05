@@ -15,19 +15,12 @@ interface chatLobbyItemProps {
     chatId: number
 }
 
-export const ChatLobbyItem: React.FC<chatLobbyItemProps> = ({itemName, userName, img_url, lastMessageTime}) => {
+export const ChatLobbyItem: React.FC<chatLobbyItemProps> = ({itemName, img_url}) => {
     
     return (
     <Container sx={cStyle()}>
       <Flex sx={fStyle()}>
         <Heading sx={hStyle()}>{itemName}</Heading>
-        {/* <VStack>
-          {item.diets.map((diet) => (
-            <Text key={diet} fontSize='xs'>
-              {diet}
-            </Text>
-          ))}
-        </VStack> */}
         <Box>
           <Image
             sx={iStyle()}
