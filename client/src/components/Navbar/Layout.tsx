@@ -11,11 +11,13 @@ export default function Layout(props) {
   );
   function cStyle() {
     return {
-      justifyContent: 'space-between',
+      justifyContent: 'space-evenly',
       alignItems: 'center',
       position: 'fixed',
       bottom: '0',
       width: '100%',
+      paddingLeft: '0',
+      paddingRight: '0',
     };
   }
 }
