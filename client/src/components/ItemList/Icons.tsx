@@ -25,14 +25,14 @@ export default function Icons({ item }) {
   return (
     <Flex sx={fStyle()}>
       <VStack>
-        <Image src={nut} alt='nut' width='15px' height='15px' />
-        <Image src={lactose} alt='lactose' width='15px' height='15px' />
-        <Image src={gluten} alt='gluten' width='15px' height='15px' />
+        <Image src={nut} alt='nut' width='18px' height='18px' />
+        <Image src={lactose} alt='lactose' width='18px' height='18px' />
+        <Image src={gluten} alt='gluten' width='18px' height='18px' />
       </VStack>
       <VStack>
-        <Image src={vegan} alt='vegan' width='15px' height='15px' />
-        <Image src={vegetarian} alt='vegetarian' width='15px' height='15px' />
-        <Image src={pescatarian} alt='gluten' width='15px' height='15px' />
+        <Image src={vegan} alt='vegan' width='18px' height='18px' />
+        <Image src={vegetarian} alt='vegetarian' width='18px' height='18px' />
+        <Image src={pescatarian} alt='gluten' width='18px' height='18px' />
       </VStack>
     </Flex>
   );
@@ -40,7 +40,8 @@ export default function Icons({ item }) {
 
 function fStyle() {
   return {
-    borderRadius: '2px',
-    padding: '3px',
+    width: '45px',
+    height: '60px',
+    justifyContent: 'center',
   };
 }
