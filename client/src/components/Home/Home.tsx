@@ -23,7 +23,6 @@ export default function Home() {
         <Grocery isGroceries={isGroceries} />
       </Flex>
 
-      {/*  <SearchBar /> */}
       <Tabs
         onChange={(index) => setIsGroceries(!isGroceries)}
         isFitted

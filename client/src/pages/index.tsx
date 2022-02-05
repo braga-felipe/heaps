@@ -7,7 +7,7 @@ import { useGet_All_ItemsQuery, useMeQuery } from '../generated/graphql';
 import Home from '../components/Home/Home';
 import { useEffect } from 'react';
 import { getInitialUser } from '../redux/actions/user';
-import SearchBar from '../components/SeachBar/SearchBar';
+import '@fontsource/lobster';
 
 export interface State {
   user?;
@@ -41,10 +41,15 @@ const IndexPage: NextPage = () => {
 
   return (
     <Container className={styles.container}>
-      {meUser && <Heading>Hello, {meUser.username}!</Heading>}
+      {meUser && <Heading size='xs'>Hello, {meUser.username}!</Heading>}
+      <Heading sx={HStyle()}>Heaps</Heading>
       <Home />
     </Container>
   );
 };
-
+function HStyle() {
+  return {
+    fontFamily: 'Lobster',
+  };
+}
 export default IndexPage;
