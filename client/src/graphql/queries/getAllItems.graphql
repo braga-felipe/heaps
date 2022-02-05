@@ -18,6 +18,13 @@ query GET_ALL_ITEMS {
       zipCode
       SICK_points
     }
+    takers {
+      username
+      email
+      address
+      zipCode
+      SICK_points
+    }
     createdAt
     updatedAt
   }

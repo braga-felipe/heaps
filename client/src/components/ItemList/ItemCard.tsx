@@ -6,7 +6,7 @@ import ProfileIcon from '../Assets/ProfileIcon';
 
 export default function ItemCard({ user, item, buttonName, path }) {
   return (
-    <Container sx={cStyle()}>
+    <Container sx={cStyle(user, item)}>
       <Flex sx={fStyle()}>
         <Heading sx={hStyle()}>{item.name}</Heading>
         <Icons item={item} />
@@ -26,13 +26,14 @@ function fStyle() {
   };
 }
 
-function cStyle() {
+function cStyle(user, item) {
+  const background = item.owner.email === user.email ? 'primary' : 'secondary';
   return {
     border: '1px solid',
     marginTop: '3px',
     marginLeft: '-10px',
     width: '300px',
-    background: '#5D55B4',
+    background: background,
     borderRadius: ' 10px',
     boxShadow: '3px 3px 10px rgba(116, 65, 0, 0.2)',
   };
@@ -46,5 +47,6 @@ function hStyle() {
     fontSize: '20px',
     lineHeight: '22px',
     width: '120px',
+    textAlign: 'left',
   };
 }
