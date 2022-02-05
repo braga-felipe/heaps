@@ -16,7 +16,9 @@ export default function ItemCard({ user, item, buttonName, path }) {
     <Container sx={cStyle(user, item)}>
       <Flex sx={fStyle()}>
         <VStack sx={vsStyle()}>
-          <Heading sx={hStyle()}>{item.name}</Heading>
+          <Heading isTruncated sx={hStyle()}>
+            {item.name}
+          </Heading>
           <Heading sx={h2Style()}>ZIP Code:{item.owner.zipCode}</Heading>
         </VStack>
         <Flex sx={f2Style()}>
@@ -68,9 +70,9 @@ function hStyle() {
     color: '#FFFFFF',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: '130%',
+    fontSize: '100%',
     width: '100px',
-    // textAlign: 'left',
+    textAlign: 'left',
   };
 }
 
