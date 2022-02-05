@@ -4,6 +4,7 @@ import {
   AccordionPanel,
   Text,
   Box,
+  Heading,
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 import ItemCardButton from '../ButtonItemCard';
@@ -24,11 +25,25 @@ export function AccordionItemComponent({ item, buttonName, path }) {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <Text color='white'>{item.description}</Text>
+            <Heading isTruncated sx={hStyle()}>
+              {item.name}:
+            </Heading>
+            <Text color='white' align='left'>
+              {item.description}
+            </Text>
             <ItemCardButton buttonName={buttonName} path={path} />
           </AccordionPanel>
         </>
       )}
     </AccordionItem>
   );
+}
+function hStyle() {
+  return {
+    color: '#FFFFFF',
+    fontStyle: 'normal',
+    fontWeight: '800',
+    fontSize: '100%',
+    textAlign: 'left',
+  };
 }
