@@ -8,6 +8,8 @@ const customTheme = extendTheme({
     secondary: '#DEC073',
   },
   fonts: {
+    heading: 'Sora',
+    body: 'Roboto',
   },
   fontWeight: {},
 });

@@ -48,7 +48,8 @@ function HStyle() {
     position: 'fixed',
     fontFamily: 'Lobster',
     fontSize: '3xl',
-    margin: '2%'
+    margin: '2%',
+    color: '#5D55B4;'
   };
 }
 
