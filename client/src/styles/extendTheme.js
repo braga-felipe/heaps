@@ -7,7 +7,8 @@ const customTheme = extendTheme({
     primary: '#7A75B5',
     secondary: '#DEC073',
   },
-  fonts: {},
+  fonts: {
+  },
   fontWeight: {},
 });
 
