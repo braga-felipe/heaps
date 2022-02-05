@@ -1266,10 +1266,35 @@
     "ts-node" "^9"
     "tslib" "^2"
 
+"@fontsource/andada-pro@^4.5.5":
+  "integrity" "sha512-lmlHMGFIuGoJweK2tx6nrg11BhPuRTonEBthVma3L4jfnt1ZZjtGie9fHYb9FPPkNQ9HZp3VFmbICBqHIPDu6A=="
+  "resolved" "https://registry.npmjs.org/@fontsource/andada-pro/-/andada-pro-4.5.5.tgz"
+  "version" "4.5.5"
+
+"@fontsource/encode-sans@^4.5.1":
+  "integrity" "sha512-ulqUy8uUbMPyasJH3KK4uSICvumQGmuXX5rJGMEwA6beeteXrSRoUCBFjd3ZwpxfKANl2q0QIduhzG3OjbQDwA=="
+  "resolved" "https://registry.npmjs.org/@fontsource/encode-sans/-/encode-sans-4.5.1.tgz"
+  "version" "4.5.1"
+
+"@fontsource/hahmlet@^4.5.6":
+  "integrity" "sha512-8cx+wca9kpMPpZl3RB3uPPcxqqWESINE6yc9JPRd8prDGx85SG5D7cpG0iBNp88ut1YogUfAr8s5naWgFMqn1w=="
+  "resolved" "https://registry.npmjs.org/@fontsource/hahmlet/-/hahmlet-4.5.6.tgz"
+  "version" "4.5.6"
+
 "@fontsource/lobster@^4.5.1":
   "integrity" "sha512-pg5MUPxfoncGKS4yzmwdX3codC+zaS1AsF1zCoGe1/5fr/RnwsLSjBvX0ozstnzFFebJBx8q48RGaS6opoTxmA=="
   "resolved" "https://registry.npmjs.org/@fontsource/lobster/-/lobster-4.5.1.tgz"
   "version" "4.5.1"
+
+"@fontsource/roboto@^4.5.3":
+  "integrity" "sha512-NUvBTj332dFRdiVkLlavXbDGoD2zyyeGYmMyrXOnctg/3e4pq95+rJgNfUP+k4v8UBk2L1aomGw9dDjbRdAmTg=="
+  "resolved" "https://registry.npmjs.org/@fontsource/roboto/-/roboto-4.5.3.tgz"
+  "version" "4.5.3"
+
+"@fontsource/sora@^4.5.2":
+  "integrity" "sha512-KD7WpqNvnviMyfBsQKEWsKtMve/uP4Hpq/rxfvOWggURMEEGSTciDarEwxs9HIbj/C7u4mCKjFQSFYLteG2+xQ=="
+  "resolved" "https://registry.npmjs.org/@fontsource/sora/-/sora-4.5.2.tgz"
+  "version" "4.5.2"
 
 "@graphql-codegen/cli@2.4.0":
   "integrity" "sha512-4iiHH2AxBE17lX5cFdFg6+kh7I6uKQLYG0IZRalRbW/grKL7kuVp/RDUjmVB2GNJTJEhjxYLMJFJZocUmAUBlw=="

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
@@ -29,6 +29,7 @@ import {
   Diets,
   useCreate_ItemMutation,
 } from '../../generated/graphql';
+
 interface Values {
   name: string;
   description: string;
