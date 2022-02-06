@@ -5,6 +5,7 @@ import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
 import InputNumber from '../ChakraUiComponents/InputNumber';
 import CheckBox from '../ChakraUiComponents/Checkbox';
+import CreateCooking from '../Assets/CreateCooking';
 import SubmitButton from '../ChakraUiComponents/Button';
 import {
   HStack,
@@ -55,6 +56,7 @@ export default function CreateItem(props) {
   return (
     <Auth>
       <Container>
+        <CreateCooking />
         <Heading>Create a Food Item</Heading>
         <Formik
           initialValues={{

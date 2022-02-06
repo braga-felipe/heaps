@@ -20,10 +20,7 @@ export default function Home() {
 
   return (
     <Container sx={cStyle()}>
-      <Flex sx={{ justifyContent: 'center', alignItems: 'center' }}>
-        <Grocery isGroceries={isGroceries} />
-      </Flex>
-
+      <Grocery isGroceries={isGroceries} />
       <Tabs
         onChange={(index) => setIsGroceries(!isGroceries)}
         isFitted
