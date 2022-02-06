@@ -7,7 +7,7 @@ import { useUser_LoginMutation } from '../../generated/graphql';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { getInitialUser } from '../../redux/actions/user';
-
+import MysticPan from '../Assets/mysticPan';
 interface User {
   email: string;
   password: string;
@@ -21,6 +21,7 @@ export default function Login() {
   return (
     <Container>
       <Heading>Log In</Heading>
+      <MysticPan />
       <Formik
         initialValues={{
           email: '',
