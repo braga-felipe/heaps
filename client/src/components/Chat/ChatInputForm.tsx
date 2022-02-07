@@ -37,12 +37,19 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
     <>
       <Box className='inputContainer' display='flex' flex-direction='row'>
         <Input
+          margin='3px 3px 3px 3px'
           name='chatInput'
           placeholder='Type your message here'
           onChange={handleChange}
         />
-        <Button name='Send' type='submit' onClick={() => handleSend(message)}>
-          Send Message
+        <Button
+          background='primaryActive'
+          color='white'
+          margin='3px 3px 6px 3px'
+          name='Send'
+          type='submit'
+          onClick={() => handleSend(message)}>
+          Send
         </Button>
       </Box>
     </>
