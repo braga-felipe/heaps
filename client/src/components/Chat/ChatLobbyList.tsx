@@ -8,14 +8,17 @@ import ChatLobbyItem from './chatLobbyItem';
 import { MessagesContainer } from './MessagesContainer';
 interface chatLobbyListProps {
   chats?;
+  bool,
+  tid
 }
 
-export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats }) => {
+export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats, bool, tid }) => {
   const [res, refreshLobby] = useGetMyChatsQuery();
   const { data, error, fetching } = res;
 
-  const [isMessage, setIsMessage] = useState(false);
-  const [targetId, setTargetId] = useState(0);
+  const [isMessage, setIsMessage] = useState(bool ? bool : false);
+  const [targetId, setTargetId] = useState(tid ? tid : 0);
+
 
   const user = useSelector((state: State) => state.user);
   console.log('CHATLOBBY USER', { user });

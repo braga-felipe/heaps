@@ -1,13 +1,19 @@
 import React from 'react';
 import ChatLobbyList from '../components/Chat/ChatLobbyList';
-interface chatLobbyProps {}
+import { useRouter } from 'next/router';
+
+interface chatLobbyProps {
+
+}
 
 export const chatLobby: React.FC<chatLobbyProps> = ({}) => {
-  return (
-    <>
-      <ChatLobbyList></ChatLobbyList>
-    </>
-  );
-};
+  const router = useRouter();
+  const { bool, tid } = router.query;
+    return (
+      <>
+      <ChatLobbyList tid={tid} bool={bool}></ChatLobbyList>
+      </>
+    );
+}
 
 export default chatLobby;

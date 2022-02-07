@@ -8,7 +8,7 @@ export default function ItemCardButton({ buttonName, path }) {
   const user = useSelector((state: State) => state.user);
   function showPageLinked() {
     return Object.keys(user).length
-      ? router.push('/' + `${path}`)
+      ? router.push('/' + 'chatLobby/?tid=1&bool=false')
       : router.push('/login');
   }
   return (
