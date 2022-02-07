@@ -6,28 +6,29 @@ import { useCreateMessageMutation } from '../../generated/graphql';
 import { ChatInputForm } from '../../components/Chat/ChatInputForm';
 import { useMeQuery } from '../../generated/graphql';
 import { MessagesContainer } from '../../components/Chat/MessagesContainer';
+import { State } from '..';
+import { useSelector } from 'react-redux';
 
-export default function Messages() {
+export default function MessagesPage() {
   const router = useRouter();
-  const [meResult , updateMe] = useMeQuery();
- 
+  const [meResult, updateMe] = useMeQuery();
+
   if (!meResult.data) {
-    return (<h1>Authenticating</h1>)
+    return <h1>Authenticating</h1>;
   }
   const myID = meResult.data.me.id;
 
   const { id } = router.query;
   if (!id) {
-    return (<h1> loading </h1>);
-  } 
-  const variables= {
-    getChatId: Array.isArray(id) ? parseInt(id[0]) : parseInt(id)
+    return <h1> loading </h1>;
   }
+  const variables = {
+    getChatId: Array.isArray(id) ? parseInt(id[0]) : parseInt(id),
+  };
   //URQL Hooks
-  return(
+  return (
     <>
       <MessagesContainer variables={variables} myID={myID}></MessagesContainer>
     </>
   );
 }
-
