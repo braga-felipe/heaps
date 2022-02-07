@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Icons from './Icons';
-import SickPointIcon from '../Assets/SickPointsIcon';
+import Avatar from '../Assets/Avatar';
 import { Container, Flex, Heading, VStack } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
 import ProfileIcon from '../Assets/ProfileIcon';
@@ -19,7 +19,7 @@ export default function ItemCard({ user, item, buttonName, path }) {
           <Heading isTruncated sx={hStyle()}>
             {item.name}
           </Heading>
-          <Heading sx={h2Style()}>ZIP Code:{item.owner.zipCode}</Heading>
+          <Heading sx={h2Style()}>ZIP Code:{item.owner?.zipCode}</Heading>
         </VStack>
         <Flex sx={f2Style()}>
           {isOwner(user, item) && url === '/dashboard' ? (
@@ -37,17 +37,23 @@ export default function ItemCard({ user, item, buttonName, path }) {
         </Flex>
         <Icons item={item} />
         <VStack>
-          <ProfileIcon user={user} />
+          {/* <ProfileIcon user={user} /> */}
+          <Avatar />
           <SickPointsIcon item={item} />
         </VStack>
       </Flex>
-      <Accordion item={item} buttonName={buttonName} path={path} />
+      <Accordion
+        item={item}
+        buttonName={buttonName}
+        counter={counter}
+        path={path}
+      />
     </Container>
   );
 }
 
 function isOwner(user, item) {
-  return item.owner.email === user.email ? true : false;
+  return item.owner?.email === user.email ? true : false;
 }
 
 function fStyle() {
@@ -69,7 +75,7 @@ function hStyle() {
   return {
     color: '#FFFFFF',
     fontStyle: 'normal',
-    fontWeight: '500',
+    fontWeight: '800',
     fontSize: '100%',
     width: '100px',
     textAlign: 'left',
