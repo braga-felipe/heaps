@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { Container, Heading } from '@chakra-ui/react';
+import { Container, Heading, Text, Link } from '@chakra-ui/react';
 import InputField from '../ChakraUiComponents/InputField';
 import SubmitButton from '../ChakraUiComponents/Button';
 import { useUser_LoginMutation } from '../../generated/graphql';
@@ -47,6 +47,19 @@ export default function Login() {
           </Form>
         )}
       </Formik>
+      <Container sx={cStyle()}>
+        <Text>
+          Don't have an account? <Link href='/register'>Register here!</Link>
+        </Text>
+      </Container>
     </Container>
   );
+}
+
+function cStyle() {
+  return {
+    marginTop: '8px',
+    color: 'grey',
+    textAlign: 'center',
+  };
 }

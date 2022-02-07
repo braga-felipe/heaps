@@ -30,7 +30,7 @@ export default function ItemCard({ user, item, buttonName, path }) {
           ) : (
             <Container sx={spacer()}> </Container>
           )}
-          <Heading sx={hp2Style()}>portions:</Heading>
+          <Heading sx={hp2Style()}>portions</Heading>
           <Heading sx={h3Style()}>
             {counter}/{item.servings}
           </Heading>
@@ -53,7 +53,7 @@ function isOwner(user, item) {
 function fStyle() {
   return {
     justifyContent: 'space-between',
-    alignItems: 'end',
+    alignItems: 'center',
   };
 }
 
@@ -96,6 +96,7 @@ function f2Style() {
 function cStyle(user, item) {
   const background = isOwner(user, item) ? 'primary' : 'secondary';
   return {
+    boxSizing: 'none',
     border: '1px solid',
     marginTop: '3px',
     marginLeft: '-10px',
@@ -110,8 +111,9 @@ function hp2Style() {
   return {
     color: '#FFFFFF',
     fontStyle: 'normal',
-    fontWeight: '5000',
+    fontWeight: '500',
     fontSize: '10px',
+    margin: '0',
     width: '45px',
     textAlign: 'left',
   };
@@ -128,6 +130,6 @@ function h3Style() {
 }
 function spacer() {
   return {
-    height: '50px',
+    height: '10px',
   };
 }
