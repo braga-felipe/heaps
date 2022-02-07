@@ -5,13 +5,13 @@ import Image from 'next/image';
 export default function Icons({ item }) {
   console.log({ item });
   const nut =
-    item && !item?.allergies.includes('nutFree') ? '/nut.png' : '/nut-not.png';
+    item && item?.allergies.includes('nutFree') ? '/nut.png' : '/nut-not.png';
   const lactose =
-    item && !item?.allergies.includes('lactoseFree')
+    item && item?.allergies.includes('lactoseFree')
       ? '/lactose.png'
       : '/lactose-not.png';
   const gluten =
-    item && !item?.allergies.includes('glutenFree')
+    item && item?.allergies.includes('glutenFree')
       ? '/gluten.png'
       : '/gluten-not.png';
   const vegan =
