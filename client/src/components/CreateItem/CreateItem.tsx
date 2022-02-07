@@ -103,13 +103,19 @@ export default function CreateItem(props) {
                     group='allergies'
                     value='lactoseFree'
                   />
-                  <CheckBox name='Nut Free' group='allergies' value='nutFree' />
+                  <CheckBox
+                    name='Nut Free'
+                    group='allergies'
+                    value='nutFree' />
                 </CheckboxGroup>
               </Container>
               <Container>
                 <FormLabel>Diets</FormLabel>
                 <CheckboxGroup>
-                  <CheckBox name='Vegan' group='diets' value='vegan' />
+                  <CheckBox
+                    name='Vegan'
+                    group='diets'
+                    value='vegan' />
                   <CheckBox
                     name='Vegetarian'
                     group='diets'
