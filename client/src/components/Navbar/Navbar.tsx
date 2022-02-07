@@ -1,19 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { HStack, Container } from '@chakra-ui/react';
-import { useMeQuery, useLogoutMutation } from '../../generated/graphql';
-
+import { useLogoutMutation } from '../../generated/graphql';
+import { State } from '../../pages';
+import { useDispatch, useSelector } from 'react-redux';
+import { logUserOut } from '../../redux/actions/user';
 export default function Navbar() {
+  // set a toggle state to control render of login/logout button
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [, logout] = useLogoutMutation();
+  // import user from store and useDispatch to dispatch actions
+  const user = useSelector((state: State) => state.user);
+  const dispatch = useDispatch();
 
-  const getMeUser = () => {
-    const [{ data }] = useMeQuery();
-    return data && data.me;
+  // import graphql logout hook
+  const [, logOutUser] = useLogoutMutation();
+
+  // function to be called in logout button
+  const logout = () => {
+    // call graphQL hook to erase session id
+    logOutUser();
+    // change the state of user in store
+    dispatch(logUserOut());
+    // set toggle button to false
+    setIsLoggedIn(false);
   };
 
-  const user = getMeUser();
+  useEffect(() => {
+    // on change of user state page re-renders?
+    user && user?.email ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  });
 
   return (
     <HStack sx={hsStyle()}>
@@ -38,17 +55,21 @@ export default function Navbar() {
             <Image src='/chat.png' width='30px' height='30px' />
           </Container>
         </Link>
-        {user ? (
-          <Container onClick={() => { logout(); }}>
+        {/* if toggle state is true, render logout icon, else render login icon */}
+        {isLoggedIn ? (
+          <Container
+            onClick={() => {
+              logout();
+            }}>
             <Image src='/logout.png' width='30px' height='30px' />
           </Container>
-        ) : (<Link href='/login'>
-          <Container>
-            <Image src='/login.png' width='30px' height='30px' />
-          </Container>
-        </Link>)}
-
-
+        ) : (
+          <Link href='/login'>
+            <Container>
+              <Image src='/login.png' width='30px' height='30px' />
+            </Container>
+          </Link>
+        )}
       </HStack>
     </HStack>
   );
@@ -70,5 +91,4 @@ function cStyle() {
     alignItems: 'center',
     fontWeight: 'bold',
   };
-
 }
