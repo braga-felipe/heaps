@@ -17,7 +17,6 @@ export default function SearchBar({ items, onChange }) {
         defaultValue={selectOptions}
         onChange={onChange}
         options={items.map((data) => {
-          console.log('DATA', data);
           return {
             value: data?.props?.item.name,
             label: data?.props?.item.name,
