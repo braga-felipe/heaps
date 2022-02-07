@@ -7,6 +7,7 @@ import Home from '../components/Home/Home';
 import { useEffect } from 'react';
 import { getInitialUser } from '../redux/actions/user';
 import '@fontsource/lobster';
+import Avatar from '../components/UserProfile/Avatar';
 
 export interface State {
   user?;
@@ -33,11 +34,14 @@ const IndexPage: NextPage = () => {
   useEffect(() => {
     dispatch(getAllItems(itemList));
     meUser && dispatch(getInitialUser(meUser));
+    meUser && console.log('Userimg', meUser.img_url);
   });
 
   return (
     <>
-      {meUser && (<Heading sx={HcStyle()}>Hello, {meUser.username}!</Heading>)}
+      {meUser && (<Heading sx={HcStyle()}>
+        {/* <Avatar avatar={meUser.img_url} /> */}
+        Hello, {meUser.username}!</Heading>)}
       <Heading sx={HStyle()}>Heaps</Heading>
       <Home />
     </>

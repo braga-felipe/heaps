@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Icons from './Icons';
-import Avatar from '../Assets/Avatar';
+import Avatar from '../UserProfile/Avatar';
 import { Container, Flex, Heading, VStack } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
 import ProfileIcon from '../Assets/ProfileIcon';
@@ -38,7 +38,7 @@ export default function ItemCard({ user, item, buttonName, path }) {
         <Icons item={item} />
         <VStack>
           {/* <ProfileIcon user={user} /> */}
-          <Avatar />
+          <Avatar avatar={user.img_url} />
           <SickPointsIcon item={item} />
         </VStack>
       </Flex>
