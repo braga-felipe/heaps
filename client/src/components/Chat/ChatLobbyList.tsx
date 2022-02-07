@@ -12,12 +12,11 @@ interface chatLobbyListProps {
 }
 
 export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats, bool, tid }) => {
-  const [res, refreshLobby] = useGetMyChatsQuery();
-  const { data, error, fetching } = res;
-
   const [isMessage, setIsMessage] = useState(bool ? bool : false);
   const [targetId, setTargetId] = useState(tid ? tid : 0);
 
+  const [res, refreshLobby] = useGetMyChatsQuery();
+  const { data, error, fetching } = res;
 
   const user = useSelector((state: State) => state.user);
   console.log('CHATLOBBY USER', { user });
@@ -30,7 +29,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats, bool, tid }
     return <h1>Fetching Lobby</h1>;
   }
   if (data) {
-    console.log(data);
+  
   }
   const myId = data.me.id;
   const lobbyChatList = data.me.chats.map((chat) => {
@@ -44,13 +43,10 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats, bool, tid }
     };
   });
 
-  const variables = {
-    getChatId: targetId,
-  };
 
   return isMessage ? (
     <>
-      <MessagesContainer myID={myId} variables={variables} />
+      <MessagesContainer chatId={targetId} />
       <Button onClick={() => setIsMessage(false)}>Back to lobby</Button>
     </>
   ) : (

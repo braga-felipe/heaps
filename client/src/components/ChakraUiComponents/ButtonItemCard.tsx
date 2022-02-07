@@ -15,8 +15,8 @@ export default function ItemCardButton({ buttonName, path, item }) {
     if (url) {
       router.push('/' + url);
     } else {
-      const newChatID = await createNewChat({options: {userOwnerId: item.ownerId, userRequesterId: userID, itemOwnerId: item.id}});
-      router.push('/' + `chatLobby/?tid=${newChatID.data.createChat.id}&bool=true`);
+      const newChat = await createNewChat({options: {userOwnerId: item.ownerId, userRequesterId: userID, itemOwnerId: item.id}});
+      router.push('/' + `chatLobby/?tid=${newChat.data.createChat.id}&bool=true`);
     }
   }
 

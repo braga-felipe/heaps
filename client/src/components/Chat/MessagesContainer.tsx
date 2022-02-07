@@ -9,21 +9,21 @@ import { ClaimButton } from './ClaimButton';
 import { MessagesList } from './MessagesList';
 
 interface MessagesContainerProps {
-  variables;
-  myID;
+  chatId;
 }
 
 export const MessagesContainer: React.FC<MessagesContainerProps> = ({
-  variables,
-  myID,
+  chatId
 }) => {
+
   const [res, updateMessages] = useGetChatMessagesQuery({
-    variables: variables,
+    variables: {
+      getChatId: chatId
+    }
   });
 
   const { data, error, fetching } = res;
   const user = useSelector((state: State) => state.user);
-  console.log({ user });
 
   if (error) {
     console.log(error);
@@ -47,15 +47,15 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
             <ClaimButton
               userOwnerId={data.getChat.userOwnerId}
               requesterId={requester.id}
-              myID={myID}
+              myID={user.id}
               itemID={data.getChat.item.id}></ClaimButton>
           </Box>
           <MessagesList user={user} messages={messages}></MessagesList>
           <Box>
             <ChatInputForm
-              chatId={variables.getChatId}
+              chatId={chatId}
               updateMessages={updateMessages}
-              myID={myID}></ChatInputForm>
+              myID={user.id}></ChatInputForm>
           </Box>
         </Container>
       </>

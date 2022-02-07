@@ -30,7 +30,6 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
 
   function handleChange(evt) {
     updateMessage({ text: evt.target.value });
-    console.log(message);
   }
 
   return (
