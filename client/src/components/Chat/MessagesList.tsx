@@ -7,7 +7,6 @@ import {
   useGetChatMessagesQuery,
 } from '../../generated/graphql';
 import { ChatInputForm } from './ChatInputForm';
-import moment from 'moment';
 import { ChatBubble } from './ChatBubble';
 
 interface MessagesListProps {

@@ -1,4 +1,5 @@
-import { Box, Link, Button, Container } from '@chakra-ui/react';
+import { Box, Link, Button, Container, Heading } from '@chakra-ui/react';
+import Lobby from '../Assets/Lobby';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetMyChatsQuery } from '../../generated/graphql';
@@ -54,37 +55,42 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats, bool, tid }
       <Button onClick={() => setIsMessage(false)}>Back to lobby</Button>
     </>
   ) : (
-    <>
-      <h1> ChatLobby </h1>
-      {lobbyChatList.map((chat) => {
-        return (
-          <Button
-            key={chat.chatId}
-            // href={`http://localhost:3000/messages/${chat.chatId}`}
-            onClick={(e) => {
-              // e.target.id = `${chat.chatId}`
-              setTargetId(chat.chatId);
-              setIsMessage(true);
-            }}>
-            <ChatLobbyItem
+    <Container>
+      <Lobby />
+      <Heading textAlign='center'> Chat Lobby </Heading>
+      <Box sx={bStyle()}>
+        {lobbyChatList.map((chat) => {
+          return (
+            <Button
+              variant='ghost'
               key={chat.chatId}
-              chatId={chat.chatId}
-              itemName={chat.itemName}
-              userName={chat.userName}
-              img_url={chat.img_url}
-              lastMessageTime={chat.img_url}></ChatLobbyItem>
-          </Button>
-        );
-      })}
-    </>
+              onClick={() => {
+                setTargetId(chat.chatId);
+                setIsMessage(true);
+              }}>
+              <ChatLobbyItem
+                key={chat.chatId}
+                chatId={chat.chatId}
+                itemName={chat.itemName}
+                userName={chat.userName}
+                img_url={chat.img_url}
+                lastMessageTime={chat.img_url}></ChatLobbyItem>
+            </Button>
+          );
+        })}
+      </Box>
+    </Container>
   );
 };
 
-function wrapper() {
+function bStyle() {
   return {
-    margin: '0',
-    padding: '0',
-    height: '100%',
+    width: '340px',
+    height: '500px',
+    overflowY: 'scroll',
+    marginTop: '230px',
+    borderRadius: '15px',
+    border: '1px solid #E2E8F0',
   };
 }
 export default ChatLobbyList;
