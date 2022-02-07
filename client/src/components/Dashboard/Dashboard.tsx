@@ -2,16 +2,16 @@ import React from 'react';
 import Cooking from '../Assets/Cooking';
 import ItemList from '../ItemList/ItemList';
 import { Box, Container, Flex, Heading } from '@chakra-ui/react';
-import styles from '../../styles/Home.module.css';
+import Auth from '../Auth';
 export default function Dashboard() {
   return (
-    <Container className={styles.container}>
-      <Flex sx={{ justifyContent: 'center' }}>
-        <Cooking />
-      </Flex>
-      <Container sx={cStyle()}>
+    <Auth>
+      <Container>
+        <Flex sx={{ justifyContent: 'center' }}>
+          <Cooking />
+        </Flex>
         <Heading sx={hStyle()}>Current Items</Heading>
-        <Box sx={bStyle()} height='300px'>
+        <Box sx={bStyle()} height='350px'>
           <ItemList complete={false} buttonName='Chat' path='chatLobby' />
         </Box>
         <Heading sx={hStyle()}>Past Items</Heading>
@@ -19,12 +19,12 @@ export default function Dashboard() {
           <ItemList complete={true} buttonName='Chat' path='chatLobby' />
         </Box>
       </Container>
-    </Container>
+    </Auth>
   );
 }
 function bStyle() {
   return {
-    width: '330px',
+    width: '345px',
     overflowY: 'scroll',
     borderRadius: '15px',
     border: '1px solid #E2E8F0',

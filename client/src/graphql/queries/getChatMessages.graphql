@@ -1,0 +1,22 @@
+query getChatMessages($getChatId: Int!) {
+  getChat(id: $getChatId) {
+    id
+    userOwnerId
+    item {
+      name
+      id
+    }
+    users {
+      id
+      username
+      img_url
+    }
+    messages {
+      id
+      text
+      authorId
+      isRead
+      createdAt
+    }
+  }
+}

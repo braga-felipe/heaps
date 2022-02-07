@@ -1,23 +1,27 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { Container, Heading } from '@chakra-ui/react';
+import { Container, Heading, Text, Link } from '@chakra-ui/react';
 import InputField from '../ChakraUiComponents/InputField';
 import SubmitButton from '../ChakraUiComponents/Button';
-
 import { useUser_LoginMutation } from '../../generated/graphql';
 import { useRouter } from 'next/router';
-
+import { useDispatch } from 'react-redux';
+import { getInitialUser } from '../../redux/actions/user';
+import MysticPan from '../Assets/mysticPan';
 interface User {
   email: string;
   password: string;
 }
 export default function Login() {
-  const [, getUser] = useUser_LoginMutation();
+  const [res, getUser] = useUser_LoginMutation();
+  console.log('LOGIN DATA: ', res.data?.userLogin.user);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   return (
     <Container>
       <Heading>Log In</Heading>
+      <MysticPan />
       <Formik
         initialValues={{
           email: '',
@@ -29,6 +33,7 @@ export default function Login() {
             setErrors({ email: `${res.data.userLogin.errors[0].message}` });
           }
           if (res.data?.userLogin.user) {
+            dispatch(getInitialUser(res.data.userLogin.user));
             router.push('/');
           }
           console.log('values', values);
@@ -42,6 +47,19 @@ export default function Login() {
           </Form>
         )}
       </Formik>
+      <Container sx={cStyle()}>
+        <Text>
+          Don't have an account? <Link href='/register'>Register here!</Link>
+        </Text>
+      </Container>
     </Container>
   );
+}
+
+function cStyle() {
+  return {
+    marginTop: '8px',
+    color: 'grey',
+    textAlign: 'center',
+  };
 }

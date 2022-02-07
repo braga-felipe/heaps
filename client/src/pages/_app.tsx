@@ -7,6 +7,8 @@ import { store } from '../redux/store';
 import customTheme from '../styles/extendTheme';
 import type { AppProps } from 'next/app';
 import Layout from '../components/Navbar/Layout';
+import '@fontsource/sora';
+import '@fontsource/roboto';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

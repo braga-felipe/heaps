@@ -1266,6 +1266,36 @@
     "ts-node" "^9"
     "tslib" "^2"
 
+"@fontsource/andada-pro@^4.5.5":
+  "integrity" "sha512-lmlHMGFIuGoJweK2tx6nrg11BhPuRTonEBthVma3L4jfnt1ZZjtGie9fHYb9FPPkNQ9HZp3VFmbICBqHIPDu6A=="
+  "resolved" "https://registry.npmjs.org/@fontsource/andada-pro/-/andada-pro-4.5.5.tgz"
+  "version" "4.5.5"
+
+"@fontsource/encode-sans@^4.5.1":
+  "integrity" "sha512-ulqUy8uUbMPyasJH3KK4uSICvumQGmuXX5rJGMEwA6beeteXrSRoUCBFjd3ZwpxfKANl2q0QIduhzG3OjbQDwA=="
+  "resolved" "https://registry.npmjs.org/@fontsource/encode-sans/-/encode-sans-4.5.1.tgz"
+  "version" "4.5.1"
+
+"@fontsource/hahmlet@^4.5.6":
+  "integrity" "sha512-8cx+wca9kpMPpZl3RB3uPPcxqqWESINE6yc9JPRd8prDGx85SG5D7cpG0iBNp88ut1YogUfAr8s5naWgFMqn1w=="
+  "resolved" "https://registry.npmjs.org/@fontsource/hahmlet/-/hahmlet-4.5.6.tgz"
+  "version" "4.5.6"
+
+"@fontsource/lobster@^4.5.1":
+  "integrity" "sha512-pg5MUPxfoncGKS4yzmwdX3codC+zaS1AsF1zCoGe1/5fr/RnwsLSjBvX0ozstnzFFebJBx8q48RGaS6opoTxmA=="
+  "resolved" "https://registry.npmjs.org/@fontsource/lobster/-/lobster-4.5.1.tgz"
+  "version" "4.5.1"
+
+"@fontsource/roboto@^4.5.3":
+  "integrity" "sha512-NUvBTj332dFRdiVkLlavXbDGoD2zyyeGYmMyrXOnctg/3e4pq95+rJgNfUP+k4v8UBk2L1aomGw9dDjbRdAmTg=="
+  "resolved" "https://registry.npmjs.org/@fontsource/roboto/-/roboto-4.5.3.tgz"
+  "version" "4.5.3"
+
+"@fontsource/sora@^4.5.2":
+  "integrity" "sha512-KD7WpqNvnviMyfBsQKEWsKtMve/uP4Hpq/rxfvOWggURMEEGSTciDarEwxs9HIbj/C7u4mCKjFQSFYLteG2+xQ=="
+  "resolved" "https://registry.npmjs.org/@fontsource/sora/-/sora-4.5.2.tgz"
+  "version" "4.5.2"
+
 "@graphql-codegen/cli@2.4.0":
   "integrity" "sha512-4iiHH2AxBE17lX5cFdFg6+kh7I6uKQLYG0IZRalRbW/grKL7kuVp/RDUjmVB2GNJTJEhjxYLMJFJZocUmAUBlw=="
   "resolved" "https://registry.npmjs.org/@graphql-codegen/cli/-/cli-2.4.0.tgz"
@@ -1873,14 +1903,9 @@
   "resolved" "https://registry.npmjs.org/@next/env/-/env-12.0.9.tgz"
   "version" "12.0.9"
 
-"@next/swc-linux-x64-gnu@12.0.9":
-  "integrity" "sha512-bJZ9bkMkQzsY+UyWezEZ77GWQ4TzwKeXdayX3U3+aEkL8k5C6eKBXlidWdrhu0teLmaUXIyWerWrLnJzwGXdfw=="
-  "resolved" "https://registry.npmjs.org/@next/swc-linux-x64-gnu/-/swc-linux-x64-gnu-12.0.9.tgz"
-  "version" "12.0.9"
-
-"@next/swc-linux-x64-musl@12.0.9":
-  "integrity" "sha512-SR9p0R+v1T32DTXPVAXZw31pmJAkSDotC6Afy+mfC0xrEL3pp95R8sGXYAAUCEPkQp0MEeUOVy2LrToe92X7hQ=="
-  "resolved" "https://registry.npmjs.org/@next/swc-linux-x64-musl/-/swc-linux-x64-musl-12.0.9.tgz"
+"@next/swc-darwin-x64@12.0.9":
+  "integrity" "sha512-fDOs2lZIyrAdU18IxMA5orBPn9qLbOdu55gXSTNZOhyRJ8ugtbUAejsK7OL0boJy0CCHPAdVRXm01Mwk8tZ9RQ=="
+  "resolved" "https://registry.npmjs.org/@next/swc-darwin-x64/-/swc-darwin-x64-12.0.9.tgz"
   "version" "12.0.9"
 
 "@nodelib/fs.scandir@2.1.5":
@@ -3874,6 +3899,11 @@
   "integrity" "sha1-FQStJSMVjKpA20onh8sBQRmU6k8="
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
+
+"fsevents@^2.1.2", "fsevents@~2.3.2":
+  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
+  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  "version" "2.3.2"
 
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="

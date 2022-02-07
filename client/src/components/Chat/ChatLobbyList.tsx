@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Link } from '@chakra-ui/react';
 import React from 'react';
 import { useGetMyChatsQuery } from '../../generated/graphql';
 import ChatLobbyItem from './chatLobbyItem';
@@ -8,10 +8,8 @@ interface chatLobbyListProps {
 }
 
 export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats }) => {
-
   const [ res, refreshLobby ] = useGetMyChatsQuery();
   const { data, error, fetching } = res;
-  
   
   if (error) {
     console.log(error);
@@ -35,7 +33,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats }) => {
         itemName: chat.item.name,
         userName: userDetails.username,
         img_url: userDetails.img_url,
-        lastMessageTime: chat.messages[chat.messages.length].createdAt
+        lastMessageTime: chat.messages[chat.messages.length - 1].createdAt
       };
     })
 
@@ -43,7 +41,9 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats }) => {
       <>
       <h1> ChatLobby </h1>
         {lobbyChatList.map(chat => {
-          return <ChatLobbyItem key = {chat.chatId} chatId={chat.chatId} itemName={chat.itemName} userName={chat.userName} img_url={chat.img_url} lastMessageTime={chat.img_url} ></ChatLobbyItem>
+          return <Link href={`http://localhost:3000/messages/${chat.chatId}`}>
+           <ChatLobbyItem key={chat.chatId} chatId={chat.chatId} itemName={chat.itemName} userName={chat.userName} img_url={chat.img_url} lastMessageTime={chat.img_url} ></ChatLobbyItem>
+          </Link>
         })}
       </>
     );
