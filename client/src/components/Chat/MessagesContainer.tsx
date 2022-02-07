@@ -43,7 +43,7 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
       <>
         <Container sx={cStyle()}>
           <Box display='flex' alignItems='center' flexDirection='row'>
-            <Heading>{data.getChat.item.name}</Heading>
+            <Heading ml='9px'>{data.getChat.item.name}</Heading>
             <ClaimButton
               userOwnerId={data.getChat.userOwnerId}
               requesterId={requester.id}
@@ -65,11 +65,11 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
 
 function cStyle() {
   return {
-    margin: '0',
+    margin: '5px',
     padding: '0',
     display: 'flex',
     // alignItems: 'center',
     flexDirection: 'column',
-    width: '350px',
+    width: '95%',
   };
 }

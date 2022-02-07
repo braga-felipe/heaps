@@ -34,9 +34,10 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
 
   return (
     <>
-      <Box className='inputContainer' display='flex' flex-direction='row'>
+      <Box width='100%' display='flex' flex-direction='row'>
         <Input
-          margin='3px 3px 3px 3px'
+          width='300px'
+          margin='3px 3px 0px 3px'
           name='chatInput'
           placeholder='Type your message here'
           onChange={handleChange}
@@ -44,7 +45,7 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
         <Button
           background='primaryActive'
           color='white'
-          margin='3px 3px 6px 3px'
+          margin='3px 3px 0px 3px'
           name='Send'
           type='submit'
           onClick={() => handleSend(message)}>
