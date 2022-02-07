@@ -1,16 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { State } from '../../pages/index';
 import { HStack, Container } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
+import { useMeQuery, useLogoutMutation } from '../../generated/graphql';
 
 export default function Navbar() {
-  // const user = useSelector((state: State) => state.user);
-  // console.log({ user });
-  // function isLoggedIn() {
-  //   return Object.keys(user).length ? true : false;
-  // }
+
+  const [, logout] = useLogoutMutation();
+
+  const getMeUser = () => {
+    const [{ data }] = useMeQuery();
+    return data && data.me;
+  };
+
+  const user = getMeUser();
+
   return (
     <HStack sx={hsStyle()}>
       <HStack sx={cStyle()}>
@@ -34,11 +38,17 @@ export default function Navbar() {
             <Image src='/chat.png' width='30px' height='30px' />
           </Container>
         </Link>
-        <Link href='/login'>
-          <Container>
+        {user ? (
+          <Container onClick={() => { logout(); }}>
             <Image src='/logout.png' width='30px' height='30px' />
           </Container>
-        </Link>
+        ) : (<Link href='/login'>
+          <Container>
+            <Image src='/login.png' width='30px' height='30px' />
+          </Container>
+        </Link>)}
+
+
       </HStack>
     </HStack>
   );
@@ -51,6 +61,7 @@ function hsStyle() {
     alignItems: 'center',
     background: '#dfb23f',
     color: 'white',
+    paddingTop: '2%',
   };
 }
 function cStyle() {
@@ -59,4 +70,5 @@ function cStyle() {
     alignItems: 'center',
     fontWeight: 'bold',
   };
+
 }

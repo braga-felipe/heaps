@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLottie } from 'lottie-react';
-import avatar1 from '../Assets/avatar1.json';
-import avatar2 from '../Assets/avatar2.json';
-import avatar3 from '../Assets/avatar3.json';
-import avatar4 from '../Assets/avatar4.json';
+import avatar1 from './avatar1.json';
+import avatar2 from './avatar2.json';
+import avatar3 from './avatar3.json';
+import avatar4 from './avatar4.json';
 
 export default function Cooking({ avatar }) {
 

@@ -1,17 +1,15 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Icons from './Icons';
-import Avatar from '../UserProfile/Avatar';
+import Avatar from '../Assets/Avatar';
 import { Container, Flex, Heading, VStack } from '@chakra-ui/react';
 import { AccordionComponent as Accordion } from '../ChakraUiComponents/Accordion/Accordion';
-import ProfileIcon from '../Assets/ProfileIcon';
 import SickPointsIcon from '../Assets/SickPointsIcon';
 
 export default function ItemCard({ user, item, buttonName, path }) {
   const router = useRouter();
   const url = router.route;
   const counter = item.servings;
-  console.log(item);
   return (
     <Container sx={cStyle(user, item)}>
       <Flex sx={fStyle()}>

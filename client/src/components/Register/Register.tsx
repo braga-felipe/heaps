@@ -8,7 +8,7 @@ import { FormControl, FormLabel, Container, Heading, Text, Link, VStack, HStack,
 import { useCreate_UserMutation } from '../../generated/graphql';
 import { useRouter } from 'next/router';
 import UserAvatar from './UserAvatar';
-import Avatar from '../UserProfile/Avatar';
+import Avatar from '../Assets/Avatar';
 
 interface NewUser {
   username: string;
