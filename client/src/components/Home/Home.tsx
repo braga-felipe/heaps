@@ -27,6 +27,8 @@ export default function Home() {
       <Grocery isGroceries={isGroceries} />
       <Box sx={bStyle()}>
         <Button
+          backgroundColor='primary'
+          color='white'
           onClick={() => {
             setIsMap(!isMap);
           }}>
