@@ -1,13 +1,28 @@
 import React from 'react';
-import { Container, Avatar } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+
+import { Container, Avatar, Link } from '@chakra-ui/react';
 export default function ProfileIcon({ user }) {
+  const router = useRouter();
+  function showPageLinked() {
+    router.push('/profile/' + `${user.id}`);
+  }
   return (
-    <Container margin='2px'>
+    <Link onClick={showPageLinked}>
       <Avatar
+        sx={style()}
         backgroundColor='#DFB23F'
-        src={user?.img_url || '/user.png'}
+        src={user?.img_url}
         alt='profile'
       />
-    </Container>
+    </Link>
   );
+}
+
+function style() {
+  return {
+    margin: '5px 0 0 0',
+    height: '35px',
+    width: '35px',
+  };
 }

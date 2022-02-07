@@ -1,13 +1,12 @@
 import type { NextPage } from 'next';
-import styles from '../styles/Home.module.css';
-import { Container, Heading } from '@chakra-ui/react';
-import { useSelector, useDispatch } from 'react-redux';
+import { Heading } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
 import { getAllItems } from '../redux/actions/items';
 import { useGet_All_ItemsQuery, useMeQuery } from '../generated/graphql';
 import Home from '../components/Home/Home';
 import { useEffect } from 'react';
 import { getInitialUser } from '../redux/actions/user';
-import SearchBar from '../components/SeachBar/SearchBar';
+import '@fontsource/lobster';
 
 export interface State {
   user?;
@@ -22,12 +21,14 @@ const IndexPage: NextPage = () => {
     return data && data.getAllItems;
   };
 
+  // take care of async with then
   const getMeData = () => {
     const [{ data }] = useMeQuery();
     return data && data.me;
   };
 
   const itemList = getItemsList();
+
   const meUser = getMeData();
 
   useEffect(() => {
@@ -36,12 +37,32 @@ const IndexPage: NextPage = () => {
   });
 
   return (
-    <Container className={styles.container}>
-      {meUser && <Heading>Hello, {meUser.username}!</Heading>}
-      <SearchBar />
+    <>
+      {meUser && <Heading sx={HcStyle()}>Hello, {meUser.username}!</Heading>}
+      <Heading sx={HStyle()}>Heaps</Heading>
       <Home />
-    </Container>
+    </>
   );
 };
+function HStyle() {
+  return {
+    position: 'fixed',
+    fontFamily: 'Lobster',
+    fontSize: '3xl',
+    margin: '2%',
+    color: '#5D55B4;',
+  };
+}
+
+function HcStyle() {
+  return {
+    position: 'fixed',
+    left: '270px',
+    fontSize: 'xs',
+    zIndex: '1',
+    backgroundColor: 'white',
+    width: '100%',
+  };
+}
 
 export default IndexPage;

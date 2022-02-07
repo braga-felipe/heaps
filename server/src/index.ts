@@ -32,7 +32,8 @@ app.use(express.json());
 app.use(
   cors({
     origin: 'http://localhost:3000',
-    credentials: true
+    // origin: '*',
+    credentials: true,
   })
 );
 
@@ -54,8 +55,8 @@ app.use(
 (async function () {
   //typeORM connection to POSTGRES
   await createConnection({
-    url: "postgres://cqdwlaycgnlihe:5a485120a790b97466abe4032ae3976c7ee7834b87f3975d5bd3919745f197ff@ec2-3-227-15-75.compute-1.amazonaws.com:5432/d9917k0abiuhik",
-    type: "postgres",
+    url: 'postgres://cqdwlaycgnlihe:5a485120a790b97466abe4032ae3976c7ee7834b87f3975d5bd3919745f197ff@ec2-3-227-15-75.compute-1.amazonaws.com:5432/d9917k0abiuhik',
+    type: 'postgres',
 
     logging: true,
     synchronize: true,
@@ -76,9 +77,8 @@ app.use(
     }),
     context: ({ req, res }): MyContext => ({
       req,
-      res
-    })
-
+      res,
+    }),
   });
 
   //Start server and apply middleware to ApolloServer
@@ -90,8 +90,7 @@ app.use(
     });
     app.listen(PORT, () => {
       console.log('listening on port: ', PORT);
-    })
-
+    });
   } catch (err) {
     console.error(err);
   }
