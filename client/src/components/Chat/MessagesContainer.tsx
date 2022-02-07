@@ -51,10 +51,12 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
               itemID={data.getChat.item.id}></ClaimButton>
           </Box>
           <MessagesList user={user} messages={messages}></MessagesList>
-          <ChatInputForm
-            chatId={variables.getChatId}
-            updateMessages={updateMessages}
-            myID={myID}></ChatInputForm>
+          <Box>
+            <ChatInputForm
+              chatId={variables.getChatId}
+              updateMessages={updateMessages}
+              myID={myID}></ChatInputForm>
+          </Box>
         </Container>
       </>
     );
