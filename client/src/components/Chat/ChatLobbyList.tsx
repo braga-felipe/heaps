@@ -41,7 +41,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats, bool, tid }
       itemName: chat.item.name,
       userName: userDetails.username,
       img_url: userDetails.img_url,
-      lastMessageTime: chat.messages[chat.messages.length - 1].createdAt,
+      lastMessageTime: chat.messages.length ? chat.messages[chat.messages.length - 1].createdAt : null,
     };
   });
 

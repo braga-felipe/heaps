@@ -9,9 +9,10 @@ interface chatLobbyProps {
 export const chatLobby: React.FC<chatLobbyProps> = ({}) => {
   const router = useRouter();
   const { bool, tid } = router.query;
+  const parsedTid = Array.isArray(tid) ? parseInt(tid.pop()) : parseInt(tid);
     return (
       <>
-      <ChatLobbyList tid={tid} bool={bool}></ChatLobbyList>
+      <ChatLobbyList tid={parsedTid} bool={bool}></ChatLobbyList>
       </>
     );
 }
