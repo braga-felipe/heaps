@@ -1,5 +1,4 @@
-
-import React from 'react'
+import React from 'react';
 import ChatLobbyList from '../components/Chat/ChatLobbyList';
 import { useRouter } from 'next/router';
 

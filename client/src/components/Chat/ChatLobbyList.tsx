@@ -1,4 +1,4 @@
-import { Box, Link, Button } from '@chakra-ui/react';
+import { Box, Link, Button, Container } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetMyChatsQuery } from '../../generated/graphql';
@@ -80,4 +80,11 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats, bool, tid }
   );
 };
 
+function wrapper() {
+  return {
+    margin: '0',
+    padding: '0',
+    height: '100%',
+  };
+}
 export default ChatLobbyList;
