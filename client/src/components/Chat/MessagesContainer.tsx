@@ -1,4 +1,4 @@
-import { Box, Button, Container } from '@chakra-ui/react';
+import { Box, Button, Container, Heading } from '@chakra-ui/react';
 import React from 'react';
 import { render } from 'react-dom';
 import { useSelector } from 'react-redux';
@@ -41,16 +41,16 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
 
     return (
       <>
-        <Container display='flex' alignItems='center' flexDirection='column'>
+        <Container sx={cStyle()}>
           <Box display='flex' alignItems='center' flexDirection='row'>
-            <h1>{data.getChat.item.name}</h1>
+            <Heading>{data.getChat.item.name}</Heading>
             <ClaimButton
               userOwnerId={data.getChat.userOwnerId}
               requesterId={requester.id}
               myID={myID}
               itemID={data.getChat.item.id}></ClaimButton>
           </Box>
-          <MessagesList messages={messages}></MessagesList>
+          <MessagesList user={user} messages={messages}></MessagesList>
           <ChatInputForm
             chatId={variables.getChatId}
             updateMessages={updateMessages}
@@ -60,3 +60,14 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
     );
   }
 };
+
+function cStyle() {
+  return {
+    margin: '0',
+    padding: '0',
+    display: 'flex',
+    // alignItems: 'center',
+    flexDirection: 'column',
+    width: '350px',
+  };
+}
