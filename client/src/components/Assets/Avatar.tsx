@@ -21,7 +21,6 @@ export default function Cooking({ avatar }) {
       return avatar4;
     }
   }
-
   const options = {
     animationData: selectAvatar(),
     loop: true,

@@ -22,6 +22,7 @@ const IndexPage: NextPage = () => {
     return data && data.getAllItems;
   };
 
+  // take care of async with then
   const getMeData = () => {
     const [{ data }] = useMeQuery();
     return data && data.me;
@@ -51,7 +52,7 @@ function HStyle() {
     fontFamily: 'Lobster',
     fontSize: '3xl',
     margin: '2%',
-    color: '#5D55B4;'
+    color: '#5D55B4;',
   };
 }
 

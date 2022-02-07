@@ -11,6 +11,7 @@ import '@fontsource/sora';
 import '@fontsource/roboto';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  console.log('_app loaded');
   return (
     <ReduxProvider store={store}>
       <Provider value={client}>

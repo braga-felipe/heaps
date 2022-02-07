@@ -47,7 +47,7 @@ export function AccordionItemComponent({ item, buttonName, path, counter }) {
               : null}
             <Divider />
             <Heading sx={hStyle()}>Portions left: {counter}</Heading>
-            <ItemCardButton buttonName={buttonName} path={path} />
+            <ItemCardButton buttonName={buttonName} path={path} item={item} />
           </AccordionPanel>
         </>
       )}
