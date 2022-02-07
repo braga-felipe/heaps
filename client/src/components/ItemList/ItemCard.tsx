@@ -11,7 +11,6 @@ export default function ItemCard({ user, item, buttonName, path }) {
   const router = useRouter();
   const url = router.route;
   const counter = item.servings;
-  console.log(item);
   return (
     <Container sx={cStyle(user, item)}>
       <Flex sx={fStyle()}>
