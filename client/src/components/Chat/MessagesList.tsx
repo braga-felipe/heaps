@@ -1,14 +1,23 @@
-import { Container, Box } from '@chakra-ui/react';
 import React from 'react'
+import {
+  Box,
+  Container,
+  Flex,
+  Image,
+  Heading,
+} from '@chakra-ui/react';
 import { OperationContext } from 'urql';
 import { useCreateMessageMutation, useGetChatMessagesQuery } from '../../generated/graphql';
 import { ChatInputForm } from './ChatInputForm';
+import moment from 'moment';
+import { ChatBubble } from './ChatBubble';
 
 interface MessagesListProps {
-  messages;
+  messages,
+  myID
 }
 
-export const MessagesList: React.FC<MessagesListProps> = ({messages}) => {
+export const MessagesList: React.FC<MessagesListProps> = ({messages, myID}) => {
   
     return (
       <>
@@ -20,10 +29,8 @@ export const MessagesList: React.FC<MessagesListProps> = ({messages}) => {
           <Box className="messageList">
             {messages.map(message => {
               return (
-                <Box key={message.id} border="1px solid black">
-                <p>{message.text}</p>
-                <p>{message.createdAt}</p>
-                </Box>
+                <ChatBubble key={message.id} className={myID === message.authorId ? "myMessage" : "otherMessage"} message={message}>
+                  </ChatBubble>
               )})}
           </Box>
         </Box> 
