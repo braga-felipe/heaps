@@ -96,6 +96,7 @@ function f2Style() {
 function cStyle(user, item) {
   const background = isOwner(user, item) ? 'primary' : 'secondary';
   return {
+    boxSizing: 'none',
     border: '1px solid',
     marginTop: '3px',
     marginLeft: '-10px',
