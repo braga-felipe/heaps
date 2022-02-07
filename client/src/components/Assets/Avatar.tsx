@@ -1,5 +1,6 @@
 import { useLottie } from 'lottie-react';
 import avatar from './avatar1.json';
+
 export default function Cooking() {
   const options = {
     animationData: avatar,
