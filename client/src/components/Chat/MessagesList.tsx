@@ -24,21 +24,19 @@ export const MessagesList: React.FC<MessagesListProps> = ({
         Your Messages
       </Heading>
       <Box sx={bStyle()}>
-        {messages.map((message) => {
+        {messages.map((message, index) => {
           return (
-            <>
-              <Box>
-                <Container sx={msgStyle(user, message)} key={message.id}>
-                  <Text fontSize='lg' sx={txtStyle()}>
-                    {message.text}
-                  </Text>
-                  {/* <br /> */}
-                  <Text fontSize='xs' sx={timeStyle()}>
-                    {moment(parseInt(message.createdAt)).calendar()}
-                  </Text>
-                </Container>
-              </Box>
-            </>
+            <Box key={index}>
+              <Container sx={msgStyle(user, message)} key={message.id}>
+                <Text fontSize='lg' sx={txtStyle()}>
+                  {message.text}
+                </Text>
+                {/* <br /> */}
+                <Text fontSize='xs' sx={timeStyle()}>
+                  {moment(parseInt(message.createdAt)).calendar()}
+                </Text>
+              </Container>
+            </Box>
           );
         })}
       </Box>

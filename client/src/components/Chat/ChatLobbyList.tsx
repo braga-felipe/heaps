@@ -8,17 +8,20 @@ import ChatLobbyItem from './chatLobbyItem';
 import { MessagesContainer } from './MessagesContainer';
 interface chatLobbyListProps {
   chats?;
-  bool,
-  tid
+  bool;
+  tid;
 }
 
-export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats, bool, tid }) => {
+export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
+  chats,
+  bool,
+  tid,
+}) => {
   const [res, refreshLobby] = useGetMyChatsQuery();
   const { data, error, fetching } = res;
 
   const [isMessage, setIsMessage] = useState(bool ? bool : false);
   const [targetId, setTargetId] = useState(tid ? tid : 0);
-
 
   const user = useSelector((state: State) => state.user);
   console.log('CHATLOBBY USER', { user });
@@ -41,7 +44,9 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats, bool, tid }
       itemName: chat.item.name,
       userName: userDetails.username,
       img_url: userDetails.img_url,
-      lastMessageTime: chat.messages.length ? chat.messages[chat.messages.length - 1].createdAt : null,
+      lastMessageTime: chat.messages.length
+        ? chat.messages[chat.messages.length - 1].createdAt
+        : null,
     };
   });
 
@@ -59,23 +64,25 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ chats, bool, tid }
       <Lobby />
       <Heading textAlign='center'> Chat Lobby </Heading>
       <Box sx={bStyle()}>
-        {lobbyChatList.map((chat) => {
+        {lobbyChatList.map((chat, index) => {
           return (
-            <Button
-              variant='ghost'
-              key={chat.chatId}
-              onClick={() => {
-                setTargetId(chat.chatId);
-                setIsMessage(true);
-              }}>
-              <ChatLobbyItem
+            <Box key={index} height='85px'>
+              <Button
+                variant='ghost'
                 key={chat.chatId}
-                chatId={chat.chatId}
-                itemName={chat.itemName}
-                userName={chat.userName}
-                img_url={chat.img_url}
-                lastMessageTime={chat.img_url}></ChatLobbyItem>
-            </Button>
+                onClick={() => {
+                  setTargetId(chat.chatId);
+                  setIsMessage(true);
+                }}>
+                <ChatLobbyItem
+                  key={chat.chatId}
+                  chatId={chat.chatId}
+                  itemName={chat.itemName}
+                  userName={chat.userName}
+                  img_url={chat.img_url}
+                  lastMessageTime={chat.img_url}></ChatLobbyItem>
+              </Button>
+            </Box>
           );
         })}
       </Box>

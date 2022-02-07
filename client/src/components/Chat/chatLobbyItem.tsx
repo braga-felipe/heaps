@@ -16,7 +16,9 @@ export const ChatLobbyItem: React.FC<chatLobbyItemProps> = ({
   return (
     <Container sx={cStyle()}>
       <Flex sx={fStyle()}>
-        <Heading sx={hStyle()}>{itemName}</Heading>
+        <Heading isTruncated sx={hStyle()}>
+          {itemName}
+        </Heading>
         <Box>
           <Image
             sx={iStyle()}
@@ -35,7 +37,8 @@ export const ChatLobbyItem: React.FC<chatLobbyItemProps> = ({
 function iStyle() {
   return {
     borderRadius: 'full',
-    boxSize: '80px',
+    boxSize: '70px',
+    margin: '5px',
   };
 }
 
