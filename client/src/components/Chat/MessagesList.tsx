@@ -1,5 +1,6 @@
 import { Box, Container, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
+import moment from 'moment';
 import { OperationContext } from 'urql';
 import {
   useCreateMessageMutation,
@@ -22,18 +23,23 @@ export const MessagesList: React.FC<MessagesListProps> = ({
         Your Messages
       </Heading>
       <Box sx={bStyle()}>
-        {/* <Box className='messageList'> */}
         {messages.map((message) => {
           return (
             <>
-              <Container sx={msgStyle(user, message)} key={message.id}>
-                <Text sx={txtStyle()}>{message.text}</Text>
-              </Container>
-              {/* <Text sx={timeStyle()}>{message.createdAt}</Text> */}
+              <Box>
+                <Container sx={msgStyle(user, message)} key={message.id}>
+                  <Text fontSize='lg' sx={txtStyle()}>
+                    {message.text}
+                  </Text>
+                  {/* <br /> */}
+                  <Text fontSize='xs' sx={timeStyle()}>
+                    {moment(parseInt(message.createdAt)).calendar()}
+                  </Text>
+                </Container>
+              </Box>
             </>
           );
         })}
-        {/* </Box> */}
       </Box>
     </>
   );
@@ -41,19 +47,17 @@ export const MessagesList: React.FC<MessagesListProps> = ({
 
 function bStyle() {
   return {
-    // display: 'flex',
-    // flexDirection: 'column',
-    // grid: 'autoFlow / 1fr 1fr 1fr',
-    // grid: 'repeat(3, 80px) / auto-flow',
-    width: '370px',
+    width: '100%',
     height: '600px',
     overflowY: 'scroll',
     borderRadius: '15px',
     border: '1px solid #E2E8F0',
+    marginLeft: '5px',
   };
 }
 function hStyle() {
   return {
+    marginLeft: '10px',
     color: 'grey',
   };
 }
@@ -70,10 +74,10 @@ function msgStyle(user, message) {
         };
   return {
     ...float,
+    color: 'white',
     borderRadius: '15px',
     border: '1px solid #E2E8F0',
-    margin: '10px',
-    marginBottom: '30px',
+    margin: '5px 5px 0px 5px',
     minHeight: '45px',
     maxWidth: '55%',
   };
@@ -81,12 +85,13 @@ function msgStyle(user, message) {
 
 function txtStyle() {
   return {
-    margin: '10px',
+    margin: '5px',
   };
 }
 
 function timeStyle() {
   return {
-    color: 'grey',
+    color: 'white',
+    textAlign: 'right',
   };
 }

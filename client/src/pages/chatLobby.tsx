@@ -1,19 +1,13 @@
-
-import React from 'react'
+import React from 'react';
 import ChatLobbyList from '../components/Chat/ChatLobbyList';
-
-interface chatLobbyProps {
-
-}
+interface chatLobbyProps {}
 
 export const chatLobby: React.FC<chatLobbyProps> = ({}) => {
-
-
-    return (
-      <>
+  return (
+    <>
       <ChatLobbyList></ChatLobbyList>
-      </>
-    );
-}
+    </>
+  );
+};
 
 export default chatLobby;
