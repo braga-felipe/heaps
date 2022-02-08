@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Groceries from './Groceries';
 import Dishes from './Dishes';
+import Loading from '../Assets/Loading';
 // import { useRouter } from 'next/router';
 import Grocery from '../Assets/Grocery';
 import Map from '../Map/Map';
@@ -14,6 +15,7 @@ import {
   Container,
   Flex,
   Box,
+  Heading,
 } from '@chakra-ui/react';
 import { State } from '../../pages';
 import { useSelector } from 'react-redux';
@@ -22,7 +24,7 @@ export default function Home() {
   const items = useSelector((state: State) => state.items);
   const [isGroceries, setIsGroceries] = useState(true);
   const [isMap, setIsMap] = useState(false);
-  return (
+  return items.length ? (
     <Container sx={cStyle()}>
       <Grocery isGroceries={isGroceries} />
       <Box sx={bStyle()}>
@@ -55,6 +57,8 @@ export default function Home() {
       </Tabs>
       <Flex mb='10px' justify='space-around'></Flex>
     </Container>
+  ) : (
+    <Loading />
   );
 }
 function bStyle() {

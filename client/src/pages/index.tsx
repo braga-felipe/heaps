@@ -18,11 +18,11 @@ const IndexPage: NextPage = () => {
   const dispatch = useDispatch();
 
   const getItemsList = () => {
-    const [{ data }] = useGet_All_ItemsQuery();
+    const [{ data, fetching }] = useGet_All_ItemsQuery();
     return data && data.getAllItems;
   };
 
-  // take care of async with then
+  // TODO:take care of async with then?
   const getMeData = () => {
     const [{ data }] = useMeQuery();
     return data && data.me;
@@ -39,8 +39,7 @@ const IndexPage: NextPage = () => {
 
   return (
     <>
-      {meUser && (<Heading sx={HcStyle()}>
-        Hello, {meUser.username}!</Heading>)}
+      {meUser && <Heading sx={HcStyle()}>Hello, {meUser.username}!</Heading>}
       <Heading sx={HStyle()}>Heaps</Heading>
       <Home />
     </>

@@ -1,5 +1,6 @@
 import { Box, Link, Button, Container, Heading } from '@chakra-ui/react';
 import Lobby from '../Assets/Lobby';
+import Loading from '../Assets/Loading';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetMyChatsQuery } from '../../generated/graphql';
@@ -31,7 +32,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
     return <h1>Error Fetching Lobby</h1>;
   }
   if (fetching) {
-    return <h1>Fetching Lobby</h1>;
+    return <Loading />;
   }
   if (data) {
     console.log(data);
