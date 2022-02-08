@@ -3,7 +3,9 @@ import Groceries from './Groceries';
 import Dishes from './Dishes';
 // import { useRouter } from 'next/router';
 import Grocery from '../Assets/Grocery';
+import Map from '../Map/Map';
 import {
+  Button,
   Tabs,
   TabList,
   TabPanels,
@@ -11,16 +13,28 @@ import {
   TabPanel,
   Container,
   Flex,
+  Box,
 } from '@chakra-ui/react';
+import { State } from '../../pages';
+import { useSelector } from 'react-redux';
 
 export default function Home() {
-  // const router = useRouter();
-  // router.reload();
+  const items = useSelector((state: State) => state.items);
   const [isGroceries, setIsGroceries] = useState(true);
-
+  const [isMap, setIsMap] = useState(false);
   return (
     <Container sx={cStyle()}>
       <Grocery isGroceries={isGroceries} />
+      <Box sx={bStyle()}>
+        <Button
+          backgroundColor='primary'
+          color='white'
+          onClick={() => {
+            setIsMap(!isMap);
+          }}>
+          {isMap ? 'list' : 'map'}
+        </Button>
+      </Box>
       <Tabs
         onChange={(index) => setIsGroceries(!isGroceries)}
         isFitted
@@ -35,19 +49,21 @@ export default function Home() {
           </Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>
-            <Groceries />
-          </TabPanel>
-          <TabPanel>
-            <Dishes />
-          </TabPanel>
+          <TabPanel>{isMap ? <Map /> : <Groceries />}</TabPanel>
+          <TabPanel>{isMap ? <Map /> : <Dishes />}</TabPanel>
         </TabPanels>
       </Tabs>
       <Flex mb='10px' justify='space-around'></Flex>
     </Container>
   );
 }
-
+function bStyle() {
+  return {
+    position: 'absolute',
+    marginLeft: '305px',
+    marginTop: '-45px',
+  };
+}
 function cStyle() {
   return {
     margin: '0',

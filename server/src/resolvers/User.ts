@@ -12,7 +12,7 @@ import {
 import { User } from "../entities/User";
 import * as argon2 from "argon2";
 import { MyContext } from '../types';
-import generateRandomImage from '../utils/generateRandomUrl';
+//import generateRandomImage from '../utils/generateRandomUrl';
 
 
 @InputType()
@@ -81,7 +81,7 @@ export class UserResolver {
   @Mutation(() => UserResponse)
   async createUser(
     @Arg("options") options: CreateUserInput,
-    @Ctx() {req} : MyContext
+    @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
     if (!options.username) {
       return {
@@ -115,7 +115,7 @@ export class UserResolver {
       };
     }
     const hashedPassword = await argon2.hash(options.password);
-    const randomURL = generateRandomImage();
+    //const randomURL = generateRandomImage();
     let user;
     try {
       const checkUser = await User.findOne({ email: options.email })
@@ -123,8 +123,8 @@ export class UserResolver {
         return {
           errors: [
             {
-            field: "email",
-            message: "Email already in use."
+              field: "email",
+              message: "Email already in use."
             }
           ]
         }
@@ -135,7 +135,7 @@ export class UserResolver {
         email: options.email,
         address: options.address,
         zipCode: options.zipCode,
-        img_url: randomURL,
+        img_url: options.img_url,
       }).save();
     } catch (err) {
       if (err) {
@@ -157,56 +157,56 @@ export class UserResolver {
   @Mutation(() => UserResponse)
   async userLogin(
     @Arg('options') options: UserLoginInput,
-    @Ctx() {req} : MyContext
-    ): Promise<UserResponse> {
+    @Ctx() { req }: MyContext
+  ): Promise<UserResponse> {
 
-      const user = await User.findOne({ email: options.email });
-      if (!user) {
-        return {
-          errors: [
-            {
-              field: "email",
-              message: "Email and password combination does not match."
-            }
-          ]
-        }
-      }
-      const validPasswordCheck = await argon2.verify(user.password, options.password);
-      if (!validPasswordCheck) {
-        return {
-          errors: [
-            {
-              field: "password",
-              message: "Password and password combination does not match."
-            }
-          ]
-        }
-      }
-      req.session.userId = user.id
-      return { user };
-    }
-
-    //Authentication query. Returns user or null
-    @Query(() => User, { nullable: true })
-    me(@Ctx() { req }: MyContext) {
-      if (!req.session.userId) {
-        return null;
-      }
-      return User.findOne(req.session.userId, { relations: ["chats", "items_owned", "items_taken"]});
-    }
-
-    @Mutation(() => Boolean)
-    logout(@Ctx() { req, res }: MyContext) {
-      return new Promise((resolve) =>
-        req.session.destroy((err) => {
-          res.clearCookie('qid');
-          if (err) {
-            console.log(err);
-            resolve(false);
-            return;
+    const user = await User.findOne({ email: options.email });
+    if (!user) {
+      return {
+        errors: [
+          {
+            field: "email",
+            message: "Email and password combination does not match."
           }
-          resolve(true);
-        })
-      );
+        ]
+      }
     }
+    const validPasswordCheck = await argon2.verify(user.password, options.password);
+    if (!validPasswordCheck) {
+      return {
+        errors: [
+          {
+            field: "password",
+            message: "Password and password combination does not match."
+          }
+        ]
+      }
+    }
+    req.session.userId = user.id
+    return { user };
+  }
+
+  //Authentication query. Returns user or null
+  @Query(() => User, { nullable: true })
+  me(@Ctx() { req }: MyContext) {
+    if (!req.session.userId) {
+      return null;
+    }
+    return User.findOne(req.session.userId, { relations: ["chats", "items_owned", "items_taken"] });
+  }
+
+  @Mutation(() => Boolean)
+  logout(@Ctx() { req, res }: MyContext) {
+    return new Promise((resolve) =>
+      req.session.destroy((err) => {
+        res.clearCookie('qid');
+        if (err) {
+          console.log(err);
+          resolve(false);
+          return;
+        }
+        resolve(true);
+      })
+    );
+  }
 }

@@ -17,6 +17,7 @@ query GET_ALL_ITEMS {
       address
       zipCode
       SICK_points
+      img_url
     }
     takers {
       username
@@ -24,6 +25,12 @@ query GET_ALL_ITEMS {
       address
       zipCode
       SICK_points
+      img_url
+    }
+    chats {
+      users {
+        id
+      }
     }
     createdAt
     updatedAt

@@ -9,6 +9,9 @@ export const user = (state = {}, action) => {
     case 'GET_INITIAL_USER': {
       return action.payload;
     }
+    case 'LOGOUT': {
+      return {};
+    }
     default:
       return state;
   }

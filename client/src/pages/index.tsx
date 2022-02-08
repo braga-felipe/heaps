@@ -7,6 +7,7 @@ import Home from '../components/Home/Home';
 import { useEffect } from 'react';
 import { getInitialUser } from '../redux/actions/user';
 import '@fontsource/lobster';
+import Avatar from '../components/Assets/Avatar';
 
 export interface State {
   user?;
@@ -21,6 +22,7 @@ const IndexPage: NextPage = () => {
     return data && data.getAllItems;
   };
 
+  // take care of async with then
   const getMeData = () => {
     const [{ data }] = useMeQuery();
     return data && data.me;
@@ -37,7 +39,8 @@ const IndexPage: NextPage = () => {
 
   return (
     <>
-      {meUser && (<Heading sx={HcStyle()}>Hello, {meUser.username}!</Heading>)}
+      {meUser && (<Heading sx={HcStyle()}>
+        Hello, {meUser.username}!</Heading>)}
       <Heading sx={HStyle()}>Heaps</Heading>
       <Home />
     </>
@@ -49,7 +52,7 @@ function HStyle() {
     fontFamily: 'Lobster',
     fontSize: '3xl',
     margin: '2%',
-    color: '#5D55B4;'
+    color: '#5D55B4;',
   };
 }
 

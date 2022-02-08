@@ -230,6 +230,13 @@ export type AcceptItemClaimMutationVariables = Exact<{
 
 export type AcceptItemClaimMutation = { __typename?: 'Mutation', takeItem: { __typename?: 'Item', id: number } };
 
+export type CreateChatMutationVariables = Exact<{
+  options: ChatCreateInput;
+}>;
+
+
+export type CreateChatMutation = { __typename?: 'Mutation', createChat: { __typename?: 'Chat', id: number } };
+
 export type Create_ItemMutationVariables = Exact<{
   options: ItemCreateInput;
 }>;
@@ -273,7 +280,7 @@ export type User_LoginMutation = { __typename?: 'Mutation', userLogin: { __typen
 export type Get_All_ItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Get_All_ItemsQuery = { __typename?: 'Query', getAllItems?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, ownerId: number, createdAt: string, updatedAt: string, owner: { __typename?: 'User', username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined }, takers: Array<{ __typename?: 'User', username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined }> }> | null | undefined };
+export type Get_All_ItemsQuery = { __typename?: 'Query', getAllItems?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, ownerId: number, createdAt: string, updatedAt: string, owner: { __typename?: 'User', username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, img_url?: string | null | undefined }, takers: Array<{ __typename?: 'User', username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, img_url?: string | null | undefined }>, chats: Array<{ __typename?: 'Chat', users: Array<{ __typename?: 'User', id: number }> }> }> | null | undefined };
 
 export type Get_All_UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -327,6 +334,17 @@ export const AcceptItemClaimDocument = gql`
 
 export function useAcceptItemClaimMutation() {
   return Urql.useMutation<AcceptItemClaimMutation, AcceptItemClaimMutationVariables>(AcceptItemClaimDocument);
+};
+export const CreateChatDocument = gql`
+    mutation CreateChat($options: ChatCreateInput!) {
+  createChat(options: $options) {
+    id
+  }
+}
+    `;
+
+export function useCreateChatMutation() {
+  return Urql.useMutation<CreateChatMutation, CreateChatMutationVariables>(CreateChatDocument);
 };
 export const Create_ItemDocument = gql`
     mutation CREATE_ITEM($options: ItemCreateInput!) {
@@ -459,6 +477,7 @@ export const Get_All_ItemsDocument = gql`
       address
       zipCode
       SICK_points
+      img_url
     }
     takers {
       username
@@ -466,6 +485,12 @@ export const Get_All_ItemsDocument = gql`
       address
       zipCode
       SICK_points
+      img_url
+    }
+    chats {
+      users {
+        id
+      }
     }
     createdAt
     updatedAt

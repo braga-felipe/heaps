@@ -3,7 +3,6 @@ import { VStack, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
 
 export default function Icons({ item }) {
-  console.log({ item });
   const nut =
     item && item?.allergies.includes('nutFree') ? '/nut.png' : '/nut-not.png';
   const lactose =

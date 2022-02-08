@@ -1,0 +1,9 @@
+import moment from 'moment';
+
+const timestamp = 1644220720573;
+const date = moment(1644220720573).calendar();
+date;
+
+const formated = moment(date).calendar();
+
+date;

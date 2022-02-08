@@ -3,6 +3,7 @@ import Cooking from '../Assets/Cooking';
 import ItemList from '../ItemList/ItemList';
 import { Box, Container, Flex, Heading } from '@chakra-ui/react';
 import Auth from '../Auth';
+
 export default function Dashboard() {
   return (
     <Auth>
