@@ -1,61 +1,75 @@
-import React, { useState, useEffect, SetStateAction, Dispatch } from "react";
-import FocusLock from 'react-focus-lock';
-import { ChakraProvider, FormLabel, FormControl, Stack, ButtonGroup, Button, Box, Popover, PopoverTrigger, IconButton, PopoverArrow, PopoverContent, PopoverCloseButton, useDisclosure, Input, PopoverHeader, PopoverBody } from "@chakra-ui/react";
-import { EditIcon } from '@chakra-ui/icons';
+import React, { useState, SetStateAction, Dispatch } from "react";
+import {
+  ChakraProvider,
+  FormLabel,
+  Button,
+  Box,
+  Popover,
+  PopoverTrigger,
+  PopoverArrow,
+  PopoverContent,
+  Input,
+} from "@chakra-ui/react";
+import { useUpdate_UserMutation } from "../../generated/graphql";
 
+interface ReturnType {
+  value: boolean;
+  setValue: Dispatch<SetStateAction<boolean>>;
+  setTrue: () => void;
+  setFalse: () => void;
+  toggle: () => void;
+}
 
-
-export const PopoverForm = () => {
-  const [name, setName] = useState('');
-  const [streetAddress, setStreetAddress] = useState('');
-  const [zipCode, setZipCode] = useState('');
-
-  console.log(name, streetAddress, zipCode)
-  interface ReturnType {
-    value: boolean
-    setValue: Dispatch<SetStateAction<boolean>>
-    setTrue: () => void
-    setFalse: () => void
-    toggle: () => void
-  }
+export const PopoverForm = ({ userProfile, onClick }) => {
+  const [name, setName] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [res, updateUser] = useUpdate_UserMutation();
 
   function useBoolean(defaultValue?: boolean): ReturnType {
-    const [value, setValue] = useState(!!defaultValue)
+    const [value, setValue] = useState(!!defaultValue);
 
     const setTrue = () => setValue(true);
     const setFalse = () => setValue(false);
-    const toggle = () => setValue(x => !x);
+    const toggle = () => setValue((x) => !x);
 
-    return { value, setValue, setTrue, setFalse, toggle }
+    return { value, setValue, setTrue, setFalse, toggle };
   }
-
 
   const { value, setValue, setTrue, setFalse, toggle } = useBoolean(false);
 
-  function handleClickSubmit () {
+  function handleClickSubmit() {
     if (value === false) {
       setValue(true);
-      setName('');
-      setStreetAddress('');
-      setZipCode('');
     } else {
       setValue(false);
-      setName('');
-      setStreetAddress('');
-      setZipCode('');
+      updateUser({
+        options: {
+          id: userProfile.id,
+          username: name,
+          address: streetAddress,
+          zipCode: zipCode,
+        },
+      });
     }
   }
 
   return (
     <ChakraProvider>
       <Box p={2}>
-        <Popover placement="auto-start" >
-          <PopoverTrigger >
-            <Button onClick={handleClickSubmit} size="xs" colorScheme="blue" sx={{ marginTop: "10px" }}>
+        <Popover placement="auto-start">
+          <PopoverTrigger>
+            <Button
+              user={userProfile}
+              onClick={handleClickSubmit}
+              size="xs"
+              colorScheme="blue"
+              sx={{ marginTop: "10px" }}
+            >
               {value ? "Save" : "Edit"}
             </Button>
           </PopoverTrigger>
-          <PopoverContent >
+          <PopoverContent>
             <FormLabel htmlFor={"Name"}>{"Name"}</FormLabel>
             <Input onChange={(e) => setName(e.target.value)} />
             <FormLabel htmlFor={"Street Address"}>{"Street Address"}</FormLabel>
@@ -68,4 +82,4 @@ export const PopoverForm = () => {
       </Box>
     </ChakraProvider>
   );
-}
+};
