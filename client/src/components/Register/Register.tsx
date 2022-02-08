@@ -66,7 +66,7 @@ export default function Register() {
                     <Radio value='avatar3' id='3'>
                       <Avatar avatar='avatar3' />
                     </Radio>
-                    <Radio value='iavatar4' id='4'>
+                    <Radio value='avatar4' id='4'>
                       <Avatar avatar='avatar4' />
                     </Radio>
                   </VStack>
