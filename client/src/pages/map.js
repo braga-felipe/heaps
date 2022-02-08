@@ -9,10 +9,15 @@ export default function Home() {
     longitude: 0,
     latitude: 0,
   });
-
+  console.log('POSITION INDEX: ' + position);
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       function (position) {
+        console.log(
+          'COORDINATES: ',
+          position.coords.latitude,
+          position.coords.longitude
+        );
         setPosition({
           longitude: position.coords.longitude,
           latitude: position.coords.latitude,
@@ -25,12 +30,10 @@ export default function Home() {
     );
   }, []);
 
-  const defaultPosition = [52.494626979101454, 13.411428028821229];
-
   return (
     <Container>
       <MapContainer>
-        <Map defaultPosition={defaultPosition} location={position} />
+        <Map position={position} />
       </MapContainer>
     </Container>
   );

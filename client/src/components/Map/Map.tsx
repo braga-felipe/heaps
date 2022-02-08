@@ -52,7 +52,7 @@ export default function Map() {
 function bStyle() {
   return {
     width: '365px',
-    marginTop: '80px',
+    marginTop: '150px',
     marginLeft: '-12px',
     minHeight: '80px',
     maxHeight: '500px',
@@ -63,6 +63,7 @@ function bStyle() {
 }
 function searchStyle() {
   return {
+    // position: 'absolute',
     borderRadius: '12px 12px 0 0',
     width: '342px',
     margin: '0',
