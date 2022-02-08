@@ -8,11 +8,13 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { getInitialUser } from '../../redux/actions/user';
 import MysticPan from '../Assets/mysticPan';
+
 interface User {
   email: string;
   password: string;
 }
 export default function Login() {
+
   const [res, getUser] = useUser_LoginMutation();
   console.log('LOGIN DATA: ', res.data?.userLogin.user);
   const router = useRouter();
