@@ -1,6 +1,6 @@
-import { Box, Container, Heading } from '@chakra-ui/react';
-import React from 'react';
-import Loading from '../Assets/Loading';
+import { Box, Button, Container, Heading } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { render } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { useGetChatMessagesQuery } from '../../generated/graphql';
 import { State } from '../../pages';
@@ -9,32 +9,45 @@ import { ClaimButton } from './ClaimButton';
 import { MessagesList } from './MessagesList';
 
 interface MessagesContainerProps {
-  variables;
-  myID;
+  chatId;
 }
 
 export const MessagesContainer: React.FC<MessagesContainerProps> = ({
-  variables,
-  myID,
+  chatId
 }) => {
+ 
   const [res, updateMessages] = useGetChatMessagesQuery({
-    variables: variables,
+    variables: {
+      getChatId: chatId
+    }
   });
+ 
 
   const { data, error, fetching } = res;
   const user = useSelector((state: State) => state.user);
-  console.log({ user });
 
   if (error) {
     console.log(error);
     return <h1>Error Fetching Lobby</h1>;
   }
+
   if (fetching) {
-    return <Loading />;
+    return (
+      <>
+        <Container sx={cStyle()}>
+          <Box display='flex' alignItems='center' flexDirection='row'>
+            <Heading ml='9px'>Chat Loading</Heading>
+          </Box>
+          <MessagesList user={user} messages={[]} chatId={null}></MessagesList>
+        </Container>
+      </>
+    );
+
   }
 
   if (data) {
     const messages = data.getChat.messages;
+    chatId = data.getChat.id;
     const requester = data.getChat.users
       .filter((user) => user.id !== data.getChat.userOwnerId)
       .pop();
@@ -49,11 +62,11 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
             <ClaimButton
               userOwnerId={data.getChat.userOwnerId}
               requesterId={requester.id}
-              myID={myID}
+              myID={user.id}
               itemID={data.getChat.item.id}></ClaimButton>
           </Box>
           <Box sx={bStyle()}>
-            <MessagesList user={user} messages={messages}></MessagesList>
+            <MessagesList user={user} messages={messages} chatId={chatId}></MessagesList>
           </Box>
           <Box>
             <ChatInputForm

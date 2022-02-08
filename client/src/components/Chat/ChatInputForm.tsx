@@ -4,47 +4,47 @@ import { OperationContext } from 'urql';
 import { useCreateMessageMutation } from '../../generated/graphql';
 
 interface ChatInputFormProps {
-  chatId: number;
   updateMessages: (opts?: Partial<OperationContext>) => void;
-  myID: number;
-  fetching: boolean;
 }
 
 export const ChatInputForm: React.FC<ChatInputFormProps> = ({
-  chatId,
   updateMessages,
-  myID,
-  fetching,
 }) => {
-  const [, sendMessage] = useCreateMessageMutation();
 
   const [message, updateMessage] = useState({
     text: '',
   });
 
-  async function handleSend(message) {
-    await sendMessage({
-      options: { text: message.text, currentUserId: myID, chatId: chatId },
-    });
-    updateMessages();
-  }
-
   function handleChange(evt) {
     updateMessage({ text: evt.target.value });
-    console.log(message);
   }
 
   return (
     <FormControl>
       <Box width='100%' display='flex' flex-direction='row'>
         <Input
+          value={message.text}
           width='300px'
           margin='3px 3px 0px 3px'
           name='chatInput'
           placeholder='Type your message here'
           onChange={handleChange}
         />
-        {fetching ? (
+        <Button
+          background='primaryActive'
+          color='white'
+          margin='3px 3px 0px 3px'
+          name='Send'
+          type='submit'
+          onClick={(event) => {
+            event.preventDefault();
+            updateMessages(message);
+            updateMessage({text:''});
+          }}>
+          Send
+        </Button>
+
+<!--         {fetching ? (
           <Button
             isLoading
             background='primaryActive'
@@ -65,7 +65,8 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
             onClick={() => handleSend(message)}>
             Send
           </Button>
-        )}
+        )} -->
+
       </Box>
     </FormControl>
   );
