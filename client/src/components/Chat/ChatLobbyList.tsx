@@ -1,4 +1,5 @@
-import { Box, Link, Button, Container, Heading } from '@chakra-ui/react';
+import { Box, IconButton, Button, Container, Heading } from '@chakra-ui/react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import Lobby from '../Assets/Lobby';
 import Loading from '../Assets/Loading';
 import React, { useState } from 'react';
@@ -57,8 +58,14 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
 
   return isMessage ? (
     <>
+      <IconButton
+        aria-label='Back to Lobby'
+        icon={<ArrowBackIcon />}
+        sx={btnStyle()}
+        onClick={() => setIsMessage(false)}>
+        {'<'}
+      </IconButton>
       <MessagesContainer myID={myId} variables={variables} />
-      <Button onClick={() => setIsMessage(false)}>Back to lobby</Button>
     </>
   ) : (
     <Container>
@@ -90,6 +97,12 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
     </Container>
   );
 };
+function btnStyle() {
+  return {
+    position: 'absolute',
+    margin: '-2px 0 0 320px',
+  };
+}
 
 function bStyle() {
   return {
@@ -101,4 +114,5 @@ function bStyle() {
     border: '1px solid #E2E8F0',
   };
 }
+
 export default ChatLobbyList;
