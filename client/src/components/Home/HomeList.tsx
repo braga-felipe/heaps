@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { State } from '../../pages/index';
-import { Container, VStack } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
 import ItemCard from '../ItemList/ItemCard';
 import SearchBar from '../../components/SeachBar/SearchBar';
 

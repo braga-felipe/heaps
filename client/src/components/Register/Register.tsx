@@ -4,7 +4,18 @@ import { getInitialUser } from '../../redux/actions/user';
 import { Formik, Form } from 'formik';
 import InputField from '../ChakraUiComponents/InputField';
 import SubmitButton from '../ChakraUiComponents/Button';
-import { FormControl, FormLabel, Container, Heading, Text, Link, VStack, HStack, RadioGroup, Radio } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormLabel,
+  Container,
+  Heading,
+  Text,
+  Link,
+  VStack,
+  HStack,
+  RadioGroup,
+  Radio,
+} from '@chakra-ui/react';
 import { useCreate_UserMutation } from '../../generated/graphql';
 import { useRouter } from 'next/router';
 import UserAvatar from './UserAvatar';
@@ -53,7 +64,9 @@ export default function Register() {
           <Form>
             <Heading>Register</Heading>
             <FormControl as='fieldset'>
-              <FormLabel as='legend'>Select a Avatar for your Profile</FormLabel>
+              <FormLabel as='legend'>
+                Select a Avatar for your Profile
+              </FormLabel>
               <HStack>
                 <RadioGroup onChange={setRadio} value={radio}>
                   <VStack spacing='24px'>
@@ -66,7 +79,7 @@ export default function Register() {
                     <Radio value='avatar3' id='3'>
                       <Avatar avatar='avatar3' />
                     </Radio>
-                    <Radio value='iavatar4' id='4'>
+                    <Radio value='avatar4' id='4'>
                       <Avatar avatar='avatar4' />
                     </Radio>
                   </VStack>

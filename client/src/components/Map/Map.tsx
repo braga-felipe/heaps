@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Container } from '@chakra-ui/react';
 import MapAnim from '../Assets/mapAnimation';
+import Leaflet from './Leaflet';
 import { useSelector } from 'react-redux';
 import { State } from '../../pages';
 import SearchBar from '../SeachBar/SearchBar';
@@ -42,7 +43,8 @@ export default function Map() {
         <SearchBar onChange={filter} items={items} />
       </Container>
       <Box sx={bStyle()}>
-        <MapAnim />
+        <Leaflet />
+        {/* <MapAnim /> */}
       </Box>
     </>
   );

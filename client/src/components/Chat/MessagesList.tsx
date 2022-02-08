@@ -1,14 +1,6 @@
 import { Box, Container, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import moment from 'moment';
-import { OperationContext } from 'urql';
-import {
-  useCreateMessageMutation,
-  useGetChatMessagesQuery,
-} from '../../generated/graphql';
-import { ChatInputForm } from './ChatInputForm';
-import { ChatBubble } from './ChatBubble';
-
 interface MessagesListProps {
   user;
   messages;
@@ -23,37 +15,37 @@ export const MessagesList: React.FC<MessagesListProps> = ({
       <Heading sx={hStyle()} size='sm'>
         Your Messages
       </Heading>
-      <Box sx={bStyle()}>
-        {messages.map((message, index) => {
-          return (
-            <Box key={index}>
-              <Container sx={msgStyle(user, message)} key={message.id}>
-                <Text fontSize='lg' sx={txtStyle()}>
-                  {message.text}
-                </Text>
-                {/* <br /> */}
-                <Text fontSize='xs' sx={timeStyle()}>
-                  {moment(parseInt(message.createdAt)).calendar()}
-                </Text>
-              </Container>
-            </Box>
-          );
-        })}
-      </Box>
+      {/* <Box sx={bStyle()}> */}
+      {messages.map((message, index) => {
+        return (
+          <Box key={index}>
+            <Container sx={msgStyle(user, message)} key={message.id}>
+              <Text fontSize='lg' sx={txtStyle()}>
+                {message.text}
+              </Text>
+              {/* <br /> */}
+              <Text fontSize='xs' sx={timeStyle()}>
+                {moment(parseInt(message.createdAt)).calendar()}
+              </Text>
+            </Container>
+          </Box>
+        );
+      })}
+      {/* </Box> */}
     </>
   );
 };
 
-function bStyle() {
-  return {
-    width: '100%',
-    height: '600px',
-    overflowY: 'scroll',
-    borderRadius: '15px',
-    border: '1px solid #E2E8F0',
-    marginLeft: '5px',
-  };
-}
+// function bStyle() {
+//   return {
+//     width: '100%',
+//     height: '650px',
+//     overflowY: 'scroll',
+//     borderRadius: '15px',
+//     border: '1px solid #E2E8F0',
+//     marginLeft: '5px',
+//   };
+// }
 function hStyle() {
   return {
     marginLeft: '10px',

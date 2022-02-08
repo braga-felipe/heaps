@@ -1,6 +1,6 @@
-import { Box, Button, Container, Heading } from '@chakra-ui/react';
+import { Box, Container, Heading } from '@chakra-ui/react';
 import React from 'react';
-import { render } from 'react-dom';
+import Loading from '../Assets/Loading';
 import { useSelector } from 'react-redux';
 import { useGetChatMessagesQuery } from '../../generated/graphql';
 import { State } from '../../pages';
@@ -30,7 +30,7 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
     return <h1>Error Fetching Lobby</h1>;
   }
   if (fetching) {
-    return <h1>Fetching Lobby</h1>;
+    return <Loading />;
   }
 
   if (data) {
@@ -43,16 +43,21 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
       <>
         <Container sx={cStyle()}>
           <Box display='flex' alignItems='center' flexDirection='row'>
-            <Heading ml='9px'>{data.getChat.item.name}</Heading>
+            <Heading ml='9px' width='195px' isTruncated>
+              {data.getChat.item.name}
+            </Heading>
             <ClaimButton
               userOwnerId={data.getChat.userOwnerId}
               requesterId={requester.id}
               myID={myID}
               itemID={data.getChat.item.id}></ClaimButton>
           </Box>
-          <MessagesList user={user} messages={messages}></MessagesList>
+          <Box sx={bStyle()}>
+            <MessagesList user={user} messages={messages}></MessagesList>
+          </Box>
           <Box>
             <ChatInputForm
+              fetching={fetching}
               chatId={variables.getChatId}
               updateMessages={updateMessages}
               myID={myID}></ChatInputForm>
@@ -65,11 +70,23 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
 
 function cStyle() {
   return {
-    margin: '5px',
+    margin: '15px 5px 5px 5px',
     padding: '0',
     display: 'flex',
     // alignItems: 'center',
     flexDirection: 'column',
     width: '95%',
+  };
+}
+
+function bStyle() {
+  return {
+    width: '100%',
+    height: '655px',
+    overflowY: 'scroll',
+    borderRadius: '15px',
+    border: '1px solid #E2E8F0',
+    marginLeft: '5px',
+    marginTop: '8px',
   };
 }
