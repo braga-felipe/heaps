@@ -39,17 +39,18 @@ export default function UserProfile() {
   //     const [{ data }] = useMeQuery();
   //     return data && data.me;
   //   };
-  //   const data = getMeData();
-  //   const userMe = useMeQuery();
-  //   // if(data) console.log('data ', user)
-  //   const [user, setUser] = useState(userMe);
+    // const data = getMeData();
+    const userMe = useMeQuery();
+    // if(data) console.log('data ', user)
+    const [user, setUser] = useState(userMe);
 
-  // useEffect (() => {
-  // userMe;
-  // setUser(userMe);
 
-  // }, [user, userMe])
-  // console.log('user profile', user[0].data.me);
+  useEffect (() => {
+    userMe;
+
+  }, [user, userMe])
+
+  console.log('user profile', user);
 
 
   return (
@@ -68,11 +69,11 @@ export default function UserProfile() {
                   name="Random Guy"
                   src="https://bit.ly/dan-abramov"
                 />
-                <Heading>{user.username}</Heading>
+                <Heading>{user[0]?.data?.me?.username}</Heading>
                 <Text color="gray">
-                  {user.address} {", "} {user.zipCode}
+                  {user[0]?.data?.me?.address} {", "} {user[0]?.data?.me?.zipCode}
                 </Text>
-                <Text>{user.email}</Text>
+                <Text>{user[0]?.data?.me?.email}</Text>
               </VStack>
             </WrapItem>
           </Wrap>
@@ -81,7 +82,7 @@ export default function UserProfile() {
       <Container mt={4} sx={{ border: "1px solid" }}>
         <VStack sx={{ margin: "10px" }}>
           <Text>{"Current Items"}</Text>
-          {user.items_owned?.map((data) => (
+          {user[0]?.data?.me?.items_owned?.map((data) => (
             <Tag colorScheme="blue" key={data.id}>
             </Tag>
           ))}

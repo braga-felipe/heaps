@@ -35,8 +35,14 @@ export const PopoverForm = () => {
   function handleClickSubmit () {
     if (value === false) {
       setValue(true);
+      setName('');
+      setStreetAddress('');
+      setZipCode('');
     } else {
       setValue(false);
+      setName('');
+      setStreetAddress('');
+      setZipCode('');
     }
   }
 
@@ -44,7 +50,7 @@ export const PopoverForm = () => {
     <ChakraProvider>
       <Box p={2}>
         <Popover placement="auto-start" >
-          <PopoverTrigger>
+          <PopoverTrigger >
             <Button onClick={handleClickSubmit} size="xs" colorScheme="blue" sx={{ marginTop: "10px" }}>
               {value ? "Save" : "Edit"}
             </Button>
