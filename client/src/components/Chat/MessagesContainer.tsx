@@ -42,6 +42,7 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
         </Container>
       </>
     );
+
   }
 
   if (data) {
@@ -55,14 +56,25 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
       <>
         <Container sx={cStyle()}>
           <Box display='flex' alignItems='center' flexDirection='row'>
-            <Heading ml='9px'>{data.getChat.item.name}</Heading>
+            <Heading ml='9px' width='195px' isTruncated>
+              {data.getChat.item.name}
+            </Heading>
             <ClaimButton
               userOwnerId={data.getChat.userOwnerId}
               requesterId={requester.id}
               myID={user.id}
               itemID={data.getChat.item.id}></ClaimButton>
           </Box>
-          <MessagesList user={user} messages={messages} chatId={chatId}></MessagesList>
+          <Box sx={bStyle()}>
+            <MessagesList user={user} messages={messages} chatId={chatId}></MessagesList>
+          </Box>
+          <Box>
+            <ChatInputForm
+              fetching={fetching}
+              chatId={variables.getChatId}
+              updateMessages={updateMessages}
+              myID={myID}></ChatInputForm>
+          </Box>
         </Container>
       </>
     );
@@ -71,11 +83,23 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
 
 function cStyle() {
   return {
-    margin: '5px',
+    margin: '15px 5px 5px 5px',
     padding: '0',
     display: 'flex',
     // alignItems: 'center',
     flexDirection: 'column',
     width: '95%',
+  };
+}
+
+function bStyle() {
+  return {
+    width: '100%',
+    height: '655px',
+    overflowY: 'scroll',
+    borderRadius: '15px',
+    border: '1px solid #E2E8F0',
+    marginLeft: '5px',
+    marginTop: '8px',
   };
 }

@@ -1,9 +1,10 @@
-import { ObjectType, Field, Int } from "type-graphql";
+import { ObjectType, Field, Int, InputType } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, BaseEntity, OneToMany, ManyToMany} from 'typeorm';
 import { Item } from './Item';
 import { Chat } from './Chat';
 
 @ObjectType()
+@InputType()
 @Entity()
 export class User extends BaseEntity {
 

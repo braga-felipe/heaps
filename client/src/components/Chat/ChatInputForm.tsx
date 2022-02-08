@@ -1,6 +1,5 @@
-import { Box, Input, Button } from '@chakra-ui/react';
+import { Box, Input, Button, FormControl } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { OperationContext } from 'urql';
 import { useCreateMessageMutation } from '../../generated/graphql';
 
@@ -9,9 +8,7 @@ interface ChatInputFormProps {
 }
 
 export const ChatInputForm: React.FC<ChatInputFormProps> = ({
-
   updateMessages,
-
 }) => {
 
   const [message, updateMessage] = useState({
@@ -23,7 +20,7 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
   }
 
   return (
-    <>
+    <FormControl>
       <Box width='100%' display='flex' flex-direction='row'>
         <Input
           value={message.text}
@@ -46,7 +43,31 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
           }}>
           Send
         </Button>
+
+<!--         {fetching ? (
+          <Button
+            isLoading
+            background='primaryActive'
+            color='white'
+            margin='3px 3px 0px 3px'
+            name='Send'
+            type='submit'
+            onClick={() => handleSend(message)}>
+            Send
+          </Button>
+        ) : (
+          <Button
+            background='primaryActive'
+            color='white'
+            margin='3px 3px 0px 3px'
+            name='Send'
+            type='submit'
+            onClick={() => handleSend(message)}>
+            Send
+          </Button>
+        )} -->
+
       </Box>
-    </>
+    </FormControl>
   );
 };

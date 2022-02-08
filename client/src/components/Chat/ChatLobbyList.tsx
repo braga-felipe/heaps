@@ -1,5 +1,7 @@
-import { Box, Link, Button, Container, Heading } from '@chakra-ui/react';
+import { Box, IconButton, Button, Container, Heading } from '@chakra-ui/react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import Lobby from '../Assets/Lobby';
+import Loading from '../Assets/Loading';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetMyChatsQuery } from '../../generated/graphql';
@@ -29,7 +31,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
     return <h1>Error Fetching Lobby</h1>;
   }
   if (fetching) {
-    return <h1>Fetching Lobby</h1>;
+    return <Loading />;
   }
   if (data) {
   
@@ -51,8 +53,14 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
 
   return isMessage ? (
     <>
-      <MessagesContainer chatId={targetId} />
-      <Button onClick={() => setIsMessage(false)}>Back to lobby</Button>
+      <IconButton
+        aria-label='Back to Lobby'
+        icon={<ArrowBackIcon />}
+        sx={btnStyle()}
+        onClick={() => setIsMessage(false)}>
+        {'<'}
+      </IconButton>
+  <MessagesContainer chatId={targetId} />
     </>
   ) : (
     <Container>
@@ -84,6 +92,12 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
     </Container>
   );
 };
+function btnStyle() {
+  return {
+    position: 'absolute',
+    margin: '-2px 0 0 320px',
+  };
+}
 
 function bStyle() {
   return {
@@ -95,4 +109,5 @@ function bStyle() {
     border: '1px solid #E2E8F0',
   };
 }
+
 export default ChatLobbyList;
