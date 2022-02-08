@@ -1,6 +1,8 @@
 import { Box, Container, Heading, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import moment from 'moment';
+import { useCreateMessageMutation } from '../../generated/graphql';
+import { ChatInputForm } from './ChatInputForm';
 interface MessagesListProps {
   user;
   messages;
@@ -10,16 +12,21 @@ interface MessagesListProps {
 export const MessagesList: React.FC<MessagesListProps> = ({
   user,
   messages,
-  chatId
+  chatId,
 }) => {
   const [messageState, updateMessageState] = useState(messages);
   const [, sendMessage] = useCreateMessageMutation();
 
   async function handleSend(message) {
-    const messageSent = await sendMessage({
-      options: { text: message.text, currentUserId: user.id, chatId: chatId },
-    });
-    updateMessageState([...messageState, messageSent.data.createMessage]);
+    try {
+      const messageSent = await sendMessage({
+        options: { text: message.text, currentUserId: user.id, chatId: chatId },
+      });
+      updateMessageState([...messageState, messageSent.data.createMessage]);
+      console.log({ messageSent });
+    } catch (error) {
+      console.log({ error });
+    }
   }
 
   return (
@@ -27,42 +34,40 @@ export const MessagesList: React.FC<MessagesListProps> = ({
       <Heading sx={hStyle()} size='sm'>
         Your Messages
       </Heading>
-      {/* <Box sx={bStyle()}> */}
-      {messageState.map((message, index) => {
-        return (
-          <Box key={index}>
-            <Container sx={msgStyle(user, message)} key={message.id}>
-              <Text fontSize='lg' sx={txtStyle()}>
-                {message.text}
-              </Text>
-              {/* <br /> */}
-              <Text fontSize='xs' sx={timeStyle()}>
-                {moment(parseInt(message.createdAt)).calendar()}
-              </Text>
-            </Container>
-          </Box>
-        );
-      })}
-         <Box>
-            <ChatInputForm
-              updateMessages={handleSend}
-            ></ChatInputForm>
-        </Box>
-      {/* </Box> */}
+      <Box sx={bStyle()}>
+        {messageState.map((message, index) => {
+          return (
+            <Box key={index}>
+              <Container sx={msgStyle(user, message)} key={message.id}>
+                <Text fontSize='lg' sx={txtStyle()}>
+                  {message.text}
+                </Text>
+                {/* <br /> */}
+                <Text fontSize='xs' sx={timeStyle()}>
+                  {moment(parseInt(message.createdAt)).calendar()}
+                </Text>
+              </Container>
+            </Box>
+          );
+        })}
+      </Box>
+      <Box>
+        <ChatInputForm updateMessages={handleSend}></ChatInputForm>
+      </Box>
     </>
   );
 };
 
-// function bStyle() {
-//   return {
-//     width: '100%',
-//     height: '650px',
-//     overflowY: 'scroll',
-//     borderRadius: '15px',
-//     border: '1px solid #E2E8F0',
-//     marginLeft: '5px',
-//   };
-// }
+function bStyle() {
+  return {
+    width: '100%',
+    height: '650px',
+    overflowY: 'scroll',
+    borderRadius: '15px',
+    border: '1px solid #E2E8F0',
+    marginLeft: '5px',
+  };
+}
 function hStyle() {
   return {
     marginLeft: '10px',

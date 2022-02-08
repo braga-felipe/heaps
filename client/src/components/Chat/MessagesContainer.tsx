@@ -1,10 +1,8 @@
 import { Box, Button, Container, Heading } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { render } from 'react-dom';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useGetChatMessagesQuery } from '../../generated/graphql';
 import { State } from '../../pages';
-import { ChatInputForm } from './ChatInputForm';
 import { ClaimButton } from './ClaimButton';
 import { MessagesList } from './MessagesList';
 
@@ -13,15 +11,13 @@ interface MessagesContainerProps {
 }
 
 export const MessagesContainer: React.FC<MessagesContainerProps> = ({
-  chatId
+  chatId,
 }) => {
- 
   const [res, updateMessages] = useGetChatMessagesQuery({
     variables: {
-      getChatId: chatId
-    }
+      getChatId: chatId,
+    },
   });
- 
 
   const { data, error, fetching } = res;
   const user = useSelector((state: State) => state.user);
@@ -42,7 +38,6 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
         </Container>
       </>
     );
-
   }
 
   if (data) {
@@ -65,16 +60,12 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
               myID={user.id}
               itemID={data.getChat.item.id}></ClaimButton>
           </Box>
-          <Box sx={bStyle()}>
-            <MessagesList user={user} messages={messages} chatId={chatId}></MessagesList>
-          </Box>
-          <Box>
-            <ChatInputForm
-              fetching={fetching}
-              chatId={variables.getChatId}
-              updateMessages={updateMessages}
-              myID={myID}></ChatInputForm>
-          </Box>
+          {/* <Box sx={bStyle()}> */}
+          <MessagesList
+            user={user}
+            messages={messages}
+            chatId={chatId}></MessagesList>
+          {/* </Box> */}
         </Container>
       </>
     );

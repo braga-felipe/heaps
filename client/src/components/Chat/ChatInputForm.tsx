@@ -10,7 +10,6 @@ interface ChatInputFormProps {
 export const ChatInputForm: React.FC<ChatInputFormProps> = ({
   updateMessages,
 }) => {
-
   const [message, updateMessage] = useState({
     text: '',
   });
@@ -20,31 +19,30 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
   }
 
   return (
-    <FormControl>
-      <Box width='100%' display='flex' flex-direction='row'>
-        <Input
-          value={message.text}
-          width='300px'
-          margin='3px 3px 0px 3px'
-          name='chatInput'
-          placeholder='Type your message here'
-          onChange={handleChange}
-        />
-        <Button
-          background='primaryActive'
-          color='white'
-          margin='3px 3px 0px 3px'
-          name='Send'
-          type='submit'
-          onClick={(event) => {
-            event.preventDefault();
-            updateMessages(message);
-            updateMessage({text:''});
-          }}>
-          Send
-        </Button>
+    <Box width='100%' display='flex' flex-direction='row'>
+      <Input
+        value={message.text}
+        width='300px'
+        margin='3px 3px 0px 3px'
+        name='chatInput'
+        placeholder='Type your message here'
+        onChange={handleChange}
+      />
+      <Button
+        background='primaryActive'
+        color='white'
+        margin='3px 3px 0px 3px'
+        name='Send'
+        type='submit'
+        onClick={(event) => {
+          event.preventDefault();
+          updateMessages(message);
+          updateMessage({ text: '' });
+        }}>
+        Send
+      </Button>
 
-<!--         {fetching ? (
+      {/* <!--         {fetching ? (
           <Button
             isLoading
             background='primaryActive'
@@ -65,9 +63,7 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
             onClick={() => handleSend(message)}>
             Send
           </Button>
-        )} -->
-
-      </Box>
-    </FormControl>
+        )} --> */}
+    </Box>
   );
 };
