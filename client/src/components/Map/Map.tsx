@@ -43,8 +43,8 @@ export default function Map() {
         <SearchBar onChange={filter} items={items} />
       </Container>
       <Box sx={bStyle()}>
-        {/* <Leaflet /> */}
-        <MapAnim />
+        <Leaflet />
+        {/* <MapAnim /> */}
       </Box>
     </>
   );

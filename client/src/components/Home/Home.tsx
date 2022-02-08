@@ -4,7 +4,8 @@ import Dishes from './Dishes';
 import Loading from '../Assets/Loading';
 // import { useRouter } from 'next/router';
 import Grocery from '../Assets/Grocery';
-import Map from '../Map/Map';
+// import Map from '../Map/Map';
+import Map from '../../pages/map';
 import {
   Button,
   Tabs,
