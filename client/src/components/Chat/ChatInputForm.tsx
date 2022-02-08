@@ -22,9 +22,11 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
   });
 
   async function handleSend(message) {
-    await sendMessage({
+    console.log(myID, 'myID', chatId, 'chatID' );
+    const messageSent = await sendMessage({
       options: { text: message.text, currentUserId: myID, chatId: chatId },
     });
+    console.log(messageSent);
     updateMessages();
   }
 

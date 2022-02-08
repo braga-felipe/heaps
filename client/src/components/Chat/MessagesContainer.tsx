@@ -15,7 +15,6 @@ interface MessagesContainerProps {
 export const MessagesContainer: React.FC<MessagesContainerProps> = ({
   chatId
 }) => {
-
   const [res, updateMessages] = useGetChatMessagesQuery({
     variables: {
       getChatId: chatId
@@ -35,6 +34,7 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
 
   if (data) {
     const messages = data.getChat.messages;
+    chatId = data.getChat.id;
     const requester = data.getChat.users
       .filter((user) => user.id !== data.getChat.userOwnerId)
       .pop();

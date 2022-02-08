@@ -1,6 +1,7 @@
 import React from 'react';
 import ChatLobbyList from '../components/Chat/ChatLobbyList';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 interface chatLobbyProps {
 
