@@ -17,14 +17,12 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
   bool,
   tid,
 }) => {
+  console.log('renderng chat lobby')
   const [res, refreshLobby] = useGetMyChatsQuery();
   const { data, error, fetching } = res;
 
   const [isMessage, setIsMessage] = useState(bool ? bool : false);
   const [targetId, setTargetId] = useState(tid ? tid : 0);
-
-  const user = useSelector((state: State) => state.user);
-  console.log('CHATLOBBY USER', { user });
 
   if (error) {
     console.log(error);

@@ -1,5 +1,5 @@
 import { Box, Container, Heading, Text } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { OperationContext } from 'urql';
 import {
@@ -12,19 +12,31 @@ import { ChatBubble } from './ChatBubble';
 interface MessagesListProps {
   user;
   messages;
+  chatId;
 }
 
 export const MessagesList: React.FC<MessagesListProps> = ({
   user,
   messages,
+  chatId
 }) => {
+  const [messageState, updateMessageState] = useState(messages);
+  const [, sendMessage] = useCreateMessageMutation();
+
+  async function handleSend(message) {
+    const messageSent = await sendMessage({
+      options: { text: message.text, currentUserId: user.id, chatId: chatId },
+    });
+    updateMessageState([...messageState, messageSent.data.createMessage]);
+  }
+
   return (
     <>
       <Heading sx={hStyle()} size='sm'>
         Your Messages
       </Heading>
       <Box sx={bStyle()}>
-        {messages.map((message, index) => {
+        {messageState.map((message, index) => {
           return (
             <Box key={index}>
               <Container sx={msgStyle(user, message)} key={message.id}>
@@ -40,6 +52,11 @@ export const MessagesList: React.FC<MessagesListProps> = ({
           );
         })}
       </Box>
+      <Box>
+            <ChatInputForm
+              updateMessages={handleSend}
+            ></ChatInputForm>
+        </Box>
     </>
   );
 };
