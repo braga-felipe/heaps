@@ -12,7 +12,8 @@ import {
 import { User } from "../entities/User";
 import * as argon2 from "argon2";
 import { MyContext } from '../types';
-//import generateRandomImage from '../utils/generateRandomUrl';
+import { getManager} from "typeorm";
+
 
 
 @InputType()
@@ -44,6 +45,28 @@ class UserLoginInput {
   @Field()
   password: string;
 }
+
+@InputType()
+class UserUpdateOptionsInput {
+  @Field(() => Int)
+  id: number;
+
+  @Field({nullable: true})
+  username?: string;
+
+  @Field({nullable: true})
+  address?: string;
+
+  @Field({nullable: true})
+  zipCode?: string;
+}
+// @InputType()
+// class UserUpdateInput {
+//   @Field(() => Int)
+//   id: number;
+//   @Field(() => UserUpdateOptions)
+//   updateOptions: UserUpdateOptions;
+// }
 @ObjectType()
 class FieldError {
   @Field(() => String)
@@ -61,6 +84,8 @@ class UserResponse {
   @Field(() => User, { nullable: true })
   user?: User;
 }
+
+
 
 @Resolver()
 export class UserResolver {
@@ -208,5 +233,28 @@ export class UserResolver {
         resolve(true);
       })
     );
+  }
+
+  @Mutation(() => User)
+  async updateUser (
+    //The potential fields we can update ("options") are defined in UserUpdateInput type def.
+    @Arg('options') options: UserUpdateOptionsInput
+  ): Promise<User> {
+    const entityManager = getManager();
+    if (options.username !== '') {
+      // executes UPDATE user SET {options} WHERE id = options.id
+      await entityManager.update(User, options.id, {username: options.username});
+    }
+    if (options.address !== '') {
+      // executes UPDATE user SET {options} WHERE id = options.id
+      await entityManager.update(User, options.id, {address: options.address});
+    }
+    if (options.zipCode !== '') {
+      // executes UPDATE user SET {options} WHERE id = options.id
+      await entityManager.update(User, options.id, {zipCode: options.zipCode});
+    }
+    const updatedUser = await entityManager.findOneOrFail(User, options.id);
+
+    return updatedUser;
   }
 }
