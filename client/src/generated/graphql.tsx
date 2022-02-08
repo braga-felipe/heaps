@@ -133,6 +133,7 @@ export type Mutation = {
   logout: Scalars['Boolean'];
   takeItem: Item;
   updateItem: Item;
+  updateUser: User;
   userLogin: UserResponse;
 };
 
@@ -164,6 +165,11 @@ export type MutationTakeItemArgs = {
 
 export type MutationUpdateItemArgs = {
   options: ItemUpdateInput;
+};
+
+
+export type MutationUpdateUserArgs = {
+  options: UserUpdateOptionsInput;
 };
 
 
@@ -223,6 +229,13 @@ export type UserResponse = {
   user?: Maybe<User>;
 };
 
+export type UserUpdateOptionsInput = {
+  address?: InputMaybe<Scalars['String']>;
+  id: Scalars['Int'];
+  username?: InputMaybe<Scalars['String']>;
+  zipCode?: InputMaybe<Scalars['String']>;
+};
+
 export type AcceptItemClaimMutationVariables = Exact<{
   options: ItemTakeInput;
 }>;
@@ -269,6 +282,13 @@ export type Update_ItemMutationVariables = Exact<{
 
 
 export type Update_ItemMutation = { __typename?: 'Mutation', updateItem: { __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, createdAt: string, updatedAt: string } };
+
+export type Update_UserMutationVariables = Exact<{
+  options: UserUpdateOptionsInput;
+}>;
+
+
+export type Update_UserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: number, username: string, address: string, zipCode: string } };
 
 export type User_LoginMutationVariables = Exact<{
   options: UserLoginInput;
@@ -435,6 +455,20 @@ export const Update_ItemDocument = gql`
 
 export function useUpdate_ItemMutation() {
   return Urql.useMutation<Update_ItemMutation, Update_ItemMutationVariables>(Update_ItemDocument);
+};
+export const Update_UserDocument = gql`
+    mutation UPDATE_USER($options: UserUpdateOptionsInput!) {
+  updateUser(options: $options) {
+    id
+    username
+    address
+    zipCode
+  }
+}
+    `;
+
+export function useUpdate_UserMutation() {
+  return Urql.useMutation<Update_UserMutation, Update_UserMutationVariables>(Update_UserDocument);
 };
 export const User_LoginDocument = gql`
     mutation USER_LOGIN($options: UserLoginInput!) {
