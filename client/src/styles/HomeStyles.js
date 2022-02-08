@@ -5,7 +5,7 @@ export const Container = styled.main`
   grid-template-rows: 2.5fr 4fr;
   width: 100vw;
   height: 100vh;
-
+  margin-left: -18px;
   .leaflet-container {
     z-index: 100;
   }
