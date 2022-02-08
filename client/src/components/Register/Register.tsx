@@ -50,7 +50,7 @@ export default function Register() {
           console.log('register: ', res);
         }}>
         {({ values }) => (
-          <Form>
+          <Form id='Register'>
             <Heading>Register</Heading>
             <FormControl as='fieldset'>
               <FormLabel as='legend'>Select a Avatar for your Profile</FormLabel>
