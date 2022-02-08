@@ -10,7 +10,8 @@ export default function ItemCard({ user, item, buttonName, path }) {
   const router = useRouter();
   const url = router.route;
   const counter = item.servings;
-  return (
+  console.log('ITEM in ITEMCARD', item);
+  return item ? (
     <Container sx={cStyle(user, item)}>
       <Flex sx={fStyle()}>
         <VStack sx={vsStyle()}>
@@ -36,7 +37,7 @@ export default function ItemCard({ user, item, buttonName, path }) {
         <Icons item={item} />
         <VStack>
           {/* <ProfileIcon user={user} /> */}
-          <Avatar avatar={item.owner.img_url} />
+          {item.owner ? <Avatar avatar={item.owner.img_url} /> : null}
           <SickPointsIcon item={item} />
         </VStack>
       </Flex>
@@ -47,7 +48,7 @@ export default function ItemCard({ user, item, buttonName, path }) {
         path={path}
       />
     </Container>
-  );
+  ) : null;
 }
 
 function isOwner(user, item) {

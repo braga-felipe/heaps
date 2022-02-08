@@ -34,7 +34,6 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
           <Box display='flex' alignItems='center' flexDirection='row'>
             <Heading ml='9px'>Chat Loading</Heading>
           </Box>
-          <MessagesList user={user} messages={[]} chatId={null}></MessagesList>
         </Container>
       </>
     );
