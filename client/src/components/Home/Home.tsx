@@ -24,7 +24,7 @@ export default function Home() {
   const items = useSelector((state: State) => state.items);
   const [isGroceries, setIsGroceries] = useState(true);
   const [isMap, setIsMap] = useState(false);
-  return items.length ? (
+  return items ? (
     <Container sx={cStyle()}>
       <Grocery isGroceries={isGroceries} />
       <Box sx={bStyle()}>
