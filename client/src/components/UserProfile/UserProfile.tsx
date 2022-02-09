@@ -14,6 +14,7 @@ import {
   Radio,
   RadioGroup
 } from "@chakra-ui/react";
+import { Formik, Form } from 'formik';
 import { PopoverForm } from "../UpdateProfile/UpdateProfile";
 import { useMeQuery, useUpdate_UserMutation } from "../../generated/graphql";
 import { useSelector } from "react-redux";
@@ -22,19 +23,17 @@ import SubmitButton from "../ChakraUiComponents/Button";
 import Avatar from "../Assets/Avatar";
 import UserAvatar from "../Register/UserAvatar";
 import ItemList from '../../components/ItemList/ItemList';
+import { user } from "../../redux/reducers/user";
+import { useRouter } from 'next/router';
+import { Console } from "console";
 
 export default function UserProfile({ handleClickSubmit }) {
+  const router = useRouter();
   const [res, updateProfile] = useMeQuery();
   const { data, error, fetching } = res;
   const [radio, setRadio] = useState('');
   const [newImg, setNewImg] = useState('');
   const [, updateImg] = useUpdate_UserMutation();
-
-  function changeAvatar() {
-    //radio.length && updateImg({ options: { img_url: radio } })
-
-  }
-
 
   if (error) {
     console.log("Error fectching user Profile :", error);
@@ -72,32 +71,49 @@ export default function UserProfile({ handleClickSubmit }) {
             </Wrap>
           </Flex>
         </Container>
-        <FormControl as='fieldset'>
-          <FormLabel as='legend'>
-            Select a Avatar for your Profile
-          </FormLabel>
-          <HStack>
-            <RadioGroup onChange={setRadio} value={radio}>
-              <VStack spacing='24px'>
-                <Radio value='avatar1' id='1'>
-                  <Avatar avatar='avatar1' />
-                </Radio>
-                <Radio value='avatar2' id='2'>
-                  <Avatar avatar='avatar2' />
-                </Radio>
-                <Radio value='avatar3' id='3'>
-                  <Avatar avatar='avatar3' />
-                </Radio>
-                <Radio value='avatar4' id='4'>
-                  <Avatar avatar='avatar4' />
-                </Radio>
-              </VStack>
-            </RadioGroup>
-            {radio.length ? <UserAvatar avatar={radio} /> : <UserAvatar avatar={data.me.img_url} />}
-          </HStack>
-        </FormControl>
-        <SubmitButton name='Save' onClick />
-      </Container>
+        <Formik
+          initialValues={{
+            id: userProfile.id,
+            img_url: userProfile.img_url
+          }}
+          onSubmit={(values, actions) => {
+            console.log('avatar', values, actions)
+            values.img_url = radio;
+            updateImg({ options: { id: values.id, img_url: values.img_url } });
+
+          }}
+        >
+          {({ values }) => (
+            <Form >
+              <FormControl as='fieldset'>
+                <FormLabel as='legend'>
+                  Select a Avatar for your Profile
+                </FormLabel>
+                <HStack>
+                  <RadioGroup onChange={setRadio} value={radio}>
+                    <VStack spacing='24px'>
+                      <Radio value='avatar1' id='1'>
+                        <Avatar avatar='avatar1' />
+                      </Radio>
+                      <Radio value='avatar2' id='2'>
+                        <Avatar avatar='avatar2' />
+                      </Radio>
+                      <Radio value='avatar3' id='3'>
+                        <Avatar avatar='avatar3' />
+                      </Radio>
+                      <Radio value='avatar4' id='4'>
+                        <Avatar avatar='avatar4' />
+                      </Radio>
+                    </VStack>
+                  </RadioGroup>
+                  {radio.length ? <UserAvatar avatar={radio} /> : <UserAvatar avatar={data.me.img_url} />}
+                </HStack>
+              </FormControl>
+              <SubmitButton props={values} name='Save' />
+            </Form>
+          )}
+        </Formik>
+      </Container >
     );
   }
 }

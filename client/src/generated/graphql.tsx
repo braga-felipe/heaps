@@ -240,6 +240,7 @@ export type UserResponse = {
 export type UserUpdateOptionsInput = {
   address?: InputMaybe<Scalars['String']>;
   id: Scalars['Int'];
+  img_url?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
   zipCode?: InputMaybe<Scalars['String']>;
 };
