@@ -47,7 +47,7 @@ export default function Navbar() {
   useEffect(() => {
     // on change of user state page re-renders?
     user && user?.email ? setIsLoggedIn(true) : setIsLoggedIn(false);
-    chats.length && setIsUnread(checkIfLastMessageOfEachChatIsUnread(chats));
+    (user && user?.chats?.length) && setIsUnread(checkIfLastMessageOfEachChatIsUnread(user.chats));
   });
 
   return (
@@ -70,7 +70,10 @@ export default function Navbar() {
         </Link>
         <Link href={'/chatLobby'}>
           <Container>
-            <Image src='/chat.png' width='30px' height='30px' />
+            {isUnread ? 
+                        <Image src='/chat_with_notification.png' width='30px' height='30px' />
+                      : <Image src='/chat.png' width='30px' height='30px' />
+            }
           </Container>
         </Link>
         {/* if toggle state is true, render logout icon, else render login icon */}
