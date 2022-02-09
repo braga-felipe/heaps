@@ -14,6 +14,21 @@ query ME {
     }
     chats {
       id
+      item {
+        name
+        ownerId
+      }
+      messages {
+        text
+        authorId
+        isRead
+        createdAt
+      }
+      users {
+        username
+        id
+        img_url
+      }
     }
     img_url
     createdAt
