@@ -49,7 +49,6 @@ const Map = ({ position, isGroceries, buttonName, path }) => {
   let result = items.filter(function ({ name }) {
     return !this.has(name) && this.add(name);
   }, new Set());
-  console.log('items ;', items);
   useEffect(() => {
     setItemsRendered(items);
   }, [items, foundItems]);
@@ -68,6 +67,8 @@ const Map = ({ position, isGroceries, buttonName, path }) => {
       setFoundItems(keyword);
     }
   };
+
+  console.log('IN LEAFLET!');
   return position.longitude ? (
     <>
       <Container sx={searchStyle()}>
@@ -86,43 +87,57 @@ const Map = ({ position, isGroceries, buttonName, path }) => {
             ))}
         />
       </Container>
-      <MapContainer
-        center={[position.latitude, position.longitude]}
-        zoom={13}
-        scrollWheelZoom={false}
-        style={{ height: 400, width: '100%', zIndex: '1' }}>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-        />
-        <Marker
-          icon={userIcon}
-          position={[position.latitude, position.longitude]}>
-          <Popup>You're here.</Popup>
-        </Marker>
-        {items.slice(0, 4).map((item, index) => (
+      <Container sx={mapStyle()}>
+        <MapContainer
+          center={[position.latitude, position.longitude]}
+          zoom={13}
+          scrollWheelZoom={false}
+          style={{ height: 400, width: '100%' }}>
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          />
           <Marker
-            key={index}
-            icon={itemIcon}
-            position={[locations[index].latitude, locations[index].longitude]}>
-            <Popup>
-              {
-                <ItemCard
-                  user={user}
-                  item={item}
-                  buttonName={'Chat'}
-                  path={''}
-                />
-              }
-            </Popup>
+            icon={userIcon}
+            position={[position.latitude, position.longitude]}>
+            <Popup>You're here.</Popup>
           </Marker>
-        ))}
-      </MapContainer>
+          {items.slice(0, 4).map((item, index) => (
+            <Marker
+              key={index}
+              icon={itemIcon}
+              position={[
+                locations[index].latitude,
+                locations[index].longitude,
+              ]}>
+              <Popup>
+                {
+                  <ItemCard
+                    user={user}
+                    item={item}
+                    buttonName={'Chat'}
+                    path={''}
+                  />
+                }
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      </Container>
     </>
   ) : (
     <Loading />
   );
 };
+
+function mapStyle() {
+  return {
+    borderRadius: '15px',
+    marginTop: '5px',
+    zIndex: '0',
+    position: 'relative',
+  };
+}
 
 function searchStyle() {
   return {
@@ -130,9 +145,9 @@ function searchStyle() {
     width: '375px',
     marginTop: '-80px',
     padding: '20px 0px 15px 0',
-    position: 'fixed',
+    position: 'relative',
     backgroundColor: 'white',
-    zIndex: '0',
+
     // boxShadow: '3px 3px 10px rgba(116, 65, 0, 0.2)',
   };
 }
