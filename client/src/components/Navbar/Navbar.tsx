@@ -36,7 +36,7 @@ export default function Navbar() {
   useEffect(() => {
     // on change of user state page re-renders?
     user && user?.email ? setIsLoggedIn(true) : setIsLoggedIn(false);
-    (user && user?.chats?.length) && setIsUnread(checkIfLastMessageOfEachChatIsUnread(user.chats));
+    (user && user?.chats?.length) && setIsUnread(checkIfLastMessageOfEachChatIsUnread(user.chats, user.id));
   });
 
   return (

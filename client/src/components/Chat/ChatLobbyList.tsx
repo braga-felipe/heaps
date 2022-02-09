@@ -17,12 +17,11 @@ interface chatLobbyListProps {
 
 export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
   console.log('renderng chat lobby');
-  const [res, refreshLobby] = useGetMyChatsQuery();
-  const { data, error, fetching } = res;
-  //
-
+  
   const [isMessage, setIsMessage] = useState(bool ? bool : false);
   const [targetId, setTargetId] = useState(tid ? tid : 0);
+  const [res, refreshLobby] = useGetMyChatsQuery();
+  const { data, error, fetching } = res;
 
   if (error) {
     console.log(error);
@@ -36,25 +35,20 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
   const myId = data.me.id;
   const lobbyChatList = data.me.chats.map((chat) => {
     const userDetails = chat.users.filter((user) => user.id !== myId).pop();
+    const lastMessage = chat.messages.length ? chat.messages[chat.messages.length - 1] : null;
     return {
       chatId: chat.id,
       itemName: chat.item.name,
       userName: userDetails.username,
       img_url: userDetails.img_url,
-      lastMessageIsRead: chat.messages.length
-        ? chat.messages[chat.messages.length - 1].isRead
-        : false,
+      lastMessageIsRead: (lastMessage.authorId !== myId) ? lastMessage.isRead : true
     };
   });
-  console.log(
-    'CHECKING THE LAST MESSAGE',
-    checkIfLastMessageOfEachChatIsUnread(data.me.chats)
-  );
   const sortedList = lobbyChatList.sort(function (x, y) {
     return x.lastMessageIsRead === y.lastMessageIsRead
       ? 0
       : x.lastMessageIsRead
-      ? -1
+      ? 1
       : 1;
   });
 
@@ -64,7 +58,10 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
         aria-label='Back to Lobby'
         icon={<ArrowBackIcon />}
         sx={btnStyle()}
-        onClick={() => setIsMessage(false)}>
+        onClick={() => {
+          refreshLobby();
+          setIsMessage(false);
+        }}>
         {'<'}
       </IconButton>
       <MessagesContainer chatId={targetId} />
