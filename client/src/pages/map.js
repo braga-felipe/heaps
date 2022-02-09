@@ -9,7 +9,7 @@ export default function Home() {
     longitude: 0,
     latitude: 0,
   });
-  console.log('POSITION INDEX: ' + position);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       function (position) {

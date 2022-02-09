@@ -52,7 +52,15 @@ export default function Home() {
           </Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>{isMap ? <Map /> : <Groceries />}</TabPanel>
+          <TabPanel>
+            {isMap ? (
+              <Box mt='60px'>
+                <Map />
+              </Box>
+            ) : (
+              <Groceries />
+            )}
+          </TabPanel>
           <TabPanel>{isMap ? <Map /> : <Dishes />}</TabPanel>
         </TabPanels>
       </Tabs>
