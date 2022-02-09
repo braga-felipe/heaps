@@ -100,13 +100,14 @@ function cStyle(user, item) {
   const background = isOwner(user, item) ? 'primary' : 'secondary';
   return {
     boxSizing: 'none',
-    border: '1px solid',
-    marginTop: '3px',
+    border: '0px solid',
+    marginTop: '5px',
     marginLeft: '-10px',
+    marginBottom: '10px',
     width: '300px',
     background: background,
     borderRadius: ' 10px',
-    boxShadow: '3px 3px 10px rgba(116, 65, 0, 0.2)',
+    boxShadow: '3px 3px 8px rgba(116, 65, 0, 0.3)',
   };
 }
 
