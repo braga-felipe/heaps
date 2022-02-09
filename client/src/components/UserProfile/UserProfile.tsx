@@ -22,6 +22,7 @@ import { PopoverForm } from "../UpdateProfile/UpdateProfile";
 import { useMeQuery } from "../../generated/graphql";
 import { useSelector } from "react-redux";
 import { State } from "../../pages/index";
+import axios from 'axios';
 
 export default function UserProfile({ handleClickSubmit }) {
   const [res, updateProfile] = useMeQuery();
@@ -37,6 +38,17 @@ export default function UserProfile({ handleClickSubmit }) {
 
   if (data) {
     const userProfile = data.me;
+
+  axios({
+    method: 'GET',
+    url: 'https://open.mapquestapi.com/geocoding/v1/address?key=aY2o4VA1k5YSIMmGNHN3lJkaKBJunk0Q&location=Washington,DC',
+  }).then((res) => {
+    const data = res.data;
+    console.log('MapQuest', data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
     return (
       <Container>

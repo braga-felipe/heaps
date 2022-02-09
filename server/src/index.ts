@@ -19,24 +19,21 @@ import { MyContext } from './types';
 //TODO: Update DB to redis store
 // const connectRedis = require('connect-redis');
 // const redis = require('redis');
-
 const session = require('express-session');
-
 const app = express();
 const PORT = 4000;
 
-// const redisClient = redis.createClient()
-// const RedisStore = connectRedis(session)
+
+const corsOptions ={
+  credentials: true,
+  origin:true,
+  allowedHeaders: ["Content-Type",'Access-Control-Allow-Origin'],
+  methods: ["GET, HEAD, PUT, PATCH, POST, DELETE"],
+  preflightContinue: false,
+  optionSuccessStatus:200,
+}
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-    // origin: '*',
-    credentials: true,
-  })
-);
-
 app.use(
   session({
     name: 'qid',
@@ -86,7 +83,8 @@ app.use(
     await apolloServer.start();
     apolloServer.applyMiddleware({
       app,
-      cors: false,
+      cors: corsOptions,
+
     });
     app.listen(PORT, () => {
       console.log('listening on port: ', PORT);
