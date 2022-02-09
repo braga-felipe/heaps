@@ -34,8 +34,7 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
         margin='3px 3px 0px 3px'
         name='Send'
         type='submit'
-        onClick={(event) => {
-          event.preventDefault();
+        onClick={() => {
           updateMessages(message);
           updateMessage({ text: '' });
         }}>

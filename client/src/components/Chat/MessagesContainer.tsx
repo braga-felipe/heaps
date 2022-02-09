@@ -46,8 +46,8 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
   }
 
   if (data) {
-    console.log('fetched messages');
     const messages = data.getChat.messages;
+    console.log(messages);
     chatId = data.getChat.id;
     const requester = data.getChat.users
       .filter((user) => user.id !== data.getChat.userOwnerId)

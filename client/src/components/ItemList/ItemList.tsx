@@ -15,7 +15,7 @@ interface ItemProp {
   ownerId: number;
 }
 
-export default function ItemList({ /*items,*/ complete, buttonName, path }) {
+export default function ItemList({ complete, buttonName, path, isOwner }) {
   // access items and user from store
   const items = useSelector((state: State) => state.items);
   const user = useSelector((state: State) => state.user);
@@ -25,8 +25,41 @@ export default function ItemList({ /*items,*/ complete, buttonName, path }) {
       <Container>
         {items.map((item: ItemProp, index) => {
           // filter items by the complete props and user id
-          if (item.complete === complete && item.ownerId === user.id) {
+          if (
+            item.complete === complete &&
+            item.ownerId === user.id &&
+            isOwner === true
+          ) {
             itemsToView.push(item);
+            return (
+              <ItemCard
+                user={user}
+                item={item}
+                key={index}
+                buttonName={buttonName}
+                path={path}
+              />
+            );
+          } else if (
+            item.complete === complete &&
+            user.items_taken.filter((i) => i.id === item.id).length &&
+            isOwner === false
+          ) {
+            itemsToView.push(item);
+            return (
+              <ItemCard
+                user={user}
+                item={item}
+                key={index}
+                buttonName={buttonName}
+                path={path}
+              />
+            );
+          } else if (
+            item.complete === complete &&
+            user.items_taken.filter((i) => i.id === item.id).length &&
+            isOwner === false
+          ) {
             return (
               <ItemCard
                 user={user}

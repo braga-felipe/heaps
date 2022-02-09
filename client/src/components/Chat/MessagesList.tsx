@@ -16,8 +16,11 @@ export const MessagesList: React.FC<MessagesListProps> = ({
   chatId,
 }) => {
   const [messageState, updateMessageState] = useState(messages);
- 
   const [ , sendMessage ] = useCreateMessageMutation();
+
+  useEffect(() => {
+    updateMessageState(messages)
+  },[messages])
 
   async function handleSend(message) {
     try {
