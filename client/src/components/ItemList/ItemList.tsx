@@ -15,7 +15,7 @@ interface ItemProp {
   ownerId: number;
 }
 
-export default function ItemList({ /*items,*/ complete, buttonName, path }) {
+export default function ItemList({ isOwner, complete, buttonName, path }) {
   // access items and user from store
   const items = useSelector((state: State) => state.items);
   const user = useSelector((state: State) => state.user);
@@ -25,7 +25,7 @@ export default function ItemList({ /*items,*/ complete, buttonName, path }) {
       <Container>
         {items.map((item: ItemProp, index) => {
           // filter items by the complete props and user id
-          if (item.complete === complete && item.ownerId === user.id) {
+          if (item.complete === complete && isOwner === user.id) {
             itemsToView.push(item);
             return (
               <ItemCard
