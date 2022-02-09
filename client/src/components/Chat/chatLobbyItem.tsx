@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, Container, Flex, Image, Heading } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading, Text } from '@chakra-ui/react';
+import Image from 'next/image';
+import Avatar from '../Assets/Avatar';
 
 interface chatLobbyItemProps {
   itemName: string;
@@ -13,38 +15,47 @@ export const ChatLobbyItem: React.FC<chatLobbyItemProps> = ({
   itemName,
   img_url,
   userName,
-  lastMessageIsRead
+  lastMessageIsRead,
 }) => {
+  //
   return (
     <Container sx={cStyle()}>
       <Flex sx={fStyle()}>
-        <Heading isTruncated sx={hStyle()}>
-          {itemName}
-        </Heading>
-        <Heading isTruncated sx={hStyle()}>
-          {userName}
-        </Heading>
+        <Box display='flex' flexDirection='column' alignItems='left'>
+          <Heading isTruncated sx={hStyle()}>
+            {itemName}
+          </Heading>
+          <Heading isTruncated sx={hNameStyle()}>
+            {userName}
+          </Heading>
+        </Box>
         <Box>
-          {!lastMessageIsRead ? <Image src={"https://www.iconsdb.com/icons/preview/red/circle-xxl.png"} alt="unread" maxWidth="10px" position="absolute" zIndex="1000"/> : null }
-          <Image
-            sx={iStyle()}
-            src={
-              img_url ||
-              'https://ca.slack-edge.com/T0WU5R8NT-U02GWRVJERW-72846fc663f1-512'
-            }
-            alt='profile'
-          />
+          {!lastMessageIsRead ? (
+            <Container sx={notificationStyle()}>
+              <Text fontSize='9'>!</Text>
+            </Container>
+          ) : null}
+          <Avatar avatar={img_url} />
         </Box>
       </Flex>
     </Container>
   );
 };
 
-function iStyle() {
+function notificationStyle() {
   return {
-    borderRadius: 'full',
-    boxSize: '70px',
-    margin: '5px',
+    color: 'white',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '20px',
+    height: '20px',
+    padding: '0px',
+    zIndex: '1000',
+    marginLeft: '40px',
+    position: 'absolute',
+    backgroundColor: '#BC1818',
   };
 }
 
@@ -63,15 +74,29 @@ function cStyle() {
     width: '325px',
     background: 'primary',
     borderRadius: ' 10px',
+    height: '80px',
+    color: 'white',
     boxShadow: '3px 3px 10px rgba(116, 65, 0, 0.2)',
   };
 }
 
 function hStyle() {
   return {
+    marginTop: '15px',
+    textAlign: 'left',
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: '20px',
+    lineHeight: '22px',
+  };
+}
+function hNameStyle() {
+  return {
+    marginTop: '5px',
+    textAlign: 'left',
+    fontStyle: 'normal',
+    fontWeight: '500',
+    fontSize: '15px',
     lineHeight: '22px',
   };
 }

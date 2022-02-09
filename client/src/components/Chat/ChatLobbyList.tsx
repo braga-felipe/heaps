@@ -19,6 +19,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
   console.log('renderng chat lobby');
   const [res, refreshLobby] = useGetMyChatsQuery();
   const { data, error, fetching } = res;
+  //
 
   const [isMessage, setIsMessage] = useState(bool ? bool : false);
   const [targetId, setTargetId] = useState(tid ? tid : 0);
@@ -32,7 +33,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
   }
   if (data) {
   }
-  const myId = data?.me.id;
+  const myId = data.me.id;
   const lobbyChatList = data.me.chats.map((chat) => {
     const userDetails = chat.users.filter((user) => user.id !== myId).pop();
     return {
