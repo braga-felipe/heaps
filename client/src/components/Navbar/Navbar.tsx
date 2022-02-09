@@ -10,8 +10,9 @@ import { getAllChats } from '../../redux/actions/chats';
 import checkIfLastMessageOfEachChatIsUnread from '../../utils/checkIfLastMessageOfEachChatIsRead';
 export default function Navbar() {
   // state to check if there are unread messages and display icon
+  //newcomment
   const [isUnread, setIsUnread] = useState(false);
-
+//
   // set a toggle state to control render of login/logout button
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
