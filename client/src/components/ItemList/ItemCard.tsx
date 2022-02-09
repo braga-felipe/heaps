@@ -36,7 +36,6 @@ export default function ItemCard({ user, item, buttonName, path }) {
         </Flex>
         <Icons item={item} />
         <VStack>
-          {/* <ProfileIcon user={user} /> */}
           {item.owner ? <Avatar avatar={item.owner.img_url} /> : null}
           <SickPointsIcon item={item} />
         </VStack>

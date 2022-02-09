@@ -1,8 +1,9 @@
 import { Box, Container, Heading, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import { useCreateMessageMutation } from '../../generated/graphql';
+import { useCreateMessageMutation, useMarkAsReadMutation } from '../../generated/graphql';
 import { ChatInputForm } from './ChatInputForm';
+import { ChatBubble } from './ChatBubble';
 interface MessagesListProps {
   user;
   messages;
@@ -15,7 +16,8 @@ export const MessagesList: React.FC<MessagesListProps> = ({
   chatId,
 }) => {
   const [messageState, updateMessageState] = useState(messages);
-  const [, sendMessage] = useCreateMessageMutation();
+ 
+  const [ , sendMessage ] = useCreateMessageMutation();
 
   async function handleSend(message) {
     try {
@@ -37,17 +39,7 @@ export const MessagesList: React.FC<MessagesListProps> = ({
       <Box sx={bStyle()}>
         {messageState.map((message, index) => {
           return (
-            <Box key={index}>
-              <Container sx={msgStyle(user, message)} key={message.id}>
-                <Text fontSize='lg' sx={txtStyle()}>
-                  {message.text}
-                </Text>
-                {/* <br /> */}
-                <Text fontSize='xs' sx={timeStyle()}>
-                  {moment(parseInt(message.createdAt)).calendar()}
-                </Text>
-              </Container>
-            </Box>
+            <ChatBubble key={index} userId={user.id} message={message}> </ChatBubble>
           );
         })}
       </Box>
