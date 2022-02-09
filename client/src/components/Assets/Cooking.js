@@ -6,6 +6,7 @@ export default function Cooking() {
     loop: true,
     autoplay: true,
     style: {
+      position: 'absolute',
       margin: '0px',
       height: '200px',
       width: '400px',

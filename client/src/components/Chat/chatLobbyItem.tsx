@@ -17,7 +17,6 @@ export const ChatLobbyItem: React.FC<chatLobbyItemProps> = ({
   userName,
   lastMessageIsRead,
 }) => {
-  //
   return (
     <Container sx={cStyle()}>
       <Flex sx={fStyle()}>
