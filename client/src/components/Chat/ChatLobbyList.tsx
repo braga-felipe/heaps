@@ -15,7 +15,6 @@ interface chatLobbyListProps {
 }
 
 export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
-  chats,
   bool,
   tid,
 }) => {
@@ -44,12 +43,14 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
       itemName: chat.item.name,
       userName: userDetails.username,
       img_url: userDetails.img_url,
-      lastMessageTime: chat.messages.length
-        ? chat.messages[chat.messages.length - 1].createdAt
-        : null,
+      lastMessageIsRead: chat.messages.length
+        ? chat.messages[chat.messages.length - 1].isRead
+        : false,
     };
   });
-
+  const sortedList = lobbyChatList.sort(function(x,y) {
+    return (x.lastMessageIsRead === y.lastMessageIsRead)? 0 : x.lastMessageIsRead? -1 : 1;
+  });
 
   return isMessage ? (
     <>
@@ -67,7 +68,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
       <Lobby />
       <Heading textAlign='center'> Chat Lobby </Heading>
       <Box sx={bStyle()}>
-        {lobbyChatList.map((chat, index) => {
+        {sortedList.map((chat, index) => {
           return (
             <Box key={index} height='85px'>
               <Button
@@ -83,7 +84,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
                   itemName={chat.itemName}
                   userName={chat.userName}
                   img_url={chat.img_url}
-                  lastMessageTime={chat.img_url}></ChatLobbyItem>
+                  lastMessageIsRead={chat.lastMessageIsRead}></ChatLobbyItem>
               </Button>
             </Box>
           );
