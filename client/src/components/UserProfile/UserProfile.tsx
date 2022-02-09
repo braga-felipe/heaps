@@ -71,48 +71,50 @@ export default function UserProfile({ handleClickSubmit }) {
             </Wrap>
           </Flex>
         </Container>
-        <Formik
-          initialValues={{
-            id: userProfile.id,
-            img_url: userProfile.img_url
-          }}
-          onSubmit={(values, actions) => {
-            console.log('avatar', values, actions)
-            values.img_url = radio;
-            updateImg({ options: { id: values.id, img_url: values.img_url } });
+        <Container sx={pStyle()}>
+          <Formik
+            initialValues={{
+              id: userProfile.id,
+              img_url: userProfile.img_url
+            }}
+            onSubmit={(values, actions) => {
+              console.log('avatar', values, actions)
+              values.img_url = radio;
+              updateImg({ options: { id: values.id, img_url: values.img_url } });
 
-          }}
-        >
-          {({ values }) => (
-            <Form >
-              <FormControl as='fieldset'>
-                <FormLabel as='legend'>
-                  Select a Avatar for your Profile
-                </FormLabel>
-                <HStack>
-                  <RadioGroup onChange={setRadio} value={radio}>
-                    <VStack spacing='24px'>
-                      <Radio value='avatar1' id='1'>
-                        <Avatar avatar='avatar1' />
-                      </Radio>
-                      <Radio value='avatar2' id='2'>
-                        <Avatar avatar='avatar2' />
-                      </Radio>
-                      <Radio value='avatar3' id='3'>
-                        <Avatar avatar='avatar3' />
-                      </Radio>
-                      <Radio value='avatar4' id='4'>
-                        <Avatar avatar='avatar4' />
-                      </Radio>
-                    </VStack>
-                  </RadioGroup>
-                  {radio.length ? <UserAvatar avatar={radio} /> : <UserAvatar avatar={data.me.img_url} />}
-                </HStack>
-              </FormControl>
-              <SubmitButton props={values} name='Save' />
-            </Form>
-          )}
-        </Formik>
+            }}
+          >
+            {({ values }) => (
+              <Form >
+                <FormControl as='fieldset'>
+                  <FormLabel as='legend'>
+                    Select a Avatar for your Profile
+                  </FormLabel>
+                  <HStack>
+                    <RadioGroup onChange={setRadio} value={radio}>
+                      <VStack spacing='24px'>
+                        <Radio value='avatar1' id='1'>
+                          <Avatar avatar='avatar1' />
+                        </Radio>
+                        <Radio value='avatar2' id='2'>
+                          <Avatar avatar='avatar2' />
+                        </Radio>
+                        <Radio value='avatar3' id='3'>
+                          <Avatar avatar='avatar3' />
+                        </Radio>
+                        <Radio value='avatar4' id='4'>
+                          <Avatar avatar='avatar4' />
+                        </Radio>
+                      </VStack>
+                    </RadioGroup>
+                    {radio.length ? <UserAvatar avatar={radio} /> : <UserAvatar avatar={data.me.img_url} />}
+                  </HStack>
+                </FormControl>
+                <SubmitButton props={values} name='Save' />
+              </Form>
+            )}
+          </Formik>
+        </Container>
       </Container >
     );
   }
@@ -129,6 +131,18 @@ function cStyle() {
     background: 'primary',
     borderRadius: ' 10px',
     boxShadow: '3px 3px 10px rgba(116, 65, 0, 0.4)',
+    fontFamily: 'Roboto'
+
+  };
+}
+function pStyle() {
+  return {
+    boxSizing: 'none',
+    border: '1px solid',
+    marginTop: '10px',
+    marginLeft: '15px',
+    color: 'white',
+    width: '90%',
     fontFamily: 'Roboto'
 
   };
