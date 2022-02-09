@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int, InputType } from "type-graphql";
+import { ObjectType, Field, Int, InputType, Float } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, BaseEntity, OneToMany, ManyToMany} from 'typeorm';
 import { Item } from './Item';
 import { Chat } from './Chat';
@@ -31,6 +31,14 @@ export class User extends BaseEntity {
   @Field(() => String)
   @Column()
   zipCode: string;
+
+  @Field(() => Float)
+  @Column({ type: "double precision" })
+  lat: number;
+
+  @Field(() => Float)
+  @Column({ type: "double precision" })
+  lng: number;
 
   @Field(() => Int, { nullable: true })
   @Column({ nullable: true })

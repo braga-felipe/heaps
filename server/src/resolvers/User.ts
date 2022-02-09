@@ -11,10 +11,9 @@ import {
 } from "type-graphql";
 import { User } from "../entities/User";
 import * as argon2 from "argon2";
-import { MyContext } from '../types';
-import { getManager} from "typeorm";
-
-
+import { MyContext } from "../types";
+import { getManager } from "typeorm";
+import axios from "axios";
 
 @InputType()
 class CreateUserInput {
@@ -51,13 +50,13 @@ class UserUpdateOptionsInput {
   @Field(() => Int)
   id: number;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   username?: string;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   address?: string;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   zipCode?: string;
 }
 // @InputType()
@@ -85,8 +84,6 @@ class UserResponse {
   user?: User;
 }
 
-
-
 @Resolver()
 export class UserResolver {
   @Query(() => [User])
@@ -96,7 +93,9 @@ export class UserResolver {
   }
 
   @Query(() => User)
-  async getOneUserByID(@Arg("id", () => Int) id: number): Promise<User | undefined> {
+  async getOneUserByID(
+    @Arg("id", () => Int) id: number
+  ): Promise<User | undefined> {
     const user = await User.findOneOrFail(id, {
       relations: ["items_owned", "chats", "items_taken"],
     });
@@ -140,19 +139,26 @@ export class UserResolver {
       };
     }
     const hashedPassword = await argon2.hash(options.password);
-    //const randomURL = generateRandomImage();
+
+    const coordinates = await axios({
+      method: "GET",
+      url: `https://open.mapquestapi.com/geocoding/v1/address?key=aY2o4VA1k5YSIMmGNHN3lJkaKBJunk0Q&location=${options.address},${options.zipCode}`,
+    }).then((response) => {
+      return response.data.results[0].locations[0].displayLatLng;
+    });
+
     let user;
     try {
-      const checkUser = await User.findOne({ email: options.email })
+      const checkUser = await User.findOne({ email: options.email });
       if (checkUser) {
         return {
           errors: [
             {
               field: "email",
-              message: "Email already in use."
-            }
-          ]
-        }
+              message: "Email already in use.",
+            },
+          ],
+        };
       }
       user = await User.create({
         username: options.username,
@@ -161,10 +167,12 @@ export class UserResolver {
         address: options.address,
         zipCode: options.zipCode,
         img_url: options.img_url,
+        lat: coordinates.lat,
+        lng: coordinates.lng,
       }).save();
     } catch (err) {
       if (err) {
-        console.log(err)
+        console.log(err);
         return {
           errors: [
             {
@@ -181,33 +189,35 @@ export class UserResolver {
 
   @Mutation(() => UserResponse)
   async userLogin(
-    @Arg('options') options: UserLoginInput,
+    @Arg("options") options: UserLoginInput,
     @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
-
     const user = await User.findOne({ email: options.email });
     if (!user) {
       return {
         errors: [
           {
             field: "email",
-            message: "Email and password combination does not match."
-          }
-        ]
-      }
+            message: "Email and password combination does not match.",
+          },
+        ],
+      };
     }
-    const validPasswordCheck = await argon2.verify(user.password, options.password);
+    const validPasswordCheck = await argon2.verify(
+      user.password,
+      options.password
+    );
     if (!validPasswordCheck) {
       return {
         errors: [
           {
             field: "password",
-            message: "Password and password combination does not match."
-          }
-        ]
-      }
+            message: "Password and password combination does not match.",
+          },
+        ],
+      };
     }
-    req.session.userId = user.id
+    req.session.userId = user.id;
     return { user };
   }
 
@@ -217,14 +227,16 @@ export class UserResolver {
     if (!req.session.userId) {
       return null;
     }
-    return User.findOne(req.session.userId, { relations: ["chats", "items_owned", "items_taken"] });
+    return User.findOne(req.session.userId, {
+      relations: ["chats", "items_owned", "items_taken"],
+    });
   }
 
   @Mutation(() => Boolean)
   logout(@Ctx() { req, res }: MyContext) {
     return new Promise((resolve) =>
       req.session.destroy((err) => {
-        res.clearCookie('qid');
+        res.clearCookie("qid");
         if (err) {
           console.log(err);
           resolve(false);
@@ -236,22 +248,28 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  async updateUser (
+  async updateUser(
     //The potential fields we can update ("options") are defined in UserUpdateInput type def.
-    @Arg('options') options: UserUpdateOptionsInput
+    @Arg("options") options: UserUpdateOptionsInput
   ): Promise<User> {
     const entityManager = getManager();
-    if (options.username !== '') {
+    if (options.username !== "") {
       // executes UPDATE user SET {options} WHERE id = options.id
-      await entityManager.update(User, options.id, {username: options.username});
+      await entityManager.update(User, options.id, {
+        username: options.username,
+      });
     }
-    if (options.address !== '') {
+    if (options.address !== "") {
       // executes UPDATE user SET {options} WHERE id = options.id
-      await entityManager.update(User, options.id, {address: options.address});
+      await entityManager.update(User, options.id, {
+        address: options.address,
+      });
     }
-    if (options.zipCode !== '') {
+    if (options.zipCode !== "") {
       // executes UPDATE user SET {options} WHERE id = options.id
-      await entityManager.update(User, options.id, {zipCode: options.zipCode});
+      await entityManager.update(User, options.id, {
+        zipCode: options.zipCode,
+      });
     }
     const updatedUser = await entityManager.findOneOrFail(User, options.id);
 
