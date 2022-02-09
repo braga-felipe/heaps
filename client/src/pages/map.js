@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 const Map = dynamic(() => import('../components/Map/Leaflet'), { ssr: false });
 
-export default function Home() {
+export default function Home({ isGroceries, buttonName, path }) {
   const [position, setPosition] = useState({
     longitude: 0,
     latitude: 0,
@@ -33,7 +33,12 @@ export default function Home() {
   return (
     <Container>
       <MapContainer>
-        <Map position={position} />
+        <Map
+          position={position}
+          isGroceries={isGroceries}
+          buttonName={buttonName}
+          path={path}
+        />
       </MapContainer>
     </Container>
   );

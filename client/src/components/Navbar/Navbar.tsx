@@ -23,7 +23,7 @@ export default function Navbar() {
   const [res, refreshLobby] = useGetMyChatsQuery();
   const { data, error, fetching } = res;
   if (error) console.log(error);
-  if (fetching) setIsUnread(false);
+  // if (fetching) setIsUnread(false);
   if (data) {
     // send chats to state
     dispatch(getAllChats(data.me.chats));
