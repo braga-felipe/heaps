@@ -33,6 +33,16 @@ export class MessageResolver {
     return message;
   }
 
+  @Mutation(() => Message)
+  async MarkAsRead (
+    @Arg('id' , () => Int) id: number
+  ): Promise<Message> {
+    const message = await Message.findOneOrFail(id);
+    message.isRead = true;
+    const updatedMessage = await message.save();
+    return updatedMessage;
+  }
+
 }
 
 
