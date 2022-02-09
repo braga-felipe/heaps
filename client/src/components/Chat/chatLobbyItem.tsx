@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, Container, Flex, Image, Heading } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading } from '@chakra-ui/react';
+import Image from 'next/image';
+import Avatar from '../Assets/Avatar';
 
 interface chatLobbyItemProps {
   itemName: string;
@@ -19,22 +21,17 @@ export const ChatLobbyItem: React.FC<chatLobbyItemProps> = ({
   return (
     <Container sx={cStyle()}>
       <Flex sx={fStyle()}>
+      <Box display="flex" flexDirection="column" alignItems="left">
         <Heading isTruncated sx={hStyle()}>
           {itemName}
         </Heading>
         <Heading isTruncated sx={hStyle()}>
           {userName}
         </Heading>
+      </Box>
         <Box>
-          {!lastMessageIsRead ? <Image src={"https://www.iconsdb.com/icons/preview/red/circle-xxl.png"} alt="unread" maxWidth="10px" position="absolute" zIndex="1000"/> : null }
-          <Image
-            sx={iStyle()}
-            src={
-              img_url ||
-              'https://ca.slack-edge.com/T0WU5R8NT-U02GWRVJERW-72846fc663f1-512'
-            }
-            alt='profile'
-          />
+          {!lastMessageIsRead ? <Image src={"/notification.png"} alt="unread" width="20px" height="20px" objectPosition="absolute" /> : null }
+          <Avatar avatar={img_url}/>
         </Box>
       </Flex>
     </Container>
