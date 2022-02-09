@@ -33,7 +33,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
   }
   if (data) {
   }
-  const myId = data?.me.id;
+  const myId = data.me.id;
   const lobbyChatList = data.me.chats.map((chat) => {
     const userDetails = chat.users.filter((user) => user.id !== myId).pop();
     return {
