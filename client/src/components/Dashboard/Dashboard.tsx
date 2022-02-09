@@ -1,5 +1,6 @@
 import React from 'react';
 import Cooking from '../Assets/Cooking';
+import Link from 'next/link';
 import ItemList from '../ItemList/ItemList';
 import { Box, Container, Flex, Heading } from '@chakra-ui/react';
 import Auth from '../Auth';
@@ -12,9 +13,11 @@ export default function Dashboard() {
 
   return (
     <Auth>
-      <Box sx={profileStyle()}>
-        <Avatar avatar={user.img_url} />
-      </Box>
+      <Link href={'/profile'}>
+        <Box sx={profileStyle()}>
+          <Avatar avatar={user.img_url} />
+        </Box>
+      </Link>
       <Container>
         <Flex sx={{ justifyContent: 'center' }}>
           <Cooking />
