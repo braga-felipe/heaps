@@ -19,7 +19,7 @@ export const ChatBubble: React.FC<ChatBubbleProps> = ({message, userId}) => {
     }
     checkMessage(message, userId);
   },[message])
-
+//
 
     return (
       <Box>

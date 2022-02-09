@@ -13,7 +13,7 @@ interface MessagesContainerProps {
 export const MessagesContainer: React.FC<MessagesContainerProps> = ({
   chatId,
 }) => {
-
+//
   const [res, updateMessages] = useGetChatMessagesQuery({
     variables: {
       getChatId: chatId,
