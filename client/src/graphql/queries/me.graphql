@@ -30,6 +30,8 @@ query ME {
         img_url
       }
     }
+    lat
+    long
     img_url
     createdAt
     updatedAt
