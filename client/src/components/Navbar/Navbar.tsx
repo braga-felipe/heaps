@@ -19,18 +19,6 @@ export default function Navbar() {
   const user = useSelector((state: State) => state.user);
   const dispatch = useDispatch();
 
-  // hook to fetch the chats from database
-  const [res, refreshLobby] = useGetMyChatsQuery();
-  const { data, error, fetching } = res;
-  if (error) console.log(error);
-  if (fetching) setIsUnread(false);
-  if (data) {
-    // send chats to state
-    dispatch(getAllChats(data.me.chats));
-  }
-  // take chat from state
-  const chats = useSelector((state: State) => state.chats);
-
   // import graphql logout hook
   const [, logOutUser] = useLogoutMutation();
 
@@ -47,7 +35,7 @@ export default function Navbar() {
   useEffect(() => {
     // on change of user state page re-renders?
     user && user?.email ? setIsLoggedIn(true) : setIsLoggedIn(false);
-    chats.length && setIsUnread(checkIfLastMessageOfEachChatIsUnread(chats));
+    (user && user?.chats?.length) && setIsUnread(checkIfLastMessageOfEachChatIsUnread(user.chats));
   });
 
   return (
@@ -70,7 +58,10 @@ export default function Navbar() {
         </Link>
         <Link href={'/chatLobby'}>
           <Container>
-            <Image src='/chat.png' width='30px' height='30px' />
+            {isUnread ? 
+                        <Image src='/chat_with_notification.png' width='30px' height='30px' />
+                      : <Image src='/chat.png' width='30px' height='30px' />
+            }
           </Container>
         </Link>
         {/* if toggle state is true, render logout icon, else render login icon */}
