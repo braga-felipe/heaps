@@ -354,7 +354,7 @@ export type Get_User_By_IdQuery = { __typename?: 'Query', getOneUserByID: { __ty
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, img_url?: string | null | undefined, createdAt: string, updatedAt: string, items_owned?: Array<{ __typename?: 'Item', id: number }> | null | undefined, items_taken?: Array<{ __typename?: 'Item', id: number }> | null | undefined, chats?: Array<{ __typename?: 'Chat', id: number }> | null | undefined } | null | undefined };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, img_url?: string | null | undefined, createdAt: string, updatedAt: string, items_owned?: Array<{ __typename?: 'Item', id: number }> | null | undefined, items_taken?: Array<{ __typename?: 'Item', id: number }> | null | undefined, chats?: Array<{ __typename?: 'Chat', id: number, item: { __typename?: 'Item', name: string, ownerId: number }, messages?: Array<{ __typename?: 'Message', text: string, authorId: number, isRead: boolean, createdAt: string }> | null | undefined, users: Array<{ __typename?: 'User', username: string, id: number, img_url?: string | null | undefined }> }> | null | undefined } | null | undefined };
 
 
 export const AcceptItemClaimDocument = gql`
@@ -753,6 +753,21 @@ export const MeDocument = gql`
     }
     chats {
       id
+      item {
+        name
+        ownerId
+      }
+      messages {
+        text
+        authorId
+        isRead
+        createdAt
+      }
+      users {
+        username
+        id
+        img_url
+      }
     }
     img_url
     createdAt
