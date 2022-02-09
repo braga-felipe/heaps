@@ -9,6 +9,7 @@ import { State } from '../../pages';
 
 export default function Dashboard() {
   const user = useSelector((state: State) => state.user);
+
   return (
     <Auth>
       <Box sx={profileStyle()}>
