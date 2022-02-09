@@ -19,7 +19,7 @@ query GET_ALL_ITEMS {
       SICK_points
       img_url
       lat
-      long
+      lng
     }
     takers {
       username
