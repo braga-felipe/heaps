@@ -4,7 +4,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { __prod__ } from './constants';
 import { createConnection } from 'typeorm';
-import cors from 'cors';
+
 //Resolver Imports for Graphql
 import { ItemResolver } from './resolvers/item';
 import { Item } from './entities/Item';
@@ -23,15 +23,14 @@ const session = require('express-session');
 const app = express();
 const PORT = 4000;
 
-
-const corsOptions ={
+const corsOptions = {
   credentials: true,
-  origin:true,
-  allowedHeaders: ["Content-Type",'Access-Control-Allow-Origin'],
-  methods: ["GET, HEAD, PUT, PATCH, POST, DELETE"],
+  origin: true,
+  allowedHeaders: ['Content-Type', 'Access-Control-Allow-Origin'],
+  methods: ['GET, HEAD, PUT, PATCH, POST, DELETE'],
   preflightContinue: false,
-  optionSuccessStatus:200,
-}
+  optionSuccessStatus: 200,
+};
 
 app.use(express.json());
 app.use(
@@ -84,7 +83,6 @@ app.use(
     apolloServer.applyMiddleware({
       app,
       cors: corsOptions,
-
     });
     app.listen(PORT, () => {
       console.log('listening on port: ', PORT);

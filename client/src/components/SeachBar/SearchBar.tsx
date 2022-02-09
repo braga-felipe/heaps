@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { Container } from '@chakra-ui/react';
+import { Container, position } from '@chakra-ui/react';
 
 interface Props {
   label: string;
