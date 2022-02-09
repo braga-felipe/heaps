@@ -58,14 +58,11 @@ class UserUpdateOptionsInput {
 
   @Field({ nullable: true })
   zipCode?: string;
+
+  @Field({ nullable: true })
+  img_url?: string;
 }
-// @InputType()
-// class UserUpdateInput {
-//   @Field(() => Int)
-//   id: number;
-//   @Field(() => UserUpdateOptions)
-//   updateOptions: UserUpdateOptions;
-// }
+
 @ObjectType()
 class FieldError {
   @Field(() => String)
@@ -269,6 +266,13 @@ export class UserResolver {
       // executes UPDATE user SET {options} WHERE id = options.id
       await entityManager.update(User, options.id, {
         zipCode: options.zipCode,
+      });
+    }
+
+    if (options.img_url !== "") {
+      // executes UPDATE user SET {options} WHERE id = options.id
+      await entityManager.update(User, options.id, {
+        img_url: options.img_url,
       });
     }
     const updatedUser = await entityManager.findOneOrFail(User, options.id);
