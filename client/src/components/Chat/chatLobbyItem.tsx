@@ -5,13 +5,15 @@ interface chatLobbyItemProps {
   itemName: string;
   userName: string;
   img_url: string;
-  lastMessageTime: string;
+  lastMessageIsRead: boolean;
   chatId: number;
 }
 
 export const ChatLobbyItem: React.FC<chatLobbyItemProps> = ({
   itemName,
   img_url,
+  userName,
+  lastMessageIsRead
 }) => {
   return (
     <Container sx={cStyle()}>
@@ -19,7 +21,11 @@ export const ChatLobbyItem: React.FC<chatLobbyItemProps> = ({
         <Heading isTruncated sx={hStyle()}>
           {itemName}
         </Heading>
+        <Heading isTruncated sx={hStyle()}>
+          {userName}
+        </Heading>
         <Box>
+          {!lastMessageIsRead ? <Image src={"https://www.iconsdb.com/icons/preview/red/circle-xxl.png"} alt="unread" maxWidth="10px" position="absolute" zIndex="1000"/> : null }
           <Image
             sx={iStyle()}
             src={
