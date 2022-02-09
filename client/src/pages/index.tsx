@@ -12,6 +12,7 @@ import Avatar from '../components/Assets/Avatar';
 export interface State {
   user?;
   items?;
+  chats?;
 }
 
 const IndexPage: NextPage = () => {

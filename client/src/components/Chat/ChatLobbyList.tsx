@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetMyChatsQuery } from '../../generated/graphql';
 import { State } from '../../pages';
+import checkIfLastMessageOfEachChatIsUnread from '../../utils/checkIfLastMessageOfEachChatIsRead';
 import ChatLobbyItem from './chatLobbyItem';
 import { MessagesContainer } from './MessagesContainer';
 interface chatLobbyListProps {
@@ -14,11 +15,8 @@ interface chatLobbyListProps {
   tid;
 }
 
-export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
-  bool,
-  tid,
-}) => {
-  console.log('renderng chat lobby')
+export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
+  console.log('renderng chat lobby');
   const [res, refreshLobby] = useGetMyChatsQuery();
   const { data, error, fetching } = res;
 
@@ -33,7 +31,6 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
     return <Loading />;
   }
   if (data) {
-  
   }
   const myId = data.me.id;
   const lobbyChatList = data.me.chats.map((chat) => {
@@ -48,8 +45,16 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
         : false,
     };
   });
-  const sortedList = lobbyChatList.sort(function(x,y) {
-    return (x.lastMessageIsRead === y.lastMessageIsRead)? 0 : x.lastMessageIsRead? -1 : 1;
+  console.log(
+    'CHECKING THE LAST MESSAGE',
+    checkIfLastMessageOfEachChatIsUnread(data.me.chats)
+  );
+  const sortedList = lobbyChatList.sort(function (x, y) {
+    return x.lastMessageIsRead === y.lastMessageIsRead
+      ? 0
+      : x.lastMessageIsRead
+      ? -1
+      : 1;
   });
 
   return isMessage ? (
@@ -61,7 +66,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({
         onClick={() => setIsMessage(false)}>
         {'<'}
       </IconButton>
-  <MessagesContainer chatId={targetId} />
+      <MessagesContainer chatId={targetId} />
     </>
   ) : (
     <Container>
