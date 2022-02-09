@@ -56,15 +56,14 @@ export const PopoverForm = ({ userProfile, onClick }) => {
 
   return (
     <ChakraProvider>
-      <Box p={2}>
+      <Box p={2} sx={{color: 'black'}}>
         <Popover placement="auto-start">
           <PopoverTrigger>
             <Button
               user={userProfile}
               onClick={handleClickSubmit}
               size="xs"
-              colorScheme="blue"
-              sx={{ marginTop: "10px" }}
+              sx={{ marginTop: "10px", background: "#dfb23f", color: 'white'}}
             >
               {value ? "Save" : "Edit"}
             </Button>

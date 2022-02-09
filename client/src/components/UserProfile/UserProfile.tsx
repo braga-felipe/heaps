@@ -6,23 +6,16 @@ import {
   VStack,
   HStack,
   Tag,
-  Avatar,
   Wrap,
   WrapItem,
   Flex,
-} from "@chakra-ui/react";
-import {
-  Editable,
-  EditableInput,
-  EditablePreview,
-  IconButton,
-  useEditableControls,
 } from "@chakra-ui/react";
 import { PopoverForm } from "../UpdateProfile/UpdateProfile";
 import { useMeQuery } from "../../generated/graphql";
 import { useSelector } from "react-redux";
 import { State } from "../../pages/index";
-import axios from 'axios';
+import Avatar from "../Assets/Avatar";
+import ItemList from '../../components/ItemList/ItemList';
 
 export default function UserProfile({ handleClickSubmit }) {
   const [res, updateProfile] = useMeQuery();
@@ -39,39 +32,28 @@ export default function UserProfile({ handleClickSubmit }) {
   if (data) {
     const userProfile = data.me;
 
-  axios({
-    method: 'GET',
-    url: 'https://open.mapquestapi.com/geocoding/v1/address?key=aY2o4VA1k5YSIMmGNHN3lJkaKBJunk0Q&location=Washington,DC',
-  }).then((res) => {
-    const data = res.data;
-    console.log('MapQuest', data);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+
 
     return (
-      <Container>
+      <Container >
         <Heading align="center" sx={{ margin: "10px", marginTop: "20px" }}>
           Profile
         </Heading>
-        <Container maxW="350px" sx={{ border: "1px solid" }}>
+        <Container maxW="350px" sx={cStyle()}>
           <Flex direction="row-reverse">
             <PopoverForm
               userProfile={userProfile}
               onClick={handleClickSubmit}
             />
             <Wrap justify="left" sx={{ margin: "10px", marginRight: "40px" }}>
-              <WrapItem>
-                <VStack align="left">
+              <WrapItem >
+                <VStack align="left" width="100%">
                   <Avatar
-                    size="lg"
-                    name="Random Guy"
-                    src="https://bit.ly/dan-abramov"
+                    avatar={data.me.img_url}
                   />
                   <Heading>{userProfile.username}</Heading>
-                  <Text color="gray">
-                    {userProfile.address} {", "} {userProfile.zipCode}
+                  <Text >
+                   {`${userProfile.address}, ${userProfile.zipCode}`}
                   </Text>
                   <Text>{userProfile.email}</Text>
                 </VStack>
@@ -79,15 +61,23 @@ export default function UserProfile({ handleClickSubmit }) {
             </Wrap>
           </Flex>
         </Container>
-        <Container mt={4} sx={{ border: "1px solid" }}>
-          <VStack sx={{ margin: "10px" }}>
-            <Text>{"Current Items"}</Text>
-            {userProfile.items_owned?.map((data) => (
-              <Tag colorScheme="blue" key={data.id}></Tag>
-            ))}
-          </VStack>
-        </Container>
       </Container>
     );
   }
+}
+
+function cStyle() {
+  return {
+    boxSizing: 'none',
+    border: '1px solid',
+    marginTop: '10px',
+    marginLeft: '15px',
+    color: 'white',
+    width: '90%',
+    background: 'primary',
+    borderRadius: ' 10px',
+    boxShadow: '3px 3px 10px rgba(116, 65, 0, 0.4)',
+    fontFamily: 'Roboto'
+
+  };
 }
