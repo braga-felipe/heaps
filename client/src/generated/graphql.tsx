@@ -304,7 +304,7 @@ export type Update_UserMutationVariables = Exact<{
 }>;
 
 
-export type Update_UserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: number, username: string, address: string, zipCode: string } };
+export type Update_UserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: number, username: string, address: string, zipCode: string, img_url?: string | null | undefined } };
 
 export type User_LoginMutationVariables = Exact<{
   options: UserLoginInput;
@@ -490,6 +490,7 @@ export const Update_UserDocument = gql`
     username
     address
     zipCode
+    img_url
   }
 }
     `;

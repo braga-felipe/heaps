@@ -12,7 +12,7 @@ export default function Navbar() {
   // state to check if there are unread messages and display icon
   //newcomment
   const [isUnread, setIsUnread] = useState(false);
-//
+  //
   // set a toggle state to control render of login/logout button
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -59,9 +59,9 @@ export default function Navbar() {
         </Link>
         <Link href={'/chatLobby'}>
           <Container>
-            {isUnread ? 
-                        <Image src='/chat_with_notification.png' width='30px' height='30px' />
-                      : <Image src='/chat.png' width='30px' height='30px' />
+            {isUnread ?
+              <Image src='/chat_with_notification.png' width='30px' height='30px' />
+              : <Image src='/chat.png' width='30px' height='30px' />
             }
           </Container>
         </Link>

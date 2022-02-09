@@ -17,7 +17,7 @@ interface chatLobbyListProps {
 
 export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
   console.log('renderng chat lobby');
-  
+
   const [isMessage, setIsMessage] = useState(bool ? bool : false);
   const [targetId, setTargetId] = useState(tid ? tid : 0);
   const [res, refreshLobby] = useGetMyChatsQuery();
@@ -32,7 +32,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
   }
   if (data) {
   }
-  const myId = data.me.id;
+  const myId = data?.me.id;
   const lobbyChatList = data.me.chats.map((chat) => {
     const userDetails = chat.users.filter((user) => user.id !== myId).pop();
     const lastMessage = chat.messages.length ? chat.messages[chat.messages.length - 1] : null;
@@ -48,8 +48,8 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
     return x.lastMessageIsRead === y.lastMessageIsRead
       ? 0
       : x.lastMessageIsRead
-      ? 1
-      : 1;
+        ? 1
+        : 1;
   });
 
   return isMessage ? (
