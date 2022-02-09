@@ -24,7 +24,7 @@ export default function Navbar() {
   const { data, error, fetching } = res;
   if (error) console.log(error);
   // if (fetching) setIsUnread(false);
-  if (data) {
+  if (data?.me) {
     // send chats to state
     dispatch(getAllChats(data.me.chats));
   }
