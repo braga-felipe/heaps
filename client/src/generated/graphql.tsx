@@ -126,6 +126,7 @@ export type MessageCreateInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  MarkAsRead: Message;
   createChat: Chat;
   createItem: Item;
   createMessage: Message;
@@ -135,6 +136,11 @@ export type Mutation = {
   updateItem: Item;
   updateUser: User;
   userLogin: UserResponse;
+};
+
+
+export type MutationMarkAsReadArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -275,6 +281,13 @@ export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
+
+export type MarkAsReadMutationVariables = Exact<{
+  markAsReadId: Scalars['Int'];
+}>;
+
+
+export type MarkAsReadMutation = { __typename?: 'Mutation', MarkAsRead: { __typename?: 'Message', id: number } };
 
 export type Update_ItemMutationVariables = Exact<{
   options: ItemUpdateInput;
@@ -433,6 +446,17 @@ export const LogoutDocument = gql`
 
 export function useLogoutMutation() {
   return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
+};
+export const MarkAsReadDocument = gql`
+    mutation MarkAsRead($markAsReadId: Int!) {
+  MarkAsRead(id: $markAsReadId) {
+    id
+  }
+}
+    `;
+
+export function useMarkAsReadMutation() {
+  return Urql.useMutation<MarkAsReadMutation, MarkAsReadMutationVariables>(MarkAsReadDocument);
 };
 export const Update_ItemDocument = gql`
     mutation UPDATE_ITEM($options: ItemUpdateInput!) {
