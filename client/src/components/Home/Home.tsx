@@ -55,13 +55,21 @@ export default function Home() {
           <TabPanel>
             {isMap ? (
               <Box mt='60px'>
-                <Map />
+                <Map isGroceries={isGroceries} buttonName='Chat' path='' />
               </Box>
             ) : (
               <Groceries />
             )}
           </TabPanel>
-          <TabPanel>{isMap ? <Map /> : <Dishes />}</TabPanel>
+          <TabPanel>
+            {isMap ? (
+              <Box mt='60px'>
+                <Map isGroceries={isGroceries} buttonName='Chat' path='' />
+              </Box>
+            ) : (
+              <Dishes />
+            )}
+          </TabPanel>
         </TabPanels>
       </Tabs>
       <Flex mb='10px' justify='space-around'></Flex>

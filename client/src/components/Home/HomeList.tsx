@@ -5,7 +5,7 @@ import { Container } from '@chakra-ui/react';
 import ItemCard from '../ItemList/ItemCard';
 import SearchBar from '../../components/SeachBar/SearchBar';
 
-interface ItemProp {
+export interface ItemProp {
   id: number;
   name: string;
   description: string;

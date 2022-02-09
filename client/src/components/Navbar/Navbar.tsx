@@ -19,6 +19,18 @@ export default function Navbar() {
   const user = useSelector((state: State) => state.user);
   const dispatch = useDispatch();
 
+  // hook to fetch the chats from database
+  const [res, refreshLobby] = useGetMyChatsQuery();
+  const { data, error, fetching } = res;
+  if (error) console.log(error);
+  // if (fetching) setIsUnread(false);
+  if (data) {
+    // send chats to state
+    dispatch(getAllChats(data.me.chats));
+  }
+  // take chat from state
+  const chats = useSelector((state: State) => state.chats);
+
   // import graphql logout hook
   const [, logOutUser] = useLogoutMutation();
 
