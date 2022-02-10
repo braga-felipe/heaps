@@ -328,7 +328,7 @@ export type GetChatMessagesQueryVariables = Exact<{
 }>;
 
 
-export type GetChatMessagesQuery = { __typename?: 'Query', getChat?: { __typename?: 'Chat', id: number, userOwnerId: number, item: { __typename?: 'Item', name: string, id: number }, users: Array<{ __typename?: 'User', id: number, username: string, img_url?: string | null | undefined }>, messages?: Array<{ __typename?: 'Message', id: number, text: string, authorId: number, isRead: boolean, createdAt: string }> | null | undefined } | null | undefined };
+export type GetChatMessagesQuery = { __typename?: 'Query', getChat?: { __typename?: 'Chat', id: number, userOwnerId: number, item: { __typename?: 'Item', name: string, id: number, takers: Array<{ __typename?: 'User', id: number }> }, users: Array<{ __typename?: 'User', id: number, username: string, img_url?: string | null | undefined }>, messages?: Array<{ __typename?: 'Message', id: number, text: string, authorId: number, isRead: boolean, createdAt: string }> | null | undefined } | null | undefined };
 
 export type Get_ItemQueryVariables = Exact<{
   getItemId: Scalars['Int'];
@@ -615,6 +615,9 @@ export const GetChatMessagesDocument = gql`
     item {
       name
       id
+      takers {
+        id
+      }
     }
     users {
       id

@@ -61,6 +61,7 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
               {data.getChat.item.name}
             </Heading>
             <ClaimButton
+              takers={data.getChat.item.takers}
               userOwnerId={data.getChat.userOwnerId}
               requesterId={requester.id}
               myID={user.id}
@@ -68,6 +69,7 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
           </Box>
           {/* <Box sx={bStyle()}> */}
           <MessagesList
+            updateMessages={updateMessages}
             user={user}
             messages={messages}
             chatId={chatId}></MessagesList>
