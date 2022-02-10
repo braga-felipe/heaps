@@ -73,7 +73,7 @@ export class Item extends BaseEntity {
   @ManyToOne(() => User, (user: User) => user.items_owned, {onDelete: 'SET NULL'})
   owner: User;
 
-  @Field(() => [User])
+  @Field(() => [User], {nullable: true})
   @ManyToMany(() => User, (user: User) => user.items_taken, {onDelete: 'SET NULL'})
   @JoinTable()
   takers: User[];
