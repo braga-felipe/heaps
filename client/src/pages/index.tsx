@@ -39,7 +39,7 @@ const IndexPage: NextPage = () => {
   });
 
   return (
-    <Container maxW="375px" sx={{ height: "812px", width: "375px" }}>
+    <Container maxW="375px" sx={{ height: "812px", width: "375px", marginLeft: '20px'}}>
       <Flex flexDirection="row">
         {meUser && <Heading sx={HcStyle()}>Hello, {meUser.username}!</Heading>}
         <Heading sx={HStyle()}>Heaps</Heading>
