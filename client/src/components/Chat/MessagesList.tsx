@@ -1,6 +1,6 @@
 import { Box, Container, Heading, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { useCreateMessageMutation} from '../../generated/graphql';
+import { useCreateMessageMutation } from '../../generated/graphql';
 import { ChatInputForm } from './ChatInputForm';
 import { ChatBubble } from './ChatBubble';
 interface MessagesListProps {
@@ -17,11 +17,11 @@ export const MessagesList: React.FC<MessagesListProps> = ({
   updateMessages
 }) => {
   const [messageState, updateMessageState] = useState(messages);
-  const [ , sendMessage ] = useCreateMessageMutation();
+  const [, sendMessage] = useCreateMessageMutation();
 
   useEffect(() => {
     updateMessageState(messages)
-  },[messages])
+  }, [messages])
 
   async function handleSend(message) {
     try {
@@ -58,30 +58,34 @@ export const MessagesList: React.FC<MessagesListProps> = ({
 function bStyle() {
   return {
     width: '100%',
-    height: '650px',
+    height: '630px',
     overflowY: 'scroll',
     borderRadius: '15px',
     border: '1px solid #E2E8F0',
-    marginLeft: '5px',
+    marginLeft: '1.5%',
+    marginBottom: '4%',
+    marginTop: '2%',
   };
 }
 function hStyle() {
   return {
     marginLeft: '10px',
     color: 'grey',
+    marginTop: '2%',
+    marginBottom: '2%',
   };
 }
 function msgStyle(user, message) {
   const float =
     user.id === message.authorId
       ? {
-          float: 'right',
-          backgroundColor: 'primary',
-        }
+        float: 'right',
+        backgroundColor: 'primary',
+      }
       : {
-          float: 'left',
-          backgroundColor: 'secondary',
-        };
+        float: 'left',
+        backgroundColor: 'secondary',
+      };
   return {
     ...float,
     color: 'white',

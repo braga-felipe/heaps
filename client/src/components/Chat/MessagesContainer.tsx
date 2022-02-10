@@ -13,12 +13,12 @@ interface MessagesContainerProps {
 export const MessagesContainer: React.FC<MessagesContainerProps> = ({
   chatId,
 }) => {
-//
+  //
   const [res, updateMessages] = useGetChatMessagesQuery({
     variables: {
       getChatId: chatId,
     },
-  }); 
+  });
 
   // useEffect(() => {
   //   updateMessages();
@@ -56,24 +56,28 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
     return (
       <>
         <Container sx={cStyle()}>
-          <Box display='flex' alignItems='center' flexDirection='row'>
+          <Box sx={bStyle()} display='flex' alignItems='center' flexDirection='row'>
             <Heading ml='9px' width='195px' isTruncated>
               {data.getChat.item.name}
             </Heading>
-            <ClaimButton
-              complete={data.getChat.item.complete}
-              takers={data.getChat.item.takers}
-              userOwnerId={data.getChat.userOwnerId}
-              requesterId={requester.id}
-              myID={user.id}
-              itemID={data.getChat.item.id}></ClaimButton>
+            <Container sx={claimStyle()}>
+              <ClaimButton
+                complete={data.getChat.item.complete}
+                takers={data.getChat.item.takers}
+                userOwnerId={data.getChat.userOwnerId}
+                requesterId={requester.id}
+                myID={user.id}
+                itemID={data.getChat.item.id}></ClaimButton>
+            </Container>
           </Box>
           {/* <Box sx={bStyle()}> */}
-          <MessagesList
-            updateMessages={updateMessages}
-            user={user}
-            messages={messages}
-            chatId={chatId}></MessagesList>
+          <Container sx={messageStyle()}>
+            <MessagesList
+              updateMessages={updateMessages}
+              user={user}
+              messages={messages}
+              chatId={chatId}></MessagesList>
+          </Container>
           {/* </Box> */}
         </Container>
       </>
@@ -94,12 +98,20 @@ function cStyle() {
 
 function bStyle() {
   return {
-    width: '100%',
-    height: '655px',
-    overflowY: 'scroll',
-    borderRadius: '15px',
-    border: '1px solid #E2E8F0',
-    marginLeft: '5px',
-    marginTop: '8px',
+    marginTop: '3%',
   };
 }
+function claimStyle() {
+  return {
+    position: 'fixed',
+    marginTop: '30%',
+    marginLeft: '50%'
+  };
+}
+
+function messageStyle() {
+  return {
+    marginTop: '10%',
+  };
+}
+
