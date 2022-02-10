@@ -1,6 +1,8 @@
 import { Button } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useAcceptItemClaimMutation } from '../../generated/graphql';
+import { State } from '../../pages';
 
 interface ClaimButtonProps {
   userOwnerId: number;
@@ -8,6 +10,7 @@ interface ClaimButtonProps {
   requesterId: number;
   itemID: number;
   takers;
+  complete: boolean;
 }
 
 export const ClaimButton: React.FC<ClaimButtonProps> = ({
@@ -15,20 +18,23 @@ export const ClaimButton: React.FC<ClaimButtonProps> = ({
   myID,
   requesterId,
   itemID,
-  takers
+  takers,
+  complete
 }) => {
   const [, acceptItemClaim] = useAcceptItemClaimMutation();
-  const [isClaimed, updateIsClaimed] = useState(false);
+  const [isClaimed, updateIsClaimed] = useState(complete);
   function handleClick() {
     acceptItemClaim({ options: { itemId: itemID, userId: requesterId } });
-  }
-
-  if (userOwnerId === myID && !isClaimed) {
     updateIsClaimed(true);
+  }
+  const user = useSelector((state: State) => state.user);
+
+  console.log(takers)
+  if (userOwnerId === myID && !isClaimed) {
     return <Button onClick={handleClick}>Accept Request</Button>;
   } else if (userOwnerId === myID && isClaimed) {
-    return <Button isDisabled={true}>Request Accepted</Button>; 
-  } else if (takers && takers.includes(myID)) {
+    return <Button isDisabled={true}>You Accepted</Button>; 
+  } else if (user.items_taken.filter((i) => i.id === itemID).length) {
     return <Button isDisabled={true}>Request Accepted</Button>; 
   } else return null;
 };

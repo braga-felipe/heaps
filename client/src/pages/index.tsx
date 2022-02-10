@@ -1,13 +1,13 @@
-import type { NextPage } from "next";
-import { Box, Container, Flex, Heading, Spacer } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
-import { getAllItems } from "../redux/actions/items";
-import { useGet_All_ItemsQuery, useMeQuery } from "../generated/graphql";
-import Home from "../components/Home/Home";
-import { useEffect } from "react";
-import { getInitialUser } from "../redux/actions/user";
-import "@fontsource/lobster";
-import Avatar from "../components/Assets/Avatar";
+import type { NextPage } from 'next';
+import { Container, Heading, Image } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
+import { getAllItems } from '../redux/actions/items';
+import { useGet_All_ItemsQuery, useMeQuery } from '../generated/graphql';
+import Home from '../components/Home/Home';
+import { useEffect } from 'react';
+import { getInitialUser } from '../redux/actions/user';
+import '@fontsource/lobster';
+import Avatar from '../components/Assets/Avatar';
 
 export interface State {
   user?;
@@ -39,35 +39,44 @@ const IndexPage: NextPage = () => {
   });
 
   return (
-    <Container sx={{ height: '412px', width: '375px', }}>
-      <Flex flexDirection="row">
-        {meUser && <Heading sx={HcStyle()}>Hello, {meUser.username}!</Heading>}
-        <Heading sx={HStyle()}>Heaps </Heading>
-      </Flex>
+    <>
+      {meUser && <Heading sx={HcStyle()}>Hello, {meUser.username}!</Heading>}
+      <Container sx={cStyle()}>
+        <Image src='/code_works_heaps.png' boxSize='60px' />
+      </Container>
+      <Heading sx={HStyle()} >Heaps</Heading>
       <Home />
-    </Container>
+    </>
   );
 };
+function cStyle() {
+  return {
+    position: 'fixed',
+    fontFamily: 'Lobster',
+    fontSize: '3xl',
+    color: '#5D55B4;',
+  };
+}
 function HStyle() {
   return {
-    position: "fixed",
-    fontFamily: "Lobster",
-    fontSize: "3xl",
-    margin: "2%",
-    color: "#5D55B4;",
+    position: 'absolute',
+    marginTop: '14%',
+    fontFamily: 'Lobster',
+    marginLeft: '7.5%',
+    fontSize: 'xs',
+    color: '#5D55B4;',
   };
 }
 
 function HcStyle() {
   return {
-    position: "fixed",
-    left: "250px",
-    fontSize: "xs",
-    zIndex: "1",
-    backgroundColor: "transparent",
-    width: "100%",
-    marginTop: "10px",
-    color: "#5D55B4",
+    position: 'fixed',
+    left: '270px',
+    fontSize: 'xs',
+    zIndex: '1',
+    backgroundColor: 'white',
+    width: '100%',
+    color: '#5D55B4;',
   };
 }
 

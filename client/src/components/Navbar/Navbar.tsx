@@ -46,7 +46,7 @@ export default function Navbar() {
       <HStack sx={cStyle()}>
         <Link href="/">
           <Container>
-            <Image src="/home.png" width="25px" height="25px" />
+            <Image src='/code_works_heaps_white.png' width='40px' height='40px' />
           </Container>
         </Link>
         <Link href={"/createItem"}>
