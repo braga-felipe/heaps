@@ -100,10 +100,11 @@ function hsStyle() {
     alignItems: "center",
     background: "#dfb23f",
     color: "white",
-    paddingTop: "22.5px",
+    paddingTop: "20px",
     height: "75px",
     opacity: 0.85,
     borderTopRadius: "15px",
+    width: '100%'
   };
 }
 function cStyle() {
