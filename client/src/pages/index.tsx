@@ -62,11 +62,11 @@ function cStyle() {
 function HStyle() {
   return {
     position: "absolute",
-    marginTop: "10px",
+    marginTop: "55px",
     fontFamily: "Lobster",
-    marginLeft: "0",
-    fontSize: "xs",
+    fontSize: "30px",
     color: "#5D55B4;",
+    marginLeft: "8px"
   };
 }
 

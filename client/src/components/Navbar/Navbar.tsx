@@ -122,7 +122,7 @@ function logo() {
   return {
     position: 'absolute',
     height: '45px',
-    width: '80px',
+    width: '85px',
     marginBottom: '10px'
   }
 }
