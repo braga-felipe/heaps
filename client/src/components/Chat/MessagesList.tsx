@@ -1,19 +1,20 @@
 import { Box, Container, Heading, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import moment from 'moment';
-import { useCreateMessageMutation, useMarkAsReadMutation } from '../../generated/graphql';
+import { useCreateMessageMutation} from '../../generated/graphql';
 import { ChatInputForm } from './ChatInputForm';
 import { ChatBubble } from './ChatBubble';
 interface MessagesListProps {
   user;
   messages;
   chatId;
+  updateMessages;
 }
 
 export const MessagesList: React.FC<MessagesListProps> = ({
   user,
   messages,
   chatId,
+  updateMessages
 }) => {
   const [messageState, updateMessageState] = useState(messages);
   const [ , sendMessage ] = useCreateMessageMutation();
@@ -28,6 +29,7 @@ export const MessagesList: React.FC<MessagesListProps> = ({
         options: { text: message.text, currentUserId: user.id, chatId: chatId },
       });
       updateMessageState([...messageState, messageSent.data.createMessage]);
+      // await updateMessages();
       console.log({ messageSent });
     } catch (error) {
       console.log({ error });

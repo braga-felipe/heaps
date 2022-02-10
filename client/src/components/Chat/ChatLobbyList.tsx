@@ -41,7 +41,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
       itemName: chat.item.name,
       userName: userDetails.username,
       img_url: userDetails.img_url,
-      lastMessageIsRead: (lastMessage.authorId !== myId) ? lastMessage.isRead : true
+      lastMessageIsRead: (lastMessage?.authorId !== myId) ? lastMessage?.isRead : true
     };
   });
   const sortedList = lobbyChatList.sort(function (x, y) {
