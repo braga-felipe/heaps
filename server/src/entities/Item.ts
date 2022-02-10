@@ -76,7 +76,7 @@ export class Item extends BaseEntity {
   @Field(() => [User], {nullable: true})
   @ManyToMany(() => User, (user: User) => user.items_taken, {onDelete: 'SET NULL'})
   @JoinTable()
-  takers: User[];
+  takers?: User[];
 
   @Field(() => [Chat])
   @OneToMany(() => Chat, (chat: Chat) => chat.item, {onDelete: 'SET NULL'})

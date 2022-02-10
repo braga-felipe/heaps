@@ -6,7 +6,6 @@ query GetMyChats {
       item {
         name
         ownerId
-        
       }
       messages {
         text
