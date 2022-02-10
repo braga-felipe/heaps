@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { Heading } from '@chakra-ui/react';
+import { Container, Heading, Image } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { getAllItems } from '../redux/actions/items';
 import { useGet_All_ItemsQuery, useMeQuery } from '../generated/graphql';
@@ -41,17 +41,29 @@ const IndexPage: NextPage = () => {
   return (
     <>
       {meUser && <Heading sx={HcStyle()}>Hello, {meUser.username}!</Heading>}
-      <Heading sx={HStyle()}>Heaps</Heading>
+      <Container sx={cStyle()}>
+        <Image src='/code_works_heaps.png' boxSize='60px' />
+      </Container>
+      <Heading sx={HStyle()} >Heaps</Heading>
       <Home />
     </>
   );
 };
-function HStyle() {
+function cStyle() {
   return {
     position: 'fixed',
     fontFamily: 'Lobster',
     fontSize: '3xl',
-    margin: '2%',
+    color: '#5D55B4;',
+  };
+}
+function HStyle() {
+  return {
+    position: 'absolute',
+    marginTop: '14%',
+    fontFamily: 'Lobster',
+    marginLeft: '7.5%',
+    fontSize: 'xs',
     color: '#5D55B4;',
   };
 }
@@ -64,6 +76,7 @@ function HcStyle() {
     zIndex: '1',
     backgroundColor: 'white',
     width: '100%',
+    color: '#5D55B4;',
   };
 }
 
