@@ -21,13 +21,13 @@ export const ClaimButton: React.FC<ClaimButtonProps> = ({
   const [isClaimed, updateIsClaimed] = useState(false);
   function handleClick() {
     acceptItemClaim({ options: { itemId: itemID, userId: requesterId } });
+    updateIsClaimed(true);
   }
 
   if (userOwnerId === myID && !isClaimed) {
-    updateIsClaimed(true);
     return <Button onClick={handleClick}>Accept Request</Button>;
   } else if (userOwnerId === myID && isClaimed) {
-    return <Button isDisabled={true}>Request Accepted</Button>; 
+    return <Button isDisabled={true}>You Accepted</Button>; 
   } else if (takers && takers.includes(myID)) {
     return <Button isDisabled={true}>Request Accepted</Button>; 
   } else return null;
