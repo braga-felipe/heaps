@@ -61,6 +61,7 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
               {data.getChat.item.name}
             </Heading>
             <ClaimButton
+              complete={data.getChat.item.complete}
               takers={data.getChat.item.takers}
               userOwnerId={data.getChat.userOwnerId}
               requesterId={requester.id}

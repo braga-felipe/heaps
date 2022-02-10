@@ -8,6 +8,7 @@ interface ClaimButtonProps {
   requesterId: number;
   itemID: number;
   takers;
+  complete: boolean;
 }
 
 export const ClaimButton: React.FC<ClaimButtonProps> = ({
@@ -15,19 +16,20 @@ export const ClaimButton: React.FC<ClaimButtonProps> = ({
   myID,
   requesterId,
   itemID,
-  takers
+  takers,
+  complete
 }) => {
   const [, acceptItemClaim] = useAcceptItemClaimMutation();
-  const [isClaimed, updateIsClaimed] = useState(false);
+  const [isClaimed, updateIsClaimed] = useState(complete);
   function handleClick() {
     acceptItemClaim({ options: { itemId: itemID, userId: requesterId } });
+    updateIsClaimed(true);
   }
 
   if (userOwnerId === myID && !isClaimed) {
-    updateIsClaimed(true);
     return <Button onClick={handleClick}>Accept Request</Button>;
   } else if (userOwnerId === myID && isClaimed) {
-    return <Button isDisabled={true}>Request Accepted</Button>; 
+    return <Button isDisabled={true}>You Accepted</Button>; 
   } else if (takers && takers.includes(myID)) {
     return <Button isDisabled={true}>Request Accepted</Button>; 
   } else return null;

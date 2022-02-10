@@ -5,6 +5,7 @@ query getChatMessages($getChatId: Int!) {
     item {
       name
       id
+      complete
       takers {
         id
       }
