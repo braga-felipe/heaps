@@ -32,13 +32,13 @@ export class User extends BaseEntity {
   @Column()
   zipCode: string;
 
-  @Field(() => Float)
-  @Column({ type: "double precision" })
-  lat: number;
+  @Field(() => Float, {nullable: true})
+  @Column({ type: "double precision", nullable: true })
+  lat?: number;
 
-  @Field(() => Float)
-  @Column({ type: "double precision" })
-  lng: number;
+  @Field(() => Float, {nullable: true})
+  @Column({ type: "double precision", nullable: true })
+  lng?: number;
 
   @Field(() => Int, { nullable: true })
   @Column({ nullable: true })
