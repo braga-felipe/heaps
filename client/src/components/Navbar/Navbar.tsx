@@ -43,10 +43,13 @@ export default function Navbar() {
     <HStack sx={hsStyle()}>
       <HStack sx={cStyle()}>
         <Link href='/'>
-          <Container>
-            <Image src='/code_works_heaps_white.png' width='40px' height='40px' />
+          <Container sx={logo()}>
+            <Image src='/logo-branco.png' width='150px' height='130px' />
           </Container>
         </Link>
+        <Container>
+
+        </Container>
         <Link href={'/createItem'}>
           <Container>
             <Image src='/food.png' width='30px' height='30px' />
@@ -101,4 +104,13 @@ function cStyle() {
     alignItems: 'center',
     fontWeight: 'bold',
   };
+}
+
+function logo() {
+  return {
+    position: 'absolute',
+    height: '45px',
+    width: '80px',
+    marginBottom: '10px'
+  }
 }

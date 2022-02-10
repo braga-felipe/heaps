@@ -31,10 +31,17 @@ export const ClaimButton: React.FC<ClaimButtonProps> = ({
 
   console.log(takers)
   if (userOwnerId === myID && !isClaimed) {
-    return <Button onClick={handleClick}>Accept Request</Button>;
+    return <Button sx={bStyle()} onClick={handleClick}>Accept Request</Button>;
   } else if (userOwnerId === myID && isClaimed) {
-    return <Button isDisabled={true}>You Accepted</Button>; 
+    return <Button sx={bStyle()} isDisabled={true}>You Accepted</Button>;
   } else if (user.items_taken.filter((i) => i.id === itemID).length) {
-    return <Button isDisabled={true}>Request Accepted</Button>; 
+    return <Button sx={bStyle()} isDisabled={true}>Request Accepted</Button>;
   } else return null;
 };
+
+function bStyle() {
+  return {
+    background: 'primaryActive',
+    color: 'white',
+  };
+}
