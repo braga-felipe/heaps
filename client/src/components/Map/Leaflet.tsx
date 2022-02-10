@@ -13,25 +13,6 @@ const Map = ({ position, isGroceries, buttonName, path }) => {
   const items = useSelector((state: State) => state.items);
   const user = useSelector((state: State) => state.user);
 
-  // const locations = [
-  //   {
-  //     latitude: 52.49702132212514,
-  //     longitude: 13.412426015499745,
-  //   },
-  //   {
-  //     latitude: 52.49724753603104,
-  //     longitude: 13.410591427437256,
-  //   },
-  //   {
-  //     latitude: 52.49173324225949,
-  //     longitude: 13.421504900958329,
-  //   },
-  //   {
-  //     latitude: 52.492115421218806,
-  //     longitude: 13.408594567248748,
-  //   },
-  // ];
-
   const userIcon = L.icon({
     iconUrl: 'https://img.icons8.com/office/80/000000/place-marker--v1.png',
     iconSize: [38, 38],
@@ -67,8 +48,6 @@ const Map = ({ position, isGroceries, buttonName, path }) => {
       setFoundItems(keyword);
     }
   };
-console.log('itemsRendered :', itemsRendered)
-  console.log('IN LEAFLET!');
   return position.longitude ? (
     <>
       <Container sx={searchStyle()}>

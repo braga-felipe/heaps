@@ -219,8 +219,8 @@ export type User = {
   img_url?: Maybe<Scalars['String']>;
   items_owned?: Maybe<Array<Item>>;
   items_taken?: Maybe<Array<Item>>;
-  lat: Scalars['Float'];
-  lng: Scalars['Float'];
+  lat?: Maybe<Scalars['Float']>;
+  lng?: Maybe<Scalars['Float']>;
   updatedAt: Scalars['String'];
   username: Scalars['String'];
   zipCode: Scalars['String'];
@@ -316,7 +316,7 @@ export type User_LoginMutation = { __typename?: 'Mutation', userLogin: { __typen
 export type Get_All_ItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Get_All_ItemsQuery = { __typename?: 'Query', getAllItems?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, ownerId: number, createdAt: string, updatedAt: string, owner: { __typename?: 'User', username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, img_url?: string | null | undefined, lat: number, lng: number }, takers?: Array<{ __typename?: 'User', username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, img_url?: string | null | undefined }> | null | undefined, chats: Array<{ __typename?: 'Chat', users: Array<{ __typename?: 'User', id: number }> }> }> | null | undefined };
+export type Get_All_ItemsQuery = { __typename?: 'Query', getAllItems?: Array<{ __typename?: 'Item', id: number, name: string, description: string, servings: number, complete: boolean, archive: boolean, isGroceries: boolean, allergies: Array<Allergies>, diets: Array<Diets>, SICK_points: number, ownerId: number, createdAt: string, updatedAt: string, owner: { __typename?: 'User', username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, img_url?: string | null | undefined, lat?: number | null | undefined, lng?: number | null | undefined }, takers?: Array<{ __typename?: 'User', username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, img_url?: string | null | undefined }> | null | undefined, chats: Array<{ __typename?: 'Chat', users: Array<{ __typename?: 'User', id: number }> }> }> | null | undefined };
 
 export type Get_All_UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -357,7 +357,7 @@ export type Get_User_By_IdQuery = { __typename?: 'Query', getOneUserByID: { __ty
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, lat: number, lng: number, img_url?: string | null | undefined, createdAt: string, updatedAt: string, items_owned?: Array<{ __typename?: 'Item', id: number }> | null | undefined, items_taken?: Array<{ __typename?: 'Item', id: number }> | null | undefined, chats?: Array<{ __typename?: 'Chat', id: number, item: { __typename?: 'Item', name: string, ownerId: number }, messages?: Array<{ __typename?: 'Message', text: string, authorId: number, isRead: boolean, createdAt: string }> | null | undefined, users: Array<{ __typename?: 'User', username: string, id: number, img_url?: string | null | undefined }> }> | null | undefined } | null | undefined };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: number, username: string, email: string, address: string, zipCode: string, SICK_points?: number | null | undefined, lat?: number | null | undefined, lng?: number | null | undefined, img_url?: string | null | undefined, createdAt: string, updatedAt: string, items_owned?: Array<{ __typename?: 'Item', id: number }> | null | undefined, items_taken?: Array<{ __typename?: 'Item', id: number }> | null | undefined, chats?: Array<{ __typename?: 'Chat', id: number, item: { __typename?: 'Item', name: string, ownerId: number }, messages?: Array<{ __typename?: 'Message', text: string, authorId: number, isRead: boolean, createdAt: string }> | null | undefined, users: Array<{ __typename?: 'User', username: string, id: number, img_url?: string | null | undefined }> }> | null | undefined } | null | undefined };
 
 
 export const AcceptItemClaimDocument = gql`
