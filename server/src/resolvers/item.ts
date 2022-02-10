@@ -129,6 +129,7 @@ export class ItemResolver {
     } else {
       item.takers = [user];
     }
+    item.complete = true;
     await entityManager.save(item)
     return item;
   }
