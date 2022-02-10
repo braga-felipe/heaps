@@ -4,5 +4,6 @@ mutation UPDATE_USER($options: UserUpdateOptionsInput!) {
     username
     address
     zipCode
+    img_url
   }
 }

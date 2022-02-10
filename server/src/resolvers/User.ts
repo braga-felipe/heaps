@@ -58,14 +58,11 @@ class UserUpdateOptionsInput {
 
   @Field({ nullable: true })
   zipCode?: string;
+
+  @Field({ nullable: true })
+  img_url?: string;
 }
-// @InputType()
-// class UserUpdateInput {
-//   @Field(() => Int)
-//   id: number;
-//   @Field(() => UserUpdateOptions)
-//   updateOptions: UserUpdateOptions;
-// }
+
 @ObjectType()
 class FieldError {
   @Field(() => String)
@@ -140,9 +137,13 @@ export class UserResolver {
     }
     const hashedPassword = await argon2.hash(options.password);
 
+    const address = options.address.replace(/ /g, '%20')
+console.log('addres with spaces :', address)
+console.log(`address with zipcode: ${address},${options.zipCode}`)
+
     const coordinates = await axios({
       method: "GET",
-      url: `https://open.mapquestapi.com/geocoding/v1/address?key=aY2o4VA1k5YSIMmGNHN3lJkaKBJunk0Q&location=${options.address},${options.zipCode}`,
+      url: `https://open.mapquestapi.com/geocoding/v1/address?key=aY2o4VA1k5YSIMmGNHN3lJkaKBJunk0Q&location=${address},${options.zipCode}`,
     }).then((response) => {
       return response.data.results[0].locations[0].displayLatLng;
     });
@@ -184,6 +185,7 @@ export class UserResolver {
       }
     }
     req.session.userId = user?.id;
+    console.log('user in dabatase :',user)
     return { user };
   }
 
@@ -269,6 +271,13 @@ export class UserResolver {
       // executes UPDATE user SET {options} WHERE id = options.id
       await entityManager.update(User, options.id, {
         zipCode: options.zipCode,
+      });
+    }
+
+    if (options.img_url !== "") {
+      // executes UPDATE user SET {options} WHERE id = options.id
+      await entityManager.update(User, options.id, {
+        img_url: options.img_url,
       });
     }
     const updatedUser = await entityManager.findOneOrFail(User, options.id);
