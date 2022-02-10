@@ -1,12 +1,12 @@
-import React from 'react';
-import Auth from '../Auth';
-import { useRouter } from 'next/router';
-import { Formik, Form } from 'formik';
-import InputField from '../ChakraUiComponents/InputField';
-import InputNumber from '../ChakraUiComponents/InputNumber';
-import CheckBox from '../ChakraUiComponents/Checkbox';
-import CreateCooking from '../Assets/CreateCooking';
-import SubmitButton from '../ChakraUiComponents/Button';
+import React from "react";
+import Auth from "../Auth";
+import { useRouter } from "next/router";
+import { Formik, Form } from "formik";
+import InputField from "../ChakraUiComponents/InputField";
+import InputNumber from "../ChakraUiComponents/InputNumber";
+import CheckBox from "../ChakraUiComponents/Checkbox";
+import CreateCooking from "../Assets/CreateCooking";
+import SubmitButton from "../ChakraUiComponents/Button";
 import {
   HStack,
   Button,
@@ -21,16 +21,16 @@ import {
   ModalFooter,
   ModalBody,
   useDisclosure,
-} from '@chakra-ui/react';
-import { State } from '../../pages/index';
-import { useDispatch, useSelector } from 'react-redux';
-import { createOneItem } from '../../redux/actions/items';
-import CompletePopUp from '../Assets/CompletePopUp';
+} from "@chakra-ui/react";
+import { State } from "../../pages/index";
+import { useDispatch, useSelector } from "react-redux";
+import { createOneItem } from "../../redux/actions/items";
+import CompletePopUp from "../Assets/CompletePopUp";
 import {
   Allergies,
   Diets,
   useCreate_ItemMutation,
-} from '../../generated/graphql';
+} from "../../generated/graphql";
 
 interface Values {
   name: string;
@@ -50,18 +50,22 @@ export default function CreateItem(props) {
   // hook for modal
   const { isOpen, onOpen, onClose } = useDisclosure();
   function goToHomePage() {
-    router.push('/');
+    router.push("/");
   }
 
   return (
     <Auth>
-      <Container>
+      <Container sx={{ marginLeft: "15px", height: "812px" }}>
         <CreateCooking />
-        <Heading>Create a Food Item</Heading>
+        <Heading
+          sx={{ marginBottom: "20px", fontSize: "28px", color: "#5D55B4" }}
+        >
+          Add Food or Groceries!
+        </Heading>
         <Formik
           initialValues={{
-            name: '',
-            description: '',
+            name: "",
+            description: "",
             servings: 1,
             ownerId: user.id,
             isGroceries: false,
@@ -80,57 +84,52 @@ export default function CreateItem(props) {
             actions.resetForm();
 
             onOpen();
-          }}>
-          <Form>
-            <InputField name='name' />
-            <InputField name='description' />
+          }}
+        >
+          <Form style={{ margin: "5px" }}>
+            <InputField name="name" />
+            <InputField name="description" />
             <CheckBox
-              name='Is Groceries'
-              group='isGroceries'
-              value='isGroceries'
+              name="Groceries"
+              group="isGroceries"
+              value="isGroceries"
             />
-            <HStack>
+            <HStack sx={{ marginTop: "20px", marginBottom: "30px" }}>
               <Container>
-                <FormLabel>Allergies</FormLabel>
+                <FormLabel fontWeight="bold">Allergies</FormLabel>
                 <CheckboxGroup>
                   <CheckBox
-                    name='Gluten Free'
-                    group='allergies'
-                    value='glutenFree'
+                    name="Gluten Free"
+                    group="allergies"
+                    value="glutenFree"
                   />
                   <CheckBox
-                    name='Lactose Free'
-                    group='allergies'
-                    value='lactoseFree'
+                    name="Lactose Free"
+                    group="allergies"
+                    value="lactoseFree"
                   />
-                  <CheckBox
-                    name='Nut Free'
-                    group='allergies'
-                    value='nutFree' />
+                  <CheckBox name="Nut Free" group="allergies" value="nutFree" />
                 </CheckboxGroup>
               </Container>
               <Container>
-                <FormLabel>Diets</FormLabel>
+                <FormLabel fontWeight="bold">Diets</FormLabel>
                 <CheckboxGroup>
+                  <CheckBox name="Vegan" group="diets" value="vegan" />
                   <CheckBox
-                    name='Vegan'
-                    group='diets'
-                    value='vegan' />
-                  <CheckBox
-                    name='Vegetarian'
-                    group='diets'
-                    value='vegetarian'
+                    name="Vegetarian"
+                    group="diets"
+                    value="vegetarian"
                   />
                   <CheckBox
-                    name='Pescatarian'
-                    group='diets'
-                    value='pescatarian'
+                    name="Pescatarian"
+                    group="diets"
+                    value="pescatarian"
                   />
                 </CheckboxGroup>
               </Container>
             </HStack>
             <InputNumber />
-            <SubmitButton props={props} name='Create Dish' />
+            <SubmitButton props={props} name="Create Dish" />
           </Form>
         </Formik>
 
@@ -142,7 +141,7 @@ export default function CreateItem(props) {
               <CompletePopUp />
             </ModalBody>
             <ModalFooter>
-              <Button colorScheme='blue' onClick={onClose} mr={3}>
+              <Button colorScheme="blue" onClick={onClose} mr={3}>
                 Back to form
               </Button>
               <Button onClick={goToHomePage}>Go to Home Page</Button>

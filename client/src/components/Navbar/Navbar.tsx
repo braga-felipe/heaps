@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { HStack, Container } from '@chakra-ui/react';
-import { useGetMyChatsQuery, useLogoutMutation } from '../../generated/graphql';
-import { State } from '../../pages';
-import { useDispatch, useSelector } from 'react-redux';
-import { logUserOut } from '../../redux/actions/user';
-import { getAllChats } from '../../redux/actions/chats';
-import checkIfLastMessageOfEachChatIsUnread from '../../utils/checkIfLastMessageOfEachChatIsRead';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { HStack, Container } from "@chakra-ui/react";
+import { useGetMyChatsQuery, useLogoutMutation } from "../../generated/graphql";
+import { State } from "../../pages";
+import { useDispatch, useSelector } from "react-redux";
+import { logUserOut } from "../../redux/actions/user";
+import { getAllChats } from "../../redux/actions/chats";
+import checkIfLastMessageOfEachChatIsUnread from "../../utils/checkIfLastMessageOfEachChatIsRead";
 export default function Navbar() {
   // state to check if there are unread messages and display icon
   //newcomment
@@ -36,33 +36,40 @@ export default function Navbar() {
   useEffect(() => {
     // on change of user state page re-renders?
     user && user?.email ? setIsLoggedIn(true) : setIsLoggedIn(false);
-    (user && user?.chats?.length) && setIsUnread(checkIfLastMessageOfEachChatIsUnread(user.chats, user.id));
+    user &&
+      user?.chats?.length &&
+      setIsUnread(checkIfLastMessageOfEachChatIsUnread(user.chats, user.id));
   });
 
   return (
     <HStack sx={hsStyle()}>
       <HStack sx={cStyle()}>
-        <Link href='/'>
+        <Link href="/">
           <Container>
-            <Image src='/home.png' width='25px' height='25px' />
+            <Image src="/home.png" width="25px" height="25px" />
           </Container>
         </Link>
-        <Link href={'/createItem'}>
+        <Link href={"/createItem"}>
           <Container>
-            <Image src='/food.png' width='30px' height='30px' />
+            <Image src="/food.png" width="30px" height="30px" />
           </Container>
         </Link>
-        <Link href={'/dashboard'}>
+        <Link href={"/dashboard"}>
           <Container>
-            <Image src='/dashboard.png' width='30px' height='30px' />
+            <Image src="/dashboard.png" width="30px" height="30px" />
           </Container>
         </Link>
-        <Link href={'/chatLobby'}>
+        <Link href={"/chatLobby"}>
           <Container>
-            {isUnread ?
-              <Image src='/chat_with_notification.png' width='30px' height='30px' />
-              : <Image src='/chat.png' width='30px' height='30px' />
-            }
+            {isUnread ? (
+              <Image
+                src="/chat_with_notification.png"
+                width="30px"
+                height="30px"
+              />
+            ) : (
+              <Image src="/chat.png" width="30px" height="30px" />
+            )}
           </Container>
         </Link>
         {/* if toggle state is true, render logout icon, else render login icon */}
@@ -70,13 +77,14 @@ export default function Navbar() {
           <Container
             onClick={() => {
               logout();
-            }}>
-            <Image src='/logout.png' width='30px' height='30px' />
+            }}
+          >
+            <Image src="/logout.png" width="30px" height="30px" />
           </Container>
         ) : (
-          <Link href='/login'>
+          <Link href="/login">
             <Container>
-              <Image src='/login.png' width='30px' height='30px' />
+              <Image src="/login.png" width="30px" height="30px" />
             </Container>
           </Link>
         )}
@@ -87,18 +95,21 @@ export default function Navbar() {
 
 function hsStyle() {
   return {
-    display: 'flex-box',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    background: '#dfb23f',
-    color: 'white',
-    paddingTop: '2%',
+    display: "flex-box",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    background: "#dfb23f",
+    color: "white",
+    paddingTop: "22.5px",
+    height: "75px",
+    opacity: 0.85,
+    borderTopRadius: "15px",
   };
 }
 function cStyle() {
   return {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    fontWeight: 'bold',
+    justifyContent: "space-between",
+    alignItems: "center",
+    fontWeight: "bold",
   };
 }

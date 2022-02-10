@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { State } from '../../pages/index';
 import { Container } from '@chakra-ui/react';
@@ -20,6 +20,12 @@ export default function ItemList({ complete, buttonName, path, isOwner }) {
   const items = useSelector((state: State) => state.items);
   const user = useSelector((state: State) => state.user);
   const itemsToView = [];
+
+  useEffect(() => {
+    itemsToView
+    items
+  },[itemsToView, items])
+
   return (
     <Container sx={cStyle()} className='round-container'>
       <Container>
