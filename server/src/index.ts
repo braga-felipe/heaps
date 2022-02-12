@@ -2,8 +2,9 @@ import 'reflect-metadata';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
-import { __prod__ } from './constants';
+// import { __prod__ } from './constants';
 import { createConnection } from 'typeorm';
+import 'dotenv/config';
 
 //Resolver Imports for Graphql
 import { ItemResolver } from './resolvers/item';
@@ -16,9 +17,6 @@ import { ChatResolver } from './resolvers/chat';
 import { MessageResolver } from './resolvers/message';
 import { MyContext } from './types';
 
-//TODO: Update DB to redis store
-// const connectRedis = require('connect-redis');
-// const redis = require('redis');
 const session = require('express-session');
 const app = express();
 const PORT = 4000;
@@ -43,7 +41,7 @@ app.use(
       sameSite: false,
     },
     saveUninitialized: false,
-    secret: 'qiwroasdjlasddde',
+    secret: process.env.SECRET_KEY,
     resave: false,
   })
 );
@@ -51,7 +49,7 @@ app.use(
 (async function () {
   //typeORM connection to POSTGRES
   await createConnection({
-    url: 'postgres://cqdwlaycgnlihe:5a485120a790b97466abe4032ae3976c7ee7834b87f3975d5bd3919745f197ff@ec2-3-227-15-75.compute-1.amazonaws.com:5432/d9917k0abiuhik',
+    url: process.env.DB_URL,
     type: 'postgres',
 
     logging: true,
@@ -60,7 +58,6 @@ app.use(
       rejectUnauthorized: false,
     },
 
-    //TODO: Add entities to array
     entities: [Item, User, Chat, Message],
   });
 

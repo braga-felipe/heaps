@@ -37,7 +37,7 @@ export default function Register() {
   const [radio, setRadio] = useState('avatar1');
 
   return (
-    <Container>
+    <Container ml='10px'>
       <Formik
         initialValues={{
           username: '',

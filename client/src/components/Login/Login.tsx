@@ -14,7 +14,6 @@ interface User {
   password: string;
 }
 export default function Login() {
-
   const [res, getUser] = useUser_LoginMutation();
   console.log('LOGIN DATA: ', res.data?.userLogin.user);
   const router = useRouter();
@@ -22,8 +21,10 @@ export default function Login() {
 
   return (
     <Container>
-      <Heading>Log In</Heading>
-      <MysticPan />
+      <Container ml='10px'>
+        <Heading>Log In</Heading>
+        <MysticPan />
+      </Container>
       <Formik
         initialValues={{
           email: '',
@@ -42,11 +43,13 @@ export default function Login() {
           console.log('login: ', res);
         }}>
         {(props) => (
-          <Form>
-            <InputField name='email' />
-            <InputField name='password' />
-            <SubmitButton props={props} name='Log In' />
-          </Form>
+          <Container ml='10px'>
+            <Form>
+              <InputField name='email' />
+              <InputField name='password' />
+              <SubmitButton props={props} name='Log In' />
+            </Form>
+          </Container>
         )}
       </Formik>
       <Container sx={cStyle()}>
