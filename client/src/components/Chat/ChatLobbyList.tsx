@@ -22,7 +22,7 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
   const [targetId, setTargetId] = useState(tid ? tid : 0);
   const [res, refreshLobby] = useGetMyChatsQuery();
   const { data, error, fetching } = res;
-
+  let sortedList;
   if (error) {
     console.log(error);
     return <h1>Error Fetching Lobby</h1>;
@@ -31,29 +31,29 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
     return <Loading />;
   }
   if (data) {
+    const myId = data.me.id;
+    const lobbyChatList = data.me.chats.map((chat) => {
+      const userDetails = chat.users.filter((user) => user.id !== myId).pop();
+      const lastMessage = chat.messages.length
+        ? chat.messages[chat.messages.length - 1]
+        : null;
+      return {
+        chatId: chat.id,
+        itemName: chat.item.name,
+        userName: userDetails.username,
+        img_url: userDetails.img_url,
+        lastMessageIsRead:
+          lastMessage?.authorId !== myId ? lastMessage?.isRead : true,
+      };
+    });
+    sortedList = lobbyChatList.sort(function (x, y) {
+      return x.lastMessageIsRead === y.lastMessageIsRead
+        ? 0
+        : x.lastMessageIsRead
+        ? 1
+        : 1;
+    });
   }
-  const myId = data?.me.id;
-  const lobbyChatList = data.me.chats.map((chat) => {
-    const userDetails = chat.users.filter((user) => user.id !== myId).pop();
-    const lastMessage = chat.messages.length
-      ? chat.messages[chat.messages.length - 1]
-      : null;
-    return {
-      chatId: chat.id,
-      itemName: chat.item.name,
-      userName: userDetails.username,
-      img_url: userDetails.img_url,
-      lastMessageIsRead:
-        lastMessage?.authorId !== myId ? lastMessage?.isRead : true,
-    };
-  });
-  const sortedList = lobbyChatList.sort(function (x, y) {
-    return x.lastMessageIsRead === y.lastMessageIsRead
-      ? 0
-      : x.lastMessageIsRead
-      ? 1
-      : 1;
-  });
 
   return isMessage ? (
     <>
