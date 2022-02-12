@@ -1,7 +1,10 @@
 import { Box, Button, Container, Heading } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useGetChatMessagesQuery, useMarkAsReadMutation } from '../../generated/graphql';
+import {
+  useGetChatMessagesQuery,
+  useMarkAsReadMutation,
+} from '../../generated/graphql';
 import { State } from '../../pages';
 import { ClaimButton } from './ClaimButton';
 import { MessagesList } from './MessagesList';
@@ -56,7 +59,11 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
     return (
       <>
         <Container sx={cStyle()}>
-          <Box sx={bStyle()} display='flex' alignItems='center' flexDirection='row'>
+          <Box
+            sx={bStyle()}
+            display='flex'
+            alignItems='center'
+            flexDirection='row'>
             <Heading ml='9px' width='195px' isTruncated>
               {data.getChat.item.name}
             </Heading>
@@ -87,7 +94,7 @@ export const MessagesContainer: React.FC<MessagesContainerProps> = ({
 
 function cStyle() {
   return {
-    margin: '15px 5px 5px 5px',
+    margin: '5px 5px 5px 5px',
     padding: '0',
     display: 'flex',
     // alignItems: 'center',
@@ -98,20 +105,19 @@ function cStyle() {
 
 function bStyle() {
   return {
-    marginTop: '3%',
+    marginTop: '1%',
   };
 }
 function claimStyle() {
   return {
     position: 'fixed',
     marginTop: '30%',
-    marginLeft: '50%'
+    marginLeft: '50%',
   };
 }
 
 function messageStyle() {
   return {
-    marginTop: '10%',
+    marginTop: '1%',
   };
 }
-

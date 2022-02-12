@@ -35,21 +35,24 @@ export const ChatLobbyList: React.FC<chatLobbyListProps> = ({ bool, tid }) => {
   const myId = data?.me.id;
   const lobbyChatList = data.me.chats.map((chat) => {
     const userDetails = chat.users.filter((user) => user.id !== myId).pop();
-    const lastMessage = chat.messages.length ? chat.messages[chat.messages.length - 1] : null;
+    const lastMessage = chat.messages.length
+      ? chat.messages[chat.messages.length - 1]
+      : null;
     return {
       chatId: chat.id,
       itemName: chat.item.name,
       userName: userDetails.username,
       img_url: userDetails.img_url,
-      lastMessageIsRead: (lastMessage?.authorId !== myId) ? lastMessage?.isRead : true
+      lastMessageIsRead:
+        lastMessage?.authorId !== myId ? lastMessage?.isRead : true,
     };
   });
   const sortedList = lobbyChatList.sort(function (x, y) {
     return x.lastMessageIsRead === y.lastMessageIsRead
       ? 0
       : x.lastMessageIsRead
-        ? 1
-        : 1;
+      ? 1
+      : 1;
   });
 
   return isMessage ? (

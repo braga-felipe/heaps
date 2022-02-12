@@ -19,7 +19,7 @@ export const ClaimButton: React.FC<ClaimButtonProps> = ({
   requesterId,
   itemID,
   takers,
-  complete
+  complete,
 }) => {
   const [, acceptItemClaim] = useAcceptItemClaimMutation();
   const [isClaimed, updateIsClaimed] = useState(complete);
@@ -29,18 +29,32 @@ export const ClaimButton: React.FC<ClaimButtonProps> = ({
   }
   const user = useSelector((state: State) => state.user);
 
-  console.log(takers)
+  console.log(takers);
   if (userOwnerId === myID && !isClaimed) {
-    return <Button sx={bStyle()} onClick={handleClick}>Accept Request</Button>;
+    return (
+      <Button sx={bStyle()} onClick={handleClick}>
+        Accept
+      </Button>
+    );
   } else if (userOwnerId === myID && isClaimed) {
-    return <Button sx={bStyle()} isDisabled={true}>You Accepted</Button>;
-  } else if (user.items_taken.filter((i) => i.id === itemID).length) {
-    return <Button sx={bStyle()} isDisabled={true}>Request Accepted</Button>;
+    return (
+      <Button sx={bStyle()} isDisabled={true}>
+        You Accepted
+      </Button>
+    );
+  } else if (user.items_taken?.filter((i) => i.id === itemID).length) {
+    return (
+      <Button sx={bStyle()} isDisabled={true}>
+        Request Accepted
+      </Button>
+    );
   } else return null;
 };
 
 function bStyle() {
   return {
+    marginTop: '-50px',
+    margintLeft: '50px',
     background: 'primaryActive',
     color: 'white',
   };

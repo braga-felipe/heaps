@@ -8,10 +8,10 @@ export default function Groceries({ isGroceries }) {
     autoplay: true,
     style: {
       height: '200px',
-      width: '480px',
+      width: '375px',
       padding: '0px',
       marginTop: '5px',
-      marginLeft: '-60px',
+      marginLeft: '0px',
     },
   };
   const { View } = useLottie(options);

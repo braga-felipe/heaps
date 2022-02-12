@@ -83,6 +83,7 @@ function bStyle() {
     position: 'absolute',
     marginLeft: '305px',
     marginTop: '-45px',
+    padding: '0px',
   };
 }
 function cStyle() {

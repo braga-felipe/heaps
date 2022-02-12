@@ -22,9 +22,9 @@ export default function ItemList({ complete, buttonName, path, isOwner }) {
   const itemsToView = [];
 
   useEffect(() => {
-    itemsToView
-    items
-  },[itemsToView, items])
+    itemsToView;
+    items;
+  }, [itemsToView, items]);
 
   return (
     <Container sx={cStyle()} className='round-container'>
@@ -48,7 +48,7 @@ export default function ItemList({ complete, buttonName, path, isOwner }) {
             );
           } else if (
             item.complete === complete &&
-            user.items_taken.filter((i) => i.id === item.id).length &&
+            user.items_taken?.filter((i) => i.id === item.id).length &&
             isOwner === false
           ) {
             itemsToView.push(item);

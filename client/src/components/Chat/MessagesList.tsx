@@ -14,14 +14,14 @@ export const MessagesList: React.FC<MessagesListProps> = ({
   user,
   messages,
   chatId,
-  updateMessages
+  updateMessages,
 }) => {
   const [messageState, updateMessageState] = useState(messages);
   const [, sendMessage] = useCreateMessageMutation();
 
   useEffect(() => {
-    updateMessageState(messages)
-  }, [messages])
+    updateMessageState(messages);
+  }, [messages]);
 
   async function handleSend(message) {
     try {
@@ -44,7 +44,9 @@ export const MessagesList: React.FC<MessagesListProps> = ({
       <Box sx={bStyle()}>
         {messageState.map((message, index) => {
           return (
-            <ChatBubble key={index} userId={user.id} message={message}> </ChatBubble>
+            <ChatBubble key={index} userId={user.id} message={message}>
+              {' '}
+            </ChatBubble>
           );
         })}
       </Box>
@@ -58,7 +60,7 @@ export const MessagesList: React.FC<MessagesListProps> = ({
 function bStyle() {
   return {
     width: '100%',
-    height: '630px',
+    height: '620px',
     overflowY: 'scroll',
     borderRadius: '15px',
     border: '1px solid #E2E8F0',
@@ -79,13 +81,13 @@ function msgStyle(user, message) {
   const float =
     user.id === message.authorId
       ? {
-        float: 'right',
-        backgroundColor: 'primary',
-      }
+          float: 'right',
+          backgroundColor: 'primary',
+        }
       : {
-        float: 'left',
-        backgroundColor: 'secondary',
-      };
+          float: 'left',
+          backgroundColor: 'secondary',
+        };
   return {
     ...float,
     color: 'white',
