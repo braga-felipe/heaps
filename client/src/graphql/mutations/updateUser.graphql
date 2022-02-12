@@ -1,0 +1,9 @@
+mutation UPDATE_USER($options: UserUpdateOptionsInput!) {
+  updateUser(options: $options) {
+    id
+    username
+    address
+    zipCode
+    img_url
+  }
+}

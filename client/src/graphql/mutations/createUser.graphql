@@ -1,0 +1,16 @@
+mutation CREATE_USER($options: CreateUserInput!) {
+  createUser(options: $options) {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      username
+      email
+      address
+      zipCode
+      SICK_points
+    }
+  }
+}

@@ -1,0 +1,5 @@
+mutation MarkAsRead($markAsReadId: Int!) {
+  MarkAsRead(id: $markAsReadId) {
+    id
+  }
+}

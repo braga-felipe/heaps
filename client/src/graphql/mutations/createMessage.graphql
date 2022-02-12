@@ -1,0 +1,9 @@
+mutation CreateMessage($options: MessageCreateInput!) {
+  createMessage(options: $options) {
+    id
+    text
+    authorId
+    isRead
+    createdAt
+  }
+}
