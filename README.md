@@ -4,9 +4,9 @@
 
 ## Welcome to _heaps_ !
 
-An app for sharing food with people near you and reduce waste.
-After creating an account the user can create items, categorized as either _dishes_ or _groceries_, making it available in our platform being displayed either in out main list or our _map_ that display's the user's current location.
-Other users to request items using the _chat_ to coordinate the pick up and preferred time.
+An app for sharing food with people near you and reducing waste. 
+Users can upload items, categorized as either dishes or groceries, which can be discovered based on one’s geographical location. 
+Users can also request items, and communicate through the chat to coordinate the pick-up at a preferred time.
 
 ## Screenshots
 
@@ -43,5 +43,3 @@ Other users to request items using the _chat_ to coordinate the pick up and pref
     ...
     ...
    ```
-
-5.
